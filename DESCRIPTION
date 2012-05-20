@@ -1,0 +1,30 @@
+Package: ggplyr
+Maintainer: Garrett Grolemund <grolemund@rice.edu>
+License: GPL
+Title: Explore large data with binned modelling
+LazyData: true
+Type: Package
+Author: Garrett Grolemund <grolemund@rice.edu>, Hadley
+    Wickham <h.wickham@gmail.com>
+Description: modelglyphs makes it easy to view the output
+    of models that are applied to subsets of the data.
+Version: 0.1.0
+Imports:
+    ggplot2,
+    plyr,
+    proto,
+    grid
+Depends:
+    R (>= 2.15)
+Collate:
+    'apply-functions.r'
+    'fun.r'
+    'ggplyr-class.r'
+    'gglayer-class.r'
+    'internal-functions.r'
+    'ply-functions.r'
+    'scaling-functions.r'
+    'split-functions.r'
+    'combine-functions.r'
+    'ggplyr_build.r'
+    'rel-class.r'
