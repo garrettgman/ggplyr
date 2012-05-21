@@ -33,45 +33,67 @@ in_place <- function(layers, mapping = NULL, position = NULL, ...) {
 }
 
 
-nest <- function(layers, mapping, x_scale = identity, y_scale = identity, width = rel(1), height = rel(1), reference = NULL, position = "identity", ...) {
+
+#####################################################################################
+
+nest <- function(layers, mapping, x_scale = identity, y_scale = identity, width = rel(1), height = rel(1), reference = NULL, ...) {
 	
-	# build out subplots
-	data <- individual_data(layers)
-	prototype <- layer_clone(layers[[1]])
-	prototype$mapping$.gid <- as.name(".gid")	
-	prototype$data <- data
-	prototype$plyr <- TRUE
-	prototype$compute_aesthetics <- compute_plyr_aesthetics
-	prototype$position <- get(paste("position", position, sep = "_"))()
-	sdata <- suppressMessages(build_subplots(prototype)) #what happens to .gid?
-	
-	# build a .combine fun
-	.combine <- nest_subplots(x_scale = x_scale, y_scale = y_scale, 
-		width = width, height = height, sdata = sdata)
+	subplot_layer <- format_layer(layers, mapping)
+	subplots <- subplot_info(subplot_layer)
 		
-	# build prototype of layer to return
-	prototype$mapping <- super_aes(mapping, prototype$mapping)
-	prototype$subplots <- list(data = sdata, fun = .combine)
-	old_par <- prototype$geom_params
-	new_par <- list(...) 
-	params <- c(new_par, old_par[setdiff(names(old_par), names(new_par))])
-	prototype$geom_params <- params
+	# make a layer to return
+	super_layer <- format_super(subplot_layer, mapping, ...)
+	super_layer$subplots <- c(subplots, x_scale = x_scale, y_scale = y_scale, 
+		width = width, height = height)
+	super_layer$subplots$mapping = subplot_layer$mapping
+	super_layer$combine <- nest_subplots
 	
-	if (!is.null(position)) {
-		prototype$position <- get(paste("position", position, sep = "_"))()
-	}
-	
+	# add references if necessary
+	# return it
 	if (is.null(reference)) {
-		gglayer(prototype)
+		gglayer(super_layer)
 	} else {
-		ref.layer <- reference(prototype)
-		list(ref.layer, gglayer(prototype))
+		ref.layer <- reference(super_layer)
+		list(ref.layer, gglayer(super_layer))
 	}
 	
 }
 
-subplot_info <- function(layers, mapping, ...) {
+
+subplot_info <- function(prototype) {
+
+	build <- suppressMessages(ggplot_build(ggplot() + prototype + facet_wrap(~ .gid)))
 	
+	scales <- non_xy_scales(build$plot$scales$scales)
+	
+	list(data = build$data[[1]], scales = scales)
+}
+
+######################################################################################
+
+
+
+
+
+
+
+format_super <- function(subplot.layer, mapping, ...) {
+	
+	super <- layer_clone(subplot.layer)
+	
+	maps <- mapping[names(mapping) %in% c(.x_aes, .y_aes)]
+	maps$.gid <- as.name(".gid")
+	
+	old_par <- super$geom_params
+	new_par <- list(...) 
+	params <- c(new_par, old_par[setdiff(names(old_par), names(new_par))])
+	
+	super$geom_params <- params
+	super$mapping <- maps
+	super
+}
+
+format_layer <- function(layers, mapping) {
 	# transfer all non-xy mappings to the subplots
 	non.xy <- !(names(mapping) %in% c(.x_aes, .y_aes))
 	gmaps <- mapping[non.xy]
@@ -79,19 +101,19 @@ subplot_info <- function(layers, mapping, ...) {
 	maps[names(gmaps)] <- gmaps
 	maps$.gid <- as.name(".gid")
 	
-	# update parameters
-	old_par <- layers[[1]]$geom_params
-	new_par <- list(...) 
-	params <- c(new_par, old_par[setdiff(names(old_par), names(new_par))])
-	
 	# prepare build
 	prototype <- layer_clone(layers[[1]])
 	prototype$data <- individual_data(layers)
 	prototype$mapping <- maps
 	prototype$plyr <- TRUE
-	prototype$geom_params <- params
 	prototype$compute_aesthetics <- compute_plyr_aesthetics
 	
+	prototype
+}
+
+
+subplot_info <- function(prototype) {
+
 	build <- suppressMessages(ggplot_build(ggplot() + prototype + facet_wrap(~ .gid)))
 	
 	scales <- non_xy_scales(build$plot$scales$scales)
@@ -171,49 +193,55 @@ update_aes <- function(imap, gmap) {
 	map
 }
 
-nest_subplots <- function(x_scale, y_scale, width, height, sdata) {
-	function(data) {
-
-		gdata <- globalize(.gid_coords(data))
-		sdata <- join(sdata, gdata, by = ".gid")
+nest_subplots <- function(., data) {
+	x_scale <- .$subplots$x_scale
+	y_scale <- .$subplots$y_scale
+	height <- .$subplots$height
+	width <- .$subplots$width
+	sdata <- .$subplots$data
+	sdata$PANEL <- NULL
+	sdata$group <- NULL
 		
-		# locate x and y related variables in subplot data
-		xvar <- get_xs(sdata)
-		yvar <- get_ys(sdata)
+	gdata <- globalize(.gid_coords(data))
+	sdata <- join(sdata, gdata, by = ".gid")
 		
-		# scale if necessary
-		if (!identical(x_scale, identity) || 
-			!identical(y_scale, identity)) {
-				sdata <- ddply(sdata, ".gid", 
-					function(df) {
-						df[xvar] <- lapply(df[xvar], x_scale)
-						df[yvar] <- lapply(df[yvar], y_scale)
-						df
-					}
-				)
-		}
+	# locate x and y related variables in subplot data
+	xvar <- get_xs(sdata)
+	yvar <- get_ys(sdata)
 		
-		if (is.rel(width)) {
-			width <- diff(range(sdata$X)) / max(sdata$.gid) * unclass(width)
-		}
-
-		if (is.rel(height)) {
-			height <- diff(range(sdata$Y)) / max(sdata$.gid) * unclass(height)
-		}
-	
-		# update x and y related variables
-		fun.x <- function(x) sdata$X + rescale11(x) * width
-		fun.y <- function(y) sdata$Y + rescale11(y) * height
-		sdata[xvar] <- lapply(sdata[xvar], fun.x)
-		sdata[yvar] <- lapply(sdata[yvar], fun.y)
-		
-		sdata <- sdata[setdiff(names(sdata), c("X", "Y"))]
-		data[names(sdata)] <- sdata # are the orders the same?
-		data
+	# scale if necessary
+	if (!identical(x_scale, identity) || 
+		!identical(y_scale, identity)) {
+			sdata <- ddply(sdata, ".gid", 
+				function(df) {
+					df[xvar] <- lapply(df[xvar], x_scale)
+					df[yvar] <- lapply(df[yvar], y_scale)
+					df
+				}
+			)
 	}
+		
+	if (is.rel(width)) {
+		width <- diff(range(sdata$X)) / max(sdata$.gid) * unclass(width)
+	}
+
+	if (is.rel(height)) {
+		height <- diff(range(sdata$Y)) / max(sdata$.gid) * unclass(height)
+	}
+	
+	# update x and y related variables
+	fun.x <- function(x) sdata$X + rescale11(x) * width
+	fun.y <- function(y) sdata$Y + rescale11(y) * height
+	sdata[xvar] <- lapply(sdata[xvar], fun.x)
+	sdata[yvar] <- lapply(sdata[yvar], fun.y)
+		
+	sdata <- sdata[setdiff(names(sdata), c("X", "Y"))]
+	data[names(sdata)] <- sdata # are the orders the same?
+	data
 }
 
 .gid_coords <- function(data) {
+
 	data <- data[c(".gid", "x", "y")]
 	n <- length(unique(data$.gid))
 	data <- unique(data)

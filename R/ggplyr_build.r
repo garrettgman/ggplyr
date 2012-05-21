@@ -1,20 +1,15 @@
 #' Build a ggplyr object for rendering
 #'
-#' This function takes the plot object, and performs all steps necessary to produce an object that can be rendered. This function outputs two pieces: a list of data.frames (one for each layer), and a panel object, which contain all information about axis limits, breaks, etc.
-#'
-#' ggplyr_build follows \code{\link{ggplot_build}} but implements extra steps to calcuate groupwise aesthetics and positioning.
-#'
-#' @param plot ggplyr object
-#' @export
+#' This function takes the plot object, and performs all steps necessary to produce an object that can be rendered.
 ggplyr_build <- function(plot){
+
   if (length(plot$layers) == 0) stop("No layers in plot", call.=FALSE)
   
   plot <- ggplot2:::plot_clone(plot)
   layers <- plot$layers
   layer_data <- lapply(layers, function(y) y$data)
-  
   scales <- plot$scales
-  # Apply function to layer and matching data
+  
   dlapply <- function(f) {
     out <- vector("list", length(data))
     for(i in seq_along(data)) {
@@ -22,15 +17,9 @@ ggplyr_build <- function(plot){
     }
     out
   }
-
-  # Initialise panels, add extra data for margins & missing facetting
-  # variables, and add on a PANEL variable to data
   
   panel <- ggplot2:::new_panel()
   panel <- ggplot2:::train_layout(panel, plot$facet, layer_data, plot$data)
-  
-  # data is a list of data sets. All are manipulated in one pass
-  # figures out data for layer, assigns rows to panels (usually panel 1)
   data <- ggplot2:::map_layout(panel, plot$facet, layer_data, plot$data)
 
   
@@ -45,84 +34,74 @@ ggplyr_build <- function(plot){
   #######################################################
   
   
-  
-  # adds a group column based on group/fill/color aesthetic
   data <- lapply(data, ggplot2:::add_group)
-  
-  # Transform all scales
-  # transforms data based on the scale settings?
   data <- lapply(data, ggplot2:::scales_transform_df, scales = scales)
   
-  # Map and train positions so that statistics have access to ranges
-  # and all positions are numeric
   scale_x <- function() scales$get_scales("x")
   scale_y <- function() scales$get_scales("y")
-
-  # panel gets scales here
-  panel <- ggplot2:::train_position(panel, data, scale_x(), scale_y())
-  
-  # characters and factors are converted to numbers (in x and y axes?)
-  data <- ggplot2:::map_position(panel, data, scale_x(), scale_y())
-  
-  # Apply and map statistics
-  # fills out the columns with aesthetics generated from the stat
-  # combines rows according to stat
-  data <- ggplot2:::calculate_stats(panel, data, layers)
-  
-  # calculates missing aesthetics from stat (like y)
-  data <- dlapply(function(d, p) p$map_statistic(d, plot)) 
-  
-  # seems like groups were already in order...
-  data <- lapply(data, ggplot2:::order_groups)
-  
-  # Reparameterise geoms from (e.g.) y and width to ymin and ymax
-  # builds new aesthetic columns from stat aesthetic columns
-  # predicts from the stat which aes grid will need to draw
-  data <- dlapply(function(d, p) p$reparameterise(d))
-
-
-
-  # Apply position adjustments
-  # changes x, reorders rows
-  data <- dlapply(function(d, p) p$adjust_position(d))
-  
-  
-  
-   
-  # Reset position scales, then re-train and map.  This ensures that facets
-  # have control over the range of a plot: is it generated from what's 
-  # displayed, or does it include the range of underlying data?
-  ggplot2:::reset_scales(panel)
   panel <- ggplot2:::train_position(panel, data, scale_x(), scale_y())
   data <- ggplot2:::map_position(panel, data, scale_x(), scale_y())
   
-  # Train and map non-position scales
-  npscales <- scales$non_position_scales()  
-  if (npscales$n() > 0) {
-    lapply(data, ggplot2:::scales_train_df, scales = npscales)
-    
-    # replaces numbers in things like fill to color values, etc.
-    data <- lapply(data, ggplot2:::scales_map_df, scales = npscales)
-  }
+  
+  ######################################################
+  ### note: subplot data get uploaded here           ###
+  ######################################################
   
   # reorganizes data to plot subplots for applicable layers
   data <- dlapply(make_subplots)
-  
-  # Train coordinate system
-  # builds all of the ranges for the x and y axiis
+  #plot$layers <- update_mappings(layers)
+  update_scales(scales, layers)
+  ######################################################
+   
+   
+  # Reset position scales, then re-train and map.  This ensures that facets
+  # have control over the range of a plot
   ggplot2:::reset_scales(panel)
   panel <- ggplot2:::train_position(panel, data, scale_x(), scale_y())
   data <- ggplot2:::map_position(panel, data, scale_x(), scale_y())
-  
+    
   panel <- ggplot2:::train_ranges(panel, plot$coordinates)
-  
   list(data = data, panel = panel, plot = plot)
 }
 
+
+
+
 make_subplots <- function(d, p) {
-	if (!("subplots" %in% ls(p))) {
+	if (!("combine" %in% ls(p))) {
 		return(d)
 	}
-	
-	p$subplots$fun(d)
+	p$combine(d)
+}
+
+update_scales <- function(scales, layers) {
+	scales$scales <- name_scales(scales$scales)
+	new.scales <- list()
+	for (i in seq_along(layers)) {
+		if ("subplots" %in% ls(layers[[i]])) {
+			new.scales <- name_scales(layers[[1]]$subplots$scales)
+			new.scales <- new.scales[setdiff(names(new.scales), names(scales$scales))]
+			scales$scales <- c(scales$scales, new.scales)
+		}
+	}
+	names(scales$scales) <- NULL
+}
+
+update_mappings <- function(layer.list) {
+	layers <- lapply(layer.list, layer_clone)	
+	update_mapping <- function(layer) {
+		if ("subplots" %in% ls(layer)) {
+			layer$mapping <- final_map(layer)
+			layer
+		}
+	}
+	lapply(layers, update_mapping)
+}
+
+final_map <- function(layer) {
+	gmap <- layer$mapping
+	smap <- layer$subplots$mapping
+	smap <- smap[setdiff(names(smap), names(gmap))]
+	layer$mapping <- structure(c(gmap, smap), class = "uneval")
+	layer
 }

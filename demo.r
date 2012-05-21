@@ -61,11 +61,12 @@ ggplot() + geom_bar(aes(x = trans, fill = mean(hwy), group = year), data = mpg, 
 qplot(Fertility, Education, data = test.data, size = I(3))
 
 # relocate data and add within group aes
+# MISSING LEGEND
 dgply(test.data,
 	.split = c("lat", "long"),
 	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education, color = rank(Catholic)), size = 3),
 	.combine = fun(nest, "layers", mapping = aes(x = mean(Fertility), 
-		y = mean(Education))))
+		y = mean(Education)), width = 5, height = 5))
 
 # NOT WORKING - smooth won't work on majors that only give back one value per group
 # relocate data and add across group aes
@@ -151,5 +152,5 @@ lgply(m1,
 # contains subplot x and y positions by .gid
 
 splits <- group_by(test.data, c("lat", "long"))
-layers <- lapply(splits, fun(geom_histogram, "data", mapping = aes(x = Fertility, fill = long)))
+layers <- llply(splits, fun(geom_histogram, "data", mapping = aes(x = Fertility, fill = long)))
 p <- nest(layers, mapping = aes(x = mean(Fertility), y = mean(Education)))
