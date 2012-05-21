@@ -70,6 +70,70 @@ nest <- function(layers, mapping, x_scale = identity, y_scale = identity, width 
 	
 }
 
+subplot_info <- function(layers, mapping, ...) {
+	
+	# transfer all non-xy mappings to the subplots
+	non.xy <- !(names(mapping) %in% c(.x_aes, .y_aes))
+	gmaps <- mapping[non.xy]
+	maps <- layers[[1]]$mapping
+	maps[names(gmaps)] <- gmaps
+	maps$.gid <- as.name(".gid")
+	
+	# update parameters
+	old_par <- layers[[1]]$geom_params
+	new_par <- list(...) 
+	params <- c(new_par, old_par[setdiff(names(old_par), names(new_par))])
+	
+	# prepare build
+	prototype <- layer_clone(layers[[1]])
+	prototype$data <- individual_data(layers)
+	prototype$mapping <- maps
+	prototype$plyr <- TRUE
+	prototype$geom_params <- params
+	prototype$compute_aesthetics <- compute_plyr_aesthetics
+	
+	build <- suppressMessages(ggplot_build(ggplot() + prototype + facet_wrap(~ .gid)))
+	
+	scales <- non_xy_scales(build$plot$scales$scales)
+	
+	list(data = build$data[[1]], scales = scales)
+}
+
+	
+non_xy_scales <- function(scales) {
+	scales <- name_scales(scales)
+	non.xy <- setdiff(names(scales), c("x", "y"))
+	scales <- scales[non.xy]
+	
+	names(scales) <- NULL
+	if (length(non.xy) == 0) {
+		return(NULL)
+	}
+	
+	scales
+}	
+
+name_scales <- function(scales) {
+	get_name <- function(scale) {
+		scale$aesthetics[[1]]
+	}
+	scale.names <- unlist(lapply(scales, get_name))
+	names(scales) <- scale.names
+	scales
+}
+	
+
+
+
+
+
+
+
+
+
+
+
+
 #' update_aes builds a mapping to correctly guide a layer that has combined individual subplots into a single metaplot.
 #'
 #' @keywords internal
