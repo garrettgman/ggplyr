@@ -43,6 +43,7 @@ dgply(test.data,
 data <- group_by(test.data, c("lat", "long"))
 lapply(data, fun(qplot, "data", x = Fertility, y = Agriculture, color = rank(Education), size = I(3), xlim = range(test.data$Fertility), ylim = range(test.data$Agriculture)))
 
+
 dgply(mpg,
 	.split = c("year"),
 	.apply = fun(geom_bar, "data", mapping = aes(x = trans)),
@@ -66,11 +67,11 @@ dgply(test.data,
 	.combine = fun(nest, "layers", mapping = aes(x = mean(Fertility), 
 		y = mean(Education))))
 
+# NOT WORKING - smooth won't work on majors that only give back one value per group
 # relocate data and add across group aes
 dgply(test.data,
 	.split = c("lat", "long"),
-	.apply = fun(geom_smooth, "data", mapping = aes(x = Fertility, y = Education), 
-		se = F),
+	.apply = fun(geom_smooth, "data", mapping = aes(x = Fertility, y = Education), method = "lm", se = F),
 	.combine = fun(nest, "layers", mapping = aes(x = mean(Fertility), 
 		y = mean(Education), color = interaction(long, lat)[1])))
 
@@ -88,6 +89,7 @@ dgply(nasa,
 
 qplot(surftemp, temperature, data = nasa, geom = "smooth")
 
+# NOT WORKING
 dgply(nasa,
 	.split = c("lat", "long"),
 	.apply = fun(geom_smooth, "data", mapping = aes(x = surftemp, y = temperature), 
@@ -121,6 +123,7 @@ dgply(test.data,
 # now with bars
 qplot(trans, data = mpg, geom = "bar", fill = year, group = year, position = "dodge")
 
+# NOT WORKING
 dgply(mpg,
 	.split = c("year"),
 	.apply = fun(geom_bar, "data", mapping = aes(x = trans, fill = year)),
@@ -138,3 +141,15 @@ lgply(m1,
 		color = max(surftemp - temperature) == max(abs(surftemp - temperature)))
 	)
 )
+
+
+
+##################################################
+###               testing nest                 ###
+##################################################
+# goal: return a layer that has a subplots attribute which 
+# contains subplot x and y positions by .gid
+
+splits <- group_by(test.data, c("lat", "long"))
+layers <- lapply(splits, fun(geom_histogram, "data", mapping = aes(x = Fertility, fill = long)))
+p <- nest(layers, mapping = aes(x = mean(Fertility), y = mean(Education)))

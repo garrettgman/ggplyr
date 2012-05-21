@@ -218,19 +218,3 @@ null_omit <- function(lst) {
 }
 
 
-#' update_aes builds a mapping to correctly guide a layer that has combined individual subplots into a single metaplot.
-#'
-#' @keywords internal
-#' @param imap The mapping for each individual subplot
-#' @param gmap The mapping for the single, combined plot
-#' @export
-update_aes <- function(imap, gmap) {
-	
-	# combine global and individual subplot mappings
-	map <- combine_aes(gmap, imap)
-		
-	# change group aes
-	map$group <- add_gid(map$group)
-	
-	map
-}

@@ -66,12 +66,12 @@ setMethod("[<-", signature(x = "gglayer"), function(x, i, j, ..., value) {
 
 #' @export
 setMethod("$", signature(x = "gglayer"), function(x, name) {
-	"$"(x@layer, name)
+	slot(x, "layer")[[name]]
 })
 
 #' @export
 setMethod("$<-", signature(x = "gglayer"), function(x, name, value) {
-	x@layer <- "$<-"(x@layer, name, value)
+	slot(x, "layer")[[name]] <- value
 	x
 })
 

@@ -2,7 +2,7 @@
 \alias{adjust_position_nest}
 \title{Relocate subplots within main plot}
 \usage{
-  adjust_position_nest(., data)
+  adjust_position_nest(., data, plot, new)
 }
 \description{
   adjust_position_nest is substituted for a layer's

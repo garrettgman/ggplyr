@@ -81,23 +81,10 @@ ggplyr_build <- function(plot){
   data <- dlapply(function(d, p) p$reparameterise(d))
 
 
-  #####################################################
-  ###      subplot adjustment occurs here           ### 
-  ###      (along with p$adjust_position)           ###
-  #####################################################
+
   # Apply position adjustments
   # changes x, reorders rows
-  ## Note: most of the departures here from ggplot_build are to 
-  #  realign the x and y scales with the new axis
-  ## Note: these departures and adjust_position will have to work with 
-  #  non gglayer layers
-  new <- ggplot()
-  data <- dlapply(function(d, p) p$adjust_position(d, plot, new))
-  scales <- plot$scales <- new$scales
-  panel$x_scales <- NULL
-  panel$y_scales <- NULL
-  panel <- ggplot2:::train_position(panel, data, scale_x(), scale_y())
-  #####################################################
+  data <- dlapply(function(d, p) p$adjust_position(d))
   
   
   
@@ -118,9 +105,24 @@ ggplyr_build <- function(plot){
     data <- lapply(data, ggplot2:::scales_map_df, scales = npscales)
   }
   
+  # reorganizes data to plot subplots for applicable layers
+  data <- dlapply(make_subplots)
+  
   # Train coordinate system
   # builds all of the ranges for the x and y axiis
+  ggplot2:::reset_scales(panel)
+  panel <- ggplot2:::train_position(panel, data, scale_x(), scale_y())
+  data <- ggplot2:::map_position(panel, data, scale_x(), scale_y())
+  
   panel <- ggplot2:::train_ranges(panel, plot$coordinates)
   
   list(data = data, panel = panel, plot = plot)
+}
+
+make_subplots <- function(d, p) {
+	if (!("subplots" %in% ls(p))) {
+		return(d)
+	}
+	
+	p$subplots$fun(d)
 }
