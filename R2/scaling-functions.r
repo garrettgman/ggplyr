@@ -1,13 +1,3 @@
-# Relative dimensions --------------------------------------------------------
-
-rel <- function(x) {
-  structure(x, class = "rel")
-}
-print.rel <- function(x, ...) print(noquote(paste(x, " *", sep = "")))
-is.rel <- function(x) inherits(x, "rel")
-
-# Rescaling functions --------------------------------------------------------
-
 rescale01 <- function(x, xlim=NULL) {
   if (is.character(x)) {
   	x <- as.numeric(factor(x))

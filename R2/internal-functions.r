@@ -70,6 +70,7 @@ adjust_position_nest <- function (., data, plot, new) {
 
 
 apply_maps <- function(data, mapping, enclos = parent.frame()) {
+
 	map <- null_omit(mapping)
 	vars <- lapply(map, eval, envir = data, enclos)
 	

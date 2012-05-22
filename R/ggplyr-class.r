@@ -1,4 +1,4 @@
-#' @include apply-functions.r
+#' @include ggtransform.r
 NULL
 
 check_ggplyr <- function(object) {

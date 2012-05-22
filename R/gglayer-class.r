@@ -25,6 +25,7 @@ setOldClass(c("proto", "environment"))
 #' @aliases show,gglayer-method
 #' @aliases c,gglayer-method
 #' @aliases rep,gglayer-method
+#' @aliases ls,gglayer-method
 #' @aliases [,gglayer-method
 #' @aliases [<-,gglayer-method
 #' @aliases $,gglayer-method
@@ -93,6 +94,15 @@ setMethod("ggtransform", signature(ggobject = "gglayer"),
 		new("gglayer", layer = layer)
 	}
 )
+
+#' @export
+setGeneric("ls")
+
+#' @export
+setMethod("ls", signature(name = "gglayer"), 
+	function(name, pos = -1, envir = as.environment(pos), all.names = FALSE, pattern) {
+		ls(slot(name, "layer"), all.names)
+})
 	
 #' Create a gglayer object
 #' 

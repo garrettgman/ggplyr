@@ -7,6 +7,7 @@
 \alias{"$<-,gglayer-method"}
 \alias{"c,gglayer-method"}
 \alias{"ggtransform,gglayer-method"}
+\alias{"ls,gglayer-method"}
 \alias{"rep,gglayer-method"}
 \alias{"show,gglayer-method"}
 \alias{gglayer-class}
