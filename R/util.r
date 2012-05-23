@@ -48,7 +48,7 @@ apply_major <- function(data, mapping, enclos = parent.frame()) {
     data.frame(vars)
 }
 
-# combine_aes is used by ggtransform
+# combine_aes is used by ggtransform and ref_box
 #' combine_aes combines two uneval objects overwriting values of the second that are defined in the first.
 #'
 #' @keywords internal
@@ -105,6 +105,10 @@ individual_data <- function(layers) {
 
 layer_clone <- function(layer) {
 	ggplot2:::plot_clone(ggplot() + layer)$layers[[1]]
+}
+
+names_scales <- function(scales) {
+	unlist(lapply(scales, function(s) s$aesthetics[[1]]))
 }
 
 #' null.omit removes the NULL elements from a list and returns the remaining objects as a more concise list.

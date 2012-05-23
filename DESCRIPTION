@@ -20,7 +20,6 @@ Collate:
     'ggtransform.r'
     'ggplyr-class.r'
     'gglayer-class.r'
-    'embed_layers.r'
     'fun.r'
     'gglayer_build.r'
     'util.r'
@@ -40,3 +39,4 @@ Collate:
     'in_place.r'
     'geom_plyr.r'
     'ggplyr_build.r'
+    'ref_box.r'

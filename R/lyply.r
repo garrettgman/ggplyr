@@ -15,5 +15,5 @@ lyply <- function(.data, .apply.fun = NULL, .combine.fun = fun(as_is, "layers"),
 	data <- llply(.data, .fun = .apply.fun, .progress = .progress, 
 		.parallel = .parallel)
 	
-	embed_layers(data, .combine.fun)
+	.combine.fun(data)
 }

@@ -61,7 +61,7 @@ dgply(test.data,
 	.split = c("lat", "long"),
 	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education, color = rank(Catholic)), size = 3),
 	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
-		y = mean(Education)), width = 5, height = 5))
+		y = mean(Education)), width = 5, height = 5)
 
 
 # adjusting for overlaps etc - separate step modifying the pos_major data frame
@@ -196,8 +196,21 @@ dgply(titanic,
 	.combine = fun(nest, "data", aes(x = Sex, y = Age), width = 1/10, 
 		height = 1/10))
 	
-	
-	
+#########################################################
+###        trying out reference layers                ###
+#########################################################	
+dgply(test.data,
+	.split = c("lat", "long"),
+	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education), size = 3, color = "white"),
+	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
+		y = mean(Education)), width = 5, height = 5, reference = ref_box(aes(fill = mean(Agriculture)))))
+
+# and with boxes
+dgply(mpg,
+	.split = c("year"),
+	.apply = fun(geom_bar, "data", mapping = aes(x = trans, fill = year)),
+	.combine = fun(nest, "data", aes(x = mean(displ), y = mean(cty)), 
+		width = 1/10, height = 1/10, reference = ref_box(fill = "navy", alpha = 1/3)))
 
 #########################################################
 ###               testing embed_layers                ###

@@ -25,16 +25,14 @@ gglayer_build <- function(layer) {
 	scales[[which_y(scales)]] <- panel$y_scales[[1]]
 	
 	# axis labels
+	browser()
 	if (!is.null(layer$embed$major_aes)) {
 		labels <- labs(layer$embed$major_aes)
+		if (!is.null(layer$embed$ref_aes)) {
+			labels <- c(labels, labs(layer$embed$ref_aes))
+		}
 		minor$plot$options$labels[c("x", "y")] <- labels[c("x", "y")]
 	}
-	if (!is.null(layer$embed$ref_aes)) {
-		lab.names <- names(minor$plot$options$labels)
-		new <- setdiff(names(layer$embed$ref_aes), lab.names)
-		minor$plot$options$labels[new] <- layer$embed$ref_aes[new]
-	}
-		
 	
 	minor$data <- list(data)
 	minor$panel <- panel

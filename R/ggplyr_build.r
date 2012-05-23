@@ -2,7 +2,7 @@
 #'
 #' This function takes the plot object, and performs all steps necessary to produce an object that can be rendered.
 ggplyr_build <- function(plot){
-	
+
 	if (length(plot$layers) == 0) stop("No layers in plot", call.=FALSE)
 	if (!identical(plot$facet, facet_null())) {
 		stop("ggplyr does not support facetting", call. = FALSE)
@@ -21,7 +21,7 @@ ggplyr_build <- function(plot){
 	# build normal layers
 	normal <- NULL
 	if (length(plot$layers) > 0) {
-		normal <- ggplot2:::ggplot_build(plot)
+		normal <- ggplot_build(plot)
 	}
 	
 	# build embeded layers
@@ -40,7 +40,7 @@ ggplyr_build <- function(plot){
 	# panel
 	xspan <- range(unlist(lapply(data, function(df) df[names(df) %in% .x_aes])))
 	yspan <- range(unlist(lapply(data, function(df) df[names(df) %in% .y_aes])))
-	panel <- ggplot2:::ggplot_build(qplot(xspan, yspan))$panel
+	panel <- ggplot_build(qplot(xspan, yspan))$panel
 	
 	# scales - collect all unique scales
 	scales <- build$plot$scales$scales
@@ -58,11 +58,16 @@ ggplyr_build <- function(plot){
 	scales <- c(scales, nscales[unique])
 	
 	# layers
-	
+	layers <- build$plot$layers
+	for (i in seq_along(embedded[-1])) {
+		layers <- c(embedded[[i]]$plot$layers, layers)
+	}
+	layers <- c(normal$plot$layers, layers)
 	
 	build$data <- data
 	build$panel <- panel
 	build$plot$scales$scales <- scales
+	build$plot$layers <- layers
 	
 	build
 }
@@ -72,8 +77,4 @@ ggplyr_build <- function(plot){
 
 is.gglayer <- function(x) {
 	"embed" %in% ls(x)
-}
-
-names_scales <- function(scales) {
-	unlist(lapply(scales, function(s) s$aesthetics[[1]]))
 }
