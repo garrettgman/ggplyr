@@ -15,9 +15,8 @@ compute_plyr_aesthetics <- function (., data, plot) {
     
     if ("plyr" %in% ls(.)){
     	
-    	evaled <- compact(eval.plyr(aesthetics, data, ".gid", 
+    	evaled <- compact(eval.plyr(aesthetics, data, c(".gid", "PANEL"), 
     		plot$plot_env))
-    	evaled$PANEL <- data$PANEL
     	evaled
     } else {
     	evaled <- compact(eval.quoted(aesthetics, data, plot$plot_env))

@@ -45,27 +45,23 @@ ggplot() + geom_plyr(aes(x = trans, fill = mean(hwy), group = year), mpg, "year"
 ggplot() + geom_bar(aes(x = trans, fill = mean(hwy), group = year), data = mpg, position = "dodge")
 
 
+# new tactic for overplotting
+ggplot() + geom_jitter(aes(x = temperature, y = ozone, color = lat), data = nasa)	
+ggplot() + geom_plyr(aes(x = mean(temperature), y = mean(ozone), color = lat[1]), data = nasa, c("lat", "long"), geom = "point")	
+
+
 
 ################################################
 ###       use plyr to embed subplots         ###
 ################################################
 qplot(Fertility, Education, data = test.data, size = I(3))
 
-# relocate data and add within group aes
-# MISSING LEGEND
+# relocate data
 dgply(test.data,
 	.split = c("lat", "long"),
 	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education, color = rank(Catholic)), size = 3),
 	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
 		y = mean(Education)), width = 5, height = 5))
-
-dgply(test.data, c("lat", "long"),
-	fun(geom_point, "data", 
-		mapping = aes(x = Fertility, y = Education, color = rank(Catholic)), 
-		size = 3),
-	fun(nest, "layers", 
-		mapping = aes(x = mean(Fertility), y = mean(Education)), 
-		width = 5, height = 5))
 
 
 # adjusting for overlaps etc - separate step modifying the pos_major data frame
@@ -144,13 +140,11 @@ dgply2(test.data, c("lat", "long"), geom = "histogram",
 
 
 
-# NOT WORKING - smooth won't work on majors that only give back one value per group
-# relocate data and add across group aes
 dgply(test.data,
 	.split = c("lat", "long"),
-	.apply = fun(geom_smooth, "data", mapping = aes(x = Fertility, y = Education), method = "lm", se = F),
-	.combine = fun(nest, "layers", mapping = aes(x = mean(Fertility), 
-		y = mean(Education), color = interaction(long, lat)[1])))
+	.apply = fun(geom_smooth, "data", mapping = aes(x = Fertility, y = Education, color = interaction(long, lat)), se = F),
+	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
+		y = mean(Education))))
 
 
 # big data		
@@ -160,39 +154,18 @@ dgply(nasa,
 	.split = c("lat", "long"),
 	.apply = fun(geom_point, "data", mapping = aes(x = surftemp, y = temperature), 
 		size = 1/5),
-	.combine = fun(nest, "layers", mapping = aes(x = long, 
-		y = lat), width = 3, height = 3),
-	.progress = "text")
+	.combine = fun(nest, "data", aes(x = long, y = lat), 
+		width = 3, height = 3), .progress = "text")
 
 qplot(surftemp, temperature, data = nasa, geom = "smooth")
 
-# NOT WORKING
 dgply(nasa,
 	.split = c("lat", "long"),
 	.apply = fun(geom_smooth, "data", mapping = aes(x = surftemp, y = temperature), 
 		se = F),
-	.combine = fun(nest, "layers", mapping = aes(x = long, 
-		y = lat), se = F, x_scale = rescale01, y_scale = rescale01, 
-		width = 1, height = 1),
+	.combine = fun(nest, "data", aes(x = long, y = lat), 
+	x_scale = free, y_scale = free),
 	.progress = "text")
-
-		
-dgply(nasa,
-	.split = c("lat", "long"),
-	.apply = fun(geom_point, "data", mapping = aes(x = 1, y = 1)),
-	.combine = fun(nest, "layers", mapping = aes(x = mean(pressure), 
-		y = mean(ozone), color = interaction(long[1], lat[1])), width = 3, height = 3),
-	.progress = "text")
-		
-		
-		
-# nest on just one axiis - NOT WORKING
-dgply(test.data,
-	.split = c("lat", "long"),
-	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education), 
-		size = 3),
-	.combine = fun(nest, "layers", mapping = aes(x = mean(Fertility), color = rank(Catholic))))	
-# needs fixed
 
 
 
@@ -200,26 +173,31 @@ dgply(test.data,
 # now with bars
 qplot(trans, data = mpg, geom = "bar", fill = year, group = year, position = "dodge")
 
-# NOT WORKING
 dgply(mpg,
 	.split = c("year"),
 	.apply = fun(geom_bar, "data", mapping = aes(x = trans, fill = year)),
-	.combine = fun(nest, "layers", mapping = aes(x = mean(hwy), y = mean(cty)), position = "dodge"))
+	.combine = fun(nest, "data", aes(x = mean(displ), y = mean(cty)), 
+		width = 1/10, height = 1/10))
+		
+dgply(mpg,
+	.split = c("year"),
+	.apply = fun(geom_bar, "data", mapping = aes(x = trans, fill = year)),
+	.combine = fun(nest, "data", aes(x = mean(displ), y = mean(cty)), 
+		y_scale = free, width = 1/10, height = 1/10))
 		
 		
-##################################################
-###         recreating model glyphs            ###
-##################################################
-
-lgply(m1,
-	.apply = fun(geom_point, "data", mapping = aes(x = long[1], y = lat[1])),
-	.combine = fun(nest, "layers", mapping = aes(x = mean(temperature), 
-		y = mean(surftemp), 
-		color = max(surftemp - temperature) == max(abs(surftemp - temperature)))
-	)
-)
-
-
+# categorical x and y axes
+# it's doable, but why not use facets?
+titanic <- data.frame(Titanic)
+dgply(titanic, 
+	.split = c("Sex", "Age"),
+	.apply = fun(geom_bar, "data", aes(Survived, Freq, fill = Class), 
+		position = "dodge"),
+	.combine = fun(nest, "data", aes(x = Sex, y = Age), width = 1/10, 
+		height = 1/10))
+	
+	
+	
 
 #########################################################
 ###               testing embed_layers                ###

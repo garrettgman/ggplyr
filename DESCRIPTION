@@ -39,5 +39,4 @@ Collate:
     'compute_plyr_aes.r'
     'in_place.r'
     'geom_plyr.r'
-    'in_place
-    (Autosaved).R'
+    'ggplyr_build.r'

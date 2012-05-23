@@ -1,4 +1,4 @@
-rescale_01 <- function(xvars, xlim=NULL) {
+rescale_01 <- free <- function(xvars, xlim=NULL) {
 	xnames <- names(xvars)
 	numberfy <- function(x) {
 		if (is.character(x)) {
@@ -33,3 +33,4 @@ rescale_01 <- function(xvars, xlim=NULL) {
 rescale_11 <- function(xvars, xlim=NULL) {
 	2 * rescale_01(xvars, xlim) - 1
 }
+

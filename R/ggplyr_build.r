@@ -13,35 +13,67 @@ ggplyr_build <- function(plot){
 	
 	# separate into gglayers and normal layers
 	ggs <- unlist(lapply(layers, is.gglayer))
-	if (all(!ggs)) return(ggplot2:::ggplot_build(plot))
+	if (all(!ggs)) return(ggplot_build(plot))
+	if (all(ggs) && sum(ggs) == 1) return(gglayer_build(layers[[ggs]]))
 	gglayers <- layers[ggs]
 	plot$layers <- layers[!ggs]
 	
 	# build normal layers
-	plot$layers <- layers[!ggs]
-	normal <- ggplot2:::ggplot_build(plot)
+	normal <- NULL
+	if (length(plot$layers) > 0) {
+		normal <- ggplot2:::ggplot_build(plot)
+	}
 	
 	# build embeded layers
 	embedded <- list()
 	for (i in seq_along(gglayers)) {
-		embedded[[i]] <- gglayer_build(gglayer)
+		embedded[[i]] <- gglayer_build(gglayers[[i]])
 	}
 	
 	# combine the builds
 	build <- embedded[[1]]
 	
 	# data
-	lapply(build, function
+	edata <- lapply(embedded, function(bd) bd$data[[1]])
+	data <- c(normal$data, edata)
 	
-	# calculate correct panel
-	# collect all unique scales
-	# collect all data
+	# panel
+	xspan <- range(unlist(lapply(data, function(df) df[names(df) %in% .x_aes])))
+	yspan <- range(unlist(lapply(data, function(df) df[names(df) %in% .y_aes])))
+	panel <- ggplot2:::ggplot_build(qplot(xspan, yspan))$panel
+	
+	# scales - collect all unique scales
+	scales <- build$plot$scales$scales
+	scales[[which_x(scales)]] <- panel$x_scales[[1]]
+	scales[[which_y(scales)]] <- panel$y_scales[[1]]
+	scale.names <- names_scales(scales)
+	for (i in seq_along(embedded[-1])) {
+		escales <- embedded[[i + 1]]$plot$scales$scales
+		unique <- !(names_scales(escales) %in% scale.names)
+		scales <- c(scales, escales[unique])
+		scale.names <- names_scales(scales)
+	}
+	nscales <- normal$plot$scales$scales
+	unique <- !(names_scales(nscales) %in% scale.names)
+	scales <- c(scales, nscales[unique])
+	
+	# layers
 	
 	
+	build$data <- data
+	build$panel <- panel
+	build$plot$scales$scales <- scales
+	
+	build
+}
 
 
 
 
 is.gglayer <- function(x) {
-	is(x, "gglayer")
+	"embed" %in% ls(x)
+}
+
+names_scales <- function(scales) {
+	unlist(lapply(scales, function(s) s$aesthetics[[1]]))
 }

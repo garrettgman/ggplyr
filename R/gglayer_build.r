@@ -1,5 +1,6 @@
 #' gglayer_build prepares an embedded layer (class gglayer) for plotting
 gglayer_build <- function(layer) {
+
 	if (!("embed" %in% ls(layer))) {
 		stop("layer does not have embedded subplots")
 	}
@@ -9,7 +10,7 @@ gglayer_build <- function(layer) {
 
 	# data
 	data <- unpanel(minor$data[[1]])
-	data <- layer$embed$fun(data) # X and Y needed?
+	data <- layer$embed$fun(data)
 	data$PANEL <- 1L
 	
 	# panel
@@ -45,12 +46,12 @@ unpanel <- function(df) {
 
 
 which_x <- function(scales) {
-	vars <- unlist(lapply(scales, function(s) s$aesthetics[[1]]))
+	vars <-  names_scales(scales)
 	which(vars == "x")
 }
 
 
 which_y <- function(scales) {
-	vars <- unlist(lapply(scales, function(s) s$aesthetics[[1]]))
+	vars <- names_scales(scales)
 	which(vars == "y")
 }

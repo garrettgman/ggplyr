@@ -18,7 +18,7 @@ add_gid <- function(aes_group) {
 apply_maps <- function(data, mapping, enclos = parent.frame()) {
 
 	map <- null_omit(mapping)
-	vars <- lapply(map, eval, envir = data, enclos)
+	vars <- llply(map, eval, envir = data, enclos)
 	
 	n <- nrow(data)
 	lengths <- unlist(lapply(vars, length))
@@ -27,6 +27,22 @@ apply_maps <- function(data, mapping, enclos = parent.frame()) {
         stop(paste("Aesthetics must either be length one, or the same length as the
         	data", "Problems:", paste(names(wrong)[wrong], collapse = ", ")), 
             call. = FALSE)
+    }
+    
+    data.frame(vars)
+}
+
+#' the difference between apply maps and apply major is that apply major will only allow one value per gid per variable
+apply_major <- function(data, mapping, enclos = parent.frame()) {
+
+	map <- null_omit(mapping)
+	vars <- llply(map, eval, envir = data, enclos)
+	vars  <- llply(vars, unique)
+	
+	lengths <- unlist(llply(vars, length))
+	wrong <- lengths != 1 
+	if (any(wrong)) {
+        stop(paste("Major aesthetics must return one value per variable per subplot group (.gid).", "Problems:", paste(names(wrong)[wrong], collapse = ", ")), call. = FALSE)
     }
     
     data.frame(vars)
