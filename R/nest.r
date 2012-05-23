@@ -18,11 +18,13 @@ nest <- function(data, major_aes = NULL, x_scale = identity, y_scale = identity,
 	idata <- individual_data(data)	
 	
 	# major level data
-	ref_layer <- reference
-	ref_aes <- ref_layer$mapping
-	non_ref <- c(.x_aes, .y_aes, names(major_aes))
-	ref_aes <- ref_aes[setdiff(names(ref_aes), non_ref)]
-	global_aes <- combine_aes(major_aes, ref_aes)
+	if (is.null(reference)) {
+		global_aes <- major_aes
+	} else {
+		ref_aes <- just_refs(reference$mapping, major_aes)
+		global_aes <- combine_aes(major_aes, ref_aes)
+	}
+	
 	
 	globals <- ddply(idata, ".gid", apply_major, global_aes)	
 	majors <- globalize(globals[c(".gid", names(major_aes))])
@@ -34,20 +36,6 @@ nest <- function(data, major_aes = NULL, x_scale = identity, y_scale = identity,
 	if (is.rel(height)) {
 		height <- diff(range(majors$Y)) / max(majors$.gid) * unclass(height)
 	}
-	
-	
-	ref_data <- globals[c(".gid", "x", "y", names(ref_aes))]
-	ref_data <- transform(globals, xmin = x - width, xmax = x + width, 
-		ymin = y - height, ymax = y + height)
-	ref_data$x <- NULL
-	ref_data$y <- NULL
-	
-	ref_map <- lapply(names(ref_data), as.name)
-	names(ref_map) <- names(ref_data)
-	ref_map$.gid <- NULL
-	
-	ref_layer$mapping <- ref_map
-	ref_layer$data <- ref_data
 	
 	# relocates subplots within major axes at build
 	combine_fun <- function(data) {
@@ -81,12 +69,14 @@ nest <- function(data, major_aes = NULL, x_scale = identity, y_scale = identity,
 	
 	prototype <- layer_clone(data[[1]])
 	prototype$data <- idata
-	prototype$embed <- list(fun = combine_fun, major_aes = major_aes, 
-		ref_aes = ref_aes)
+	prototype$embed <- list(fun = combine_fun, major_aes = major_aes)
 	
 	if (is.null(reference)) {
 		gglayer(prototype)
 	} else {
+		prototype$embed$ref_aes <- ref_aes
+		refs <- globals[c(".gid", "x", "y", names(ref_aes))]
+		ref_layer <- reference$make_layer(refs, width, height)
 		list(ref_layer, gglayer(prototype))
 	}
 }

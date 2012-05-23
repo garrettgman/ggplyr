@@ -208,10 +208,28 @@ dgply(test.data,
 # and with boxes
 dgply(mpg,
 	.split = c("year"),
-	.apply = fun(geom_bar, "data", mapping = aes(x = trans, fill = year)),
+	.apply = fun(geom_bar, "data", mapping = aes(x = trans, fill =trans)),
 	.combine = fun(nest, "data", aes(x = mean(displ), y = mean(cty)), 
-		width = 1/10, height = 1/10, reference = ref_box(fill = "navy", alpha = 1/3)))
+		width = 1/10, height = 1/10, reference = ref_box(aes(fill = mean(displ)), alpha = 1/3)))
 
+
+dgply(test.data,
+	.split = c("lat", "long"),
+	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education), size = 3),
+	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
+		y = mean(Education)), width = 5, height = 5, reference = ref_hline(aes(color = mean(Agriculture), size = 10))))
+		
+dgply(test.data,
+	.split = c("lat", "long"),
+	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education), size = 3),
+	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
+		y = mean(Education)), width = 5, height = 5, reference = ref_vline(aes(color = mean(Agriculture), size = 10))))
+		
+dgply(test.data,
+	.split = c("lat", "long"),
+	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education), size = 3),
+	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
+		y = mean(Education)), width = 5, height = 5, reference = ref_points(aes(color = mean(Agriculture)))))
 #########################################################
 ###               testing embed_layers                ###
 #########################################################
