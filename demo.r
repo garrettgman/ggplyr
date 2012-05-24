@@ -61,7 +61,7 @@ dgply(test.data,
 	.split = c("lat", "long"),
 	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education, color = rank(Catholic)), size = 3),
 	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
-		y = mean(Education)), width = 5, height = 5)
+		y = mean(Education)), width = 5, height = 5))
 
 
 # adjusting for overlaps etc - separate step modifying the pos_major data frame
@@ -204,6 +204,12 @@ dgply(test.data,
 	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education), size = 3, color = "white"),
 	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
 		y = mean(Education)), width = 5, height = 5, reference = ref_box(aes(fill = mean(Agriculture)))))
+		
+dgply(test.data,
+	.split = c("lat", "long"),
+	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education), size = 3, color = "white"),
+	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
+		y = mean(Education)), width = 5, height = 5, reference = ref_box(aes(fill = mean(Agriculture))), merge = TRUE))
 
 # and with boxes
 dgply(mpg,
@@ -230,6 +236,20 @@ dgply(test.data,
 	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education), size = 3),
 	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
 		y = mean(Education)), width = 5, height = 5, reference = ref_points(aes(color = mean(Agriculture)))))
+		
+		
+		
+#########################################################
+###               testing merging                     ###
+#########################################################		
+dgply(test.data,
+	.split = c("lat", "long"),
+	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education, color = rank(Catholic)), size = 3),
+	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
+		y = mean(Education)), width = 5, height = 5, merge = TRUE))		
+		
+		
+		
 #########################################################
 ###               testing embed_layers                ###
 #########################################################

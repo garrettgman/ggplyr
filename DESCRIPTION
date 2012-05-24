@@ -43,3 +43,5 @@ Collate:
     'ref_hline.r'
     'ref_points.r'
     'ref_vline.r'
+    'grid.r'
+    'merge_overlaps.r'

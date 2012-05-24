@@ -1,5 +1,5 @@
 #' nest combines subplot x and y data with plot level x and y coordinates to embed the subplots into a set of major axiis. nest calculates the plot level coordinates and returns a list object whcih is used by embed_layers to perform the actual comining. This list contains a function to transform the subplot data and a mapping to be used to correctly label the x and y axes.
-nest <- function(data, major_aes = NULL, x_scale = identity, y_scale = identity, width = 1, height = 1, reference = NULL) {
+nest <- function(data, major_aes = NULL, x_scale = identity, y_scale = identity, width = 1, height = 1, reference = NULL, merge.overlaps = FALSE) {
 	
 	xy.in <- c("x", "y") %in% names(major_aes)
 	if (!all(xy.in)) {
@@ -27,15 +27,23 @@ nest <- function(data, major_aes = NULL, x_scale = identity, y_scale = identity,
 	
 	
 	globals <- ddply(idata, ".gid", apply_major, global_aes)	
-	majors <- globalize(globals[c(".gid", names(major_aes))])
 	
 	# parse width and height
 	if (is.rel(width)) {
-		width <- diff(range(majors$X)) / max(majors$.gid) * unclass(width)
+		width <- diff(range(globals$x)) / max(globals$.gid) * unclass(width)
 	}
 	if (is.rel(height)) {
-		height <- diff(range(majors$Y)) / max(majors$.gid) * unclass(height)
+		height <- diff(range(globals$Y)) / max(globals$.gid) * unclass(height)
 	}
+	
+	# combine overlapping subplots
+	if (merge.overlaps) {
+		merges <- merge_overlaps(globals, width, height)
+		idata <- update_gid(idata, merges)
+		globals <- ddply(idata, ".gid", apply_major, global_aes)
+	} 
+	
+	majors <- globalize(globals[c(".gid", names(major_aes))])
 	
 	# relocates subplots within major axes at build
 	combine_fun <- function(data) {
@@ -90,4 +98,15 @@ vet <- function(x) {
 		x <- as.numeric(x)
 	}
 	x
+}
+
+update_gid <- function(df, updates) {
+	if (!(".gid" %in% names(df))) {
+		stop("Cannot update gids: data.frame does not have .gid variable", 
+			call. = FALSE)
+	}
+	
+	obsolete <- df$.gid %in% names(updates)
+	df$.gid[obsolete] <- updates[as.character(df$.gid[obsolete])]
+	df
 }
