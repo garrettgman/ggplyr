@@ -13,7 +13,8 @@ Imports:
     ggplot2,
     plyr,
     proto,
-    grid
+    grid,
+    scales
 Depends:
     R (>= 2.15)
 Collate:
@@ -45,3 +46,4 @@ Collate:
     'ref_vline.r'
     'grid.r'
     'merge_overlaps.r'
+    'geom_dart.r'

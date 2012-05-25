@@ -285,3 +285,18 @@ elayers2 <- embed_layers(layers2, fun(cross, "data", major_aes = aes(x = mean(Fe
 eplot2 <- gglayer_build(elayers2)
 gshow(eplot2)
 p <- nest(layers, mapping = aes(x = mean(Fertility), y = mean(Education)))
+
+
+#########################################################
+###               testing geom_dart                   ###
+#########################################################
+dart.data <- data.frame(x = 0, y = 0, angle = 0, width = 2, size = 1)
+darts.data <- data.frame(x = 0, y = 1:3, angle = 0, width = 1:3, size = 1, gid = 1:3)
+ggplot(dart.data, aes(x = x, y = y)) + geom_dart()
+ggplot(data.frame(x=0, y=0,angle = seq(pi/4, 2 * pi, by = pi/2)), aes(x = x, y = y, width = 3, fill = angle, angle = angle, group = angle)) + geom_dart() + coord_map()
+
+qplot(x, y, data = dart.data, geom = "dart")
+ggplot() + geom_plyr(aes(x = long[1], angle = mean(Fertility), y = lat[1], width = mean(Education), group = interaction(lat, long)), test.data, c("lat", "long"), geom = "dart")
+
+qplot(lat, long, data = test.data, geom = "dart")
+
