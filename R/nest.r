@@ -33,7 +33,7 @@ nest <- function(data, major_aes = NULL, x_scale = identity, y_scale = identity,
 		width <- diff(range(globals$x)) / max(globals$.gid) * unclass(width)
 	}
 	if (is.rel(height)) {
-		height <- diff(range(globals$Y)) / max(globals$.gid) * unclass(height)
+		height <- diff(range(globals$y)) / max(globals$.gid) * unclass(height)
 	}
 	
 	# combine overlapping subplots

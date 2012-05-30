@@ -1,7 +1,7 @@
 # ggplyr features demo - sift for tests
 
 # setwd("/Users/GarrettsiMac/Dropbox/research")
-# setwd("/Users/garrettgrolemund/Dropbox/research")
+# setwd("/Users/garrettgrolemund/Documents/git")
 library(devtools)
 load_all("ggplyr")
 
@@ -34,7 +34,17 @@ qplot(Fertility, Agriculture, data = test.data, color = interaction(lat, long))
 
 # use plyr to create a graph
 # the aesthetics can be calculated groupwise
-ggplot() + geom_plyr(aes(x = Fertility, y = Agriculture, color = rank(Fertility)), test.data, c("lat", "long"), geom = "point", size = 3)
+ggplot() + 
+  geom_plyr(aes(x = long, y = lat, color = rank(Fertility)), 
+    test.data, c("lat", "long"), geom = "jitter", size = 3, 
+    position = position_jitter(width = 0.2, height = 0.2))
+
+ggplot() + 
+  geom_jitter(aes(x = long, y = lat, color = rank(Fertility)), 
+    data = test.data, size = 3, 
+    position = position_jitter(width = 0.2, height = 0.2))
+
+
 
 data <- group_by(test.data, c("lat", "long"))
 lapply(data, fun(qplot, "data", x = Fertility, y = Agriculture, color = rank(Education), size = I(3), xlim = range(test.data$Fertility), ylim = range(test.data$Agriculture)))
