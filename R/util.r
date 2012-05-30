@@ -1,6 +1,17 @@
 .x_aes <- c("x", "xend", "xmax", "xmin")
 .y_aes <- c("y", "yend", "ymax", "ymin")
 
+#' retrieves the first name used in an expression. To be used with screening 
+#' mappings for plyr or regular computation.
+first_name <- function(expr) {
+  names <- all.names(expr)
+  names <- names[names != "["]
+  firsts <- names[1]
+  firsts[is.na(firsts)] <- ""
+  firsts
+}
+
+
 #' get_xs retrieves all mappings that need to be altered for plotting on a new x axis
 #'
 #' @keywords internal

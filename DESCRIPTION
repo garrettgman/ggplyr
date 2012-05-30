@@ -36,3 +36,7 @@ Collate:
     'glayer_build.r'
     'ref_box.r'
     'ply_aes.r'
+    'grid.r'
+    'grid_by.r'
+    'group_by.r'
+    'aesply.r'

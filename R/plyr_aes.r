@@ -1,15 +1,23 @@
+#' what replaces compute_aesthetics
 plyr_aesthetics <- function (., data, plot) {
-    aesthetics <- .$layer_mapping(plot$mapping)
-    if (!is.null(.$subset)) {
-        include <- data.frame(eval.quoted(.$subset, data, plot$env))
-        data <- data[rowSums(include, na.rm = TRUE) == ncol(include), ]
+  aesthetics <- .$layer_mapping(plot$mapping)
+  if (!is.null(.$subset)) {
+    include <- data.frame(eval.quoted(.$subset, data, plot$env))
+    data <- data[rowSums(include, na.rm = TRUE) == ncol(include), ]
+  }
+  if (!is.null(.$geom_params$group)) {
+    aesthetics["group"] <- .$geom_params$group
+  }
+  scales_add_defaults(plot$scales, data, aesthetics, plot$plot_env)
+  
+  if (is.null(data$GLYPH)) {
+    if ("plyr" %in% ls(.)) {
+      data$GLYPH <- plyr$ply.by(data)
     }
-    if (!is.null(.$geom_params$group)) {
-        aesthetics["group"] <- .$geom_params$group
-    }
-    scales_add_defaults(plot$scales, data, aesthetics, plot$plot_env)
-    compact(eval.plyr(aesthetics, data, c("GLYPH", "PANEL"), plot$plot_env))
+  }
+  aesply(data, c("GLYPH", "PANEL"), aesthetics)
 }
+
 
 eval.plyr <- function (exprs, data = NULL, by = NULL, enclos = NULL, try = FALSE) {
     if (is.numeric(exprs)) 
@@ -38,7 +46,9 @@ apply_maps <- function(data, mapping, enclos = parent.frame()) {
 	lengths <- unlist(lapply(vars, length))
 	wrong <- lengths != 1 & lengths != n
 	if (any(wrong)) {
-        stop(paste("Aesthetics must either be length one, or the same length as the data", "Problems:", paste(names(wrong)[wrong], collapse = ", ")), call. = FALSE)
+    stop(paste(
+      "Aesthetics must either be length one, or the same length as the data", 
+      "Problems:", paste(names(wrong)[wrong], collapse = ", ")), call. = FALSE)
     }
   data.frame(vars)
 }

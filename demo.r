@@ -1,19 +1,28 @@
 ###################################################
 ###             geom_scatterplots               ###
 ###################################################
-
-
+library(devtools)
+load_all("../ggplyr")
 ###########################################
 ###              working                ###
 ###########################################
-ggplot(nasa) + glyph(geom_point(aes(x = surftemp, y = temperature), 
+# imac 10.274 seconds
+# system.time(print(qplot(surftemp, temperature, data = nasa) + facet_grid(long~lat)))
+system.time(print(ggplot(nasa) + glyph(geom_point(aes(x = surftemp, y = temperature), 
   size = 1/5), glyph.by = c("lat", "long"), width = 3, height = 3, 
-  major = aes(x = long[1], y = lat[1]))
+  major = aes(x = long[1], y = lat[1]))))
+# compare to 21.736 seconds
+# system.time(print(qplot(surftemp, temperature, data = nasa, size = I(1/5)) + 
+#  facet_grid(long~lat)))
 
 # embed points (continuous - no stats)
 ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
   color = rank(Catholic)), size = 3), glyph.by = c("lat", "long"), 
-  major = aes(Fertility, Education))
+  major = aes(mean(Fertility), mean(Education)))
+
+ggplot(test.data) + glyph(ply_aes(geom_point(aes(Fertility, Agriculture, 
+  color = rank(Catholic)), size = 3), .vars = c("lat", "long")), 
+  glyph.by = c("lat", "long"), major = aes(mean(Fertility), mean(Education)))
 
 # embed bars (categorical with stats)
 ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year)), 
@@ -24,7 +33,7 @@ ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year)),
 # boxes
 ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
   color = rank(Catholic)), size = 3), glyph.by = c("lat", "long"), 
-  major = aes(Fertility, Education), ref = ref_box(aes(fill = 
+  major = aes(mean(Fertility), mean(Education)), ref = ref_box(aes(fill = 
   mean(Catholic))))
 
 # hlines
@@ -89,9 +98,21 @@ ggplot(mpg) + ply_aes(geom_point(aes(hwy, cty, color = rank(displ))),
 # new tactic for overplotting  
 ggplot() + geom_point(aes(x = temperature, y = ozone, color = lat), data = nasa)	
 # vs.
-ggplot() + ply_aes(geom_point(aes(x = mean(temperature), y = mean(ozone), color = lat[1]), data = nasa), c("lat", "long"))
+ggplot() + ply_aes(geom_point(aes(x = mean(temperature), y = mean(ozone), 
+  color = lat[1]), data = nasa), c("lat", "long"))
 #vs.	
-ggplot() + geom_point(aes(x = mean(temperature), y = mean(ozone), color = lat[1]), data = nasa)  
+ggplot() + geom_point(aes(x = mean(temperature), y = mean(ozone), 
+  color = lat[1]), data = nasa)  
+
+# splitting by grids
+ggplot(test.data) + geom_point(aes(Fertility, Agriculture, color = Catholic))
+ggplot(test.data) + geom_point(aes(grid(Fertility, 3), grid(Agriculture, 3), 
+  color = Catholic))
+ggplot(test.data) + geom_point(aes(grid(Fertility, 3), grid(Agriculture, 3), 
+  color = Catholic), position = position_jitter(width = 1, height = 1))
+ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
+  color = Catholic)), aes(I(grid(Fertility, 3)), I(grid(Agriculture, 3))), 
+  grid_by(Fertility, 3, Agriculture, 3))
 
 ###########################################
 ###          not yet working            ###

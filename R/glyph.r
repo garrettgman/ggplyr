@@ -12,6 +12,10 @@ glyph <- function(layer, major.aes, glyph.by = NULL, width = rel(0.95),
     stop(paste("Missing required aesthetic in major.aes:", 
       paste(c("x", "y")[missing], collapse = ", ")))
   }
+
+  if (!is.function(glyph.by)) {
+    glyph.by <- group_by(glyph.by)
+  }
   
   layer <- layer_clone(layer)
   layer$embed <- list(width = width, height = height, 
@@ -20,7 +24,7 @@ glyph <- function(layer, major.aes, glyph.by = NULL, width = rel(0.95),
   layer$assign_glyphs <- assign_glyphs
   layer$combine_glyphs <- combine_glyphs
   if (.ref) layer$combine_glyphs <- combine_refs
-  layer$compute_aesthetics <- plyr_aesthetics
+  #layer$compute_aesthetics <- plyr_aesthetics
     
   if (is.null(reference)) {
   	glayer(layer)
@@ -29,13 +33,21 @@ glyph <- function(layer, major.aes, glyph.by = NULL, width = rel(0.95),
   	  merge.overlaps)
   	list(ref.layer, glayer(layer))
   }
-} 
+}
+
   
 assign_glyphs <- function(., data) {
   # major x and y
-  data$GLYPH <- id(data[embed$glyph.by], drop = TRUE)
-  globals <- ddply(data, "GLYPH", apply_glyphs, embed$major.aes)
-    
+  data$GLYPH <- embed$glyph.by(data)
+  globals <- aesply(data, "GLYPH", embed$major.aes)
+  too.many <- c(length(unique(globals$x)) > length(unique(globals$GLYPH)), 
+    length(unique(globals$y)) > length(unique(globals$GLYPH)))
+  if (any(too.many)) {
+    message(paste("Major", paste(c("x", "y")[too.many], collapse = " and "), 
+      "return more than one value per glyph. Only using first."))
+    globals <- unique(ddply(globals, "GLYPH", transform, x = x[1], y = y[1]))
+  }
+  
   # parse width, height
   width <- embed$width
   height <- embed$height
@@ -59,7 +71,32 @@ assign_glyphs <- function(., data) {
   data
 }
   
+combine_glyphs <- function(., data) {  
+  data <- join(data, globalize(embed$globals), by = "GLYPH")
   
+  xvar <- get_xs(data)
+  yvar <- get_ys(data)
+  
+  # scale if necessary
+  if (!identical(embed$x_scale, identity) || 
+    !identical(embed$y_scale, identity)) {
+    data <- ddply(data, "GLYPH", function(df) {
+      df[xvar] <- embed$x_scale(df[xvar])
+      df[yvar] <- embed$y_scale(df[yvar])
+      df
+    })
+  }
+  
+  # update x and y related variables
+  # don't scale individually or xmin and xmax's will end up on top of 
+  # one another
+  data[xvar] <- vet(data$X) + rescale_11(data[xvar]) * embed$width/2
+  data[yvar] <- vet(data$Y) + rescale_11(data[yvar]) * embed$height/2
+  
+  data$X <- NULL
+  data$Y <- NULL
+  data
+}  
   
 combine_refs <- function(., data) {  
   data <- join(data, globalize(embed$globals), by = "GLYPH")

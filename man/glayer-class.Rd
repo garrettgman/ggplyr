@@ -1,10 +1,10 @@
 \name{glayer-class}
-\alias{"[,glayer-method"}
-\alias{"[<-,glayer-method"}
-\alias{"+,ggplot,glayer-method"}
-\alias{"+,glyphs,glayer-method"}
 \alias{"$,glayer-method"}
 \alias{"$<-,glayer-method"}
+\alias{"+,ggplot,glayer-method"}
+\alias{"+,glyphs,glayer-method"}
+\alias{"[,glayer-method"}
+\alias{"[<-,glayer-method"}
 \alias{"c,glayer-method"}
 \alias{"ggtransform,glayer-method"}
 \alias{"ls,glayer-method"}
