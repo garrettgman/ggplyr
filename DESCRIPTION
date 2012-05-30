@@ -1,0 +1,38 @@
+Package: glyphmaps
+Maintainer: Garrett Grolemund <grolemund@rice.edu>
+License: GPL
+Title: Explore large data with binned modelling
+LazyData: true
+Type: Package
+Author: Garrett Grolemund <grolemund@rice.edu>, Hadley
+    Wickham <h.wickham@gmail.com>
+Description: modelglyphs makes it easy to view the output
+    of models that are applied to subsets of the data.
+Version: 0.1.0
+Imports:
+    ggplot2,
+    plyr,
+    proto,
+    grid,
+    scales,
+    stringr
+Depends:
+    R (>= 2.15)
+Collate:
+    'add_glyph.r'
+    'ggtransform.r'
+    'glyph_build.r'
+    'glyphs-class.r'
+    'plyr_aes.r'
+    'plyr_stats.r'
+    'glayer-class.r'
+    'glyph.r'
+    'glyph_aesthetics.r'
+    'merge_overlaps.r'
+    'util.r'
+    'map_glyph.r'
+    'rel-class.r'
+    'rescalers.r'
+    'glayer_build.r'
+    'ref_box.r'
+    'ply_aes.r'

@@ -1,0 +1,1030 @@
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2009.11.7)  26 MAY 2012 14:57
+entering extended mode
+ %&-line parsing enabled.
+**demo.tex
+(./demo.tex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, german-x-2009-06-19, ngerman-x-2009-06-19, ancientgreek, ibycus, ar
+abic, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danish, dutc
+h, esperanto, estonian, farsi, finnish, french, galician, german, ngerman, mono
+greek, greek, hungarian, icelandic, indonesian, interlingua, irish, italian, ku
+rmanji, latin, latvian, lithuanian, mongolian, mongolian2a, bokmal, nynorsk, po
+lish, portuguese, romanian, russian, sanskrit, serbian, slovak, slovenian, span
+ish, swedish, turkish, ukenglish, ukrainian, uppersorbian, welsh, loaded.
+(/usr/local/texlive/2009/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2009/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/local/texlive/2009/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/local/texlive/2009/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/local/texlive/2009/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2009/08/25 v0.04m Graphics/color for pdfTeX
+\Gread@gobject=\count87
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+(/usr/local/texlive/2009/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+(/Library/Frameworks/R.framework/Resources/share/texmf/tex/latex/upquote.sty
+Package: upquote 2003/08/11 v1.1 Covington's upright-quote modification to verb
+atim and verb
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2005/09/27 v1.99g Standard LaTeX package
+Package textcomp Info: Sub-encoding information:
+(textcomp)               5 = only ISO-Adobe without \textcurrency
+(textcomp)               4 = 5 + \texteuro
+(textcomp)               3 = 4 + \textohm
+(textcomp)               2 = 3 + \textestimated + \textcurrency
+(textcomp)               1 = TS1 - \textcircled - \t
+(textcomp)               0 = TS1 (full)
+(textcomp)             Font families with sub-encoding setting implement
+(textcomp)             only a restricted character set as indicated.
+(textcomp)             Family '?' is the default used for unknown fonts.
+(textcomp)             See the documentation for details.
+Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 71.
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/base/ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+)
+LaTeX Info: Redefining \oldstylenums on input line 266.
+Package textcomp Info: Setting cmr sub-encoding to TS1/0 on input line 281.
+Package textcomp Info: Setting cmss sub-encoding to TS1/0 on input line 282.
+Package textcomp Info: Setting cmtt sub-encoding to TS1/0 on input line 283.
+Package textcomp Info: Setting cmvtt sub-encoding to TS1/0 on input line 284.
+Package textcomp Info: Setting cmbr sub-encoding to TS1/0 on input line 285.
+Package textcomp Info: Setting cmtl sub-encoding to TS1/0 on input line 286.
+Package textcomp Info: Setting ccr sub-encoding to TS1/0 on input line 287.
+Package textcomp Info: Setting ptm sub-encoding to TS1/4 on input line 288.
+Package textcomp Info: Setting pcr sub-encoding to TS1/4 on input line 289.
+Package textcomp Info: Setting phv sub-encoding to TS1/4 on input line 290.
+Package textcomp Info: Setting ppl sub-encoding to TS1/3 on input line 291.
+Package textcomp Info: Setting pag sub-encoding to TS1/4 on input line 292.
+Package textcomp Info: Setting pbk sub-encoding to TS1/4 on input line 293.
+Package textcomp Info: Setting pnc sub-encoding to TS1/4 on input line 294.
+Package textcomp Info: Setting pzc sub-encoding to TS1/4 on input line 295.
+Package textcomp Info: Setting bch sub-encoding to TS1/4 on input line 296.
+Package textcomp Info: Setting put sub-encoding to TS1/5 on input line 297.
+Package textcomp Info: Setting uag sub-encoding to TS1/5 on input line 298.
+Package textcomp Info: Setting ugq sub-encoding to TS1/5 on input line 299.
+Package textcomp Info: Setting ul8 sub-encoding to TS1/4 on input line 300.
+Package textcomp Info: Setting ul9 sub-encoding to TS1/4 on input line 301.
+Package textcomp Info: Setting augie sub-encoding to TS1/5 on input line 302.
+Package textcomp Info: Setting dayrom sub-encoding to TS1/3 on input line 303.
+Package textcomp Info: Setting dayroms sub-encoding to TS1/3 on input line 304.
+
+Package textcomp Info: Setting pxr sub-encoding to TS1/0 on input line 305.
+Package textcomp Info: Setting pxss sub-encoding to TS1/0 on input line 306.
+Package textcomp Info: Setting pxtt sub-encoding to TS1/0 on input line 307.
+Package textcomp Info: Setting txr sub-encoding to TS1/0 on input line 308.
+Package textcomp Info: Setting txss sub-encoding to TS1/0 on input line 309.
+Package textcomp Info: Setting txtt sub-encoding to TS1/0 on input line 310.
+Package textcomp Info: Setting futs sub-encoding to TS1/4 on input line 311.
+Package textcomp Info: Setting futx sub-encoding to TS1/4 on input line 312.
+Package textcomp Info: Setting futj sub-encoding to TS1/4 on input line 313.
+Package textcomp Info: Setting hlh sub-encoding to TS1/3 on input line 314.
+Package textcomp Info: Setting hls sub-encoding to TS1/3 on input line 315.
+Package textcomp Info: Setting hlst sub-encoding to TS1/3 on input line 316.
+Package textcomp Info: Setting hlct sub-encoding to TS1/5 on input line 317.
+Package textcomp Info: Setting hlx sub-encoding to TS1/5 on input line 318.
+Package textcomp Info: Setting hlce sub-encoding to TS1/5 on input line 319.
+Package textcomp Info: Setting hlcn sub-encoding to TS1/5 on input line 320.
+Package textcomp Info: Setting hlcw sub-encoding to TS1/5 on input line 321.
+Package textcomp Info: Setting hlcf sub-encoding to TS1/5 on input line 322.
+Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 323.
+Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 324.
+Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 325.
+Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 326.
+))
+\hlnormalsizeboxclosebrace=\box26
+\hlnormalsizeboxopenbrace=\box27
+\hlnormalsizeboxbackslash=\box28
+\hlnormalsizeboxlessthan=\box29
+\hlnormalsizeboxgreaterthan=\box30
+\hlnormalsizeboxdollar=\box31
+\hlnormalsizeboxunderscore=\box32
+\hlnormalsizeboxand=\box33
+\hlnormalsizeboxhash=\box34
+\hlnormalsizeboxat=\box35
+\hlnormalsizeboxpercent=\box36
+\hlnormalsizeboxhat=\box37
+\hlnormalsizeboxsinglequote=\box38
+\hlnormalsizeboxbacktick=\box39
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 51.
+
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/base/ts1cmtt.fd
+File: ts1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+\hltinyboxclosebrace=\box40
+\hltinyboxopenbrace=\box41
+\hltinyboxbackslash=\box42
+\hltinyboxlessthan=\box43
+\hltinyboxgreaterthan=\box44
+\hltinyboxdollar=\box45
+\hltinyboxunderscore=\box46
+\hltinyboxand=\box47
+\hltinyboxhash=\box48
+\hltinyboxat=\box49
+\hltinyboxpercent=\box50
+\hltinyboxhat=\box51
+\hltinyboxsinglequote=\box52
+\hltinyboxbacktick=\box53
+\hlscriptsizeboxclosebrace=\box54
+\hlscriptsizeboxopenbrace=\box55
+\hlscriptsizeboxbackslash=\box56
+\hlscriptsizeboxlessthan=\box57
+\hlscriptsizeboxgreaterthan=\box58
+\hlscriptsizeboxdollar=\box59
+\hlscriptsizeboxunderscore=\box60
+\hlscriptsizeboxand=\box61
+\hlscriptsizeboxhash=\box62
+\hlscriptsizeboxat=\box63
+\hlscriptsizeboxpercent=\box64
+\hlscriptsizeboxhat=\box65
+\hlscriptsizeboxsinglequote=\box66
+\hlscriptsizeboxbacktick=\box67
+\hlfootnotesizeboxclosebrace=\box68
+\hlfootnotesizeboxopenbrace=\box69
+\hlfootnotesizeboxbackslash=\box70
+\hlfootnotesizeboxlessthan=\box71
+\hlfootnotesizeboxgreaterthan=\box72
+\hlfootnotesizeboxdollar=\box73
+\hlfootnotesizeboxunderscore=\box74
+\hlfootnotesizeboxand=\box75
+\hlfootnotesizeboxhash=\box76
+\hlfootnotesizeboxat=\box77
+\hlfootnotesizeboxpercent=\box78
+\hlfootnotesizeboxhat=\box79
+\hlfootnotesizeboxsinglequote=\box80
+\hlfootnotesizeboxbacktick=\box81
+\hlsmallboxclosebrace=\box82
+\hlsmallboxopenbrace=\box83
+\hlsmallboxbackslash=\box84
+\hlsmallboxlessthan=\box85
+\hlsmallboxgreaterthan=\box86
+\hlsmallboxdollar=\box87
+\hlsmallboxunderscore=\box88
+\hlsmallboxand=\box89
+\hlsmallboxhash=\box90
+\hlsmallboxat=\box91
+\hlsmallboxpercent=\box92
+\hlsmallboxhat=\box93
+\hlsmallboxsinglequote=\box94
+\hlsmallboxbacktick=\box95
+\hllargeboxclosebrace=\box96
+\hllargeboxopenbrace=\box97
+\hllargeboxbackslash=\box98
+\hllargeboxlessthan=\box99
+\hllargeboxgreaterthan=\box100
+\hllargeboxdollar=\box101
+\hllargeboxunderscore=\box102
+\hllargeboxand=\box103
+\hllargeboxhash=\box104
+\hllargeboxat=\box105
+\hllargeboxpercent=\box106
+\hllargeboxhat=\box107
+\hllargeboxsinglequote=\box108
+\hllargeboxbacktick=\box109
+\hlLargeboxclosebrace=\box110
+\hlLargeboxopenbrace=\box111
+\hlLargeboxbackslash=\box112
+\hlLargeboxlessthan=\box113
+\hlLargeboxgreaterthan=\box114
+\hlLargeboxdollar=\box115
+\hlLargeboxunderscore=\box116
+\hlLargeboxand=\box117
+\hlLargeboxhash=\box118
+\hlLargeboxat=\box119
+\hlLargeboxpercent=\box120
+\hlLargeboxhat=\box121
+\hlLargeboxsinglequote=\box122
+\hlLargeboxbacktick=\box123
+\hlLARGEboxclosebrace=\box124
+\hlLARGEboxopenbrace=\box125
+\hlLARGEboxbackslash=\box126
+\hlLARGEboxlessthan=\box127
+\hlLARGEboxgreaterthan=\box128
+\hlLARGEboxdollar=\box129
+\hlLARGEboxunderscore=\box130
+\hlLARGEboxand=\box131
+\hlLARGEboxhash=\box132
+\hlLARGEboxat=\box133
+\hlLARGEboxpercent=\box134
+\hlLARGEboxhat=\box135
+\hlLARGEboxsinglequote=\box136
+\hlLARGEboxbacktick=\box137
+\hlhugeboxclosebrace=\box138
+\hlhugeboxopenbrace=\box139
+\hlhugeboxbackslash=\box140
+\hlhugeboxlessthan=\box141
+\hlhugeboxgreaterthan=\box142
+\hlhugeboxdollar=\box143
+\hlhugeboxunderscore=\box144
+\hlhugeboxand=\box145
+\hlhugeboxhash=\box146
+\hlhugeboxat=\box147
+\hlhugeboxpercent=\box148
+\hlhugeboxhat=\box149
+\hlhugeboxsinglequote=\box150
+\hlhugeboxbacktick=\box151
+\hlHugeboxclosebrace=\box152
+\hlHugeboxopenbrace=\box153
+\hlHugeboxbackslash=\box154
+\hlHugeboxlessthan=\box155
+\hlHugeboxgreaterthan=\box156
+\hlHugeboxdollar=\box157
+\hlHugeboxunderscore=\box158
+\hlHugeboxand=\box159
+\hlHugeboxhash=\box160
+\hlHugeboxat=\box161
+\hlHugeboxpercent=\box162
+\hlHugeboxhat=\box163
+\hlHugeboxsinglequote=\box164
+\hlHugeboxbacktick=\box165
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/ltxmisc/framed.sty
+Package: framed 2007/10/04 v 0.95: framed or shaded text with page breaks
+\fb@frw=\dimen105
+\fb@frh=\dimen106
+\FrameRule=\dimen107
+\FrameSep=\dimen108
+)
+(/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/mathpazo.sty
+Package: mathpazo 2005/04/12 PSNFSS-v9.2a Palatino w/ Pazo Math (D.Puga, WaS) 
+\symupright=\mathgroup4
+)
+(/usr/local/texlive/2009/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/base/t1enc.def
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+))
+(/usr/local/texlive/2009/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2008/12/21 v4.2 Page Geometry
+
+(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in pdf mode detected.
+)
+(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
+Package ifvtex Info: VTeX not detected.
+)
+\Gm@cnth=\count88
+\Gm@cntv=\count89
+\c@Gm@tempcnt=\count90
+\Gm@bindingoffset=\dimen109
+\Gm@wd@mp=\dimen110
+\Gm@odd@mp=\dimen111
+\Gm@even@mp=\dimen112
+\Gm@dimlist=\toks15
+
+(/usr/local/texlive/2009/texmf-dist/tex/xelatex/xetexconfig/geometry.cfg))
+(/usr/local/texlive/2009/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2009/07/16 8.31 (PWD, AO)
+\bibhang=\skip43
+\bibsep=\skip44
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count91
+)
+(/usr/local/texlive/2009/texmf-dist/tex/latex/ltxmisc/url.sty
+\Urlmuskip=\muskip10
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+(/usr/local/texlive/2009/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2009/10/09 v6.79a Hypertext links for LaTeX
+
+(/usr/local/texlive/2009/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2009/01/23 v0.5 Provides ifxetex conditional
+)
+(/usr/local/texlive/2009/texmf-dist/tex/latex/oberdiek/hycolor.sty
+Package: hycolor 2009/10/02 v1.5 Code for color options of hyperref/bookmark (H
+O)
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/oberdiek/xcolor-patch.sty
+Package: xcolor-patch 2009/10/02 xcolor patch
+))
+\@linkdim=\dimen113
+\Hy@linkcounter=\count92
+\Hy@pagecounter=\count93
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2009/10/09 v6.79a Hyperref: PDFDocEncoding definition (HO)
+)
+(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2007/12/12 v1.2 Prefix for e-TeX command names (HO)
+
+(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2007/09/09 v1.2 Providing info/warning/message (HO)
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)
+(/usr/local/texlive/2009/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+(/usr/local/texlive/2009/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2009/08/13 v3.4 Keyval support for LaTeX options (HO)
+
+(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2009/07/30 v1.5 Key value parser with default handler suppor
+t (HO)
+))
+Package hyperref Info: Option `unicode' set `true' on input line 2864.
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2009/10/09 v6.79a Hyperref: PDF Unicode definition (HO)
+)
+Package hyperref Info: Option `pdfusetitle' set `true' on input line 2864.
+Package hyperref Info: Option `bookmarks' set `true' on input line 2864.
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 2864
+.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 2864.
+Package hyperref Info: Option `breaklinks' set `false' on input line 2864.
+Package hyperref Info: Option `colorlinks' set `false' on input line 2864.
+Package hyperref Info: Hyper figures OFF on input line 2975.
+Package hyperref Info: Link nesting OFF on input line 2980.
+Package hyperref Info: Hyper index ON on input line 2983.
+Package hyperref Info: Plain pages OFF on input line 2990.
+Package hyperref Info: Backreferencing OFF on input line 2995.
+
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 3191.
+LaTeX Info: Redefining \url on input line 3428.
+(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/bitset.sty
+Package: bitset 2007/09/28 v1.0 Data type bit set (HO)
+
+(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/intcalc.sty
+Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
+)
+(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/bigintcalc.sty
+Package: bigintcalc 2007/11/11 v1.1 Expandable big integer calculations (HO)
+
+(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2009/09/23 v0.6 LuaTeX support for pdfTeX utility functions
+ (HO)
+
+(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2009/04/17 v1.2 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2009/08/05 v1.0 Some LaTeX kernel commands for general use (HO
+)
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+)))
+\Fld@menulength=\count94
+\Field@Width=\dimen114
+\Fld@charsize=\dimen115
+\Field@toks=\toks16
+Package hyperref Info: Hyper figures OFF on input line 4377.
+Package hyperref Info: Link nesting OFF on input line 4382.
+Package hyperref Info: Hyper index ON on input line 4385.
+Package hyperref Info: backreferencing OFF on input line 4392.
+Package hyperref Info: Link coloring OFF on input line 4397.
+Package hyperref Info: Link coloring with OCG OFF on input line 4402.
+Package hyperref Info: PDF/A mode OFF on input line 4407.
+
+(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
+)
+\Hy@abspage=\count95
+\c@Item=\count96
+\c@Hfootnote=\count97
+)
+*hyperref using default driver hpdftex*
+(/usr/local/texlive/2009/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
+\Fld@listcount=\count98
+)
+(/usr/local/texlive/2009/texmf-dist/tex/latex/breakurl/breakurl.sty
+Package: breakurl 2009/01/24 v1.30 Breakable hyperref URLs
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2008/08/13 v2.6a package option processing (HA)
+
+(/usr/local/texlive/2009/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+\XKV@toks=\toks17
+\XKV@tempa@toks=\toks18
+\XKV@depth=\count99
+File: xkeyval.tex 2008/08/13 v2.6a key=value parser (HA)
+))
+
+Package breakurl Warning: You are using breakurl while processing via pdflatex.
+
+(breakurl)                \burl will be just a synonym of \url.
+(breakurl)                 on input line 47.
+
+) (./demo.aux)
+\openout1 = `demo.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 402.
+LaTeX Font Info:    ... okay on input line 402.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 402.
+LaTeX Font Info:    ... okay on input line 402.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 402.
+LaTeX Font Info:    ... okay on input line 402.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 402.
+LaTeX Font Info:    ... okay on input line 402.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 402.
+LaTeX Font Info:    ... okay on input line 402.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 402.
+LaTeX Font Info:    ... okay on input line 402.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 402.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 402.
+
+ (/usr/local/texlive/2009/texmf-dist/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 402.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 402.
+LaTeX Font Info:    ... okay on input line 402.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 402.
+LaTeX Font Info:    ... okay on input line 402.
+LaTeX Font Info:    Try loading font information for T1+pplx on input line 402.
+
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/t1pplx.fd
+File: t1pplx.fd 2004/09/06 font definitions for T1/pplx.
+)
+(/usr/local/texlive/2009/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count100
+\scratchdimen=\dimen116
+\scratchbox=\box166
+\nofMPsegments=\count101
+\nofMParguments=\count102
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count103
+\MPscratchDim=\dimen117
+\MPnumerator=\count104
+\everyMPtoPDFconversion=\toks20
+)
+\big@size=\dimen118
+
+*geometry auto-detecting driver*
+*geometry detected driver: pdftex*
+
+Package geometry Warning: The marginal notes would fall off the page.
+     Add 4.86812pt and more to the right margin.
+
+-------------------- Geometry parameters
+paper: class default
+landscape: --
+twocolumn: --
+twoside: --
+asymmetric: --
+h-parts: 71.13188pt, 472.03123pt, 71.13188pt
+v-parts: 71.13188pt, 652.70622pt, 71.13188pt
+hmarginratio: --
+vmarginratio: --
+lines: --
+heightrounded: --
+bindingoffset: 0.0pt
+truedimen: --
+includehead: --
+includefoot: --
+includemp: --
+driver: pdftex
+-------------------- Page layout dimensions and switches
+\paperwidth  614.295pt
+\paperheight 794.96999pt
+\textwidth  472.03123pt
+\textheight 652.70622pt
+\oddsidemargin  -1.1381pt
+\evensidemargin -1.1381pt
+\topmargin  -38.1381pt
+\headheight 12.0pt
+\headsep    25.0pt
+\footskip   30.0pt
+\marginparwidth 65.0pt
+\marginparsep   11.0pt
+\columnsep  10.0pt
+\skip\footins  9.0pt plus 4.0pt minus 2.0pt
+\hoffset 0.0pt
+\voffset 0.0pt
+\mag 1000
+
+(1in=72.27pt, 1cm=28.45pt)
+-----------------------
+Package hyperref Info: Link coloring OFF on input line 402.
+(/usr/local/texlive/2009/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/oberdiek/refcount.sty
+Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
+)
+\c@section@level=\count105
+)
+LaTeX Info: Redefining \ref on input line 402.
+LaTeX Info: Redefining \pageref on input line 402.
+
+(./demo.out) (./demo.out)
+\@outlinefile=\write3
+\openout3 = `demo.out'.
+
+\AtBeginShipoutBox=\box167
+LaTeX Font Info:    Try loading font information for OT1+pplx on input line 414
+.
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/ot1pplx.fd
+File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
+)
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 414
+.
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/omlzplm.fd
+File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
+)
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 414
+.
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/omszplm.fd
+File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
+)
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 414
+.
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/omxzplm.fd
+File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
+)
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 414
+.
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/ot1zplm.fd
+File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
+)
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 414.
+
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 428.
+LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <10> not available
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 429.
+
+
+LaTeX Warning: Reference `fig:star-glyphs' on page 1 undefined on input line 42
+9.
+
+
+LaTeX Warning: Reference `fig:star-glyphs' on page 1 undefined on input line 43
+4.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.440 ...yr} provides new geoms \texttt{geom_star}
+                                                  , \texttt{geom_radar}, \te...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.440 ...yr} provides new geoms \texttt{geom_star}
+                                                  , \texttt{geom_radar}, \te...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.440 ...s \texttt{geom_star}, \texttt{geom_radar}
+                                                  , \texttt{geom_dart}, and ...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+\mbox #1->\leavevmode \hbox {#1}
+                                
+l.440 ...s \texttt{geom_star}, \texttt{geom_radar}
+                                                  , \texttt{geom_dart}, and ...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Extra }, or forgotten $.
+\nfss@text #1->{\mbox {#1}}
+                           
+l.440 ...s \texttt{geom_star}, \texttt{geom_radar}
+                                                  , \texttt{geom_dart}, and ...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.440 ..., \texttt{geom_radar}, \texttt{geom_dart}
+                                                  , and \texttt{geom_plyr} w...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+\mbox #1->\leavevmode \hbox {#1}
+                                
+l.440 ..., \texttt{geom_radar}, \texttt{geom_dart}
+                                                  , and \texttt{geom_plyr} w...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Extra }, or forgotten $.
+\nfss@text #1->{\mbox {#1}}
+                           
+l.440 ..., \texttt{geom_radar}, \texttt{geom_dart}
+                                                  , and \texttt{geom_plyr} w...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.440 ...texttt{geom_dart}, and \texttt{geom_plyr}
+                                                   which allow a user to qui...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+\mbox #1->\leavevmode \hbox {#1}
+                                
+l.440 ...texttt{geom_dart}, and \texttt{geom_plyr}
+                                                   which allow a user to qui...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Extra }, or forgotten $.
+\nfss@text #1->{\mbox {#1}}
+                           
+l.440 ...texttt{geom_dart}, and \texttt{geom_plyr}
+                                                   which allow a user to qui...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.441 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.451 \section
+              {top down methods}
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.451 \section
+              {top down methods}
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.451 \section{top down methods}
+                                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.451 \section{top down methods}
+                                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.451 \section{top down methods}
+                                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.451 \section{top down methods}
+                                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.451 \section{top down methods}
+                                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.451 \section{top down methods}
+                                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.451 \section{top down methods}
+                                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.451 \section{top down methods}
+                                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.451 \section{top down methods}
+                                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (11420.97923pt too wide) in paragraph at lines 440--451
+\T1/cmtt/m/n/10 ggplyr \T1/pplx/m/n/10 pro-vides new ge-oms \T1/cmtt/m/n/10 geo
+m$[]\OML/zplm/m/it/10 tar\OT1/pplx/m/n/10 , []$ 
+ []
+
+
+Overfull \hbox (21.34828pt too wide) in paragraph at lines 452--453
+\T1/cmtt/m/n/10 ggplyr's top down methods help users fit glyphs into existing m
+ethods of visualization. These
+ []
+
+
+Overfull \hbox (21.34828pt too wide) in paragraph at lines 452--453
+\T1/cmtt/m/n/10 methods provide new geoms (often based on new grobs) that can b
+e used alongside existing geoms
+ []
+
+
+! LaTeX Error: Environment ennumerate undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.455 \begin{ennumerate}
+                        
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.456   \item F
+               irst, \texttt{ggplot2} calculates aesthetics on the entire da...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 456
+[][]
+ []
+
+
+Overfull \hbox (16.09956pt too wide) in paragraph at lines 456--457
+[]\T1/cmtt/m/n/10 First, ggplot2 calculates aesthetics on the entire data set a
+t once. However, glyphs contain
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.457   \item S
+               econd, the final width and height of individual glyphs often ...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 457
+[][]
+ []
+
+
+! LaTeX Error: \begin{document} ended by \end{ennumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.458 \end{ennumerate}
+                      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Overfull \hbox (37.09444pt too wide) in paragraph at lines 457--459
+[]\T1/cmtt/m/n/10 Second, the final width and height of individual glyphs often
+ depends on non-position aesthetics,
+ []
+
+
+Overfull \hbox (10.85085pt too wide) in paragraph at lines 457--459
+\T1/cmtt/m/n/10 such as angle and length. In the ggplot2 pipeline, these aesthe
+tics are scaled right before
+ []
+
+
+Overfull \hbox (21.34828pt too wide) in paragraph at lines 457--459
+\T1/cmtt/m/n/10 the plot ranges are trained. As a result, the final widths of g
+lyphs must be computed at draw
+ []
+
+Package color Info: Redefining color shadecolor on input line 465.
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 468.
+[1
+
+{/usr/local/texlive/2009/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (25.85085pt too wide) in paragraph at lines 497--499
+[]\T1/cmtt/m/n/10 The first element of x is 0.145. Boring boxplots and histogra
+ms recorded by the PDF device: 
+ []
+
+Package color Info: Redefining color shadecolor on input line 501.
+<figure/minimal-boring-plots1.pdf, id=28, 289.08pt x 289.08pt>
+File: figure/minimal-boring-plots1.pdf Graphic file (type pdf)
+
+<use figure/minimal-boring-plots1.pdf>
+<figure/minimal-boring-plots2.pdf, id=29, 289.08pt x 289.08pt>
+File: figure/minimal-boring-plots2.pdf Graphic file (type pdf)
+
+<use figure/minimal-boring-plots2.pdf>
+Overfull \hbox (22.78873pt too wide) in paragraph at lines 521--524
+[]\T1/cmtt/m/n/10 Do the above chunks work? You should be able to compile the T
+[]X document and get a PDF file
+ []
+
+
+Overfull \hbox (6.10213pt too wide) in paragraph at lines 521--524
+\T1/cmtt/m/n/10 like this one: []$https : / / github . com / downloads / yihui 
+/ knitr / knitr-[]minimal . pdf$[]. The Rnw source
+ []
+
+
+Overfull \hbox (21.84828pt too wide) in paragraph at lines 521--524
+\T1/cmtt/m/n/10 of this document is at []$https : / / github . com / yihui / kn
+itr / blob / master / inst / examples / knitr-[]minimal .
+ []
+
+(./demo.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 9--14
+[]\T1/cmtt/m/n/10 Hadley Wickham.  The split-apply-combine strategy for data an
+alysis.  \T1/cmtt/m/it/10 Journal of
+ []
+
+) [2 <./figure/minimal-boring-plots1.pdf> <./figure/minimal-boring-plots2.pdf>]
+(./demo.aux)
+
+LaTeX Warning: There were undefined references.
+
+ )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 440 ({)
+### bottom level 
+Here is how much of TeX's memory you used:
+ 7256 strings out of 493848
+ 102679 string characters out of 3149207
+ 172277 words of memory out of 3000000
+ 10380 multiletter control sequences out of 15000+200000
+ 41301 words of font info for 97 fonts, out of 3000000 for 9000
+ 714 hyphenation exceptions out of 8191
+ 38i,11n,36p,786b,366s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/local/texlive/2009/texmf-dist/fonts/enc/dvips/cm-super/cm
+-super-t1.enc}{/usr/local/texlive/2009/texmf-dist/fonts/enc/dvips/cm-super/cm-s
+uper-ts1.enc}{/usr/local/texlive/2009/texmf-dist/fonts/enc/dvips/base/8r.enc}</
+usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></u
+sr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sfit1000.pfb></usr
+/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/l
+ocal/texlive/2009/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/te
+xlive/2009/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2
+009/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on demo.pdf (2 pages, 133364 bytes).
+PDF statistics:
+ 80 PDF objects out of 1000 (max. 8388607)
+ 8 named destinations out of 1000 (max. 500000)
+ 27 words of extra memory for PDF output out of 10000 (max. 10000000)
+

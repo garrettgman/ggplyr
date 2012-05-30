@@ -1,0 +1,116 @@
+%% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass{article}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage[round]{natbib}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+ {hyperref}
+\hypersetup{
+ pdfstartview={XYZ null null 1}}
+\usepackage{breakurl}
+\begin{document}
+
+<<setup, include=FALSE, cache=FALSE>>=
+# this is equivalent to \SweaveOpts{...}
+opts_chunk$set(fig.path='figure/minimal-', fig.align='center', fig.show='hold', fig.lp='fig:')
+options(replace.assign=TRUE,width=90)
+@
+
+
+\title{A Minimal Demo of ggplyr/glyphmaps/modelglyphs}
+
+
+\author{Garrett Grolemund}
+
+\maketitle
+This document demonstrates the basic features of the \texttt{ggplyr} package (name may change). \texttt{ggplyr} was written to create plots like the ones below. Each plot was made with \texttt{ggplyr}. The first two plots recreate plots from \citet{wickham2011split}. The last two recreate plots from \citet{wickham2012glyph}. 
+
+<<plyr star glyphs>>=
+@
+
+<<plyr filled star glyphs>>=
+@
+
+<<glyph maps grided>>=
+@
+
+<<glyph maps merged>>=
+@
+
+\section{Glyphs}
+The common feature of these graphs is that they are built around glyphs. Glyphs are geometric objects (i.e, geoms) designed to display information within the geom. In other words, a glyph can display information even if it is drawn by itself, without references to an external coordinate system. In reality, all geoms are a type of glyph, but the term glyph is usually reserved for complicated geoms, such as those that contain their own internal coordinate systems. The star glyphs in Figure~\ref{fig:star-glyphs} illustrate how glyphs can contain an internal (minor) coordinate system and can still be plotted in an external (major) coordinate system.
+
+<<star-glyphs, fig.cap = 'Individual star glyphs comprise a complete plot with an internal coordinate system. Multiple star glyphs can be organized with an external coordinate sytem to reveal second order effects.'>>=
+@
+
+Glyphs reveal a hierarchical structure of graphics: every plot is a collection of geoms, each of which can be thought of as its own self contained plot. Sometimes these subplots are not very interesting, as in the subplot created by a single point geom. At other times, thee subplots are quite complex, as in the star glyph of Figure~\ref{fig:star-glyphs}.
+
+Graphs inherit this hierarchical structure from the data they describe. Data is produced through an iterative process of collecting observations, grouping observations and summarizing groups of observations to create more compact, information dense sets of data. Humans innately perform this process when collecting data; it is a cognitive pattern of the human brain which I will write about in the second cognitive chapter of my thesis. 
+
+Glyph maps simultaneously expose data from multiple levels of the hierarchy. As a set of geoms, the glyphs reveal relationships between data points in the higher level, compact data set. As individual plots, each glyph retains information about the data points in the lower level group of data that it summarises. This dual display makes glyph maps particularly useful for certain data analysis tasks. It also provides two different approaches to constructing glyph maps.
+
+Glyph maps can be built from the top down by treating each glyph as a geom within the plot of interest. \texttt{ggplyr} provides new geoms \texttt{geom_star}, \texttt{geom_radar}, \texttt{geom_dart}, and \texttt{geom_plyr} which allow a user to quickly incorporate geoms into an existing plot.
+
+Alternatively, glyph maps can be built from the bottom up by treating each glyph as an existing plot and then combining these plots together with an external coordinate system. This approach parallels the split-apply-combine strategy of data analysis \citep{wickham2011split}. \texttt{ggplyr} provides a set of functions such as \texttt{ggply}, \texttt{dgply}, \texttt{grid}, and \texttt{nest} that help users use the familiar split-apply-combine process to create complex glyph maps. This approach will illustrate that any graph can be turned into a glyph to be used in a higher order graph. 
+
+The remainder of this paper will demonstrate how users can use \texttt{ggplyr} tools to build glyph maps from either the bottom up or the top down.
+
+Although we have chosen to describe such plots as glyph maps, they really represent a general class of graphs that have been difficult to construct until now. Because each glyph is equivalent to an independent plot, glyph maps describe any plot that embeds other plots within itself. Embedded plots occur in a variety of contexts, and I have a stack of photocopies to help demonstrate this. Embedded plots also fit into the grammar of graphics, where they represent an extension of facetting. When plots are embedded into two categorical axes, a facetted plot results. When a graph is facetted on continuous axes (which is rarely done), a glyph map results. 
+
+(Interesetingly most embedded plots have settled to the stage of embedding plots within a geographic map. This resembles how Wainer, Tufte and others have traced the development of graphs through a concrete stage where cartesian axes seldom refered to anything other than latitude and longitude. Eventually graphs became more sophisticated and axes were used to represent  abstract concepts. Perhaps embedded plots are developing through the same process, or perhaps the complexity of visualizing two orders of data at once requires one order to have a concrete interpretation.)
+
+To run the examples contained below, you'll have to download the \texttt{ggplyr} development package from \url{https://github.com/garrettgman/ggplyr} and install it with
+
+<<boring-random>>=
+library(devtools)
+load_all("ggplyr")
+@
+
+I haven't yet built the namespace or completed the documentation files, because the exact syntax / function membership hasn't been settled. As a result, the package will fail \Sexpr{install_github()}.
+
+
+\section{top down methods}
+\texttt{ggplyr}'s top down methods help users fit glyphs into existing methods of visualization. These methods provide new geoms (often based on new grobs) that can be used alongside existing geoms in \texttt{ggplot2}. 
+
+Top down methods are difficult to implement in \texttt{ggplot2} for two reasons
+\begin{ennumerate}
+  \item First, \texttt{ggplot2} calculates aesthetics on the entire data set at once. However, glyphs contain aesthetics that must be keyed to subsets of the data.
+  \item Second, the final width and height of individual glyphs often depends on non-position aesthetics, such as angle and length. In the \texttt{ggplot2} pipeline, these aesthetics are scaled right before the plot ranges are trained. As a result, the final widths of glyphs must be computed at draw time and frequently place parts of the glyph outside the plot window.
+\end{ennumerate}  
+
+\subsection{geom_plyr}
+\texttt{ggplyr} provides a way for users to compute aesthetics by 
+
+
+
+<<boring-random>>=
+set.seed(1121)
+(x=rnorm(20))
+mean(x);var(x)
+@
+
+The first element of \texttt{x} is \Sexpr{x[1]}. Boring boxplots
+and histograms recorded by the PDF device:
+
+<<boring-plots, fig.width=4, fig.height=4, out.width='.4\\linewidth'>>=
+## two plots side by side (option fig.show='hold')
+par(mar=c(4,4,.1,.1),cex.lab=.95,cex.axis=.9,mgp=c(2,.7,0),tcl=-.3,las=1)
+boxplot(x)
+hist(x,main='')
+@
+
+Do the above chunks work? You should be able to compile the \TeX{}
+document and get a PDF file like this one: \url{https://github.com/downloads/yihui/knitr/knitr-minimal.pdf}.
+The Rnw source of this document is at \url{https://github.com/yihui/knitr/blob/master/inst/examples/knitr-minimal.Rnw}.
+
+\bibliographystyle{plainnat}
+\bibliography{ggplyr}
+\end{document}
