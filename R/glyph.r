@@ -12,6 +12,10 @@ glyph <- function(layer, major.aes, glyph.by = NULL, width = rel(0.95),
     stop(paste("Missing required aesthetic in major.aes:", 
       paste(c("x", "y")[missing], collapse = ", ")))
   }
+  
+  if (is.null(glyph.by)) {
+    stop("Missing required argument in glyph: glyph.by", call. = FALSE)
+  }
 
   if (!is.function(glyph.by)) {
     glyph.by <- group_by(glyph.by)

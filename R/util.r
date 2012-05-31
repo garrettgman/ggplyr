@@ -32,8 +32,21 @@ get_ys <- function(data) {
 
 
 layer_clone <- function(layer) {
+  UseMethod("layer_clone")
+}
+
+layer_clone.proto <- function(layer) {
   ggplot2:::plot_clone(ggplot() + layer)$layers[[1]]
 }
+
+layer_clone.glayer <- function(layer) {
+  glayer(ggplot2:::plot_clone(ggplot() + layer)$layers[[1]])
+}
+
+layer_clone.list <- function(layer) {
+  lapply(layer, layer_clone)
+}
+
 
 #' null.omit removes the NULL elements from a list and returns the remaining objects as a more concise list.
 #' 

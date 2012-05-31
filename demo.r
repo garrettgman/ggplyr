@@ -8,9 +8,9 @@ load_all("../ggplyr")
 ###########################################
 # imac 10.274 seconds
 # system.time(print(qplot(surftemp, temperature, data = nasa) + facet_grid(long~lat)))
-system.time(print(ggplot(nasa) + glyph(geom_point(aes(x = surftemp, y = temperature), 
+ggplot(nasa) + glyph(geom_point(aes(x = surftemp, y = temperature), 
   size = 1/5), glyph.by = c("lat", "long"), width = 3, height = 3, 
-  major = aes(x = long[1], y = lat[1]))))
+  major = aes(x = long[1], y = lat[1]))
 # compare to 21.736 seconds
 # system.time(print(qplot(surftemp, temperature, data = nasa, size = I(1/5)) + 
 #  facet_grid(long~lat)))
@@ -114,8 +114,15 @@ ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture,
   color = Catholic)), aes(I(grid(Fertility, 3)), I(grid(Agriculture, 3))), 
   grid_by(Fertility, 3, Agriculture, 3))
 
+# geom_scatterplots
+ggplot(nasa) + geom_scatterplots(mapping = aes(x = long[1], y = lat[1], 
+  minor.x = surftemp, minor.y = temperature), glyph.by = c("long", "lat"), 
+  size = 1/5, reference = ref_box())
+
+ggplot(nasa) + glyph(geom_point(aes(x = surftemp, y = temperature), 
+  size = 1/5), glyph.by = c("lat", "long"), width = 3, height = 3, 
+  major = aes(x = long[1], y = lat[1]), ref= ref_box())
+
 ###########################################
 ###          not yet working            ###
 ###########################################
-ggplot(nasa) + geom_scatterplots(aes(x = long, y = lat, minor.x = surftemp, 
-  minor.y = temperature), size = 1/5, width = 3, height = 3, ref = "box")

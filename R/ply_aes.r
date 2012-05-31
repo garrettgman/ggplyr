@@ -1,7 +1,10 @@
 #' ply_aes causes the aesthetics of a layer to be computed groupwise.
 ply_aes <- function(layer, .vars = NULL) {
-  if (is.glayer(layer)) return(layer)
   layer <- layer_clone(layer)
+  if (is.glayer(layer)) {
+    layer$compute_aesthetics <- plyr_aesthetics
+    return(layer)
+  }
   if (!is.null(.vars)) {
     if (!is.function(.vars)) {
       .vars <- group_by(.vars)
