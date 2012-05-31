@@ -141,3 +141,13 @@ ggplot(nasa) + geom_star(aes(r = ozone, angle = date, x = long[1], y = lat[1]), 
 ###          not yet working            ###
 ###########################################
 load_all("../ggplyr")
+
+# trying out geom_coxcomb
+p <- ggplot(mpg) + 
+  geom_bar(aes(x = trans, fill = as.factor(cyl)), position = "stack") + 
+  coord_polar() +
+  facet_wrap(~year)
+
+mpg$lat <- sample(1:4, nrow(mpg), replace = TRUE)
+ggplot(mpg) + GeomCoxcomb$new(mapping = aes(r = trans, fill = lat, group = lat)) + facet_wrap(~cyl)
+
