@@ -120,9 +120,24 @@ ggplot(nasa) + geom_scatterplots(mapping = aes(x = long[1], y = lat[1],
   size = 1/5, reference = ref_box())
 
 ggplot(nasa) + glyph(geom_point(aes(x = surftemp, y = temperature), 
-  size = 1/5), glyph.by = c("lat", "long"), width = 3, height = 3, 
-  major = aes(x = long[1], y = lat[1]), ref= ref_box())
+  size = 1/5), glyph.by = c("lat", "long"), major = aes(x = long[1], 
+  y = lat[1]), ref= ref_box())
+
+# trying out geom_star
+# without glyphing
+ggplot(mpg) + GeomStar$new(mapping = aes(r = hwy, angle = cty)) + facet_wrap(~cyl)
+
+ggplot(test.data) + geom_star(mapping = aes(x = long[1], y = lat[1], 
+  r = Catholic, angle = Fertility, fill = mean(Education)), 
+  glyph.by = c("long", "lat"))
+
+ggplot(mpg) + ply_aes(geom_star(mapping = aes(x = cyl[1], y = 1, 
+  r = hwy, angle = cty, fill = mean(hwy)), glyph.by = c("cyl")))
+
+ggplot(nasa) + geom_star(aes(r = ozone, angle = date, x = long[1], y = lat[1]), glyph.by = c("long", "lat"))
+
 
 ###########################################
 ###          not yet working            ###
 ###########################################
+load_all("../ggplyr")

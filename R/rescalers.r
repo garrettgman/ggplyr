@@ -34,3 +34,7 @@ rescale_11 <- function(xvars, xlim=NULL) {
 	2 * rescale_01(xvars, xlim) - 1
 }
 
+rescale_2pi <- function(xvars, xlim = NULL) {
+  2 * pi * rescale_01(xvars, xlim)
+}
+

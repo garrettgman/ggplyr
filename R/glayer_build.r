@@ -8,7 +8,6 @@ glayer_build <- function(layer) {
   layer$data <- layer$assign_glyphs(layer$data)
   minor <- ggplot_build(ggplot() + layer + facet_wrap("GLYPH")) 
 	
-	
   ### combine subplots (minor) into single plot
   # data
   data <- unpanel(minor$data[[1]])

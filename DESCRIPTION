@@ -41,3 +41,4 @@ Collate:
     'group_by.r'
     'aesply.r'
     'geom_scatterplots.r'
+    'geom_star.r'
