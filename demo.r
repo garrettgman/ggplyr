@@ -8,9 +8,9 @@ load_all("../ggplyr")
 ###########################################
 # imac 10.274 seconds
 # system.time(print(qplot(surftemp, temperature, data = nasa) + facet_grid(long~lat)))
-ggplot(nasa) + glyph(geom_point(aes(x = surftemp, y = temperature), 
+system.time(print(ggplot(nasa) + glyph(geom_point(aes(x = surftemp, y = temperature), 
   size = 1/5), glyph.by = c("lat", "long"), width = 3, height = 3, 
-  major = aes(x = long[1], y = lat[1]))
+  major = aes(x = long[1], y = lat[1]))))
 # compare to 21.736 seconds
 # system.time(print(qplot(surftemp, temperature, data = nasa, size = I(1/5)) + 
 #  facet_grid(long~lat)))
@@ -151,3 +151,9 @@ p <- ggplot(mpg) +
 mpg$lat <- sample(1:4, nrow(mpg), replace = TRUE)
 ggplot(mpg) + GeomCoxcomb$new(mapping = aes(r = trans, fill = lat, group = lat)) + facet_wrap(~cyl)
 
+ggplot(seasons) + 
+  glyph(
+    geom_line(aes(x = time, y = pred)), 
+    major = aes(lon[1], lat[1]), glyph.by = "stn", 
+    height = rel(4.375), width = rel(1.9),
+    ref = ref_box(aes(fill = avg)), merge = TRUE)

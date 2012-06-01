@@ -7,7 +7,7 @@ glayer_build <- function(layer) {
   layer <- layer_clone(layer)
   layer$data <- layer$assign_glyphs(layer$data)
   minor <- ggplot_build(ggplot() + layer + facet_wrap("GLYPH")) 
-	
+
   ### combine subplots (minor) into single plot
   # data
   data <- unpanel(minor$data[[1]])
@@ -41,6 +41,9 @@ glayer_build <- function(layer) {
 
 
 unpanel <- function(df) {
+  if (!is.null(df$group)) {
+    df$group <- interaction(df$group, df$PANEL)
+  } 
   df$GLYPH <- as.numeric(as.character(df$PANEL))
   df$PANEL <- NULL
   df

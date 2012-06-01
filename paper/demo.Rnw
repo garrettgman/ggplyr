@@ -25,21 +25,27 @@ options(replace.assign=TRUE,width=90)
 @
 
 
-\title{A Minimal Demo of ggplyr/glyphmaps/modelglyphs}
+\title{A Minimal Demo of \texttt{glyphmaps}}
 
 
 \author{Garrett Grolemund}
 
 \maketitle
-This document demonstrates the basic features of the \texttt{ggplyr} package (name may change). \texttt{ggplyr} was written to create plots like the ones below. Each plot was made with \texttt{ggplyr}. The first two plots recreate plots from \citet{wickham2011split}. The last two recreate plots from \citet{wickham2012glyph}. 
+This document demonstrates the basic features of the \texttt{glyphmaps} package (name may change). \texttt{glyphmaps} was written to create plots like the ones below. Each plot is made with \texttt{glyphmaps}. They recreate Figures 8 and 10a from \citet{wickham2012glyph}. To run the examples in this document please download the \texttt{glyphmaps} package with the code below.
 
-<<plyr star glyphs>>=
+<<install>>=
+library(devtools)
+install_github("ggplyr", "garrettgman", "glyphmaps")
+library(glyphmaps)
 @
 
-<<plyr filled star glyphs>>=
-@
-
-<<glyph maps grided>>=
+<<glyphmaps-fig-8>>=
+p <- ggplot(seasons) + 
+  map_us +
+  glyph(
+    geom_line(aes(x = time, y = pred)), 
+    major = aes(lon[1], lat[1]), glyph.by = "stn", 
+    ref = ref_box(aes(fill = avg)))
 @
 
 <<glyph maps merged>>=

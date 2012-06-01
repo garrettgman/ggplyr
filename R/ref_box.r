@@ -11,7 +11,7 @@ ref_box <- function(mapping = NULL, fill = "grey80", ...) {
   	if (!inherits(layer$data, "waiver")) rlayer$data <- layer$data
   	
   	glyph(rlayer, major.aes = major.aes, glyph.by = glyph.by, width = width,
-  	  height = height, merge = merge.overlaps, ref = NULL, .ref = TRUE)
+  	  height = height, merge = merge.overlaps, ref = NULL, .ref = TRUE) 
   }
 } 
 

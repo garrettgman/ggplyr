@@ -55,21 +55,29 @@ assign_glyphs <- function(., data) {
   # parse width, height
   width <- embed$width
   height <- embed$height
-
   if (is.rel(width)) {
-    .$embed$width <- (diff(range(vet(globals$x))) + unclass(width)) / 
-      length(unique(globals$x)) * unclass(width)
+    .$embed$width <- width <- (diff(range(vet(globals$x))) + unclass(width)) / 
+      sqrt(length(unique(globals$x))) * unclass(width)
   }
   if (is.rel(height)) {
-    .$embed$height <- (diff(range(vet(globals$y))) + unclass(height)) / 
-      length(unique(globals$y)) * unclass(height)
+    .$embed$height <- height <- (diff(range(vet(globals$y))) + unclass(height)) / 
+      sqrt(length(unique(globals$y))) * unclass(height)
   }
 
   if (embed$merge) {
     # search for overlapping glyphs, combine
-    merges <- merge_overlaps(globals, embed$width, embed$height)
-    data <- update_GLYPH(data, merges)
-    embed$globals <- ddply(data, "GLYPH", apply_glyphs, embed$major.aes)
+    data$.gid <- data$GLYPH
+    data$GLYPH <- merge_overlaps(globals, embed$width, embed$height)
+    globals <- aesply(data, "GLYPH", embed$major.aes)
+    .$mapping <- add_gid(mapping)
+    
+    too.many <- c(length(unique(globals$x)) > length(unique(globals$GLYPH)), 
+                  length(unique(globals$y)) > length(unique(globals$GLYPH)))
+    if (any(too.many)) {
+      message(paste("Major", paste(c("x", "y")[too.many], collapse = " and "), 
+                    "return more than one value per glyph. Only using first."))
+      globals <- unique(ddply(globals, "GLYPH", transform, x = x[1], y = y[1]))
+    }
   }
   .$embed$globals <- globals
   data
@@ -147,13 +155,17 @@ globalize <- function(obj){
 	obj
 }
 
-update_GLYPH <- function(df, updates) {
-	if (!("GLYPH" %in% names(df))) {
-		stop("Cannot update glyphs: data.frame does not have GLYPH variable", 
-			call. = FALSE)
-	}
-	
-	obsolete <- df$GLYPH %in% names(updates)
-	df$GLYPH[obsolete] <- updates[as.character(df$GLYPH[obsolete])]
-	df
+
+#' add_gid intelligently adds the .gid variable to the group slot of an uneval object. If the group slot is NULL, add_gid sets group = .gid. If the group slot already contains a mapping, add_gid adds .gid to this mapping with interaction().
+#'
+#' @keywords internal
+#' @param aes_group the group value of an uneval object
+#' @export
+add_gid <- function(maps) {
+  if (is.null(maps$group)) {
+    maps$group <- as.name(".gid")
+  } else {
+    maps$group <- as.call(list(as.name("interaction"), as.name(".gid"), aes_group))
+  }
+  maps
 }
