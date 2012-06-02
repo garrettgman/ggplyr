@@ -1,4 +1,5 @@
 S3method(print,ggplyr)
+export(add_gid)
 export(get_xs)
 export(get_ys)
 export(glayer)

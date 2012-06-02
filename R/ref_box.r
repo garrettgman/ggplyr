@@ -6,7 +6,7 @@ ref_box <- function(mapping = NULL, fill = "grey80", ...) {
   	mapping <- c(mapping, def_aes[setdiff(names(def_aes), names(mapping))])
   	class(mapping) <- "uneval"
   	
-    rlayer <- ply_aes(geom_rect(mapping = mapping, ...))
+    rlayer <- ply_aes(geom_ref_rect(mapping = mapping, ...))
   	if (is.null(mapping$fill)) rlayer$geom_params$fill <- fill
   	if (!inherits(layer$data, "waiver")) rlayer$data <- layer$data
   	
@@ -23,7 +23,7 @@ ref_hline <- function(mapping = NULL, width. = 0.2, fill = "grey80", ...) {
   	mapping <- c(mapping, def_aes[setdiff(names(def_aes), names(mapping))])
   	class(mapping) <- "uneval"
   	
-  	rlayer <- ply_aes(geom_rect(mapping = mapping, ...))
+  	rlayer <- ply_aes(geom_ref_rect(mapping = mapping, ...))
   	if (is.null(mapping$fill)) rlayer$geom_params$fill <- fill
   	if (!inherits(layer$data, "waiver")) rlayer$data <- layer$data
   	
@@ -40,7 +40,7 @@ ref_vline <- function(mapping = NULL, width. = 0.2, fill = "grey80", ...) {
   	mapping <- c(mapping, def_aes[setdiff(names(def_aes), names(mapping))])
   	class(mapping) <- "uneval"
   	
-  	rlayer <- ply_aes(geom_rect(mapping = mapping, ...))
+  	rlayer <- ply_aes(geom_ref_rect(mapping = mapping, ...))
   	if (is.null(mapping$fill)) rlayer$geom_params$fill <- fill
   	if (!inherits(layer$data, "waiver")) rlayer$data <- layer$data
   	

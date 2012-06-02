@@ -43,3 +43,4 @@ Collate:
     'geom_scatterplots.r'
     'geom_star.r'
     'geom_coxcomb.r'
+    'geom_ref_rect.r'

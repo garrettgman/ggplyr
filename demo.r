@@ -7,10 +7,11 @@ load_all("../ggplyr")
 ###              working                ###
 ###########################################
 # imac 10.274 seconds
-# system.time(print(qplot(surftemp, temperature, data = nasa) + facet_grid(long~lat)))
-system.time(print(ggplot(nasa) + glyph(geom_point(aes(x = surftemp, y = temperature), 
-  size = 1/5), glyph.by = c("lat", "long"), width = 3, height = 3, 
-  major = aes(x = long[1], y = lat[1]))))
+# system.time(print(qplot(surftemp, temperature, data = nasa) + 
+# facet_grid(long~lat)))
+system.time(print(ggplot(nasa) + glyph(geom_point(aes(x = surftemp, 
+  y = temperature), size = 1/5), glyph.by = c("lat", "long"), width = 3, 
+  height = 3, major = aes(x = long[1], y = lat[1]))))
 # compare to 21.736 seconds
 # system.time(print(qplot(surftemp, temperature, data = nasa, size = I(1/5)) + 
 #  facet_grid(long~lat)))
@@ -34,7 +35,7 @@ ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year)),
 ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
   color = rank(Catholic)), size = 3), glyph.by = c("lat", "long"), 
   major = aes(mean(Fertility), mean(Education)), ref = ref_box(aes(fill = 
-  mean(Catholic))))
+  mean(Catholic)), alpha = 0.1))
 
 # hlines
 ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
@@ -52,7 +53,7 @@ ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture,
 ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year)), 
   aes(x = mean(displ), y = mean(cty)), c("year"), y_scale = free, 
   width = 1/3, height = 1/3, reference = ref_points(aes(fill = mean(hwy)), 
-  size = 1)) 
+  size = 3, alpha = 0.1)) 
 
 # merging overlaps
 ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year, group = year), 
@@ -125,7 +126,8 @@ ggplot(nasa) + glyph(geom_point(aes(x = surftemp, y = temperature),
 
 # trying out geom_star
 # without glyphing
-ggplot(mpg) + GeomStar$new(mapping = aes(r = hwy, angle = cty)) + facet_wrap(~cyl)
+ggplot(mpg) + GeomStar$new(mapping = aes(r = hwy, angle = cty)) + 
+  facet_wrap(~cyl)
 
 ggplot(test.data) + geom_star(mapping = aes(x = long[1], y = lat[1], 
   r = Catholic, angle = Fertility, fill = mean(Education)), 
@@ -134,7 +136,8 @@ ggplot(test.data) + geom_star(mapping = aes(x = long[1], y = lat[1],
 ggplot(mpg) + ply_aes(geom_star(mapping = aes(x = cyl[1], y = 1, 
   r = hwy, angle = cty, fill = mean(hwy)), glyph.by = c("cyl")))
 
-ggplot(nasa) + geom_star(aes(r = ozone, angle = date, x = long[1], y = lat[1]), glyph.by = c("long", "lat"))
+ggplot(nasa) + geom_star(aes(r = ozone, angle = date, x = long[1], y = lat[1]), 
+  glyph.by = c("long", "lat"))
 
 
 ###########################################
@@ -149,7 +152,8 @@ p <- ggplot(mpg) +
   facet_wrap(~year)
 
 mpg$lat <- sample(1:4, nrow(mpg), replace = TRUE)
-ggplot(mpg) + GeomCoxcomb$new(mapping = aes(r = trans, fill = lat, group = lat)) + facet_wrap(~cyl)
+ggplot(mpg) + GeomCoxcomb$new(mapping = aes(r = trans, fill = lat, 
+  group = lat)) + facet_wrap(~cyl)
 
 ggplot(seasons) + 
   glyph(
