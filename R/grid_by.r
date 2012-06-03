@@ -1,6 +1,6 @@
 #' grid_by is a second order function: it returns a function that can be used on 
 #' a data set to provide a grouping variable.
-grid_by <- function(x, x.npoints = 10, y, y.npoints = 10, x.range. = NULL, 
+grid_by <- function(x, y, x.npoints = 10, y.npoints = 10, x.range. = NULL, 
   y.range. = NULL) {
   
   if(inherits(try(x, silent = TRUE), "try-error")) {

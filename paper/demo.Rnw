@@ -44,7 +44,8 @@ p <- ggplot(seasons) +
   map_us +
   glyph(
     geom_line(aes(x = time, y = pred)), 
-    major = aes(lon[1], lat[1]), glyph.by = "stn", 
+    major = aes(I(grid(lon)),I(grid(lat))), glyph.by = grid_by(lon, lat))
+, 
     ref = ref_box(aes(fill = avg)))
 @
 

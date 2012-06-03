@@ -33,7 +33,7 @@ glyph <- function(layer, major.aes, glyph.by = NULL, width = rel(0.95),
   if (is.null(reference)) {
   	glayer(layer)
   } else {
-  	ref.layer <- reference(layer, major.aes, glyph.by, width, height, 
+  	ref.layer <- reference(layer, "glyph", major.aes, glyph.by, width, height, 
   	  merge.overlaps)
   	list(ref.layer, glayer(layer))
   }
@@ -156,7 +156,10 @@ globalize <- function(obj){
 }
 
 
-#' add_gid intelligently adds the .gid variable to the group slot of an uneval object. If the group slot is NULL, add_gid sets group = .gid. If the group slot already contains a mapping, add_gid adds .gid to this mapping with interaction().
+#' add_gid intelligently adds the .gid variable to the group slot of an uneval 
+#' object. If the group slot is NULL, add_gid sets group = .gid. If the group 
+#' slot already contains a mapping, add_gid adds .gid to this mapping with 
+#' interaction().
 #'
 #' @keywords internal
 #' @param aes_group the group value of an uneval object
@@ -165,7 +168,8 @@ add_gid <- function(maps) {
   if (is.null(maps$group)) {
     maps$group <- as.name(".gid")
   } else {
-    maps$group <- as.call(list(as.name("interaction"), as.name(".gid"), aes_group))
+    maps$group <- as.call(list(as.name("interaction"), as.name(".gid"), 
+      aes_group))
   }
   maps
 }

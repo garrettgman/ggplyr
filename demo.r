@@ -105,16 +105,6 @@ ggplot() + ply_aes(geom_point(aes(x = mean(temperature), y = mean(ozone),
 ggplot() + geom_point(aes(x = mean(temperature), y = mean(ozone), 
   color = lat[1]), data = nasa)  
 
-# splitting by grids
-ggplot(test.data) + geom_point(aes(Fertility, Agriculture, color = Catholic))
-ggplot(test.data) + geom_point(aes(grid(Fertility, 3), grid(Agriculture, 3), 
-  color = Catholic))
-ggplot(test.data) + geom_point(aes(grid(Fertility, 3), grid(Agriculture, 3), 
-  color = Catholic), position = position_jitter(width = 1, height = 1))
-ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
-  color = Catholic)), aes(I(grid(Fertility, 3)), I(grid(Agriculture, 3))), 
-  grid_by(Fertility, 3, Agriculture, 3))
-
 # geom_scatterplots
 ggplot(nasa) + geom_scatterplots(mapping = aes(x = long[1], y = lat[1], 
   minor.x = surftemp, minor.y = temperature), glyph.by = c("long", "lat"), 
@@ -126,7 +116,7 @@ ggplot(nasa) + glyph(geom_point(aes(x = surftemp, y = temperature),
 
 # trying out geom_star
 # without glyphing
-ggplot(mpg) + GeomStar$new(mapping = aes(r = hwy, angle = cty)) + 
+ggplot(mpg) + GeomStar$new(mapping = aes(r = hwy, angle = cty, group = cyl)) + 
   facet_wrap(~cyl)
 
 ggplot(test.data) + geom_star(mapping = aes(x = long[1], y = lat[1], 
@@ -139,7 +129,18 @@ ggplot(mpg) + ply_aes(geom_star(mapping = aes(x = cyl[1], y = 1,
 ggplot(nasa) + geom_star(aes(r = ozone, angle = date, x = long[1], y = lat[1]), 
   glyph.by = c("long", "lat"))
 
+# new gridding
+ggplot(test.data) + geom_point(aes(Fertility, Education))
+ggplot(test.data) + 
+  grid(geom_point(aes(Fertility, Education)), x.nbin = 10, y.nbin = 10, 
+       ref= ref_box(aes(color = mean(Catholic))))
 
+cheap.diamonds <- subset(diamonds, price <= 5000 & price >= 600)
+ggplot(cheap.diamonds) +
+  grid(geom_bar(aes(x = color, fill = color), position = "dodge"),
+    grid.aes = aes(x = carat, y = price), x.nbin = 10, y.nbin = 14,
+    y_scale = free, height.adjust = 0.5, width.adjust = 0.5,
+    ref = ref_box())
 ###########################################
 ###          not yet working            ###
 ###########################################
@@ -161,3 +162,19 @@ ggplot(seasons) +
     major = aes(lon[1], lat[1]), glyph.by = "stn", 
     height = rel(4.375), width = rel(1.9),
     ref = ref_box(aes(fill = avg)), merge = TRUE)
+
+
+
+###########################################
+###             obsolete                ###
+###########################################
+load_all("../ggplyr")
+# splitting by grids - obsolete
+ggplot(test.data) + geom_point(aes(Fertility, Agriculture, color = Catholic))
+ggplot(test.data) + geom_point(aes(grid(Fertility, 3), grid(Agriculture, 3), 
+  color = Catholic))
+ggplot(test.data) + geom_point(aes(grid(Fertility, 3), grid(Agriculture, 3), 
+  color = Catholic), position = position_jitter(width = 1, height = 1))
+ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
+  color = Catholic)), aes(I(grid(Fertility, 3)), I(grid(Agriculture, 3))), 
+  grid_by(Fertility, 3, Agriculture, 3))
