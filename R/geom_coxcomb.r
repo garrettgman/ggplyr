@@ -1,23 +1,8 @@
-geom_coxcomb <- function(mapping = NULL, glyph.by = NULL, data = NULL, 
-  stat = "bin", position = "identity", width = rel(0.95), height = rel(0.95), 
-  x_scale = identity, y_scale = identity, merge.overlaps = FALSE, 
-  reference = NULL, ...) { 
+geom_coxcomb <- function(mapping = NULL, data = NULL, stat = "bin", 
+  position = "identity", ...) { 
   
-  major <- mapping[c("x", "y")]
-  mapping$x <- NULL
-  mapping$y <- NULL
-  
-  glyph(
     GeomCoxcomb$new(mapping = mapping, data = data, stat = stat, 
-      position = position, ...), 
-    major.aes = major, glyph.by = glyph.by, width = width, height = height, 
-      x_scale = x_scale, y_scale = y_scale, merge.overlaps = merge.overlaps, 
-      reference = reference)
-}
-
-
-geom_coxcomb <- function (mapping = NULL, data = NULL, stat = "bin", position = "stack", ...) {
-  GeomBar$new(mapping = mapping, data = data, stat = stat, position = position, ...)
+      position = position, ...)
 }
 
 GeomCoxcomb <- proto(ggplot2:::Geom, {
@@ -68,7 +53,7 @@ GeomCoxcomb <- proto(ggplot2:::Geom, {
       df <- cbind(df, x, y)
       rbind(df, df[1, ])
     }
-    ddply(df, c("section", "PANEL"), poly_curve, params$npoints)
+    ddply(df, c("section", "group", "PANEL"), poly_curve, params$npoints)
   }
   
   draw <- draw_groups <- function(., data, scales, coordinates, ...) {
@@ -104,6 +89,7 @@ GeomCoxcomb <- proto(ggplot2:::Geom, {
       stop("Missing required aesthetic: r", call. = FALSE)
     }
     names(mapping)[names(mapping) == "r"] <- "x"
+    mapping$section <- coxcomb_sections(mapping)
     
     lyr <- do.call("layer", list(mapping = mapping, data = data, stat = stat, geom = ., 
       position = position, ...))  
@@ -112,3 +98,11 @@ GeomCoxcomb <- proto(ggplot2:::Geom, {
   }
   
 })
+
+coxcomb_sections <- function(mapping) {
+  sections <- mapping[c("alpha", "fill", "colour")]
+  sections <- sections[!unlist(lapply(sections, is.null))]
+  names(sections) <- NULL
+  if (is.null(sections)) return(NULL)
+  as.call(c(quote(interaction), sections))
+}
