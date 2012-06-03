@@ -7,6 +7,9 @@ rescale_01 <- free <- function(xvars, xlim=NULL) {
 		if (is.factor(x)) {
 			x <- as.numeric(x)
 		}
+    if (inherits(x, "POSIXt")) {
+      x <- as.numeric(x)
+    }
 		x
 	}
 	xvars <- lapply(xvars, numberfy)

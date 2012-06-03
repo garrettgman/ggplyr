@@ -14,10 +14,9 @@ ply_aes.glayer <- function(layer, .vars = NULL) {
   
 ply_aes.proto <- function(layer, .vars = NULL) {
   if (!is.null(.vars)) {
-    if (!is.function(.vars)) {
-      .vars <- group_by(.vars)
-    }
     layer$plyr <- list(ply.by = .vars)
+  } else {
+    layer$plyr <- list()
   }
   layer$compute_aesthetics <- plyr_aesthetics
   layer

@@ -1,18 +1,8 @@
-geom_star <- function(mapping = NULL, glyph.by = NULL, data = NULL, 
-  stat = "identity", position = "identity", width = rel(0.95), 
-  height = rel(0.95), x_scale = identity, y_scale = identity, 
-  merge.overlaps = FALSE, reference = NULL, ...) { 
-  
-  major <- mapping[c("x", "y")]
-  mapping$x <- NULL
-  mapping$y <- NULL
-  
-  glyph(
+geom_star <- function(mapping = NULL, data = NULL, stat = "identity", 
+  position = "identity", ...) { 
+
     GeomStar$new(mapping = mapping, data = data, stat = stat, 
-      position = position, ...), 
-    major.aes = major, glyph.by = glyph.by, 
-      width = width, height = height, x_scale = x_scale, y_scale = y_scale, 
-      merge.overlaps = merge.overlaps, reference = reference)
+      position = position, ...)
 }
 
 
@@ -20,24 +10,32 @@ GeomStar <- proto(ggplot2:::Geom, {
   objname <- "star"
   
   # turn cartesian coordinates polar
-  reparameterise <- function(., df, params) {
+  reparameterise <- function(., df, params) {    
     # scale x to be between 0 and 2*pi
-    df$theta <- unlist(rescale_2pi(df["x"]))
-    df$r <- df$y
-    df$x <- df$r * cos(df$theta)
-    df$y <- df$r * sin(df$theta)	
+    df$theta <- unlist(rescale_2pi(df["angle"]))
+    df$r <- unlist(rescale_01(df["r"]))
     
     include_origin <- function(data) {
       data <- data[order(data$theta, data$r), ]
       if (data$theta[1] > 0.01) {
         first <- data[1, ]
-        first$x <- 0
-        first$y <- 0
+        first$theta <- 0
+        first$r <- 0
         data <- rbind(first, data)
+      }
+      if (data$theta[length(data$theta)] < 6.27) {
+        last <- data[length(data$theta), ]
+        last$theta <- 6.28
+        last$r <- 0
+        data <- rbind(data, last)
       }
       data
     }
-    ddply(df, "PANEL", include_origin)
+    df <- ddply(df, c("group", "PANEL"), include_origin)
+    
+    df$x <- df$r * cos(df$theta) + df$x
+    df$y <- df$r * sin(df$theta) + df$y
+    df
   }
   
   draw <- function(., data, scales, coordinates, ...) {
@@ -61,7 +59,7 @@ GeomStar <- proto(ggplot2:::Geom, {
       linetype = "solid", size = 0.5)
   }
   
-  required_aes <- c("x", "y")
+  required_aes <- c("x", "y", "r", "angle")
   
   guide_geom <- function(.) "polygon"
   
@@ -78,13 +76,12 @@ GeomStar <- proto(ggplot2:::Geom, {
   new <- function(., mapping = NULL, data = NULL, stat = NULL, 
     position = NULL, ...) {
     
-    missing <- !(c("r", "angle") %in% names(mapping))
+    missing <- !(c("x", "y", "r", "angle") %in% names(mapping))
     if (any(missing)) {
-      stop(paste("Missing required aesthetic(s):", 
-        paste(c("r", "angle")[missing], collapse = ", ")), call. = FALSE)
+      stop(paste("Missing required aesthetics for geom_star:",
+        paste(c("x", "y", "r", "angle")[missing], collapse = ", ")),
+        call. = FALSE)
     }
-    names(mapping)[names(mapping) == "angle"] <- "x"
-    names(mapping)[names(mapping) == "r"] <- "y"
     
     do.call("layer", list(mapping = mapping, data = data, stat = stat, 
       geom = ., position = position, ...))  

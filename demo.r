@@ -34,8 +34,9 @@ ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year)),
 # boxes
 ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
   color = rank(Catholic)), size = 3), glyph.by = c("lat", "long"), 
+  width = 10, height = 10,
   major = aes(mean(Fertility), mean(Education)), ref = ref_box(aes(fill = 
-  mean(Catholic)), alpha = 0.1))
+  mean(Catholic))))
 
 # hlines
 ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
@@ -116,18 +117,19 @@ ggplot(nasa) + glyph(geom_point(aes(x = surftemp, y = temperature),
 
 # trying out geom_star
 # without glyphing
-ggplot(mpg) + GeomStar$new(mapping = aes(r = hwy, angle = cty, group = cyl)) + 
-  facet_wrap(~cyl)
+ggplot(mpg) + GeomStar$new(mapping = aes(r = hwy, angle = cty, x = 0, y = 0, 
+  group = cyl)) + facet_wrap(~cyl)
 
-ggplot(test.data) + geom_star(mapping = aes(x = long[1], y = lat[1], 
-  r = Catholic, angle = Fertility, fill = mean(Education)), 
-  glyph.by = c("long", "lat"))
+ggplot(test.data) + geom_star(mapping = aes(x = 0, y = 0, 
+  r = Catholic, angle = Fertility, group = lat)) + facet_wrap(~lat)
+
+ggplot(nasa) + ply_aes(geom_star(aes(r = ozone, angle = date, x = 0, y = 0, 
+  fill = mean(temperature))), c("lat")) + facet_wrap(~ lat)
 
 ggplot(mpg) + ply_aes(geom_star(mapping = aes(x = cyl[1], y = 1, 
-  r = hwy, angle = cty, fill = mean(hwy)), glyph.by = c("cyl")))
+  r = hwy, angle = cty, fill = mean(hwy), group = cyl)))
 
-ggplot(nasa) + geom_star(aes(r = ozone, angle = date, x = long[1], y = lat[1]), 
-  glyph.by = c("long", "lat"))
+ggplot(nasa) + geom_star(aes(r = ozone, angle = date, x = 0, y = 0))
 
 # new gridding
 ggplot(test.data) + geom_point(aes(Fertility, Education))
@@ -141,6 +143,8 @@ ggplot(cheap.diamonds) +
     grid.aes = aes(x = carat, y = price), x.nbin = 10, y.nbin = 14,
     y_scale = free, height.adjust = 0.5, width.adjust = 0.5,
     ref = ref_box())
+
+
 ###########################################
 ###          not yet working            ###
 ###########################################

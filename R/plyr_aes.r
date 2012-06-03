@@ -9,46 +9,22 @@ plyr_aesthetics <- function (., data, plot) {
     aesthetics["group"] <- .$geom_params$group
   }
   scales_add_defaults(plot$scales, data, aesthetics, plot$plot_env)
-  
-  if (is.null(data$GLYPH)) {
-    if ("plyr" %in% ls(.)) {
-      data$GLYPH <- plyr$ply.by(data)
-    }
+
+  if (!is.null(aesthetics$group)) {
+    data$group <- unlist(eval.quoted(aesthetics$group, envir = data, 
+      enclos = plot$plot_env))
+    aesthetics$group <- quote(group)
   }
-  aesply(data, c("GLYPH", "PANEL"), aesthetics)
-}
-
-
-eval.plyr <- function (exprs, data = NULL, by = NULL, enclos = NULL, try = FALSE) {
-    if (is.numeric(exprs)) 
-        return(envir[exprs])
-    qenv <- if (is.quoted(exprs)) 
-        attr(exprs, "env")
-    else parent.frame()
-    if (is.null(data)) 
-        data <- qenv
-    if (is.data.frame(data) && is.null(enclos)) 
-        enclos <- qenv
-    if (try) {
-        results <- failwith(NULL, ddply, quiet = TRUE) (data, by, apply_maps, 
-          exprs, qenv)    
-    } else {
-        results <- ddply(data, by, apply_maps, exprs, qenv)    
-    }
-    results
-}
-
-
-apply_maps <- function(data, mapping, enclos = parent.frame()) {
-	map <- null_omit(mapping)
-	vars <- llply(map, eval, envir = data, enclos)
-	n <- nrow(data)
-	lengths <- unlist(lapply(vars, length))
-	wrong <- lengths != 1 & lengths != n
-	if (any(wrong)) {
-    stop(paste(
-      "Aesthetics must either be length one, or the same length as the data", 
-      "Problems:", paste(names(wrong)[wrong], collapse = ", ")), call. = FALSE)
-    }
-  data.frame(vars)
+  if ("GLYPH" %in% names(data)) {
+    aesthetics$GLYPH <- quote(GLYPH)
+  }
+  aesthetics$PANEL <- quote(PANEL)
+  
+  criteria <- c("group", "GLYPH", "PANEL", .$plyr$ply.by)
+  criteria <- criteria[criteria %in% names(data)]  
+  data$ply.by <- id(data[criteria], drop = TRUE)
+  
+  data <- aesply(data, "ply.by", aesthetics)
+  data$ply.by <- NULL
+  data
 }
