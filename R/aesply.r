@@ -54,6 +54,7 @@ apply_maps <- function(data, mapping, enclos = parent.frame()) {
   map <- null_omit(mapping)
   vars <- llply(map, eval, envir = data, enclos)
   n <- nrow(data)
+  vars <- lapply(vars, condense)
   lengths <- unlist(lapply(vars, length))
   wrong <- lengths != 1 & lengths != n
   if (any(wrong)) {
@@ -65,3 +66,9 @@ apply_maps <- function(data, mapping, enclos = parent.frame()) {
   data.frame(vars)
 }
 
+condense <- function(var) {
+  if (length(unique(var)) == 1) {
+    return(unique(var))
+  } 
+  var
+}
