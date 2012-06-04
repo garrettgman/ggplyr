@@ -195,9 +195,9 @@ ggplot(cheap.diamonds) +
     ref = ref_box(aes(color = mean(as.numeric(color)))))
 @
 
-\subsection{ply$\_$aes}
+\subsection{ply\_aes}
 
-\texttt{ply$\_$aes} wraps a layer like \texttt{grid} or \texttt{glyph} and causes the aesthetics to be calculated in a groupwise manner. Users can specify the groups to use, or \texttt{ply$\_$aes} will default to any groupings provided by glyph.by or group.by parameters, or a group aesthetic.
+\texttt{ply\_aes} wraps a layer like \texttt{grid} or \texttt{glyph} and causes the aesthetics to be calculated in a groupwise manner. Users can specify the groups to use, or \texttt{ply$\_$aes} will default to any groupings provided by glyph.by or group.by parameters, or a group aesthetic.
 
 <<groupwise1, fig.width = 4, fig.height = 3, out.width = 0.49\textwidth, cache = TRUE, tidy = FALSE, fig.caption = '\texttt{ply$\_$aes} forces aesthetics to be calculated within groups.'>>=
 ## normal \texttt{ggplot2} behavior
