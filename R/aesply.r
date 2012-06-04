@@ -29,3 +29,39 @@ remove_I <- function(expr) {
   as.call(lapply(expr, Identity))
 }
 
+eval.plyr <- function (exprs, data = NULL, by = NULL, enclos = NULL, 
+  try = FALSE) {
+  if (is.numeric(exprs)) 
+    return(envir[exprs])
+  qenv <- if (is.quoted(exprs)) 
+    attr(exprs, "env")
+  else parent.frame()
+  if (is.null(data)) 
+    data <- qenv
+  if (is.data.frame(data) && is.null(enclos)) 
+    enclos <- qenv
+  if (try) {
+    results <- failwith(NULL, ddply, quiet = TRUE) (data, by, apply_maps, 
+                                                    exprs, qenv)    
+  } else {
+    results <- ddply(data, by, apply_maps, exprs, qenv)    
+  }
+  results
+}
+
+
+apply_maps <- function(data, mapping, enclos = parent.frame()) {
+  map <- null_omit(mapping)
+  vars <- llply(map, eval, envir = data, enclos)
+  n <- nrow(data)
+  lengths <- unlist(lapply(vars, length))
+  wrong <- lengths != 1 & lengths != n
+  if (any(wrong)) {
+    stop(paste(
+      "Aesthetics must either be length one, or the same length as the data", 
+      "Problems:", paste(names(wrong)[wrong], collapse = ", ")), 
+      call. = FALSE)
+  }
+  data.frame(vars)
+}
+
