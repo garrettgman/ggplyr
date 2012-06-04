@@ -76,8 +76,9 @@ assign_glyphs <- function(., data) {
 
   if (embed$merge) {
     # search for overlapping glyphs, combine
-    data$.gid <- data$GLYPH
-    data$GLYPH <- merge_overlaps(globals, embed$width, embed$height)
+    data$.gid <- factor(data$GLYPH)
+    merge.key <- merge_overlaps(globals, embed$width, embed$height)
+    data$GLYPH <- merge.key[data$GLYPH]
     globals <- aesply(data, "GLYPH", embed$major.aes)
     .$mapping <- add_gid(mapping)
     
@@ -178,8 +179,8 @@ add_gid <- function(maps) {
   if (is.null(maps$group)) {
     maps$group <- as.name(".gid")
   } else {
-    maps$group <- as.call(list(as.name("interaction"), as.name(".gid"), 
-      aes_group))
+    maps$group <- as.call(list(quote(interaction), as.name(".gid"), 
+      maps$group))
   }
   maps
 }
