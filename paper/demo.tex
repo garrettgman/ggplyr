@@ -405,37 +405,78 @@
 
 
 
-\title{A Minimal Demo of ggplyr/glyphmaps/modelglyphs}
+\title{A Minimal Demo of \texttt{glyphmaps}}
 
 
 \author{Garrett Grolemund}
 
 \maketitle
-This document demonstrates the basic features of the \texttt{ggplyr} package (name may change). \texttt{ggplyr} was written to create plots like the ones below. Each plot was made with \texttt{ggplyr}. The first two plots recreate plots from \citet{wickham2011split}. The last two recreate plots from \citet{wickham2012glyph}. 
+This document demonstrates the basic features of the \texttt{glyphmaps} package (name may change). \texttt{glyphmaps} was written to create plots like the ones below, which recreate plots similar to those in \citet{wickham2011split} and \citet{wickham2012glyph}. Each plot is made with \texttt{glyphmaps}. To run the examples in this document please download the \texttt{glyphmaps} package with the code below. (Note: Install won't work until I finish documenting the namespace. But cloning and load_all() DOES work.)
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{library}\hlkeyword{(}\hlsymbol{devtools}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{install\usebox{\hlnormalsizeboxunderscore}github}\hlkeyword{(}\hlstring{"{}ggplyr"{}}\hlkeyword{,}{\ }\hlstring{"{}garrettgman"{}}\hlkeyword{,}{\ }\hlstring{"{}glyphmaps"{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## Installing github repo(s) ggplyr/glyphmaps from garrettgman
+## Installing ggplyr.zip from https://github.com/garrettgman/ggplyr/zipball
+## Installing glyphmaps
+## Error: Command failed (1)
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{library}\hlkeyword{(}\hlsymbol{glyphmaps}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## Error: there is no package called 'glyphmaps'
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 
-
-
-
-
-
-
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{ggplot}\hlkeyword{(}\hlsymbol{seasons}\hlkeyword{)}{\ }\hlkeyword{+}{\ }\hlsymbol{map\usebox{\hlnormalsizeboxunderscore}us}{\ }\hlkeyword{+}{\ }\hlfunctioncall{grid}\hlkeyword{(}\hlfunctioncall{geom\usebox{\hlnormalsizeboxunderscore}line}\hlkeyword{(}\hlfunctioncall{aes}\hlkeyword{(}\hlargument{x}{\ }\hlargument{=}{\ }\hlsymbol{time}\hlkeyword{,}{\ }\hlargument{y}{\ }\hlargument{=}{\ }\hlsymbol{pred}\hlkeyword{)}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{grid.aes}{\ }\hlargument{=}{\ }\hlfunctioncall{aes}\hlkeyword{(}\hlsymbol{lon}\hlkeyword{,}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlsymbol{lat}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{x.nbin}{\ }\hlargument{=}{\ }\hlnumber{58}\hlkeyword{,}{\ }\hlargument{y.nbin}{\ }\hlargument{=}{\ }\hlnumber{25}\hlkeyword{,}{\ }\hlargument{ref}{\ }\hlargument{=}{\ }\hlfunctioncall{ref\usebox{\hlnormalsizeboxunderscore}box}\hlkeyword{(}\hlfunctioncall{aes}\hlkeyword{(}\hlargument{fill}{\ }\hlargument{=}{\ }\hlsymbol{avg}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{alpha}{\ }\hlargument{=}{\ }\hlnumber{0.2}\hlkeyword{,}{\ }\hlargument{color}{\ }\hlargument{=}{\ }\hlnumber{NA}\hlkeyword{)}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## Error: could not find function "ggplot"
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{ggplot}\hlkeyword{(}\hlsymbol{nasa}\hlkeyword{)}{\ }\hlkeyword{+}{\ }\hlsymbol{map\usebox{\hlnormalsizeboxunderscore}nasa}{\ }\hlkeyword{+}{\ }\hlfunctioncall{glyph}\hlkeyword{(}\hlfunctioncall{geom\usebox{\hlnormalsizeboxunderscore}star}\hlkeyword{(}\hlfunctioncall{aes}\hlkeyword{(}\hlargument{r}{\ }\hlargument{=}{\ }\hlsymbol{ozone}\hlkeyword{,}{\ }\hlargument{angle}{\ }\hlargument{=}{\ }\hlsymbol{date}\hlkeyword{,}{\ }\hlargument{x}{\ }\hlargument{=}{\ }\hlnumber{0}\hlkeyword{,}{\ }\hlargument{y}{\ }\hlargument{=}{\ }\hlnumber{0}\hlkeyword{,}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlargument{fill}{\ }\hlargument{=}{\ }\hlfunctioncall{mean}\hlkeyword{(}\hlsymbol{temperature}\hlkeyword{)}\hlkeyword{)}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{major.aes}{\ }\hlargument{=}{\ }\hlfunctioncall{aes}\hlkeyword{(}\hlsymbol{long}\hlkeyword{[}\hlnumber{1}\hlkeyword{]}\hlkeyword{,}{\ }\hlsymbol{lat}\hlkeyword{[}\hlnumber{1}\hlkeyword{]}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{glyph.by}{\ }\hlargument{=}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlstring{"{}long"{}}\hlkeyword{,}{\ }\hlstring{"{}lat"{}}\hlkeyword{)}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## Error: could not find function "ggplot"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 
 
 
 
 \section{Glyphs}
-The common feature of these graphs is that they are built around glyphs. Glyphs are geometric objects (i.e, geoms) designed to display information within each geom. In other words, a glyph can display information even if it ids drawn by itself, without references to an external coordinate system. In reality, all geoms are a type of glyph, but the term glyph is usually reserved for complicated geoms, such as those that contain their own internal coordinate systems. The star glyphs in Figure~\ref{fig:star-glyphs} illustrate how glyphs can contain an internal (minor) coordinate system and can still be plotted in an external (major) coordinate system.
+The common feature of these graphs is that they are built around glyphs. Glyphs are geometric objects (i.e, geoms) designed to display information within the geom. In other words, a glyph can display information even if it is drawn by itself, without references to an external coordinate system. In reality, all geoms are a type of glyph, but the term glyph is usually reserved for complicated geoms, such as those that contain their own internal coordinate systems. The star glyphs in Figure~\ref{fig:star-glyphs} illustrate how glyphs can contain an internal (minor) coordinate system and can still be plotted in an external (major) coordinate system.
 
 
 
 
-Glyphs reveal a heirarchical structure to graphics: every plot is a collection of geoms, each of which can be thought of as its own self contained plot. Sometimes these subplots are not very interesting, as in the subplot created by a single point geom. Sometimes, they are quite complex, as in the star glyph of Figure~\ref{fig:star-glyphs}.
+Glyphs reveal a hierarchical structure of graphics: every plot is a collection of geoms, each of which can be thought of as its own self contained plot. Sometimes these subplots are not very interesting, as in the subplot created by a single point geom. At other times, thee subplots are quite complex, as in the star glyph of Figure~\ref{fig:star-glyphs}.
 
-Graphs inherit this heirarchical structure from the data they describe. Data is produced through an iterative process of collecting observations, grouping observations and summarizing groups of observations to create more compact, information dense sets of data. Humans innately perform this process when collecting data.  It is a cognitive pattern of the human brain which I will write about in the second cognitive chapter of my thesis. 
+Graphs inherit this hierarchical structure from the data they describe. Data is produced through an iterative process of collecting observations, grouping observations and summarizing groups of observations to create more compact, information dense sets of data. Humans innately perform this process when collecting data; it is a cognitive pattern of the human brain which I will write about in the second cognitive chapter of my thesis. 
 
-Glyph maps simultaneously expose data from multiple levels of this process. As a set of geoms, the glyphs reveal relationships between data points in the higher level, compact data set. As individual plots, each glyph retains information about the data points in the lower level group of data that it summarises. This dual display makes glyph maps particularly useful for certain data analysis tasks. It also provides two different approaches to constructing glyph maps.
+Glyph maps simultaneously expose data from multiple levels of the hierarchy. As a set of geoms, the glyphs reveal relationships between data points in the higher level, compact data set. As individual plots, each glyph retains information about the data points in the lower level group of data that it summarises. This dual display makes glyph maps particularly useful for certain data analysis tasks. It also provides two different approaches to constructing glyph maps.
 
 Glyph maps can be built from the top down by treating each glyph as a geom within the plot of interest. \texttt{ggplyr} provides new geoms \texttt{geom_star}, \texttt{geom_radar}, \texttt{geom_dart}, and \texttt{geom_plyr} which allow a user to quickly incorporate geoms into an existing plot.
 
@@ -443,9 +484,20 @@ Alternatively, glyph maps can be built from the bottom up by treating each glyph
 
 The remainder of this paper will demonstrate how users can use \texttt{ggplyr} tools to build glyph maps from either the bottom up or the top down.
 
-Although we have chosen to describe such plots as glyph maps, they really represent a general class of graphs that have been difficult to construct until now. Because each glyph is equivalent to an independent plot, glyph maps describe any plot that embeds other plots within itself. Embedded plots occur in a variety of contexts and I have a stack of photocopies to help demonstrate this. Embedded plots also fit into the grammar of graphics, where they represent an extension of facetting. When plots are embedded into two categorical axes, a facetted plot results. When a graph is facetted on continuous axes (which is rarely done), a glyph map results. 
+Although we have chosen to describe such plots as glyph maps, they really represent a general class of graphs that have been difficult to construct until now. Because each glyph is equivalent to an independent plot, glyph maps describe any plot that embeds other plots within itself. Embedded plots occur in a variety of contexts, and I have a stack of photocopies to help demonstrate this. Embedded plots also fit into the grammar of graphics, where they represent an extension of facetting. When plots are embedded into two categorical axes, a facetted plot results. When a graph is facetted on continuous axes (which is rarely done), a glyph map results. 
 
-(Interesetingly most embedded plots have settled to or are stuck in the stage of embedding plots within a geographic map. This resembles how Wainer, Tufte and others have traced the development of graphs through a concrete stage where cartesian axes seldom refered to anything other than latitude and longitude. Eventually graphs became more sophisticated and axes were used to represent  abstract concepts. Infovis developed from SciVis in the same way. Scivis focused on visualizing physical dimensions and eventually spawned InfoVis, which focuses on visualizing abstract dimensions. Perhaps embedded plots are developing through the same process, or perhaps the complexity of visualizing two orders of data at once requires one of them to have a concrete interpretation.)
+(Interesetingly most embedded plots have settled to the stage of embedding plots within a geographic map. This resembles how Wainer, Tufte and others have traced the development of graphs through a concrete stage where cartesian axes seldom refered to anything other than latitude and longitude. Eventually graphs became more sophisticated and axes were used to represent  abstract concepts. Perhaps embedded plots are developing through the same process, or perhaps the complexity of visualizing two orders of data at once requires one order to have a concrete interpretation.)
+
+To run the examples contained below, you'll have to download the \texttt{ggplyr} development package from \url{https://github.com/garrettgman/ggplyr} and install it with
+
+
+I haven't yet built the namespace or completed the documentation files, because the exact syntax / function membership hasn't been settled. As a result, the package will fail \begin{verbatim}
+
+Error in paste(repo, branch, sep = "/", collapse = ", ") : 
+  argument "repo" is missing, with no default
+
+\end{verbatim}
+.
 
 
 \section{top down methods}
@@ -457,44 +509,19 @@ Top down methods are difficult to implement in \texttt{ggplot2} for two reasons
   \item Second, the final width and height of individual glyphs often depends on non-position aesthetics, such as angle and length. In the \texttt{ggplot2} pipeline, these aesthetics are scaled right before the plot ranges are trained. As a result, the final widths of glyphs must be computed at draw time and frequently place parts of the glyph outside the plot window.
 \end{ennumerate}  
 
+\subsection{geom_plyr}
+\texttt{ggplyr} provides a way for users to compute aesthetics by 
 
 
 
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{flushleft}
-\ttfamily\noindent
-\hlfunctioncall{set.seed}\hlkeyword{(}\hlnumber{1121}\hlkeyword{)}\hspace*{\fill}\\
-\hlstd{}\hlkeyword{(}\hlsymbol{x}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{rnorm}\hlkeyword{(}\hlnumber{20}\hlkeyword{)}\hlkeyword{)}\mbox{}
-\normalfont
-\end{flushleft}
-\begin{verbatim}
-##  [1]  0.14496  0.43832  0.15319  1.08494  1.99954 -0.81188  0.16027  0.58589  0.36009
-## [10] -0.02531  0.15088  0.11008  1.35968 -0.32699 -0.71638  1.80977  0.50840 -0.52746
-## [19]  0.13272 -0.15594
+
+The first element of \texttt{x} is \begin{verbatim}
+
+Error in eval(expr, envir, enclos) : object 'x' not found
+
 \end{verbatim}
-\begin{flushleft}
-\ttfamily\noindent
-\hlfunctioncall{mean}\hlkeyword{(}\hlsymbol{x}\hlkeyword{)}\mbox{}
-\normalfont
-\end{flushleft}
-\begin{verbatim}
-## [1] 0.3217
-\end{verbatim}
-\begin{flushleft}
-\ttfamily\noindent
-\hlfunctioncall{var}\hlkeyword{(}\hlsymbol{x}\hlkeyword{)}\mbox{}
-\normalfont
-\end{flushleft}
-\begin{verbatim}
-## [1] 0.5715
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
-
-
-The first element of \texttt{x} is 0.145. Boring boxplots
+. Boring boxplots
 and histograms recorded by the PDF device:
 
 \begin{knitrout}
@@ -504,17 +531,21 @@ and histograms recorded by the PDF device:
 \hlcomment{\usebox{\hlnormalsizeboxhash}\usebox{\hlnormalsizeboxhash}{\ }two{\ }plots{\ }side{\ }by{\ }side{\ }(option{\ }fig.show=\usebox{\hlnormalsizeboxsinglequote}hold\usebox{\hlnormalsizeboxsinglequote})}\hspace*{\fill}\\
 \hlstd{}\hlfunctioncall{par}\hlkeyword{(}\hlargument{mar}{\ }\hlargument{=}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{4}\hlkeyword{,}{\ }\hlnumber{4}\hlkeyword{,}{\ }\hlnumber{0.1}\hlkeyword{,}{\ }\hlnumber{0.1}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{cex.lab}{\ }\hlargument{=}{\ }\hlnumber{0.95}\hlkeyword{,}{\ }\hlargument{cex.axis}{\ }\hlargument{=}{\ }\hlnumber{0.9}\hlkeyword{,}{\ }\hlargument{mgp}{\ }\hlargument{=}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{0.7}\hlkeyword{,}{\ }\hlnumber{0}\hlkeyword{)}\hlkeyword{,}\hspace*{\fill}\\
 \hlstd{}{\ }{\ }{\ }{\ }\hlargument{tcl}{\ }\hlargument{=}{\ }\hlkeyword{-}\hlnumber{0.3}\hlkeyword{,}{\ }\hlargument{las}{\ }\hlargument{=}{\ }\hlnumber{1}\hlkeyword{)}\hspace*{\fill}\\
-\hlstd{}\hlfunctioncall{boxplot}\hlkeyword{(}\hlsymbol{x}\hlkeyword{)}\hspace*{\fill}\\
-\hlstd{}\hlfunctioncall{hist}\hlkeyword{(}\hlsymbol{x}\hlkeyword{,}{\ }\hlargument{main}{\ }\hlargument{=}{\ }\hlstring{"{}"{}}\hlkeyword{)}\mbox{}
+\hlstd{}\hlfunctioncall{boxplot}\hlkeyword{(}\hlsymbol{x}\hlkeyword{)}\mbox{}
 \normalfont
 \end{flushleft}
+\begin{verbatim}
+## Error: object 'x' not found
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{hist}\hlkeyword{(}\hlsymbol{x}\hlkeyword{,}{\ }\hlargument{main}{\ }\hlargument{=}{\ }\hlstring{"{}"{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## Error: object 'x' not found
+\end{verbatim}
 \end{kframe}
-
-{\centering \includegraphics[width=.4\linewidth]{figure/minimal-boring-plots1} \includegraphics[width=.4\linewidth]{figure/minimal-boring-plots2} 
-
-}
-
-
 \end{knitrout}
 
 

@@ -1,20 +1,24 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2009.11.7)  26 MAY 2012 14:57
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  4 JUN 2012 09:24
 entering extended mode
+ restricted \write18 enabled.
  %&-line parsing enabled.
 **demo.tex
 (./demo.tex
 LaTeX2e <2009/09/24>
-Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
-yphenation, german-x-2009-06-19, ngerman-x-2009-06-19, ancientgreek, ibycus, ar
-abic, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danish, dutc
-h, esperanto, estonian, farsi, finnish, french, galician, german, ngerman, mono
-greek, greek, hungarian, icelandic, indonesian, interlingua, irish, italian, ku
-rmanji, latin, latvian, lithuanian, mongolian, mongolian2a, bokmal, nynorsk, po
-lish, portuguese, romanian, russian, sanskrit, serbian, slovak, slovenian, span
-ish, swedish, turkish, ukenglish, ukrainian, uppersorbian, welsh, loaded.
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/article.cls
+Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, ge
+rman-x-2009-06-19, ngerman-x-2009-06-19, afrikaans, ancientgreek, ibycus, arabi
+c, armenian, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danis
+h, dutch, ukenglish, usenglishmax, esperanto, estonian, ethiopic, farsi, finnis
+h, french, galician, german, ngerman, swissgerman, monogreek, greek, hungarian,
+ icelandic, assamese, bengali, gujarati, hindi, kannada, malayalam, marathi, or
+iya, panjabi, tamil, telugu, indonesian, interlingua, irish, italian, kurmanji,
+ lao, latin, latvian, lithuanian, mongolian, mongolianlmc, bokmal, nynorsk, pol
+ish, portuguese, romanian, russian, sanskrit, serbian, serbianc, slovak, sloven
+ian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian, welsh, loaded
+.
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/size10.clo
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -29,35 +33,42 @@ File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/graphics/keyval.sty
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/graphics/trig.sty
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/latexconfig/graphics.cfg
-File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+(/usr/local/texlive/2011/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2009/08/25 v0.04m Graphics/color for pdfTeX
+(/usr/local/texlive/2011/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/message (HO)
+)
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/04/18 v1.20 LaTeX kernel commands for general use (HO)
+)
 \Gread@gobject=\count87
 ))
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/graphics/color.sty
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/latexconfig/color.cfg
+(/usr/local/texlive/2011/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
@@ -66,7 +77,7 @@ Package color Info: Driver file: pdftex.def on input line 130.
 Package: upquote 2003/08/11 v1.1 Covington's upright-quote modification to verb
 atim and verb
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/textcomp.sty
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2005/09/27 v1.99g Standard LaTeX package
 Package textcomp Info: Sub-encoding information:
 (textcomp)               5 = only ISO-Adobe without \textcurrency
@@ -81,7 +92,7 @@ Package textcomp Info: Sub-encoding information:
 (textcomp)             See the documentation for details.
 Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 71.
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/ts1enc.def
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/ts1enc.def
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 )
 LaTeX Info: Redefining \oldstylenums on input line 266.
@@ -150,7 +161,7 @@ Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 326.
 LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 51.
 
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/ts1cmtt.fd
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 \hltinyboxclosebrace=\box40
@@ -280,34 +291,37 @@ File: ts1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 \hlHugeboxsinglequote=\box164
 \hlHugeboxbacktick=\box165
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/ltxmisc/framed.sty
+(/usr/local/texlive/2011/texmf-dist/tex/latex/framed/framed.sty
 Package: framed 2007/10/04 v 0.95: framed or shaded text with page breaks
 \fb@frw=\dimen105
 \fb@frh=\dimen106
 \FrameRule=\dimen107
 \FrameSep=\dimen108
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/mathpazo.sty
+(/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/mathpazo.sty
 Package: mathpazo 2005/04/12 PSNFSS-v9.2a Palatino w/ Pazo Math (D.Puga, WaS) 
 \symupright=\mathgroup4
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/fontenc.sty
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/t1enc.def
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/t1enc.def
 File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
 ))
-(/usr/local/texlive/2009/texmf-dist/tex/latex/geometry/geometry.sty
-Package: geometry 2008/12/21 v4.2 Page Geometry
+(/usr/local/texlive/2011/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
 
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in pdf mode detected.
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/ifvtex.sty
-Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2010/03/01 v1.5 Switches for detecting VTeX and its modes (HO)
 Package ifvtex Info: VTeX not detected.
+)
+(/usr/local/texlive/2011/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count88
 \Gm@cntv=\count89
@@ -316,141 +330,143 @@ Package ifvtex Info: VTeX not detected.
 \Gm@wd@mp=\dimen110
 \Gm@odd@mp=\dimen111
 \Gm@even@mp=\dimen112
+\Gm@layoutwidth=\dimen113
+\Gm@layoutheight=\dimen114
+\Gm@layouthoffset=\dimen115
+\Gm@layoutvoffset=\dimen116
 \Gm@dimlist=\toks15
-
-(/usr/local/texlive/2009/texmf-dist/tex/xelatex/xetexconfig/geometry.cfg))
-(/usr/local/texlive/2009/texmf-dist/tex/latex/natbib/natbib.sty
-Package: natbib 2009/07/16 8.31 (PWD, AO)
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip43
 \bibsep=\skip44
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count91
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/ltxmisc/url.sty
+(/usr/local/texlive/2011/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip10
 Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2009/10/09 v6.79a Hypertext links for LaTeX
+(/usr/local/texlive/2011/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2011/04/17 v6.82g Hypertext links for LaTeX
 
-(/usr/local/texlive/2009/texmf-dist/tex/generic/ifxetex/ifxetex.sty
-Package: ifxetex 2009/01/23 v0.5 Provides ifxetex conditional
-)
-(/usr/local/texlive/2009/texmf-dist/tex/latex/oberdiek/hycolor.sty
-Package: hycolor 2009/10/02 v1.5 Code for color options of hyperref/bookmark (H
-O)
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+Package: hobsub-hyperref 2011/04/23 v1.4 Bundle oberdiek, subset hyperref (HO)
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/oberdiek/xcolor-patch.sty
-Package: xcolor-patch 2009/10/02 xcolor patch
-))
-\@linkdim=\dimen113
-\Hy@linkcounter=\count92
-\Hy@pagecounter=\count93
-
-(/usr/local/texlive/2009/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2009/10/09 v6.79a Hyperref: PDFDocEncoding definition (HO)
-)
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/etexcmds.sty
-Package: etexcmds 2007/12/12 v1.2 Prefix for e-TeX command names (HO)
-
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2007/09/09 v1.2 Providing info/warning/message (HO)
-)
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+Package: hobsub-generic 2011/04/23 v1.4 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2011/04/23 v1.4 Subsetting bundle oberdiek (HO)
+Package hobsub Info: Skipping package `infwarerr' (already loaded).
+Package hobsub Info: Skipping package `ltxcmds' (already loaded).
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+Package hobsub Info: Skipping package `ifvtex' (already loaded).
+Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
+Package hobsub Info: Skipping package `ifpdf' (already loaded).
+Package: etexcmds 2011/02/16 v1.5 Prefix for e-TeX command names (HO)
 Package etexcmds Info: Could not find \expanded.
 (etexcmds)             That can mean that you are not using pdfTeX 1.50 or
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
-)
-(/usr/local/texlive/2009/texmf-dist/tex/latex/latexconfig/hyperref.cfg
-File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
-)
-(/usr/local/texlive/2009/texmf-dist/tex/latex/oberdiek/kvoptions.sty
-Package: kvoptions 2009/08/13 v3.4 Keyval support for LaTeX options (HO)
-
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
-Package: kvsetkeys 2009/07/30 v1.5 Key value parser with default handler suppor
-t (HO)
-))
-Package hyperref Info: Option `unicode' set `true' on input line 2864.
-
-(/usr/local/texlive/2009/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2009/10/09 v6.79a Hyperref: PDF Unicode definition (HO)
-)
-Package hyperref Info: Option `pdfusetitle' set `true' on input line 2864.
-Package hyperref Info: Option `bookmarks' set `true' on input line 2864.
-Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 2864
-.
-Package hyperref Info: Option `bookmarksopen' set `true' on input line 2864.
-Package hyperref Info: Option `breaklinks' set `false' on input line 2864.
-Package hyperref Info: Option `colorlinks' set `false' on input line 2864.
-Package hyperref Info: Hyper figures OFF on input line 2975.
-Package hyperref Info: Link nesting OFF on input line 2980.
-Package hyperref Info: Hyper index ON on input line 2983.
-Package hyperref Info: Plain pages OFF on input line 2990.
-Package hyperref Info: Backreferencing OFF on input line 2995.
-
-Implicit mode ON; LaTeX internals redefined
-Package hyperref Info: Bookmarks ON on input line 3191.
-LaTeX Info: Redefining \url on input line 3428.
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/bitset.sty
-Package: bitset 2007/09/28 v1.0 Data type bit set (HO)
-
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/intcalc.sty
-Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
-)
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/bigintcalc.sty
-Package: bigintcalc 2007/11/11 v1.1 Expandable big integer calculations (HO)
-
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2009/09/23 v0.6 LuaTeX support for pdfTeX utility functions
- (HO)
-
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2009/04/17 v1.2 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
-)
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2009/08/05 v1.0 Some LaTeX kernel commands for general use (HO
-)
-)
+Package: kvsetkeys 2011/04/07 v1.13 Key value parser (HO)
+Package: kvdefinekeys 2011/04/07 v1.3 Defining keys (HO)
+Package: pdftexcmds 2011/04/22 v0.16 Utilities of pdfTeX for LuaTeX (HO)
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
-)))
-\Fld@menulength=\count94
-\Field@Width=\dimen114
-\Fld@charsize=\dimen115
-\Field@toks=\toks16
-Package hyperref Info: Hyper figures OFF on input line 4377.
-Package hyperref Info: Link nesting OFF on input line 4382.
-Package hyperref Info: Hyper index ON on input line 4385.
-Package hyperref Info: backreferencing OFF on input line 4392.
-Package hyperref Info: Link coloring OFF on input line 4397.
-Package hyperref Info: Link coloring with OCG OFF on input line 4402.
-Package hyperref Info: PDF/A mode OFF on input line 4407.
+Package pdftexcmds Info: \pdfdraftmode found.
+Package: pdfescape 2011/04/04 v1.12 Provides string conversions (HO)
+Package: bigintcalc 2011/01/30 v1.2 Expandable big integer calculations (HO)
+Package: bitset 2011/01/30 v1.1 Data type bit set (HO)
+Package: uniquecounter 2011/01/30 v1.2 Provides unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
+Package: hopatch 2011/01/30 v1.0 Wrapper for package hooks (HO)
+Package: xcolor-patch 2011/01/30 xcolor patch
+Package: atveryend 2011/04/23 v1.7 Hooks at very end of document (HO)
+Package atveryend Info: \enddocument detected (standard).
+Package: atbegshi 2011/01/30 v1.15 At begin shipout hook (HO)
+Package: refcount 2010/12/01 v3.2 Data extraction from references (HO)
+Package: hycolor 2011/01/30 v1.7 Color options of hyperref/bookmark (HO)
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2010/12/23 v3.10 Keyval support for LaTeX options (HO)
+)
+\@linkdim=\dimen117
+\Hy@linkcounter=\count92
+\Hy@pagecounter=\count93
 
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/atbegshi.sty
-Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2011/04/17 v6.82g Hyperref: PDFDocEncoding definition (HO)
 )
-\Hy@abspage=\count95
-\c@Item=\count96
-\c@Hfootnote=\count97
+\Hy@SavedSpaceFactor=\count94
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
-*hyperref using default driver hpdftex*
-(/usr/local/texlive/2009/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
-\Fld@listcount=\count98
+Package hyperref Info: Option `unicode' set `true' on input line 3905.
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2011/04/17 v6.82g Hyperref: PDF Unicode definition (HO)
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/breakurl/breakurl.sty
+Package hyperref Info: Option `pdfusetitle' set `true' on input line 3905.
+Package hyperref Info: Option `bookmarks' set `true' on input line 3905.
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 3905
+.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 3905.
+Package hyperref Info: Option `breaklinks' set `false' on input line 3905.
+Package hyperref Info: Option `colorlinks' set `false' on input line 3905.
+Package hyperref Info: Hyper figures OFF on input line 4026.
+Package hyperref Info: Link nesting OFF on input line 4031.
+Package hyperref Info: Hyper index ON on input line 4034.
+Package hyperref Info: Plain pages OFF on input line 4041.
+Package hyperref Info: Backreferencing OFF on input line 4046.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4264.
+\c@Hy@tempcnt=\count95
+LaTeX Info: Redefining \url on input line 4617.
+\Fld@menulength=\count96
+\Field@Width=\dimen118
+\Fld@charsize=\dimen119
+Package hyperref Info: Hyper figures OFF on input line 5701.
+Package hyperref Info: Link nesting OFF on input line 5706.
+Package hyperref Info: Hyper index ON on input line 5709.
+Package hyperref Info: backreferencing OFF on input line 5716.
+Package hyperref Info: Link coloring OFF on input line 5721.
+Package hyperref Info: Link coloring with OCG OFF on input line 5726.
+Package hyperref Info: PDF/A mode OFF on input line 5731.
+LaTeX Info: Redefining \ref on input line 5771.
+LaTeX Info: Redefining \pageref on input line 5775.
+\Hy@abspage=\count97
+\c@Item=\count98
+\c@Hfootnote=\count99
+)
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2011/04/17 v6.82g Hyperref driver for pdfTeX
+\Fld@listcount=\count100
+\c@bookmark@seq@number=\count101
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip45
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/breakurl/breakurl.sty
 Package: breakurl 2009/01/24 v1.30 Breakable hyperref URLs
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(/usr/local/texlive/2011/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 Package: xkeyval 2008/08/13 v2.6a package option processing (HA)
 
-(/usr/local/texlive/2009/texmf-dist/tex/generic/xkeyval/xkeyval.tex
-\XKV@toks=\toks17
-\XKV@tempa@toks=\toks18
-\XKV@depth=\count99
+(/usr/local/texlive/2011/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+\XKV@toks=\toks16
+\XKV@tempa@toks=\toks17
+\XKV@depth=\count102
 File: xkeyval.tex 2008/08/13 v2.6a key=value parser (HA)
 ))
 
@@ -477,7 +493,7 @@ LaTeX Font Info:    ... okay on input line 402.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 402.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 402.
 
- (/usr/local/texlive/2009/texmf-dist/tex/latex/base/ts1cmr.fd
+ (/usr/local/texlive/2011/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 402.
@@ -488,139 +504,177 @@ LaTeX Font Info:    ... okay on input line 402.
 LaTeX Font Info:    Try loading font information for T1+pplx on input line 402.
 
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/t1pplx.fd
+(/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/t1pplx.fd
 File: t1pplx.fd 2004/09/06 font definitions for T1/pplx.
 )
-(/usr/local/texlive/2009/texmf-dist/tex/context/base/supp-pdf.mkii
+(/usr/local/texlive/2011/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count100
-\scratchdimen=\dimen116
+\scratchcounter=\count103
+\scratchdimen=\dimen120
 \scratchbox=\box166
-\nofMPsegments=\count101
-\nofMParguments=\count102
-\everyMPshowfont=\toks19
-\MPscratchCnt=\count103
-\MPscratchDim=\dimen117
-\MPnumerator=\count104
-\everyMPtoPDFconversion=\toks20
+\nofMPsegments=\count104
+\nofMParguments=\count105
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count106
+\MPscratchDim=\dimen121
+\MPnumerator=\count107
+\makeMPintoPDFobject=\count108
+\everyMPtoPDFconversion=\toks19
+) (/usr/local/texlive/2011/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Managing graphics extensions (HO)
 )
-\big@size=\dimen118
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
 
-*geometry auto-detecting driver*
-*geometry detected driver: pdftex*
+(/usr/local/texlive/2011/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\big@size=\dimen122
 
-Package geometry Warning: The marginal notes would fall off the page.
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+
+Package geometry Warning: The marginal notes overrun the paper.
      Add 4.86812pt and more to the right margin.
 
--------------------- Geometry parameters
-paper: class default
-landscape: --
-twocolumn: --
-twoside: --
-asymmetric: --
-h-parts: 71.13188pt, 472.03123pt, 71.13188pt
-v-parts: 71.13188pt, 652.70622pt, 71.13188pt
-hmarginratio: --
-vmarginratio: --
-lines: --
-heightrounded: --
-bindingoffset: 0.0pt
-truedimen: --
-includehead: --
-includefoot: --
-includemp: --
-driver: pdftex
--------------------- Page layout dimensions and switches
-\paperwidth  614.295pt
-\paperheight 794.96999pt
-\textwidth  472.03123pt
-\textheight 652.70622pt
-\oddsidemargin  -1.1381pt
-\evensidemargin -1.1381pt
-\topmargin  -38.1381pt
-\headheight 12.0pt
-\headsep    25.0pt
-\footskip   30.0pt
-\marginparwidth 65.0pt
-\marginparsep   11.0pt
-\columnsep  10.0pt
-\skip\footins  9.0pt plus 4.0pt minus 2.0pt
-\hoffset 0.0pt
-\voffset 0.0pt
-\mag 1000
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(71.13188pt, 472.03123pt, 71.13188pt)
+* v-part:(T,H,B)=(71.13188pt, 652.70622pt, 71.13188pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=472.03123pt
+* \textheight=652.70622pt
+* \oddsidemargin=-1.1381pt
+* \evensidemargin=-1.1381pt
+* \topmargin=-38.1381pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-(1in=72.27pt, 1cm=28.45pt)
------------------------
+\AtBeginShipoutBox=\box167
 Package hyperref Info: Link coloring OFF on input line 402.
-(/usr/local/texlive/2009/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
+(/usr/local/texlive/2011/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/oberdiek/refcount.sty
-Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count105
+\c@section@level=\count109
 )
 LaTeX Info: Redefining \ref on input line 402.
 LaTeX Info: Redefining \pageref on input line 402.
+LaTeX Info: Redefining \nameref on input line 402.
 
 (./demo.out) (./demo.out)
 \@outlinefile=\write3
 \openout3 = `demo.out'.
 
-\AtBeginShipoutBox=\box167
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 414.
+
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
 LaTeX Font Info:    Try loading font information for OT1+pplx on input line 414
 .
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/ot1pplx.fd
+(/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/ot1pplx.fd
 File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
 )
 LaTeX Font Info:    Try loading font information for OML+zplm on input line 414
 .
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/omlzplm.fd
+(/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
 LaTeX Font Info:    Try loading font information for OMS+zplm on input line 414
 .
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/omszplm.fd
+(/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
 LaTeX Font Info:    Try loading font information for OMX+zplm on input line 414
 .
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/omxzplm.fd
+(/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
 LaTeX Font Info:    Try loading font information for OT1+zplm on input line 414
 .
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/ot1zplm.fd
+(/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 414.
-
-
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/t1cmtt.fd
-File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 428.
-LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <10> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 429.
-
-
-LaTeX Warning: Reference `fig:star-glyphs' on page 1 undefined on input line 42
-9.
-
-
-LaTeX Warning: Reference `fig:star-glyphs' on page 1 undefined on input line 43
-4.
+! Missing $ inserted.
+<inserted text> 
+                $
+l.414 ...ting the namespace. But cloning and load_
+                                                  all() DOES work.)
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.440 ...yr} provides new geoms \texttt{geom_star}
+l.415 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (5.31218pt too wide) in paragraph at lines 414--415
+[]\T1/pplx/m/n/10 This doc-u-ment demon-strates the ba-sic fea-tures of the \T1
+/cmtt/m/n/10 glyphmaps \T1/pplx/m/n/10 pack-age (name may change). \T1/cmtt/m/n
+/10 glyphmaps
+ []
+
+Package color Info: Redefining color shadecolor on input line 417.
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 420.
+Package color Info: Redefining color shadecolor on input line 443.
+LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 469.
+LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <10> not available
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 470.
+
+LaTeX Warning: Reference `fig:star-glyphs' on page 1 undefined on input line 47
+0.
+
+
+LaTeX Warning: Reference `fig:star-glyphs' on page 1 undefined on input line 47
+5.
+
+[1
+
+{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.481 ...yr} provides new geoms \texttt{geom_star}
                                                   , \texttt{geom_radar}, \te...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -628,7 +682,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <recently read> \egroup 
                         
-l.440 ...yr} provides new geoms \texttt{geom_star}
+l.481 ...yr} provides new geoms \texttt{geom_star}
                                                   , \texttt{geom_radar}, \te...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -639,7 +693,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.440 ...s \texttt{geom_star}, \texttt{geom_radar}
+l.481 ...s \texttt{geom_star}, \texttt{geom_radar}
                                                   , \texttt{geom_dart}, and ...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -647,7 +701,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 \mbox #1->\leavevmode \hbox {#1}
                                 
-l.440 ...s \texttt{geom_star}, \texttt{geom_radar}
+l.481 ...s \texttt{geom_star}, \texttt{geom_radar}
                                                   , \texttt{geom_dart}, and ...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -658,7 +712,7 @@ deleted material, e.g., by typing `I$}'.
 ! Extra }, or forgotten $.
 \nfss@text #1->{\mbox {#1}}
                            
-l.440 ...s \texttt{geom_star}, \texttt{geom_radar}
+l.481 ...s \texttt{geom_star}, \texttt{geom_radar}
                                                   , \texttt{geom_dart}, and ...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -669,7 +723,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.440 ..., \texttt{geom_radar}, \texttt{geom_dart}
+l.481 ..., \texttt{geom_radar}, \texttt{geom_dart}
                                                   , and \texttt{geom_plyr} w...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -677,7 +731,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 \mbox #1->\leavevmode \hbox {#1}
                                 
-l.440 ..., \texttt{geom_radar}, \texttt{geom_dart}
+l.481 ..., \texttt{geom_radar}, \texttt{geom_dart}
                                                   , and \texttt{geom_plyr} w...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -688,7 +742,7 @@ deleted material, e.g., by typing `I$}'.
 ! Extra }, or forgotten $.
 \nfss@text #1->{\mbox {#1}}
                            
-l.440 ..., \texttt{geom_radar}, \texttt{geom_dart}
+l.481 ..., \texttt{geom_radar}, \texttt{geom_dart}
                                                   , and \texttt{geom_plyr} w...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -699,7 +753,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.440 ...texttt{geom_dart}, and \texttt{geom_plyr}
+l.481 ...texttt{geom_dart}, and \texttt{geom_plyr}
                                                    which allow a user to qui...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -707,7 +761,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 \mbox #1->\leavevmode \hbox {#1}
                                 
-l.440 ...texttt{geom_dart}, and \texttt{geom_plyr}
+l.481 ...texttt{geom_dart}, and \texttt{geom_plyr}
                                                    which allow a user to qui...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -718,7 +772,7 @@ deleted material, e.g., by typing `I$}'.
 ! Extra }, or forgotten $.
 \nfss@text #1->{\mbox {#1}}
                            
-l.440 ...texttt{geom_dart}, and \texttt{geom_plyr}
+l.481 ...texttt{geom_dart}, and \texttt{geom_plyr}
                                                    which allow a user to qui...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -729,7 +783,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.441 
+l.482 
       
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -741,8 +795,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.451 \section
-              {top down methods}
+l.494 ...t, the package will fail \begin{verbatim}
+                                                  
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -753,16 +807,39 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.451 \section
-              {top down methods}
+l.494 ...t, the package will fail \begin{verbatim}
+                                                  
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.494 ...t, the package will fail \begin{verbatim}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Missing \endgroup inserted.
+<inserted text> 
+                \endgroup 
+l.494 ...t, the package will fail \begin{verbatim}
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
 ! Missing } inserted.
 <inserted text> 
                 }
-l.451 \section{top down methods}
-                                
+l.494 ...t, the package will fail \begin{verbatim}
+                                                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -772,16 +849,16 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.451 \section{top down methods}
-                                
+l.494 ...t, the package will fail \begin{verbatim}
+                                                  
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.451 \section{top down methods}
-                                
+l.494 ...t, the package will fail \begin{verbatim}
+                                                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -791,8 +868,8 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.451 \section{top down methods}
-                                
+l.494 ...t, the package will fail \begin{verbatim}
+                                                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -802,16 +879,16 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.451 \section{top down methods}
-                                
+l.494 ...t, the package will fail \begin{verbatim}
+                                                  
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.451 \section{top down methods}
-                                
+l.494 ...t, the package will fail \begin{verbatim}
+                                                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -821,8 +898,8 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.451 \section{top down methods}
-                                
+l.494 ...t, the package will fail \begin{verbatim}
+                                                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -832,16 +909,16 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.451 \section{top down methods}
-                                
+l.494 ...t, the package will fail \begin{verbatim}
+                                                  
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.451 \section{top down methods}
-                                
+l.494 ...t, the package will fail \begin{verbatim}
+                                                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -849,22 +926,53 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 
-Overfull \hbox (11420.97923pt too wide) in paragraph at lines 440--451
+Overfull \hbox (11968.11102pt too wide) in paragraph at lines 481--494
 \T1/cmtt/m/n/10 ggplyr \T1/pplx/m/n/10 pro-vides new ge-oms \T1/cmtt/m/n/10 geo
 m$[]\OML/zplm/m/it/10 tar\OT1/pplx/m/n/10 , []$ 
  []
 
 
-Overfull \hbox (21.34828pt too wide) in paragraph at lines 452--453
-\T1/cmtt/m/n/10 ggplyr's top down methods help users fit glyphs into existing m
-ethods of visualization. These
- []
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.499 \end{verbatim}
+                    
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
 
-Overfull \hbox (21.34828pt too wide) in paragraph at lines 452--453
-\T1/cmtt/m/n/10 methods provide new geoms (often based on new grobs) that can b
-e used alongside existing geoms
- []
+! LaTeX Error: \begin{document} ended by \end{verbatim}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.499 \end{verbatim}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.499 \end{verbatim}
+                    
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.499 \end{verbatim}
+                    
+Things are pretty mixed up, but I think the worst is over.
 
 
 ! LaTeX Error: Environment ennumerate undefined.
@@ -873,7 +981,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.455 \begin{ennumerate}
+l.507 \begin{ennumerate}
                         
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -886,21 +994,15 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.456   \item F
+l.508   \item F
                irst, \texttt{ggplot2} calculates aesthetics on the entire da...
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 456
+Underfull \hbox (badness 10000) detected at line 508
 [][]
- []
-
-
-Overfull \hbox (16.09956pt too wide) in paragraph at lines 456--457
-[]\T1/cmtt/m/n/10 First, ggplot2 calculates aesthetics on the entire data set a
-t once. However, glyphs contain
  []
 
 
@@ -910,14 +1012,14 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.457   \item S
+l.509   \item S
                econd, the final width and height of individual glyphs often ...
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 457
+Underfull \hbox (badness 10000) detected at line 509
 [][]
  []
 
@@ -928,103 +1030,72 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.458 \end{ennumerate}
+l.510 \end{ennumerate}
                       
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
+LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <12> not available
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 512.
+! Missing $ inserted.
+<inserted text> 
+                $
+l.512 \subsection{geom_plyr}
+                            
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
-Overfull \hbox (37.09444pt too wide) in paragraph at lines 457--459
-[]\T1/cmtt/m/n/10 Second, the final width and height of individual glyphs often
- depends on non-position aesthetics,
- []
-
-
-Overfull \hbox (10.85085pt too wide) in paragraph at lines 457--459
-\T1/cmtt/m/n/10 such as angle and length. In the ggplot2 pipeline, these aesthe
-tics are scaled right before
- []
-
-
-Overfull \hbox (21.34828pt too wide) in paragraph at lines 457--459
-\T1/cmtt/m/n/10 the plot ranges are trained. As a result, the final widths of g
-lyphs must be computed at draw
- []
-
-Package color Info: Redefining color shadecolor on input line 465.
-LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 468.
-[1
-
-{/usr/local/texlive/2009/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (25.85085pt too wide) in paragraph at lines 497--499
-[]\T1/cmtt/m/n/10 The first element of x is 0.145. Boring boxplots and histogra
-ms recorded by the PDF device: 
- []
-
-Package color Info: Redefining color shadecolor on input line 501.
-<figure/minimal-boring-plots1.pdf, id=28, 289.08pt x 289.08pt>
-File: figure/minimal-boring-plots1.pdf Graphic file (type pdf)
-
-<use figure/minimal-boring-plots1.pdf>
-<figure/minimal-boring-plots2.pdf, id=29, 289.08pt x 289.08pt>
-File: figure/minimal-boring-plots2.pdf Graphic file (type pdf)
-
-<use figure/minimal-boring-plots2.pdf>
-Overfull \hbox (22.78873pt too wide) in paragraph at lines 521--524
-[]\T1/cmtt/m/n/10 Do the above chunks work? You should be able to compile the T
-[]X document and get a PDF file
- []
+! Missing $ inserted.
+<inserted text> 
+                $
+l.512 \subsection{geom_plyr}
+                            
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
 
-Overfull \hbox (6.10213pt too wide) in paragraph at lines 521--524
-\T1/cmtt/m/n/10 like this one: []$https : / / github . com / downloads / yihui 
-/ knitr / knitr-[]minimal . pdf$[]. The Rnw source
- []
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 512.
 
+Package color Info: Redefining color shadecolor on input line 528.
+(./demo.bbl [2])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 558.
+ [3]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 558.
+ (./demo.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 558.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 558.
+Package rerunfilecheck Info: File `demo.out' has not changed.
+(rerunfilecheck)             Checksum: 1926138E2FEE6955E9ED7033AEAC7A1D;346.
 
-Overfull \hbox (21.84828pt too wide) in paragraph at lines 521--524
-\T1/cmtt/m/n/10 of this document is at []$https : / / github . com / yihui / kn
-itr / blob / master / inst / examples / knitr-[]minimal .
- []
-
-(./demo.bbl
-Underfull \hbox (badness 10000) in paragraph at lines 9--14
-[]\T1/cmtt/m/n/10 Hadley Wickham.  The split-apply-combine strategy for data an
-alysis.  \T1/cmtt/m/it/10 Journal of
- []
-
-) [2 <./figure/minimal-boring-plots1.pdf> <./figure/minimal-boring-plots2.pdf>]
-(./demo.aux)
 
 LaTeX Warning: There were undefined references.
 
- )
-(\end occurred inside a group at level 1)
-
-### simple group (level 1) entered at line 440 ({)
-### bottom level 
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 558.
+ ) 
 Here is how much of TeX's memory you used:
- 7256 strings out of 493848
- 102679 string characters out of 3149207
- 172277 words of memory out of 3000000
- 10380 multiletter control sequences out of 15000+200000
- 41301 words of font info for 97 fonts, out of 3000000 for 9000
- 714 hyphenation exceptions out of 8191
- 38i,11n,36p,786b,366s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/local/texlive/2009/texmf-dist/fonts/enc/dvips/cm-super/cm
--super-t1.enc}{/usr/local/texlive/2009/texmf-dist/fonts/enc/dvips/cm-super/cm-s
-uper-ts1.enc}{/usr/local/texlive/2009/texmf-dist/fonts/enc/dvips/base/8r.enc}</
-usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></u
-sr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sfit1000.pfb></usr
-/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/l
-ocal/texlive/2009/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/te
-xlive/2009/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2
-009/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on demo.pdf (2 pages, 133364 bytes).
+ 8152 strings out of 493633
+ 116308 string characters out of 3143378
+ 203033 words of memory out of 3000000
+ 11303 multiletter control sequences out of 15000+200000
+ 48286 words of font info for 109 fonts, out of 3000000 for 9000
+ 831 hyphenation exceptions out of 8191
+ 31i,11n,35p,682b,326s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/local/texlive/2011/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/t
+exlive/2011/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{/usr/local/te
+xlive/2011/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/local/texl
+ive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texliv
+e/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive
+/2011/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2
+011/texmf-dist/fonts/type1/public/cm-super/sftt1728.pfb></usr/local/texlive/201
+1/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2011/texmf
+-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2011/texmf-dist/f
+onts/type1/urw/palatino/uplri8a.pfb>
+Output written on demo.pdf (3 pages, 136593 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
- 8 named destinations out of 1000 (max. 500000)
- 27 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 82 PDF objects out of 1000 (max. 8388607)
+ 69 compressed objects within 1 object stream
+ 10 named destinations out of 1000 (max. 500000)
+ 25 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -84,11 +84,11 @@ GeomCoxcomb <- proto(ggplot2:::Geom, {
   new <- function(., mapping = NULL, data = NULL, stat = NULL, 
     position = NULL, npoints = 10, ...) {
     
-    missing <- !(c("r") %in% names(mapping))
+    missing <- !(c("angle") %in% names(mapping))
     if (any(missing)) {
-      stop("Missing required aesthetic: r", call. = FALSE)
+      stop("Missing required aesthetic: angle", call. = FALSE)
     }
-    names(mapping)[names(mapping) == "r"] <- "x"
+    names(mapping)[names(mapping) == "angle"] <- "x"
     mapping$section <- coxcomb_sections(mapping)
     
     lyr <- do.call("layer", list(mapping = mapping, data = data, stat = stat, geom = ., 
