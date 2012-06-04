@@ -13,8 +13,8 @@ ref_box <- function(mapping = NULL, fill = "grey90", color = "white", ...) {
   	
     switch(type,
       glyph = glyph(rlayer, major.aes = major.aes, glyph.by = glyph.by, 
-        width = width, height = height, merge = merge.overlaps, ref = NULL, 
-        .ref = TRUE), 
+        width = width, height = height, merge.overlaps = merge.overlaps, 
+        ref = NULL, .ref = TRUE), 
       grid = grid(rlayer, grid.aes = major.aes, x.nbin = x.nbin, 
         y.nbin = y.nbin, width.adjust = 1, height.adjust = 1, .ref = TRUE)
     )
@@ -24,7 +24,7 @@ ref_box <- function(mapping = NULL, fill = "grey90", color = "white", ...) {
 
 
 ref_hline <- function(mapping = NULL, width. = 0.2, fill = "white", ...) {	
-  function(layer, major.aes, glyph.by = NULL, width = rel(1), 
+  function(layer, type, major.aes, glyph.by = NULL, width = rel(1), 
   height = rel(1), merge.overlaps = FALSE) {
 
   	def_aes <- list(xmin = -1, xmax = 1, ymin = -width./2, ymax = width./2)
@@ -37,7 +37,7 @@ ref_hline <- function(mapping = NULL, width. = 0.2, fill = "white", ...) {
   	
   	switch(type,
   	  glyph = glyph(rlayer, major.aes = major.aes, glyph.by = glyph.by, 
-  	    width = width, height = height, merge = merge.overlaps, ref = NULL, 
+  	    width = width, height = height, merge.overlaps = merge.overlaps, ref = NULL, 
   	    .ref = TRUE), 
   	  grid = grid(rlayer, grid.aes = major.aes, x.nbin = x.nbin, 
   	    y.nbin = y.nbin, width.adjust = 1, height.adjust = 1, .ref = TRUE)
@@ -46,7 +46,7 @@ ref_hline <- function(mapping = NULL, width. = 0.2, fill = "white", ...) {
 } 
 
 ref_vline <- function(mapping = NULL, width. = 0.2, fill = "white", ...) {	
-  function(layer, major.aes, glyph.by = NULL, width = rel(1), 
+  function(layer, type, major.aes, glyph.by = NULL, width = rel(1), 
   height = rel(1), merge.overlaps = FALSE) {
   	
   	def_aes <- list(xmin = -width./2, xmax = width./2, ymin = -1, ymax = 1)
@@ -68,7 +68,7 @@ ref_vline <- function(mapping = NULL, width. = 0.2, fill = "white", ...) {
 } 
 
 ref_points <- function(mapping = NULL, fill = "white", size = 1/2, ...) {	
-  function(layer, major.aes, glyph.by = NULL, width = rel(1), 
+  function(layer, type, major.aes, glyph.by = NULL, width = rel(1), 
   height = rel(1), merge.overlaps = FALSE) {
   	
   	corner <- function(def_aes) {
