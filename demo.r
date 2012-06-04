@@ -106,7 +106,10 @@ ggplot() + ply_aes(geom_point(aes(x = mean(temperature), y = mean(ozone),
 ggplot() + geom_point(aes(x = mean(temperature), y = mean(ozone), 
   color = lat[1]), data = nasa)  
 
-# geom_scatterplots
+# geom_scatterplots - are redundant
+ggplot(nasa) + glyph(geom_point(aes(surftemp, temperature), size = 1/5), 
+  aes(long[1], lat[1]), c("lat", "long"), reference = ref_box())
+
 ggplot(nasa) + geom_scatterplots(mapping = aes(x = long[1], y = lat[1], 
   minor.x = surftemp, minor.y = temperature), glyph.by = c("long", "lat"), 
   size = 1/5, reference = ref_box())
@@ -126,6 +129,10 @@ ggplot(test.data) + geom_star(mapping = aes(x = 0, y = 0,
 ggplot(nasa) + ply_aes(geom_star(aes(r = ozone, angle = date, x = 0, y = 0, 
   fill = mean(temperature))), c("lat")) + facet_wrap(~ lat)
 
+ggplot(nasa) + map_nasa +
+  ply_aes(glyph(geom_star(aes(r = ozone, angle = date, x = 0, y = 0, 
+  fill = mean(temperature))), aes(long[1], lat[1]), c("long", "lat")))
+
 ggplot(mpg) + ply_aes(geom_star(mapping = aes(x = cyl[1], y = 1, 
   r = hwy, angle = cty, fill = mean(hwy), group = cyl)))
 
@@ -135,20 +142,15 @@ ggplot(nasa) + geom_star(aes(r = ozone, angle = date, x = 0, y = 0))
 ggplot(test.data) + geom_point(aes(Fertility, Education))
 ggplot(test.data) + 
   grid(geom_point(aes(Fertility, Education)), x.nbin = 10, y.nbin = 10, 
-       ref= ref_box(aes(color = mean(Catholic))))
+       ref= ref_box(aes(fill = mean(Catholic))))
 
 cheap.diamonds <- subset(diamonds, price <= 5000 & price >= 600)
 ggplot(cheap.diamonds) +
   grid(geom_bar(aes(x = color, fill = color), position = "dodge"),
     grid.aes = aes(x = carat, y = price), x.nbin = 10, y.nbin = 14,
     y_scale = free, height.adjust = 0.5, width.adjust = 0.5,
-    ref = ref_box())
+    ref = ref_box(aes(color = mean(as.numeric(color)))))
 
-
-###########################################
-###          not yet working            ###
-###########################################
-load_all("../ggplyr")
 
 # trying out geom_coxcomb
 p <- ggplot(mpg) + 
@@ -159,6 +161,12 @@ p <- ggplot(mpg) +
 mpg$lat <- sample(1:4, nrow(mpg), replace = TRUE)
 ggplot(mpg) + GeomCoxcomb$new(mapping = aes(r = trans, fill = lat, 
   group = lat)) + facet_wrap(~cyl)
+ggplot(mpg) + geom_coxcomb(aes(r = trans, fill = lat))
+        , group = lat))
+###########################################
+###          not yet working            ###
+###########################################
+load_all("../ggplyr")
 
 ggplot(seasons) + 
   glyph(

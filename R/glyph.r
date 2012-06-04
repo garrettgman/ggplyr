@@ -5,7 +5,7 @@
 #' 4. split up the data
 glyph <- function(layer, major.aes, glyph.by = NULL, width = rel(0.95), 
   height = rel(0.95), x_scale = identity, y_scale = identity, 
-  merge.overlaps = FALSE, reference = NULL, .ref = FALSE) {
+  merge.overlaps = FALSE, reference = NULL, ply.aes = TRUE, .ref = FALSE) {
   
   missing <- c(is.null(major.aes$x), is.null(major.aes$y))
   if (any(missing)) {
@@ -31,11 +31,19 @@ glyph <- function(layer, major.aes, glyph.by = NULL, width = rel(0.95),
   #layer$compute_aesthetics <- plyr_aesthetics
     
   if (is.null(reference)) {
-  	glayer(layer)
+    if (ply.aes) {
+  	  ply_aes(glayer(layer))
+    } else {
+      glayer(layer)
+    }
   } else {
   	ref.layer <- reference(layer, "glyph", major.aes, glyph.by, width, height, 
   	  merge.overlaps)
-  	list(ref.layer, glayer(layer))
+    if (ply.aes) {
+  	  list(ref.layer, ply_aes(glayer(layer)))
+    } else {
+      list(ref.layer, glayer(layer))
+    }
   }
 }
 
@@ -56,17 +64,14 @@ assign_glyphs <- function(., data) {
   width <- embed$width
   height <- embed$height
   if (is.rel(width)) {
-    .$embed$width <- width <- resolution(globals$x, zero = FALSE) * 
-      unclass(width)
-      
-      #(diff(range(vet(globals$x))) + unclass(width)) / 
-      #sqrt(length(unique(globals$x))) * unclass(width)
+    .$embed$width <- width <- max(resolution(globals$x, zero = FALSE) * 
+      unclass(width), (diff(range(vet(globals$x))) + unclass(width)) / 
+      length(unique(globals$x)) * unclass(width))
   }
   if (is.rel(height)) {
-    .$embed$height <- height <- resolution(globals$y, zero = FALSE) * 
-      unclass(height)
-      #(diff(range(vet(globals$y))) + unclass(height)) / 
-      #sqrt(length(unique(globals$y))) * unclass(height)
+    .$embed$height <- height <- max(resolution(globals$y, zero = FALSE) * 
+      unclass(height), (diff(range(vet(globals$y))) + unclass(height)) / 
+      length(unique(globals$y)) * unclass(height))
   }
 
   if (embed$merge) {

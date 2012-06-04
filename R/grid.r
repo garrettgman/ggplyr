@@ -1,7 +1,7 @@
 #' grid turns an ordinary layer into a gridded version of itself. 
 grid <- function(layer, grid.aes = aes(), x.nbin = 10, y.nbin = 10, 
   x_scale = identity, y_scale = identity, width.adjust = 0.95, 
-  height.adjust = 0.95, reference = NULL, .ref = FALSE) {
+  height.adjust = 0.95, reference = NULL, ply.aes = TRUE, .ref = FALSE) {
   
   if (is.glayer(layer) || is.list(layer)) {
     stop("Cannot grid glayer", call. = TRUE)
@@ -36,13 +36,22 @@ grid <- function(layer, grid.aes = aes(), x.nbin = 10, y.nbin = 10,
   #layer$compute_aesthetics <- plyr_aesthetics
   
   if (is.null(reference)) {
-    glayer(layer)
+    if (ply.aes) {
+      ply_aes(glayer(layer))
+    } else {
+      glayer(layer)
+    }
   } else {
     ref.layer <- reference(layer, "grid", grid.aes, x.nbin = x.nbin, 
       y.nbin = y.nbin)
-    list(ref.layer, glayer(layer))
+    if (ply.aes) {
+      list(ref.layer, ply_aes(glayer(layer)))
+    } else {
+      list(ref.layer, glayer(layer))
+    }
   }
 }
+
 
 
 assign_grid <- function(., data) {

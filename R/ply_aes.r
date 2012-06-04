@@ -8,6 +8,11 @@ ply_aes.list <- function(layer, .vars = NULL) {
 }
 
 ply_aes.glayer <- function(layer, .vars = NULL) {
+  if (!is.null(.vars)) {
+    layer$plyr <- list(ply.by = .vars)
+  } else {
+    layer$plyr <- list()
+  }
   layer$compute_aesthetics <- plyr_aesthetics
   layer
 }
