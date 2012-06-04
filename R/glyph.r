@@ -64,12 +64,12 @@ assign_glyphs <- function(., data) {
   width <- embed$width
   height <- embed$height
   if (is.rel(width)) {
-    .$embed$width <- width <- max(resolution(globals$x, zero = FALSE) * 
+    .$embed$width <- width <- max(resolution(vet(globals$x), zero = FALSE) * 
       unclass(width), (diff(range(vet(globals$x))) + unclass(width)) / 
       length(unique(globals$x)) * unclass(width))
   }
   if (is.rel(height)) {
-    .$embed$height <- height <- max(resolution(globals$y, zero = FALSE) * 
+    .$embed$height <- height <- max(resolution(vet(globals$y), zero = FALSE) * 
       unclass(height), (diff(range(vet(globals$y))) + unclass(height)) / 
       length(unique(globals$y)) * unclass(height))
   }
