@@ -11,7 +11,7 @@ plyr_aesthetics <- function (., data, plot) {
   scales_add_defaults(plot$scales, data, aesthetics, plot$plot_env)
 
   if (!is.null(aesthetics$group)) {
-    data$group <- unlist(eval.quoted(aesthetics$group, envir = data, 
+    data$group <- unlist(eval(aesthetics$group, envir = data, 
       enclos = plot$plot_env))
     aesthetics$group <- quote(group)
   }
