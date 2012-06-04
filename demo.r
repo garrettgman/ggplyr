@@ -21,10 +21,6 @@ ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture,
   color = rank(Catholic)), size = 3), glyph.by = c("lat", "long"), 
   major = aes(mean(Fertility), mean(Education)))
 
-ggplot(test.data) + glyph(ply_aes(geom_point(aes(Fertility, Agriculture, 
-  color = rank(Catholic)), size = 3), .vars = c("lat", "long")), 
-  glyph.by = c("lat", "long"), major = aes(mean(Fertility), mean(Education)))
-
 # embed bars (categorical with stats)
 ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year)), 
   aes(x = mean(displ), y = mean(cty)), c("year"), y_scale = free, 
@@ -130,8 +126,8 @@ ggplot(nasa) + ply_aes(geom_star(aes(r = ozone, angle = date, x = 0, y = 0,
   fill = mean(temperature))), c("lat")) + facet_wrap(~ lat)
 
 ggplot(nasa) + map_nasa +
-  ply_aes(glyph(geom_star(aes(r = ozone, angle = date, x = 0, y = 0, 
-  fill = mean(temperature))), aes(long[1], lat[1]), c("long", "lat")))
+  glyph(geom_star(aes(r = ozone, angle = date, x = 0, y = 0, 
+  fill = mean(temperature))), aes(long[1], lat[1]), c("long", "lat"))
 
 ggplot(mpg) + ply_aes(geom_star(mapping = aes(x = cyl[1], y = 1, 
   r = hwy, angle = cty, fill = mean(hwy), group = cyl)))

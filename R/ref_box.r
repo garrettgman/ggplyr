@@ -75,7 +75,7 @@ ref_points <- function(mapping = NULL, fill = "white", size = 1/2, ...) {
   	  mapping <- c(mapping, def_aes[setdiff(names(def_aes), names(mapping))])
   	  class(mapping) <- "uneval"
   	
-  	  rlayer <- ply_aes(geom_point(mapping = mapping, ...))
+  	  rlayer <- ply_aes(geom_ref_point(mapping = mapping, ...))
   	  if (is.null(mapping$fill)) rlayer$geom_params$fill <- fill
   	  if (is.null(mapping$size)) rlayer$geom_params$size <- size
   	  if (!inherits(layer$data, "waiver")) rlayer$data <- layer$data

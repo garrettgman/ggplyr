@@ -44,3 +44,4 @@ Collate:
     'geom_star.r'
     'geom_coxcomb.r'
     'geom_ref_rect.r'
+    'geom_ref_point.r'

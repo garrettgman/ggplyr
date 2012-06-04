@@ -9,7 +9,7 @@
   glyph(layer, major.aes, glyph.by = NULL, width =
   rel(0.95), height = rel(0.95), x_scale = identity,
   y_scale = identity, merge.overlaps = FALSE, reference =
-  NULL, .ref = FALSE)
+  NULL, ply.aes = TRUE, .ref = FALSE)
 }
 \description{
   glyph turns an ordinary layer into a set of glyphs. To do
