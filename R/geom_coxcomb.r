@@ -1,8 +1,34 @@
+#' Coxcomb glyphs
+#' 
+#' geom_coxcomb draws the type of glyph commonly called a coxcomb plot or polar 
+#' area plot, popularized by Florence Nightingale.
+#' 
+#' @param mapping The aesthetic mapping, usually constructed with 
+#' \code{\link[ggplot2]{aes}}. Only needs to be set at the layer level if you 
+#' are overriding the plot defaults.
+#' @param data A layer specific dataset - only needed if you want to override 
+#' the plot defaults
+#' @param stat The statistical transformation to use for this layer.
+#' @param position The position adjustment to use for overlapping points in this 
+#' layer
+#' @param npoints the number of points to use when drawing the arcs with line 
+#' segments. Defaults to 10.
+#' @param na.rm If FALSE (the default), removes missing values with a warning. 
+#' If TRUE, silently removes missing variables.
+#' @param ... other arguments passed on to \code{\link[ggplot2]{layer}}. This 
+#' can include aesthetics whose values you want to set, not map. See 
+#' \code{\link[ggplot2]{layer}} for more details.
+#' 
+#' @section Aesthetics
+#' geom_coxcomb understands the following aesthetics: x, y, colour, fill, size, 
+#' linetype, weight, and alpha.
+#' 
+#' @export
 geom_coxcomb <- function(mapping = NULL, data = NULL, stat = "bin", 
-  position = "identity", ...) { 
+  position = "identity", npoints = 10, na.rm = FALSE, ...) { 
   
     GeomCoxcomb$new(mapping = mapping, data = data, stat = stat, 
-      position = position, ...)
+      position = position, npoints = npoints, na.rm = na.rm, ...)
 }
 
 GeomCoxcomb <- proto(ggplot2:::Geom, {
@@ -82,7 +108,7 @@ GeomCoxcomb <- proto(ggplot2:::Geom, {
   }
   
   new <- function(., mapping = NULL, data = NULL, stat = NULL, 
-    position = NULL, npoints = 10, ...) {
+    position = NULL, npoints = 10, na.rm = FALSE, ...) {
     
     missing <- !(c("angle") %in% names(mapping))
     if (any(missing)) {
@@ -90,6 +116,9 @@ GeomCoxcomb <- proto(ggplot2:::Geom, {
     }
     names(mapping)[names(mapping) == "angle"] <- "x"
     mapping$section <- coxcomb_sections(mapping)
+    
+    if (na.rm) {
+      data <- 
     
     lyr <- do.call("layer", list(mapping = mapping, data = data, stat = stat, geom = ., 
       position = position, ...))  
@@ -99,6 +128,8 @@ GeomCoxcomb <- proto(ggplot2:::Geom, {
   
 })
 
+# ensures that continuous fill, alpha, and colour variables generate groups at 
+# build time as if they were discrete
 coxcomb_sections <- function(mapping) {
   sections <- mapping[c("alpha", "fill", "colour")]
   sections <- sections[!unlist(lapply(sections, is.null))]
