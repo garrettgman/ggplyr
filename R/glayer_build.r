@@ -20,7 +20,8 @@ glayer_build <- function(layer) {
 	 
   layer <- layer_clone(layer)
   layer$data <- layer$assign_glyphs(layer$data)
-  minor <- ggplot_build(ggplot() + layer + facet_wrap("GLYPH")) 
+  minor <- ggplot2::ggplot_build(ggplot2::ggplot() + layer + 
+    ggplot2::facet_wrap("GLYPH")) 
 
   ### combine subplots (minor) into single plot
   # data
@@ -31,7 +32,7 @@ glayer_build <- function(layer) {
   # panel
   xspan <- range(unlist(data[names(data) %in% .x_aes]))
   yspan <- range(unlist(data[names(data) %in% .y_aes]))
-  panel <- ggplot_build(qplot(xspan, yspan))$panel
+  panel <- ggplot2::ggplot_build(ggplot2::qplot(xspan, yspan))$panel
 
   # scales
   scales <- minor$plot$scales$scales
@@ -40,14 +41,14 @@ glayer_build <- function(layer) {
 	
   # axis labels
   if (!is.null(layer$embed$major.aes)) {
-    labels <- labs(layer$embed$major.aes)
+    labels <- ggplot2::labs(layer$embed$major.aes)
     minor$plot$options$labels[c("x", "y")] <- labels[c("x", "y")]
   }
 		
   # make build
   minor$data <- list(data)
   minor$panel <- panel
-  minor$plot$facet <- facet_null()
+  minor$plot$facet <- ggplot2::facet_null()
   minor$plot$scales$scales <- scales
 	
   minor

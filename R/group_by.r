@@ -20,6 +20,6 @@ group_by <- function(vars) {
       stop(paste(paste(vars[missing], collapse = ", "), 
         "variables not found in data.frame"), call. = FALSE)
     }
-    id(df[vars], drop = TRUE)
+    plyr::id(df[vars], drop = TRUE)
   }
 }

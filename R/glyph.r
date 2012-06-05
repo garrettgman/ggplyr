@@ -102,14 +102,14 @@ glyph <- function(layer, major.aes, glyph.by = NULL, width = rel(0.95),
   }
 }
 
-#' Assigns glyph membership to rows
-#' 
-#' assign_glyphs assigns each row in a layer's data set to a glyph during 
-#' \code{\link{glayer_build}}. assign_glyphs sets final width and heights when 
-#' width and heights are passed as rel objects. It computes and the position 
-#' aesthetics for each glyph and stores them in the layer's embed variable to be 
-#' used by combine_glyphs. assign_glyphs also handles merging when 
-#' merge.overlaps = TRUE in a \code{\link{glyph}} call.
+# Assigns glyph membership to rows
+# 
+# assign_glyphs assigns each row in a layer's data set to a glyph during 
+# \code{\link{glayer_build}}. assign_glyphs sets final width and heights when 
+# width and heights are passed as rel objects. It computes and the position 
+# aesthetics for each glyph and stores them in the layer's embed variable to be 
+# used by combine_glyphs. assign_glyphs also handles merging when 
+# merge.overlaps = TRUE in a \code{\link{glyph}} call.
 assign_glyphs <- function(., data) {
   # major x and y
   data$GLYPH <- embed$glyph.by(data)
@@ -119,21 +119,22 @@ assign_glyphs <- function(., data) {
   if (any(too.many)) {
     message(paste("Major", paste(c("x", "y")[too.many], collapse = " and "), 
       "return more than one value per glyph. Only using first."))
-    globals <- unique(ddply(globals, "GLYPH", transform, x = x[1], y = y[1]))
+    globals <- unique(plyr::ddply(globals, "GLYPH", transform, x = x[1], 
+      y = y[1]))
   }
-  
+
   # parse width, height
   width <- embed$width
   height <- embed$height
   if (is.rel(width)) {
-    .$embed$width <- width <- max(resolution(vet(globals$x), zero = FALSE) * 
-      unclass(width), (diff(range(vet(globals$x))) + unclass(width)) / 
-      length(unique(globals$x)) * unclass(width))
+    .$embed$width <- width <- max(ggplot2::resolution(vet(globals$x), 
+      zero = FALSE) * unclass(width), (diff(range(vet(globals$x))) + 
+      unclass(width)) / length(unique(globals$x)) * unclass(width))
   }
   if (is.rel(height)) {
-    .$embed$height <- height <- max(resolution(vet(globals$y), zero = FALSE) * 
-      unclass(height), (diff(range(vet(globals$y))) + unclass(height)) / 
-      length(unique(globals$y)) * unclass(height))
+    .$embed$height <- height <- max(ggplot2::resolution(vet(globals$y), 
+      zero = FALSE) * unclass(height), (diff(range(vet(globals$y))) + 
+      unclass(height)) / length(unique(globals$y)) * unclass(height))
   }
 
   if (embed$merge) {
@@ -142,28 +143,29 @@ assign_glyphs <- function(., data) {
     merge.key <- merge_overlaps(globals, embed$width, embed$height)
     data$GLYPH <- merge.key[data$GLYPH]
     globals <- aesply(data, "GLYPH", embed$major.aes)
-    .$mapping <- add_gid(mapping)
+    .$mapping <- add_gid(.$mapping)
     
     too.many <- c(length(unique(globals$x)) > length(unique(globals$GLYPH)), 
                   length(unique(globals$y)) > length(unique(globals$GLYPH)))
     if (any(too.many)) {
       message(paste("Major", paste(c("x", "y")[too.many], collapse = " and "), 
                     "return more than one value per glyph. Only using first."))
-      globals <- unique(ddply(globals, "GLYPH", transform, x = x[1], y = y[1]))
+      globals <- unique(plyr::ddply(globals, "GLYPH", transform, x = x[1], 
+        y = y[1]))
     }
   }
   .$embed$globals <- globals
   data
 }
 
-#' Calculate final positions in a glayer
-#' 
-#' combine_glyphs calculates the final positions for every location in a glayer.
-#' glayer_build first builds each glyph separately as if it were a facet. If 
-#' plotted, these glyphs would overlap with each other. combine_glyph relocates 
-#' each glyph based on the global positions stored in the layer's embed variable.
+# Calculate final positions in a glayer
+# 
+# combine_glyphs calculates the final positions for every location in a glayer.
+# glayer_build first builds each glyph separately as if it were a facet. If 
+# plotted, these glyphs would overlap with each other. combine_glyph relocates 
+# each glyph based on the global positions stored in the layer's embed variable.
 combine_glyphs <- function(., data) {  
-  data <- join(data, globalize(embed$globals), by = "GLYPH")
+  data <- plyr::join(data, globalize(embed$globals), by = "GLYPH")
   
   xvar <- get_xs(data)
   yvar <- get_ys(data)
@@ -171,7 +173,7 @@ combine_glyphs <- function(., data) {
   # scale if necessary
   if (!identical(embed$x_scale, identity) || 
     !identical(embed$y_scale, identity)) {
-    data <- ddply(data, "GLYPH", function(df) {
+    data <- plyr::ddply(data, "GLYPH", function(df) {
       df[xvar] <- embed$x_scale(df[xvar])
       df[yvar] <- embed$y_scale(df[yvar])
       df
@@ -190,11 +192,11 @@ combine_glyphs <- function(., data) {
 }  
   
 
-#' combine_refs relocates reference objects within a layer. It works exactly like 
-#' combine_glyphs but does not rescale the x and y variables for the reference 
-#' object.
+# combine_refs relocates reference objects within a layer. It works exactly like 
+# combine_glyphs but does not rescale the x and y variables for the reference 
+# object.
 combine_refs <- function(., data) {  
-  data <- join(data, globalize(embed$globals), by = "GLYPH")
+  data <- plyr::join(data, globalize(embed$globals), by = "GLYPH")
 		
   xvar <- get_xs(data)
   yvar <- get_ys(data)
@@ -202,7 +204,7 @@ combine_refs <- function(., data) {
 	# scale if necessary
   if (!identical(embed$x_scale, identity) || 
     !identical(embed$y_scale, identity)) {
-    data <- ddply(data, "GLYPH", function(df) {
+    data <- plyr::ddply(data, "GLYPH", function(df) {
       df[xvar] <- embed$x_scale(df[xvar])
 	  df[yvar] <- embed$y_scale(df[yvar])
 	  df

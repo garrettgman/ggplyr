@@ -16,11 +16,11 @@
 aesply <- function(data, .var, aesthetics) {
   no.ply <- unlist(lapply(aesthetics, first_name)) == "I"
   if (!any(no.ply)) {
-    return(compact(eval.plyr(aesthetics, data, .var)))
+    return(plyr::compact(eval.plyr(aesthetics, data, .var)))
   }
   
   all.aes <- lapply(aesthetics[no.ply], remove_I)
-  evaled <- compact(eval.quoted(all.aes, data))
+  evaled <- plyr::compact(plyr::eval.quoted(all.aes, data))
   lengths <- vapply(evaled, length, integer(1))
   n <- if (length(lengths) > 0) max(lengths) else 0
   wrong <- lengths != 1 & lengths != n
@@ -32,7 +32,7 @@ aesply <- function(data, .var, aesthetics) {
   data <- cbind(data, evaled)
   all.data <- data.frame(evaled) 
   aesthetics[no.ply] <- lapply(names(aesthetics)[no.ply], as.name)
-  compact(eval.plyr(aesthetics, data, .var))
+  plyr::compact(eval.plyr(aesthetics, data, .var))
 }
 
 #' replace I() with identity
@@ -67,8 +67,8 @@ remove_I <- function(expr) {
 eval.plyr <- function (exprs, data = NULL, by = NULL, enclos = NULL, 
   try = FALSE) {
   if (is.numeric(exprs)) 
-    return(envir[exprs])
-  qenv <- if (is.quoted(exprs)) 
+    return(exprs)
+  qenv <- if (plyr::is.quoted(exprs)) 
     attr(exprs, "env")
   else parent.frame()
   if (is.null(data)) 
@@ -76,10 +76,10 @@ eval.plyr <- function (exprs, data = NULL, by = NULL, enclos = NULL,
   if (is.data.frame(data) && is.null(enclos)) 
     enclos <- qenv
   if (try) {
-    results <- failwith(NULL, ddply, quiet = TRUE) (data, by, apply_maps, 
-                                                    exprs, qenv)    
+    results <- plyr::failwith(NULL, plyr::ddply, quiet = TRUE) (data, by, 
+      apply_maps, exprs, qenv)    
   } else {
-    results <- ddply(data, by, apply_maps, exprs, qenv)    
+    results <- plyr::ddply(data, by, apply_maps, exprs, qenv)    
   }
   results
 }
@@ -101,7 +101,7 @@ eval.plyr <- function (exprs, data = NULL, by = NULL, enclos = NULL,
 #' @export
 apply_maps <- function(data, mapping, enclos = parent.frame()) {
   map <- null_omit(mapping)
-  vars <- llply(map, eval, envir = data, enclos)
+  vars <- plyr::llply(map, eval, envir = data, enclos)
   n <- nrow(data)
   vars <- lapply(vars, condense)
   lengths <- unlist(lapply(vars, length))

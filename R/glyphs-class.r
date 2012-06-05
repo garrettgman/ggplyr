@@ -23,7 +23,8 @@ setOldClass(c("ggplot", "list"))
 #' @rdname glyphs-class
 #' @exportClass glyphs
 #' @aliases show,glyphs-method
-#' @aliases ggtransform,glyphs-method
+#' @aliases print,glyphs-method
+#' @aliases show,glyphs-method
 setClass("glyphs", contains = c("ggplot"), validity = check_glyphs)
 
 #' @export
@@ -31,22 +32,22 @@ setMethod("show", signature(object = "glyphs"), function(object){
 	print(object)
 })
 
-#' @S3method print ggplyr
+#' @S3method print glyphs
 print.glyphs <- function(x, newpage = is.null(vp), vp = NULL, ...) {
     ggplot2:::set_last_plot(x)
     if (newpage) 
-        grid.newpage()
+        grid::grid.newpage()
     data <- glyph_build(x)
-    gtable <- ggplot_gtable(data)
+    gtable <- ggplot2::ggplot_gtable(data)
     if (is.null(vp)) {
-        grid.draw(gtable)
+        grid::grid.draw(gtable)
     }
     else {
         if (is.character(vp)) 
-            seekViewport(vp)
-        else pushViewport(vp)
-        grid.draw(gtable)
-        upViewport()
+            grid::seekViewport(vp)
+        else grid::pushViewport(vp)
+        grid::grid.draw(gtable)
+        grid::upViewport()
     }
     invisible(data)
 }

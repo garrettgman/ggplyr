@@ -3,7 +3,7 @@ NULL
 
 check_glayer <- function(object) {
 	errors <- character()
-	if (!is.proto(object@layer)) {
+	if (!proto::is.proto(object@layer)) {
 		msg <- "glayer must be a proto object."
 		errors <- c(errors, msg)
 	}

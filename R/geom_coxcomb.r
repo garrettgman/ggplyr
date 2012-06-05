@@ -31,7 +31,7 @@ geom_coxcomb <- function(mapping = NULL, data = NULL, stat = "bin",
       position = position, npoints = npoints, na.rm = na.rm, ...)
 }
 
-GeomCoxcomb <- proto(ggplot2:::Geom, {
+GeomCoxcomb <- proto::proto(ggplot2:::Geom, {
   objname <- "coxcomb"
   
   default_stat <- function(.) StatBin

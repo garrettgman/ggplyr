@@ -17,6 +17,7 @@ Imports:
     scales,
     stringr
 Depends:
+    methods,
     R (>= 2.15)
 Collate:
     'glyph_build.r'

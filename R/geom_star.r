@@ -30,7 +30,7 @@ geom_star <- function(mapping = NULL, data = NULL, stat = "identity",
 }
 
 
-GeomStar <- proto(ggplot2:::Geom, {
+GeomStar <- proto::proto(ggplot2:::Geom, {
   objname <- "star"
   
   # turn cartesian coordinates polar

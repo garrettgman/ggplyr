@@ -12,7 +12,7 @@
 #' @export
 glyph_build <- function(plot){
   if (length(plot$layers) == 0) stop("No layers in plot", call.=FALSE)
-  if (!identical(plot$facet, facet_null())) {
+  if (!identical(plot$facet, ggplot2::facet_null())) {
   	stop("glyphs do not support facetting", call. = FALSE)
   }
 	
@@ -22,7 +22,7 @@ glyph_build <- function(plot){
 	
   # separate into glayers and normal layers
   gls <- unlist(lapply(layers, is.glayer))
-  if (all(!gls)) return(ggplot_build(plot))
+  if (all(!gls)) return(ggplot2::ggplot_build(plot))
   if (all(gls) && sum(gls) == 1) return(glayer_build(layers[[gls]]))
   glayers <- layers[gls]
   plot$layers <- layers[!gls]
@@ -32,7 +32,7 @@ glyph_build <- function(plot){
   # build normal layers
   normal <- NULL
   if (length(plot$layers) > 0) {
-	normal <- ggplot_build(plot)
+	normal <- ggplot2::ggplot_build(plot)
   }
 	
   # build glyph layers (embedded plots)
@@ -57,7 +57,7 @@ glyph_build <- function(plot){
   # panel
   xspan <- range(unlist(lapply(data, function(df) df[names(df) %in% .x_aes])))
   yspan <- range(unlist(lapply(data, function(df) df[names(df) %in% .y_aes])))
-  panel <- ggplot_build(qplot(xspan, yspan))$panel
+  panel <- ggplot2::ggplot_build(ggplot2::qplot(xspan, yspan))$panel
 	
   # scales 
   # collect all unique scales
