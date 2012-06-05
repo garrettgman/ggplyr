@@ -61,39 +61,39 @@ setMethod("rep", signature(x = "glayer"), function(x, ...){
 	stop("object of type 'glayer' is not subsettable")
 })
 
-#' @export
+#' @exportMethod "["
 setMethod("[", signature(x = "glayer"), 
 	function(x, i, j, ..., drop = TRUE) {
     	new("glayer", layer = x@layer[i])
 	}
 )
 
-#' @export
+#' @exportMethod "[<-"
 setMethod("[<-", signature(x = "glayer"), function(x, i, j, ..., value) {
   	x@layer[i] <- value
 	x
 })
 
 
-#' @export
+#' @exportMethod "$"
 setMethod("$", signature(x = "glayer"), function(x, name) {
 	slot(x, "layer")[[name]]
 })
 
-#' @export
+#' @exportMethod "$<-"
 setMethod("$<-", signature(x = "glayer"), function(x, name, value) {
 	slot(x, "layer")[[name]] <- value
 	x
 })
 
-#' @export
+#' @exportMethod "+"
 setMethod("+", signature(e1 = "ggplot", e2 = "glayer"), 
 	function(e1, e2) {
 		glyph_plot(e1 + e2@layer)
 	}
 )
 
-#' @export
+#' @exportMethod "+"
 setMethod("+", signature(e1 = "glyphs", e2 = "glayer"), 
 	function(e1, e2) {
 		glyph_plot(e1@.Data + e2@layer)
