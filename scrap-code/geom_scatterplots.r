@@ -1,3 +1,5 @@
+#' geom_scatterplots is redundant - it doesn't do anything that using glyph on 
+#' geom_point can't do
 geom_scatterplots <- function(mapping = NULL, glyph.by = NULL, data = NULL,
   width = rel(0.95), height = rel(0.95), x_scale = identity, y_scale = identity,
   merge.overlaps = FALSE, reference = NULL, ...) {

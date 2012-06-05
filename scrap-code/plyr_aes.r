@@ -1,4 +1,8 @@
-#' what replaces compute_aesthetics
+#' compute_aesthetics groupwise at build
+#' 
+#' plyr_aesthetics replaces a layer's compute_aesthetics method when 
+#' \code{\link{ply_aes}} is called. This results in aesthetics being computed 
+#' groupwise during \code{\link[ggplot2]{ggplot_build}}
 plyr_aesthetics <- function (., data, plot) {
   aesthetics <- .$layer_mapping(plot$mapping)
   if (!is.null(.$subset)) {

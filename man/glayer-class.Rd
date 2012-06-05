@@ -13,11 +13,10 @@
 \alias{glayer-class}
 \title{glayer class}
 \description{
-  glayers are layers made with ggplyr methods. They are
+  glayers are layers made with glyphmaps methods. They are
   equivalent to the layers made by ggplot2 functions in all
-  ways except that they contain an extra grouping variable
-  (to denote subplot membership) and a plyr_function slot,
-  which correctly locates subplots within the graph when
-  plotting.
+  ways except that they contain extra information that is
+  used to divide the data into subplots and locate those
+  subplots witihn the layer when plotting.
 }
 

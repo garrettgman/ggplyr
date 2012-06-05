@@ -32,7 +32,7 @@ ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture,
   color = rank(Catholic)), size = 3), glyph.by = c("lat", "long"), 
   width = 10, height = 10,
   major = aes(mean(Fertility), mean(Education)), ref = ref_box(aes(fill = 
-  mean(Catholic))))
+  mean(Catholic)), alpha = 0.2))
 
 # hlines
 ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
@@ -51,6 +51,11 @@ ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year)),
   aes(x = mean(displ), y = mean(cty)), c("year"), y_scale = free, 
   width = 1/3, height = 1/3, reference = ref_points(aes(fill = mean(hwy)), 
   size = 3, alpha = 0.1)) 
+
+ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year)), 
+                    aes(x = mean(displ), y = mean(cty)), c("year"), 
+                    width = 1/3, height = 1/3, reference = ref_box(aes(fill = mean(hwy)), 
+                                                                    alpha = 0.1))
 
 # merging overlaps
 ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year, group = year), 

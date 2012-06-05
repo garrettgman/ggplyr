@@ -1,6 +1,15 @@
-#' Build a glyph object for rendering
-#'
-#' This function takes the plot object, and performs all steps necessary to produce an object that can be rendered.
+#' Build a glyphs object for rendering
+#' 
+#' glyph_build takes a glyph plot object (class glyphs), and performs all steps 
+#' necessary to produce an object that can be rendered. This function outputs 
+#' two pieces: a list of data frames (one for each layer), and a panel object, 
+#' which contain all information about axis limits, breaks, etc.
+#' 
+#' @keywords internal
+#' @param layer an object of class glayer
+#' @seealso \code{\link{print.glyphs}} for functions that contain the complete 
+#' set of steps for generating a glyphs plot
+#' @export
 glyph_build <- function(plot){
   if (length(plot$layers) == 0) stop("No layers in plot", call.=FALSE)
   if (!identical(plot$facet, facet_null())) {
@@ -97,13 +106,13 @@ glyph_build <- function(plot){
   build
 }
 
-
-
-
-is.glayer <- function(x) {
-	"embed" %in% ls(x)
-}
-
+#' Ensure each layer contains a data set
+#' 
+#' propogate_data checks each layer for a data set. If none is found it assigns 
+#' a copy of the plot level data set to the layer. propogate_data avoids the 
+#' side effects of ggplot2:::map_layout, which performs a similar function.
+#' @param layers ggplot2 layer objects
+#' @param plot_data the global data set for a ggplot2 plot
 propogate_data <- function(layers, plot_data) {
 	ensure_data <- function(layer){
 		if (inherits(layer$data, "waiver")) {

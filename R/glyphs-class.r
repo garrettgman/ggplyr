@@ -1,6 +1,3 @@
-#' @include ggtransform.r
-NULL
-
 check_glyphs <- function(object) {
 	errors <- character()
 	if (!is(object@.Data, "ggplot")) {
@@ -13,11 +10,14 @@ check_glyphs <- function(object) {
 		errors
 }
 
+#' @exportClass list
+#' @exportClass ggplot
 setOldClass(c("ggplot", "list"))
 
 #' glyphs class
 #'
-#' a glyphs object is a ggplot object that has been extended to include methods for applying plyr when plotting. 
+#' a glyphs object is a ggplot object that has been extended to include methods 
+#' for embedding subplots when plotting. 
 #'
 #' @name glyphs-class
 #' @rdname glyphs-class
@@ -51,26 +51,16 @@ print.glyphs <- function(x, newpage = is.null(vp), vp = NULL, ...) {
     invisible(data)
 }
 
-#' @export
-setGeneric("ggtransform")
-
-#' @export
-setMethod("ggtransform", signature(ggobject = "glyphs"), 
-	function(ggobject, mapping, ...){
-		ggplot <- ggtransform(ggobject@.Data, mapping, ...)
-		new("glyphs", ggplot)
-	}
-)
-
-
-
 
 #' Create a glyphs object
 #' 
-#' glyph_plot gives a ggplot object the S4 class ggplyr, see \code{\link{glyphs-class}}. ggplyr denotes ggplot objects that contain extra information to be used to apply plyr functions when plotting.
+#' glyph_plot gives a ggplot object the S4 class `glyphs', see 
+#' \code{\link{glyphs-class}}. glyphs denotes ggplot objects that contain extra 
+#' information to be used to embed subplots when plotting. glyphs objects have 
+#' similar, but different print and build methods than ggplot2 objects.
 #' 
-#' @export glyph_plot
 #' @param ggplot a ggplot object
+#' #' @export glyph_plot
 glyph_plot <- function(ggplot) {
 	new("glyphs", ggplot)
 }

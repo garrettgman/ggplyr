@@ -117,11 +117,8 @@ GeomCoxcomb <- proto(ggplot2:::Geom, {
     names(mapping)[names(mapping) == "angle"] <- "x"
     mapping$section <- coxcomb_sections(mapping)
     
-    if (na.rm) {
-      data <- 
-    
-    lyr <- do.call("layer", list(mapping = mapping, data = data, stat = stat, geom = ., 
-      position = position, ...))  
+    lyr <- do.call("layer", list(mapping = mapping, data = data, stat = stat, 
+      geom = ., position = position, na.rm = na.rm, ...))  
     lyr$geom_params$npoints <- npoints
     lyr
   }

@@ -5,6 +5,6 @@
 \title{glyphs class}
 \description{
   a glyphs object is a ggplot object that has been extended
-  to include methods for applying plyr when plotting.
+  to include methods for embedding subplots when plotting.
 }
 

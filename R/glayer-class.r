@@ -7,17 +7,27 @@ check_glayer <- function(object) {
 		msg <- "glayer must be a proto object."
 		errors <- c(errors, msg)
 	}
+  if (!("embed" %in% ls(object@layer))) {
+    msg <- "glayers should contain an `embed' variable. Try building with glyph() or grid()"
+    errors <- c(errors, msg)
+  }
 	if (length(errors) == 0) 
 		TRUE
 	else
 		errors
 }
 
+
+#' @exportClass environment
+#' @exportClass proto
 setOldClass(c("proto", "environment"))
 
 #' glayer class
 #'
-#' glayers are layers made with ggplyr methods. They are equivalent to the layers made by ggplot2 functions in all ways except that they contain an extra grouping variable (to denote subplot membership) and a plyr_function slot, which correctly locates subplots within the graph when plotting.
+#' glayers are layers made with glyphmaps methods. They are equivalent to the 
+#' layers made by ggplot2 functions in all ways except that they contain extra 
+#' information that is used to divide the data into subplots and locate those 
+#' subplots witihn the layer when plotting.
 #'
 #' @name glayer-class
 #' @rdname glayer-class
@@ -89,15 +99,6 @@ setMethod("+", signature(e1 = "glyphs", e2 = "glayer"),
 		glyph_plot(e1@.Data + e2@layer)
 	}
 )
-	
-	
-#' @export
-setMethod("ggtransform", signature(ggobject = "glayer"), 
-	function(ggobject, mapping, ...){
-		layer <- ggtransform(ggobject@layer, mapping, ...)
-		new("glayer", layer = layer)
-	}
-)
 
 #' @export
 setGeneric("ls")
@@ -110,10 +111,25 @@ setMethod("ls", signature(name = "glayer"),
 	
 #' Create a glayer object
 #' 
-#' glayer gives a ggplot2 layer object the S4 class glayer, see \code{\link{glayer-class}}. ggplot layer objects are usually non-specific \code{\link{proto}} class objects.
+#' glayer gives a ggplot2 layer object the S4 class glayer, see 
+#' \code{\link{glayer-class}}. ggplot layer objects are usually non-specific 
+#' \code{\link[proto]{proto}} class objects. A layer should contain an embed 
+#' variable before being given the class 'glayer.' See the function bodies of 
+#' \code{\link{glyph}} and \code{\link{grid}} for examples.
 #'
 #' @export glayer
-#' @param layer a proto object that can be used as a layer by the \code{\link{ggplot2}} package (i.e, ggplot() + layer should return a graph).
+#' @param layer a proto object that can be used as a layer by the 
+#' \code{\link[ggplot2]{ggplot2}} package (i.e, ggplot() + layer should return a 
+#' graph).
 glayer <- function(layer) {
 	new("glayer", layer = layer)
+}
+
+#' Is an object (functionally) a glayer?
+#' 
+#' Tests whether an object is or ever was a glayer.
+#' @param x an R object
+#' @return logical
+is.glayer <- function(x) {
+  "embed" %in% ls(x)
 }
