@@ -3,6 +3,11 @@
 ###################################################
 library(devtools)
 load_all("../ggplyr")
+load("data/nasa.RData")
+load("data/testdata.RData")
+load("data/seasons.RData")
+load("data/years.RData")
+load("inst/extdata/map_layers.RData")
 ###########################################
 ###              working                ###
 ###########################################
@@ -111,9 +116,9 @@ ggplot() + geom_point(aes(x = mean(temperature), y = mean(ozone),
 ggplot(nasa) + glyph(geom_point(aes(surftemp, temperature), size = 1/5), 
   aes(long[1], lat[1]), c("lat", "long"), reference = ref_box())
 
-ggplot(nasa) + geom_scatterplots(mapping = aes(x = long[1], y = lat[1], 
-  minor.x = surftemp, minor.y = temperature), glyph.by = c("long", "lat"), 
-  size = 1/5, reference = ref_box())
+# ggplot(nasa) + geom_scatterplots(mapping = aes(x = long[1], y = lat[1], 
+#  minor.x = surftemp, minor.y = temperature), glyph.by = c("long", "lat"), 
+#  size = 1/5, reference = ref_box())
 
 ggplot(nasa) + glyph(geom_point(aes(x = surftemp, y = temperature), 
   size = 1/5), glyph.by = c("lat", "long"), major = aes(x = long[1], 
@@ -150,7 +155,7 @@ ggplot(cheap.diamonds) +
   grid(geom_bar(aes(x = color, fill = color), position = "dodge"),
     grid.aes = aes(x = carat, y = price), x.nbin = 10, y.nbin = 14,
     y_scale = free, height.adjust = 0.5, width.adjust = 0.5,
-    ref = ref_box(aes(color = mean(as.numeric(color)))))
+    ref = ref_box(aes(color = length(color))))
 
 
 # trying out geom_coxcomb
@@ -160,9 +165,9 @@ p <- ggplot(mpg) +
   facet_wrap(~year)
 
 mpg$lat <- sample(1:4, nrow(mpg), replace = TRUE)
-ggplot(mpg) + GeomCoxcomb$new(mapping = aes(r = trans, fill = lat, 
+ggplot(mpg) + GeomCoxcomb$new(mapping = aes(angle = trans, fill = lat, 
   group = lat)) + facet_wrap(~cyl)
-ggplot(mpg) + geom_coxcomb(aes(r = trans, fill = lat))
+ggplot(mpg) + geom_coxcomb(aes(angle = trans, fill = lat))
         , group = lat))
 ###########################################
 ###          not yet working            ###
@@ -173,7 +178,7 @@ ggplot(seasons) +
   glyph(
     geom_line(aes(x = time, y = pred)), 
     major = aes(lon[1], lat[1]), glyph.by = "stn", 
-    height = rel(4.375), width = rel(1.9),
+    height = 1, width = 2,
     ref = ref_box(aes(fill = avg)), merge = TRUE)
 
 

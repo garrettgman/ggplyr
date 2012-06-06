@@ -43,7 +43,8 @@ ref_box <- function(mapping = NULL, fill = "grey90", color = "white", ...) {
         width = width, height = height, merge.overlaps = merge.overlaps, 
         reference = NULL, .ref = TRUE), 
       grid = grid(rlayer, grid.aes = major.aes, x.nbin = x.nbin, 
-        y.nbin = y.nbin, width.adjust = 1, height.adjust = 1, .ref = TRUE)
+        y.nbin = y.nbin, width.adjust = 1, height.adjust = 1, 
+        reference = NULL, .ref = TRUE)
     )
   }
 } 
@@ -91,7 +92,8 @@ ref_hline <- function(mapping = NULL, thickness = 0.2, fill = "white", ...) {
   	    width = width, height = height, merge.overlaps = merge.overlaps, 
         reference = NULL, .ref = TRUE), 
   	  grid = grid(rlayer, grid.aes = major.aes, x.nbin = x.nbin, 
-  	    y.nbin = y.nbin, width.adjust = 1, height.adjust = 1, .ref = TRUE)
+  	    y.nbin = y.nbin, width.adjust = 1, height.adjust = 1, 
+  	    reference = NULL, .ref = TRUE)
   	)
   }
 } 
@@ -139,7 +141,8 @@ ref_vline <- function(mapping = NULL, thickness = 0.2, fill = "white", ...) {
   	    width = width, height = height, merge.overlaps = merge.overlaps, 
         reference = NULL, .ref = TRUE), 
   	  grid = grid(rlayer, grid.aes = major.aes, x.nbin = x.nbin, 
-  	    y.nbin = y.nbin, width.adjust = 1, height.adjust = 1, .ref = TRUE)
+  	    y.nbin = y.nbin, width.adjust = 1, height.adjust = 1,
+        reference = NULL, .ref = TRUE)
   	)
   }
 } 
@@ -188,7 +191,8 @@ ref_points <- function(mapping = NULL, colour = "white", size = 1/2, ...) {
   	      width = width, height = height, merge.overlaps = merge.overlaps, 
           reference = NULL, .ref = TRUE), 
   	    grid = grid(rlayer, grid.aes = major.aes, x.nbin = x.nbin, 
-  	      y.nbin = y.nbin, width.adjust = 1, height.adjust = 1, .ref = TRUE)
+  	      y.nbin = y.nbin, width.adjust = 1, height.adjust = 1, 
+  	      reference = NULL, .ref = TRUE)
   	  )
   	}
   	list(corner(ggplot2::aes(x = -1, y = -1)),
