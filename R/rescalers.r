@@ -19,7 +19,7 @@
 #' the range of values to scale to [0, 1]
 #' @return a list of vectors
 #' @seealso \code{\link{rescale_11}}, \code{\link{rescale_2pi}}
-#' @export
+#' @export rescale_01 free
 rescale_01 <- free <- function(xvars, xlim=NULL) {
 	xnames <- names(xvars)
 	numberfy <- function(x) {

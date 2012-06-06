@@ -2,6 +2,7 @@
 ###             geom_scatterplots               ###
 ###################################################
 library(devtools)
+install_github("ggplyr", "garrettgman", "glyphmaps")
 load_all("../ggplyr")
 load("data/nasa.RData")
 load("data/testdata.RData")
