@@ -13,6 +13,7 @@
 #' can specify the range to be scaled to [0,1] with the xlim argument. Values in 
 #' the vectors will be rescaled as if they according to this range.
 #' 
+#' @aliases free
 #' @param xvars a list of vectors
 #' @param xlim NULL (default) or a numeric vector of length two that specifies 
 #' the range of values to scale to [0, 1]

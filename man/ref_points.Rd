@@ -3,7 +3,7 @@
 \title{Corner points reference glyph}
 \usage{
   ref_points(mapping = NULL, colour = "white", size = 1/2,
-  ...)
+    ...)
 }
 \arguments{
   \item{mapping}{An aesthetic mapping, usually constructed
@@ -12,6 +12,9 @@
   \item{colour}{The color, as a character string, to be
   used as the color if color is not specified in the
   mapping}
+
+  \item{size}{The size of the points, to be used as the
+  color if size is not specified in the mapping}
 
   \item{...}{other arguments to be used as parameters in
   the reference box layer}

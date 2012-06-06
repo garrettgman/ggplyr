@@ -1,11 +1,12 @@
 \name{glyph}
 \alias{glyph}
-\title{Turn an ordinary layer into a layer of embedded subplots}
+\title{Turn a layer into a layer of embedded subplots}
 \usage{
-  glyph(layer, major.aes, glyph.by = NULL, width =
-  rel(0.95), height = rel(0.95), x_scale = identity,
-  y_scale = identity, merge.overlaps = FALSE, reference =
-  NULL, ply.aes = TRUE, .ref = FALSE)
+  glyph(layer, major.aes, glyph.by = NULL,
+    width = rel(0.95), height = rel(0.95),
+    x_scale = identity, y_scale = identity,
+    merge.overlaps = FALSE, reference = NULL,
+    ply.aes = TRUE, .ref = FALSE)
 }
 \arguments{
   \item{layer}{a ggplot2 layer object. See
@@ -29,20 +30,15 @@
   \item{width}{numeric or rel object. The width of each
   glyph. If width is numeric, the glyph will be drawn with
   a width equal to width units on the x axis. If width is
-  of class rel (see \code{\link{rel-class}}), glyph will
-  attempt to assign an inuitive width based on the number
-  of total glyphs and their placement within the plot. The
-  width can be scaled relative to this intuitive width by
-  changing the value of the rel object.}
+  of class \code{\link{rel}}, glyph will attempt to assign
+  an inuitive width based on the number of total glyphs and
+  their placement within the plot. The width can be scaled
+  relative to this intuitive width by changing the value of
+  the rel object.}
 
   \item{height}{numeric or rel object. The height of each
-  glyph. If height is numeric, the glyph will be drawn with
-  a height equal to height units on the x axis. If height
-  is of class rel (see \code{\link{rel-class}}), glyph will
-  attempt to assign an inuitive height based on the number
-  of total glyphs and their placement within the plot. The
-  height can be scaled relative to this intuitive height by
-  changing the value of the rel object.}
+  glyph. Height behaves the same way as width, but applies
+  to the y dimension.}
 
   \item{x_scale}{function. The scaling to use for the x
   axis within each glyph. If x_scale equals
@@ -98,8 +94,9 @@
   layers in the plot.
 }
 \details{
-  If a layer contains no data, glyph will use the global
-  data set for the plot. This is the data set specified in
-  \code{\link{ggplot}}.
+  Glyphed layers follow usual data inheritence rules for
+  ggplot2 layer objects. If a layer contains no data, glyph
+  will use the global data set for the plot. This is the
+  data set specified in \code{\link{ggplot}}.
 }
 

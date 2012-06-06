@@ -1,4 +1,5 @@
 \name{rescale_01}
+\alias{free}
 \alias{rescale_01}
 \title{rescale vectors to [0,1]}
 \usage{

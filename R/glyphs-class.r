@@ -10,7 +10,19 @@ check_glyphs <- function(object) {
 		errors
 }
 
+#' list S4 class
+#' 
+#' @name list-class
+#' @aliases list
+#'
 #' @exportClass list
+NULL
+
+#' ggplot S4 class
+#' 
+#' @name ggplot-class
+#' @aliases ggplot
+#'
 #' @exportClass ggplot
 setOldClass(c("ggplot", "list"))
 

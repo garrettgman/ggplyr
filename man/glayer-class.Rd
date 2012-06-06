@@ -1,16 +1,16 @@
 \name{glayer-class}
-\alias{"$,glayer-method"}
-\alias{"$<-,glayer-method"}
-\alias{"+,ggplot,glayer-method"}
-\alias{"+,glyphs,glayer-method"}
-\alias{"[,glayer-method"}
-\alias{"[<-,glayer-method"}
-\alias{"c,glayer-method"}
-\alias{"ggtransform,glayer-method"}
-\alias{"ls,glayer-method"}
-\alias{"rep,glayer-method"}
-\alias{"show,glayer-method"}
+\alias{$,glayer-method}
+\alias{$<-,glayer-method}
+\alias{+,ggplot,glayer-method}
+\alias{+,glyphs,glayer-method}
+\alias{[,glayer-method}
+\alias{[<-,glayer-method}
+\alias{c,glayer-method}
+\alias{ggtransform,glayer-method}
 \alias{glayer-class}
+\alias{ls,glayer-method}
+\alias{rep,glayer-method}
+\alias{show,glayer-method}
 \title{glayer class}
 \description{
   glayers are layers made with glyphmaps methods. They are

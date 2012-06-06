@@ -17,8 +17,19 @@ check_glayer <- function(object) {
 		errors
 }
 
-
+#' environment S4 class
+#' 
+#' @name environment-class
+#' @aliases environment
+#' 
 #' @exportClass environment
+NULL
+
+#' proto S4 class
+#' 
+#' @name proto-class
+#' @aliases proto
+#' 
 #' @exportClass proto
 setOldClass(c("proto", "environment"))
 

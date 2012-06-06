@@ -22,9 +22,9 @@
   rendering.
 }
 \seealso{
-  \code{\link{print.glyphs}} and \code{\link{glyph_build}}
-  for functions that contain the complete set of steps for
-  generating a glyphs plot
+  print.glyphs and \code{\link{glyph_build}} for functions
+  that contain the complete set of steps for generating a
+  glyphs plot
 }
 \keyword{internal}
 

@@ -3,7 +3,7 @@
 \title{Star glyphs}
 \usage{
   geom_star(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", na.rm = FALSE, ...)
+    position = "identity", na.rm = FALSE, ...)
 }
 \arguments{
   \item{mapping}{The aesthetic mapping, usually constructed

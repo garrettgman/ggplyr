@@ -1,4 +1,4 @@
-#' Turn an ordinary layer into a layer of embedded subplots
+#' Turn a layer into a layer of embedded subplots
 #' 
 #' glyph turns an ordinary layer into a set of glyphs. Each glyph is a plot that 
 #' inherits the mappings, stat, and parameters of the initial layer. The mappings 
@@ -8,6 +8,7 @@
 #' by major.aes. To allow interpretation, these major axes should correspond to 
 #' the x and y aesthetics for any other layers in the plot.
 #' 
+#' Glyphed layers follow usual data inheritence rules for ggplot2 layer objects.
 #' If a layer contains no data, glyph will use the global data set for the plot. 
 #' This is the data set specified in \code{\link{ggplot}}.
 #' 
@@ -24,22 +25,18 @@
 #' single glyph mapped to the data within the subset.
 #' @param width numeric or rel object. The width of each glyph. If width is 
 #' numeric, the glyph will be drawn with a width equal to width units on the x 
-#' axis. If width is of class rel (see \code{\link{rel-class}}), glyph will 
+#' axis. If width is of class \code{\link{rel}}, glyph will 
 #' attempt to assign an inuitive width based on the number of total glyphs and 
 #' their placement within the plot. The width can be scaled relative to this 
 #' intuitive width by changing the value of the rel object.
-#' @param height numeric or rel object. The height of each glyph. If height is 
-#' numeric, the glyph will be drawn with a height equal to height units on the x 
-#' axis. If height is of class rel (see \code{\link{rel-class}}), glyph will 
-#' attempt to assign an inuitive height based on the number of total glyphs and 
-#' their placement within the plot. The height can be scaled relative to this 
-#' intuitive height by changing the value of the rel object.
+#' @param height numeric or rel object. The height of each glyph. Height behaves 
+#' the same way as width, but applies to the y dimension.
 #' @param x_scale function. The scaling to use for the x axis within each glyph. 
 #' If x_scale equals \code{\link{identity}}(default), the x limits within each 
-#' glyph will correspond to the range of x across all glyphs. This aids comparison 
-#' because each glyph will use the same scale. If x_scale equals \code{\link{free}}, 
-#' each glyph will use its own x scale. The limits of this scale will be set to 
-#' the range of x values in that glyph.
+#' glyph will correspond to the range of x across all glyphs. This aids 
+#' comparison because each glyph will use the same scale. If x_scale equals 
+#' \code{\link{free}}, each glyph will use its own x scale. The limits of this 
+#' scale will be set to the range of x values in that glyph.
 #' @param y_scale function. y_scale behaves the same as x_scale but controls the 
 #' scales for the y axis within each glyph.
 #' @param merge.overlaps logical. If TRUE sets of glyphs that are connected by 
@@ -48,13 +45,13 @@
 #' centered location of the glyphs (maen x and y values).
 #' @param reference function. Function used to create reference objects for 
 #' glyphs. If NULL, no reference objects are used. Reference objects are plotted 
-#' on a layer beneath the glyphs. They provide a consistent frame of reference to 
-#' aid comparisons between the glyphs. Functions that create reference objects 
-#' include \code{\link{ref_box}}, \code{\link{ref_hline}}, \code{\link{ref_vline}}, 
-#' and \code{\link{ref_points}}.
-#' @param ply.aes logical. If TRUE (default) aesthetics are calculated separately 
-#' for each group, as with \code{\link{ply_aes}}. If FALSE aesthetics are 
-#' calculated based on entire data set for the layer.
+#' on a layer beneath the glyphs. They provide a consistent frame of reference 
+#' to aid comparisons between the glyphs. Functions that create reference 
+#' objects include \code{\link{ref_box}}, \code{\link{ref_hline}}, 
+#' \code{\link{ref_vline}}, and \code{\link{ref_points}}.
+#' @param ply.aes logical. If TRUE (default) aesthetics are calculated 
+#' separately for each group, as with \code{\link{ply_aes}}. If FALSE aesthetics 
+#' are calculated based on entire data set for the layer.
 #' @param .ref internal argument used for plotting reference objects.
 #' @return an object of class glayer
 #' @export

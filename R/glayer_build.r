@@ -10,7 +10,7 @@
 #' 
 #' @keywords internal
 #' @param layer an object of class glayer
-#' @seealso \code{\link{print.glyphs}} and \code{\link{glyph_build}} for 
+#' @seealso print.glyphs and \code{\link{glyph_build}} for 
 #' functions that contain the complete set of steps for generating a glyphs plot
 #' @export
 glayer_build <- function(layer) {

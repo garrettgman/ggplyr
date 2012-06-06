@@ -16,8 +16,9 @@
   etc.
 }
 \seealso{
-  \code{\link{print.glyphs}} for functions that contain the
-  complete set of steps for generating a glyphs plot
+  print.glyphs and \code{\link{glayer_build}} for functions
+  that contain the complete set of steps for generating a
+  glyphs plot
 }
 \keyword{internal}
 
