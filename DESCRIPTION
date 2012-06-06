@@ -36,3 +36,4 @@ Collate:
     'aesply.r'
     'geom_star.r'
     'geom_coxcomb.r'
+    'data.r'
