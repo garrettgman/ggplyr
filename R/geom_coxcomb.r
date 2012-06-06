@@ -125,8 +125,13 @@ GeomCoxcomb <- proto::proto(ggplot2:::Geom, {
   
 })
 
-# ensures that continuous fill, alpha, and colour variables generate groups at 
-# build time as if they were discrete
+#' coxcomb_sections ensures that continuous fill, alpha, and colour variables 
+#' generate groups at build time as if they were discrete
+#' 
+#' @keywords internal
+#' @param mapping an aesthetic mapping, usually created with 
+#' \code{\link[ggplot2]{aes}}
+#' @export
 coxcomb_sections <- function(mapping) {
   sections <- mapping[c("alpha", "fill", "colour")]
   sections <- sections[!unlist(lapply(sections, is.null))]
