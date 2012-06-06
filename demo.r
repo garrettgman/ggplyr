@@ -3,6 +3,7 @@
 ###################################################
 library(devtools)
 install_github("ggplyr", "garrettgman", "glyphmaps")
+library(glyphmaps)
 load_all("../ggplyr")
 load("data/nasa.RData")
 load("data/testdata.RData")
@@ -136,7 +137,7 @@ ggplot(test.data) + geom_star(mapping = aes(x = 0, y = 0,
 ggplot(nasa) + ply_aes(geom_star(aes(r = ozone, angle = date, x = 0, y = 0, 
   fill = mean(temperature))), c("lat")) + facet_wrap(~ lat)
 
-ggplot(nasa) + map_nasa +
+ggplot(nasa) + #map_nasa +
   glyph(geom_star(aes(r = ozone, angle = date, x = 0, y = 0, 
   fill = mean(temperature))), aes(long[1], lat[1]), c("long", "lat"))
 
