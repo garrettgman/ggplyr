@@ -37,3 +37,4 @@ Collate:
     'geom_star.r'
     'geom_coxcomb.r'
     'data.r'
+    'package.r'
