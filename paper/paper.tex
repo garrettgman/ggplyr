@@ -717,9 +717,90 @@ Gridding provides a new way to approach the problem of overplotting. A grid of g
 
 \subsection{ply$\_$aes}
 
+\texttt{ply$\_$aes} wraps a layer like \texttt{grid} or \texttt{glyph} and causes the aesthetics to be calculated in a groupwise manner. Users can specify the groups to use, or \texttt{ply$\_$aes} will default to any groupings provided by glyph.by or group.by parameters, or a group aesthetic.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlcomment{\usebox{\hlnormalsizeboxhash}\usebox{\hlnormalsizeboxhash}{\ }normal{\ }\usebox{\hlnormalsizeboxbackslash}texttt\usebox{\hlnormalsizeboxopenbrace}ggplot2\usebox{\hlnormalsizeboxclosebrace}{\ }behavior}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{ggplot}\hlkeyword{(}\hlsymbol{mpg}\hlkeyword{)}{\ }\hlkeyword{+}{\ }\hlfunctioncall{geom\usebox{\hlnormalsizeboxunderscore}point}\hlkeyword{(}\hlfunctioncall{aes}\hlkeyword{(}\hlsymbol{hwy}\hlkeyword{,}{\ }\hlsymbol{cty}\hlkeyword{,}{\ }\hlargument{color}{\ }\hlargument{=}{\ }\hlfunctioncall{rank}\hlkeyword{(}\hlsymbol{displ}\hlkeyword{)}\hlkeyword{)}\hlkeyword{)}{\ }\hlkeyword{+}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }\hlfunctioncall{facet\usebox{\hlnormalsizeboxunderscore}wrap}\hlkeyword{(}\hlkeyword{\urltilda{}}\hlsymbol{cyl}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlcomment{\usebox{\hlnormalsizeboxhash}\usebox{\hlnormalsizeboxhash}{\ }groupwise{\ }aesthetics}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{ggplot}\hlkeyword{(}\hlsymbol{mpg}\hlkeyword{)}{\ }\hlkeyword{+}{\ }\hlfunctioncall{ply\usebox{\hlnormalsizeboxunderscore}aes}\hlkeyword{(}\hlfunctioncall{geom\usebox{\hlnormalsizeboxunderscore}point}\hlkeyword{(}\hlfunctioncall{aes}\hlkeyword{(}\hlsymbol{hwy}\hlkeyword{,}{\ }\hlsymbol{cty}\hlkeyword{,}{\ }\hlargument{color}{\ }\hlargument{=}{\ }\hlfunctioncall{rank}\hlkeyword{(}\hlsymbol{displ}\hlkeyword{)}\hlkeyword{)}\hlkeyword{)}\hlkeyword{,}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }\hlfunctioncall{c}\hlkeyword{(}\hlstring{"{}cyl"{}}\hlkeyword{)}\hlkeyword{)}{\ }\hlkeyword{+}{\ }\hlfunctioncall{facet\usebox{\hlnormalsizeboxunderscore}wrap}\hlkeyword{(}\hlkeyword{\urltilda{}}\hlsymbol{cyl}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+
+{\centering \includegraphics[width=0.49\textwidth]{figure/minimal-groupwise11} \includegraphics[width=0.49\textwidth]{figure/minimal-groupwise12} 
+
+}
+
+
+\end{knitrout}
+
+
+\texttt{ply$\_$aes} doesn't actually create embedded plots, but is closely related to the glyphing process. By default, \texttt{ggplot2} does not calculate statistics in a groupwise manner. However, such calculations can be useful in certain situations. For example, \texttt{ply$\_$aes} is built into \texttt{glyph} and \texttt{grid} by default; embedded plots quickly become boring when aesthetics do not vary from subplot to subplot. Groupwise aesthetics can be interesting in other situations as well. For example, Figure~\ref{fig:groupwise2} demonstrates how groupwise aesthetics can be used to avoid overplotting.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlcomment{\usebox{\hlnormalsizeboxhash}\usebox{\hlnormalsizeboxhash}{\ }overplotted}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{ggplot}\hlkeyword{(}\hlkeyword{)}{\ }\hlkeyword{+}{\ }\hlfunctioncall{geom\usebox{\hlnormalsizeboxunderscore}point}\hlkeyword{(}\hlfunctioncall{aes}\hlkeyword{(}\hlargument{x}{\ }\hlargument{=}{\ }\hlsymbol{temperature}\hlkeyword{,}{\ }\hlargument{y}{\ }\hlargument{=}{\ }\hlsymbol{ozone}\hlkeyword{,}{\ }\hlargument{color}{\ }\hlargument{=}{\ }\hlsymbol{lat}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{data}{\ }\hlargument{=}{\ }\hlsymbol{nasa}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlcomment{\usebox{\hlnormalsizeboxhash}{\ }using{\ }ply\usebox{\hlnormalsizeboxunderscore}aes{\ }to{\ }plot{\ }just{\ }summaries}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{ggplot}\hlkeyword{(}\hlkeyword{)}{\ }\hlkeyword{+}{\ }\hlfunctioncall{ply\usebox{\hlnormalsizeboxunderscore}aes}\hlkeyword{(}\hlfunctioncall{geom\usebox{\hlnormalsizeboxunderscore}point}\hlkeyword{(}\hlfunctioncall{aes}\hlkeyword{(}\hlargument{x}{\ }\hlargument{=}{\ }\hlfunctioncall{mean}\hlkeyword{(}\hlsymbol{temperature}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{y}{\ }\hlargument{=}{\ }\hlfunctioncall{mean}\hlkeyword{(}\hlsymbol{ozone}\hlkeyword{)}\hlkeyword{,}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }\hlargument{color}{\ }\hlargument{=}{\ }\hlsymbol{lat}\hlkeyword{[}\hlnumber{1}\hlkeyword{]}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{data}{\ }\hlargument{=}{\ }\hlsymbol{nasa}\hlkeyword{)}\hlkeyword{,}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlstring{"{}lat"{}}\hlkeyword{,}{\ }\hlstring{"{}long"{}}\hlkeyword{)}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+
+{\centering \includegraphics[width=0.49\textwidth]{figure/minimal-groupwise21} \includegraphics[width=0.49\textwidth]{figure/minimal-groupwise22} 
+
+}
+
+
+\end{knitrout}
 
 
 
+
+\section{speed considerations}
+Embedding plots is computationally expensive. Such plots require much of both the computational engine of R and the graphics device. Hence, it is not unreasonable to expect \texttt{glyphmaps} to be slow, which it can be. However, relative to similar visual tasks \texttt{glyphmaps} is surprisingly fast. The final code chunk compares the speed of plotting forty thousand points in an embedded plot to plotting the same points in a facetted plot. \texttt{glyphmaps} performs quite well in comparison.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlcomment{\usebox{\hlnormalsizeboxhash}\usebox{\hlnormalsizeboxhash}{\ }embedded{\ }plot}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{system.time}\hlkeyword{(}\hlfunctioncall{print}\hlkeyword{(}\hlfunctioncall{ggplot}\hlkeyword{(}\hlsymbol{nasa}\hlkeyword{)}{\ }\hlkeyword{+}{\ }\hlfunctioncall{glyph}\hlkeyword{(}\hlfunctioncall{geom\usebox{\hlnormalsizeboxunderscore}point}\hlkeyword{(}\hlfunctioncall{aes}\hlkeyword{(}\hlargument{x}{\ }\hlargument{=}{\ }\hlsymbol{surftemp}\hlkeyword{,}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }\hlargument{y}{\ }\hlargument{=}{\ }\hlsymbol{temperature}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{size}{\ }\hlargument{=}{\ }\hlnumber{1}\hlkeyword{/}\hlnumber{2}\hlkeyword{)}\hlkeyword{,}{\ }\hlfunctioncall{aes}\hlkeyword{(}\hlargument{x}{\ }\hlargument{=}{\ }\hlsymbol{long}\hlkeyword{[}\hlnumber{1}\hlkeyword{]}\hlkeyword{,}{\ }\hlargument{y}{\ }\hlargument{=}{\ }\hlsymbol{lat}\hlkeyword{[}\hlnumber{1}\hlkeyword{]}\hlkeyword{)}\hlkeyword{,}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlstring{"{}lat"{}}\hlkeyword{,}{\ }\hlstring{"{}long"{}}\hlkeyword{)}\hlkeyword{)}\hlkeyword{)}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##    user  system elapsed 
+##  12.460   2.282  15.981 
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hspace*{\fill}\\
+\hlstd{}\hlcomment{\usebox{\hlnormalsizeboxhash}\usebox{\hlnormalsizeboxhash}{\ }facetted{\ }plot}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{system.time}\hlkeyword{(}\hlfunctioncall{print}\hlkeyword{(}\hlfunctioncall{ggplot}\hlkeyword{(}\hlsymbol{nasa}\hlkeyword{)}{\ }\hlkeyword{+}{\ }\hlfunctioncall{glyph}\hlkeyword{(}\hlfunctioncall{geom\usebox{\hlnormalsizeboxunderscore}point}\hlkeyword{(}\hlfunctioncall{aes}\hlkeyword{(}\hlargument{x}{\ }\hlargument{=}{\ }\hlsymbol{surftemp}\hlkeyword{,}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }\hlargument{y}{\ }\hlargument{=}{\ }\hlsymbol{temperature}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{size}{\ }\hlargument{=}{\ }\hlnumber{1}\hlkeyword{/}\hlnumber{2}\hlkeyword{)}{\ }\hlkeyword{+}{\ }\hlfunctioncall{facet\usebox{\hlnormalsizeboxunderscore}grid}\hlkeyword{(}\hlsymbol{long}\hlkeyword{\urltilda{}}\hlsymbol{lat}\hlkeyword{)}\hlkeyword{)}\hlkeyword{)}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## Error: argument "major.aes" is missing, with no default
+## Timing stopped at: 0.012 0.007 0.019 
+\end{verbatim}
+\end{kframe}
+
+{\centering \includegraphics[width=0.49\textwidth]{figure/minimal-<<speed-test} 
+
+}
+
+
+\end{knitrout}
 
 
 

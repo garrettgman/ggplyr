@@ -1,12 +1,36 @@
+#' Star glyphs
+#' 
+#' geom_star draws the type of glyph commonly called a star plot, radar plot, 
+#' or polar plot.
+#' 
+#' @param mapping The aesthetic mapping, usually constructed with 
+#' \code{\link[ggplot2]{aes}}. Only needs to be set at the layer level if you 
+#' are overriding the plot defaults.
+#' @param data A layer specific dataset - only needed if you want to override 
+#' the plot defaults
+#' @param stat The statistical transformation to use for this layer.
+#' @param position The position adjustment to use for overlapping points in this 
+#' layer
+#' @param na.rm If FALSE (the default), removes missing values with a warning. 
+#' If TRUE, silently removes missing variables.
+#' @param ... other arguments passed on to \code{\link[ggplot2]{layer}}. This 
+#' can include aesthetics whose values you want to set, not map. See 
+#' \code{\link[ggplot2]{layer}} for more details.
+#' 
+#' @section Aesthetics
+#' geom_coxcomb understands the following aesthetics: x, y, colour, fill, size, 
+#' linetype, weight, and alpha.
+#' 
+#' @export
 geom_star <- function(mapping = NULL, data = NULL, stat = "identity", 
-  position = "identity", ...) { 
+  position = "identity", na.rm = FALSE, ...) { 
 
     GeomStar$new(mapping = mapping, data = data, stat = stat, 
       position = position, ...)
 }
 
 
-GeomStar <- proto(ggplot2:::Geom, {
+GeomStar <- proto::proto(ggplot2:::Geom, {
   objname <- "star"
   
   # turn cartesian coordinates polar
@@ -74,7 +98,7 @@ GeomStar <- proto(ggplot2:::Geom, {
   }
   
   new <- function(., mapping = NULL, data = NULL, stat = NULL, 
-    position = NULL, ...) {
+    position = NULL, na.rm = FALSE, ...) {
     
     missing <- !(c("x", "y", "r", "angle") %in% names(mapping))
     if (any(missing)) {
@@ -84,7 +108,7 @@ GeomStar <- proto(ggplot2:::Geom, {
     }
     
     do.call("layer", list(mapping = mapping, data = data, stat = stat, 
-      geom = ., position = position, ...))  
+      geom = ., position = position, na.rm = na.rm, ...))  
   }
   
 })

@@ -23,3 +23,21 @@ ggtransform.ggplot <- function(ggobject, mapping = NULL, ...) {
 	
 }
 	
+#' @export
+setGeneric("ggtransform")
+
+#' @export
+setMethod("ggtransform", signature(ggobject = "glyphs"), 
+          function(ggobject, mapping, ...){
+            ggplot <- ggtransform(ggobject@.Data, mapping, ...)
+            new("glyphs", ggplot)
+          }
+)
+
+#' @export
+setMethod("ggtransform", signature(ggobject = "glayer"), 
+          function(ggobject, mapping, ...){
+            layer <- ggtransform(ggobject@layer, mapping, ...)
+            new("glayer", layer = layer)
+          }
+)

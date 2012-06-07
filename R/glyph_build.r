@@ -1,9 +1,18 @@
-#' Build a glyph object for rendering
-#'
-#' This function takes the plot object, and performs all steps necessary to produce an object that can be rendered.
+#' Build a glyphs object for rendering
+#' 
+#' glyph_build takes a glyph plot object (class glyphs), and performs all steps 
+#' necessary to produce an object that can be rendered. This function outputs 
+#' two pieces: a list of data frames (one for each layer), and a panel object, 
+#' which contain all information about axis limits, breaks, etc.
+#' 
+#' @keywords internal
+#' @param layer an object of class glayer
+#' @seealso print.glyphs and \code{\link{glayer_build}} for functions that contain the complete 
+#' set of steps for generating a glyphs plot
+#' @export
 glyph_build <- function(plot){
   if (length(plot$layers) == 0) stop("No layers in plot", call.=FALSE)
-  if (!identical(plot$facet, facet_null())) {
+  if (!identical(plot$facet, ggplot2::facet_null())) {
   	stop("glyphs do not support facetting", call. = FALSE)
   }
 	
@@ -13,7 +22,7 @@ glyph_build <- function(plot){
 	
   # separate into glayers and normal layers
   gls <- unlist(lapply(layers, is.glayer))
-  if (all(!gls)) return(ggplot_build(plot))
+  if (all(!gls)) return(ggplot2::ggplot_build(plot))
   if (all(gls) && sum(gls) == 1) return(glayer_build(layers[[gls]]))
   glayers <- layers[gls]
   plot$layers <- layers[!gls]
@@ -23,7 +32,7 @@ glyph_build <- function(plot){
   # build normal layers
   normal <- NULL
   if (length(plot$layers) > 0) {
-	normal <- ggplot_build(plot)
+	normal <- ggplot2::ggplot_build(plot)
   }
 	
   # build glyph layers (embedded plots)
@@ -48,7 +57,7 @@ glyph_build <- function(plot){
   # panel
   xspan <- range(unlist(lapply(data, function(df) df[names(df) %in% .x_aes])))
   yspan <- range(unlist(lapply(data, function(df) df[names(df) %in% .y_aes])))
-  panel <- ggplot_build(qplot(xspan, yspan))$panel
+  panel <- ggplot2::ggplot_build(ggplot2::qplot(xspan, yspan))$panel
 	
   # scales 
   # collect all unique scales
@@ -97,13 +106,13 @@ glyph_build <- function(plot){
   build
 }
 
-
-
-
-is.glayer <- function(x) {
-	"embed" %in% ls(x)
-}
-
+#' Ensure each layer contains a data set
+#' 
+#' propogate_data checks each layer for a data set. If none is found it assigns 
+#' a copy of the plot level data set to the layer. propogate_data avoids the 
+#' side effects of ggplot2:::map_layout, which performs a similar function.
+#' @param layers ggplot2 layer objects
+#' @param plot_data the global data set for a ggplot2 plot
 propogate_data <- function(layers, plot_data) {
 	ensure_data <- function(layer){
 		if (inherits(layer$data, "waiver")) {

@@ -17,31 +17,24 @@ Imports:
     scales,
     stringr
 Depends:
+    methods,
     R (>= 2.15)
 Collate:
-    'add_glyph.r'
-    'ggtransform.r'
     'glyph_build.r'
     'glyphs-class.r'
-    'plyr_aes.r'
-    'plyr_stats.r'
     'glayer-class.r'
     'glyph.r'
-    'glyph_aesthetics.r'
     'merge_overlaps.r'
     'util.r'
-    'map_glyph.r'
     'rel-class.r'
     'rescalers.r'
     'glayer_build.r'
     'ref_box.r'
     'ply_aes.r'
     'grid.r'
-    'grid_by.r'
     'group_by.r'
     'aesply.r'
-    'geom_scatterplots.r'
     'geom_star.r'
     'geom_coxcomb.r'
-    'geom_ref_rect.r'
-    'geom_ref_point.r'
+    'data.r'
+    'package.r'
