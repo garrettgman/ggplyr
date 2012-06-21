@@ -157,7 +157,7 @@ geom_subplot <- function(mapping, width = rel(0.95), height = rel(0.95),
     merge.overlaps <- FALSE
   }
   
-  layer <- extract_layer(mapping$subplot)
+  layer <- extract_layer(mapping$subplot, parent.frame())
   mapping$subplot <- NULL
   layer$embed <- list(width = width, height = height, x_scale = x_scale, 
     y_scale = y_scale, merge.overlaps = merge.overlaps, major.aes = mapping)
@@ -172,7 +172,7 @@ geom_subplot <- function(mapping, width = rel(0.95), height = rel(0.95),
       sp_layer(layer)
     }
   } else {
-    ref.layer <- reference(layer, "glyph", mapping, width, height, position)
+    ref.layer <- reference(layer, "subplot", mapping, width, height, position)
     if (ply.aes) {
       list(ref.layer, ply_aes(sp_layer(layer)))
     } else {
@@ -181,8 +181,8 @@ geom_subplot <- function(mapping, width = rel(0.95), height = rel(0.95),
   }
 }
 
-extract_layer <- function(subplot_aes) {
-  layer <- eval(subplot_aes, envir = parent.frame(), enclos = parent.frame(3))
+extract_layer <- function(subplot_aes, env) {
+  layer <- eval(subplot_aes, env)
   if ("sp_plot" %in% class(layer) | "ggsubplot" %in% class(layer)) {
     stop("Cannot place subplots inside subplots", call. = FALSE)
   }

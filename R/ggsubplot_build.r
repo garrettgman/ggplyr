@@ -133,7 +133,9 @@ propogate_data <- function(layers, plot_data) {
 #' @param layer ggplot2 layer objects
 #' @param plot_mapping the global data set for a ggplot2 plot
 propogate_aes <- function(layer, plot_mapping) {
-  layer$mapping <- c(layer$mapping, 
+  mapping <- c(layer$mapping, 
     plot_mapping[setdiff(names(plot_mapping), names(layer$mapping))])
+  class(mapping) <- "uneval"
+  layer$mapping <- mapping
   layer
 }

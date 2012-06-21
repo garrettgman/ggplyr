@@ -41,6 +41,13 @@ ggplot(mpg) + geom_subplot(aes(mean(displ), mean(cty), group = year,
   subplot = geom_bar(aes(trans, fill = year))), y_scale = free, width = 1/4, 
   height = 1/4)
   
+bars <- geom_bar(aes(trans, fill = year))
+bars3 <- bars
+test <- function(bars2) {
+ggplot(mpg) + geom_subplot(aes(mean(displ), mean(cty), group = year,
+  subplot = bars2), y_scale = free, width = 1/4, height = 1/4)
+}
+test(bars3)
 
 
 # reference boxes
@@ -51,23 +58,33 @@ ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture,
   major = aes(mean(Fertility), mean(Education)), ref = ref_box(aes(fill = 
   mean(Catholic)), alpha = 0.2))
 
+ggplot(test.data) + geom_subplot(aes(mean(Fertility), mean(Education), 
+  group = interaction(long, lat), subplot = geom_point(aes(Fertility, 
+  Agriculture, color = rank(Catholic)), size = 3)), 
+  ref = ref_box(aes(fill = mean(Catholic)), alpha = 0.2))
+
+
 # hlines
 ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
   color = rank(Catholic)), size = 3), glyph.by = c("lat", "long"), 
   major = aes(mean(Fertility), mean(Education)), ref = ref_hline(aes(fill = 
   mean(Catholic))))
 
+ggplot(test.data) + geom_subplot(aes(mean(Fertility), mean(Education), 
+  group = interaction(long, lat), subplot = geom_point(aes(Fertility, 
+  Agriculture, color = rank(Catholic)), size = 3)), 
+  ref = ref_hline(aes(fill = mean(Catholic))))
+
 # vlines
 ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
   color = rank(Catholic)), size = 3), glyph.by = c("lat", "long"), 
   major = aes(mean(Fertility), mean(Education)), ref = ref_vline(aes(fill = 
   mean(Catholic))))
-  
-# points
-ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year)), 
-  aes(x = mean(displ), y = mean(cty)), c("year"), y_scale = free, 
-  width = 1/3, height = 1/3, reference = ref_points(aes(fill = mean(hwy)), 
-  size = 3, alpha = 0.1)) 
+
+ggplot(test.data) + geom_subplot(aes(mean(Fertility), mean(Education), 
+  group = interaction(long, lat), subplot = geom_point(aes(Fertility, 
+  Agriculture, color = rank(Catholic)), size = 3)), 
+  ref = ref_vline(aes(fill = mean(Catholic))))
 
 ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year)), 
                     aes(x = mean(displ), y = mean(cty)), c("year"), 
