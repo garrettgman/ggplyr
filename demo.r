@@ -137,7 +137,7 @@ ggplot(test.data) + geom_star(mapping = aes(x = 0, y = 0,
 ggplot(nasa) + ply_aes(geom_star(aes(r = ozone, angle = date, x = 0, y = 0, 
   fill = mean(temperature))), c("lat")) + facet_wrap(~ lat)
 
-ggplot(nasa) + #map_nasa +
+ggplot(nasa) + map_nasa +
   glyph(geom_star(aes(r = ozone, angle = date, x = 0, y = 0, 
   fill = mean(temperature))), aes(long[1], lat[1]), c("long", "lat"))
 
@@ -170,11 +170,7 @@ mpg$lat <- sample(1:4, nrow(mpg), replace = TRUE)
 ggplot(mpg) + GeomCoxcomb$new(mapping = aes(angle = trans, fill = lat, 
   group = lat)) + facet_wrap(~cyl)
 ggplot(mpg) + geom_coxcomb(aes(angle = trans, fill = lat))
-        , group = lat))
-###########################################
-###          not yet working            ###
-###########################################
-load_all("../ggplyr")
+
 
 ggplot(seasons) + 
   glyph(
@@ -183,18 +179,7 @@ ggplot(seasons) +
     height = 1, width = 2,
     ref = ref_box(aes(fill = avg)), merge = TRUE)
 
-
-
 ###########################################
-###             obsolete                ###
+###          not yet working            ###
 ###########################################
 load_all("../ggplyr")
-# splitting by grids - obsolete
-ggplot(test.data) + geom_point(aes(Fertility, Agriculture, color = Catholic))
-ggplot(test.data) + geom_point(aes(grid(Fertility, 3), grid(Agriculture, 3), 
-  color = Catholic))
-ggplot(test.data) + geom_point(aes(grid(Fertility, 3), grid(Agriculture, 3), 
-  color = Catholic), position = position_jitter(width = 1, height = 1))
-ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
-  color = Catholic)), aes(I(grid(Fertility, 3)), I(grid(Agriculture, 3))), 
-  grid_by(Fertility, 3, Agriculture, 3))
