@@ -1,312 +1,185 @@
-# ggplyr features demo - sift for tests
-
-# setwd("/Users/GarrettsiMac/Dropbox/research")
-# setwd("/Users/garrettgrolemund/Documents/git")
+###################################################
+###             geom_scatterplots               ###
+###################################################
 library(devtools)
-load_all("ggplyr")
+install_github("ggplyr", "garrettgman", "glyphmaps")
+library(glyphmaps)
+load_all("../ggplyr")
+load("data/nasa.RData")
+load("data/testdata.RData")
+load("data/seasons.RData")
+load("data/years.RData")
+load("inst/extdata/map_layers.RData")
+###########################################
+###              working                ###
+###########################################
+# imac 10.274 seconds
+# system.time(print(qplot(surftemp, temperature, data = nasa) + 
+# facet_grid(long~lat)))
+system.time(print(ggplot(nasa) + glyph(geom_point(aes(x = surftemp, 
+  y = temperature), size = 1/5), glyph.by = c("lat", "long"), width = 3, 
+  height = 3, major = aes(x = long[1], y = lat[1]))))
+# compare to 21.736 seconds
+# system.time(print(qplot(surftemp, temperature, data = nasa, size = I(1/5)) + 
+#  facet_grid(long~lat)))
 
-#######################################
-###       transform a graph         ###
-#######################################
+# embed points (continuous - no stats)
+ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
+  color = rank(Catholic)), size = 3), glyph.by = c("lat", "long"), 
+  major = aes(mean(Fertility), mean(Education)))
 
-# make a graph
-head(test.data)
-(p <- qplot(Fertility, Agriculture, data = test.data, color = Education))
+# embed bars (categorical with stats)
+ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year)), 
+  aes(x = mean(displ), y = mean(cty)), c("year"), y_scale = free, 
+  width = 1/4, height = 1/4)
+  
+# reference boxes
+# boxes
+ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
+  color = rank(Catholic)), size = 3), glyph.by = c("lat", "long"), 
+  width = 10, height = 10,
+  major = aes(mean(Fertility), mean(Education)), ref = ref_box(aes(fill = 
+  mean(Catholic)), alpha = 0.2))
 
-# change mappings
-ggtransform(p, mapping = aes(size = Catholic))
+# hlines
+ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
+  color = rank(Catholic)), size = 3), glyph.by = c("lat", "long"), 
+  major = aes(mean(Fertility), mean(Education)), ref = ref_hline(aes(fill = 
+  mean(Catholic))))
 
-# nullify mappings, change axis
-ggtransform(p, mapping = aes(y = Education, color = NULL, size = Catholic))
+# vlines
+ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
+  color = rank(Catholic)), size = 3), glyph.by = c("lat", "long"), 
+  major = aes(mean(Fertility), mean(Education)), ref = ref_vline(aes(fill = 
+  mean(Catholic))))
+  
+# points
+ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year)), 
+  aes(x = mean(displ), y = mean(cty)), c("year"), y_scale = free, 
+  width = 1/3, height = 1/3, reference = ref_points(aes(fill = mean(hwy)), 
+  size = 3, alpha = 0.1)) 
 
-# change parameter
-ggtransform(p, mapping = aes(y = Education, color = NULL, size = Catholic), shape = 15)
+ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year)), 
+                    aes(x = mean(displ), y = mean(cty)), c("year"), 
+                    width = 1/3, height = 1/3, reference = ref_box(aes(fill = mean(hwy)), 
+                                                                    alpha = 0.1))
 
+# merging overlaps
+ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year, group = year), 
+  position = "dodge"), aes(x = mean(displ), y = mean(cty)), c("year"), 
+  y_scale = free, merge = TRUE, reference = ref_box()) 
 
+# vs.
 
+ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year, group = year),
+  position = "dodge"), aes(x = mean(displ), y = mean(cty)), c("year"), 
+  y_scale = free, reference = ref_box()) 
 
-#########################################################
-###       use plyr to make groupwise mappings         ###
-#########################################################
+ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
+  color = rank(Catholic)), size = 3), glyph.by = c("lat", "long"), 
+  major = aes(mean(Fertility), mean(Education)), ref = ref_box(aes(fill = 
+  mean(Catholic))), merge = TRUE, width = rel(1), height = rel(1))
+  
+# vs.
 
-# Our data is (arbitrarily) grouped into four locations
-qplot(Fertility, Agriculture, data = test.data, color = interaction(lat, long))
+ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
+  color = rank(Catholic)), size = 3), glyph.by = c("lat", "long"), 
+  major = aes(mean(Fertility), mean(Education)), ref = ref_box(aes(fill = 
+  mean(Catholic))), width = rel(1), height = rel(1))
+  
+ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
+  color = rank(Catholic)), size = 3), glyph.by = c("lat", "long"), 
+  major = aes(mean(Fertility), mean(Education)), ref = ref_hline(aes(fill = 
+  mean(Catholic))), merge = TRUE, width = rel(1), height = rel(1))  
 
-# use plyr to create a graph
-# the aesthetics can be calculated groupwise
-ggplot() + 
-  geom_plyr(aes(x = long, y = lat, color = rank(Fertility)), 
-    test.data, c("lat", "long"), geom = "jitter", size = 3, 
-    position = position_jitter(width = 0.2, height = 0.2))
-
-ggplot() + 
-  geom_jitter(aes(x = long, y = lat, color = rank(Fertility)), 
-    data = test.data, size = 3, 
-    position = position_jitter(width = 0.2, height = 0.2))
-
-
-
-data <- group_by(test.data, c("lat", "long"))
-lapply(data, fun(qplot, "data", x = Fertility, y = Agriculture, color = rank(Education), size = I(3), xlim = range(test.data$Fertility), ylim = range(test.data$Agriculture)))
-
-ggplot() + geom_plyr(aes(x = trans, fill = mean(hwy), group = year), mpg, "year", geom = "bar", position = "dodge")
-
-# compare with	
-ggplot() + geom_bar(aes(x = trans, fill = mean(hwy), group = year), data = mpg, position = "dodge")
-
-
-# new tactic for overplotting
-ggplot() + geom_jitter(aes(x = temperature, y = ozone, color = lat), data = nasa)	
-ggplot() + geom_plyr(aes(x = mean(temperature), y = mean(ozone), color = lat[1]), data = nasa, c("lat", "long"), geom = "point")	
-
-
-
-################################################
-###       use plyr to embed subplots         ###
-################################################
-qplot(Fertility, Education, data = test.data, size = I(3))
-
-# relocate data
-dgply(test.data,
-	.split = c("lat", "long"),
-	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education, color = rank(Catholic)), size = 3),
-	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
-		y = mean(Education)), width = 5, height = 5))
-
-
-# adjusting for overlaps etc - separate step modifying the pos_major data frame
-# drawing in polar coordinates: adjusting pos_minor, converting from cartesian to polar
-#   (won't work for all geoms, but that's ok - will work for lines and points at least)
-dgply2 <- function(data, vars, geom, minor, major, ...) {
-	browser()
-	data$.gid <- id(data[vars])
-	
-	pos_major <- ddply(data, ".gid", function(df) {
-		data.frame(x = eval(major$x, df), y = eval(major$y, df))
-	})
-
-	geom <- match.fun(paste("geom_", geom, sep = ""))
-	minor$.gid <- quote(.gid)
-	plot <- ggplot_build(ggplot(data) + 
-		geom(minor) + 
-		facet_wrap(".gid"))
-		
-	
-	
-	combo <- join(plot$data[[1]], globalize(pos_major), by = ".gid")
-	plot$data[[1]][c(".gid", "x", "y")] <- ddply(combo, ".gid", summarize, x = (x - mean(x)) / var(x) + X, y = (y - mean(y)) / var(y) + Y)
-	plot$data[[1]]$PANEL <- 1L
-	
-	plot$plot$facet <- facet_null()
-	grid.draw(ggplot_gtable(plot))
-
-}
-# does work for points, but no plot history is retained and the x and y axis retain minor names
-# need to reset panel ranges to see data for histogram case
-
-
-
-# Specific examples
-# * glyph type: {point, line, bar, density, histogram} x {cartesian, polar}
-# * glyph position: spatial location, temporal location, arbitrary summary
-# * glyph position adjustment: various overlapping adjustments
-# * embedding: over all layers, over specific layer
-# * unique, rounded/binning
-
-# How do we do them currently?
-# What should the syntax look like? 
-#  embedded_layer(
-#    geom_point(aes(Education, Fertility)), 
-#    grid(c("lat", "long"), width = 5, height = 5)) ?
-# How should it be implemented? 
-
-
-
-# * time series of spatial
-# * scatterplot plot of spatial
-# * scatterplot with arbitrary summaries used for x and y position
-# * cleveland cycle plot 
-# * polar glyphs
-# * bar charts
-# * embedded polar bar charts
-# * density plots
-# * histograms
-
-dgply2(test.data, c("lat", "long"), geom = "point", 
-	minor = aes(Fertility, Education, colour = Agriculture),
-	major = aes(mean(Fertility), mean(Education)), 
-	width = 5, height = 5)
-
-dgply2(test.data, c("lat", "long"), geom = "histogram", 
-	minor = aes(Fertility),
-	major = aes(mean(Fertility), mean(Education)), 
-	width = 5, height = 5)
-
-dgply2(test.data, c("lat", "long"), geom = "histogram", 
-	minor = aes(Fertility),
-	major = aes(mean(Fertility), mean(Education)), 
-	width = 5, height = 5)
-
-
-
-
-dgply(test.data,
-	.split = c("lat", "long"),
-	.apply = fun(geom_smooth, "data", mapping = aes(x = Fertility, y = Education, color = interaction(long, lat)), se = F),
-	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
-		y = mean(Education))))
-
-
-# big data		
-qplot(surftemp, temperature, data = nasa)
-
-dgply(nasa,
-	.split = c("lat", "long"),
-	.apply = fun(geom_point, "data", mapping = aes(x = surftemp, y = temperature), 
-		size = 1/5),
-	.combine = fun(nest, "data", aes(x = long, y = lat), 
-		width = 3, height = 3), .progress = "text")
-
-qplot(surftemp, temperature, data = nasa, geom = "smooth")
-
-dgply(nasa,
-	.split = c("lat", "long"),
-	.apply = fun(geom_smooth, "data", mapping = aes(x = surftemp, y = temperature), 
-		se = F),
-	.combine = fun(nest, "data", aes(x = long, y = lat), 
-	x_scale = free, y_scale = free),
-	.progress = "text")
-
-
-
-
-# now with bars
-qplot(trans, data = mpg, geom = "bar", fill = year, group = year, position = "dodge")
-
-dgply(mpg,
-	.split = c("year"),
-	.apply = fun(geom_bar, "data", mapping = aes(x = trans, fill = year)),
-	.combine = fun(nest, "data", aes(x = mean(displ), y = mean(cty)), 
-		width = 1/10, height = 1/10))
-		
-dgply(mpg,
-	.split = c("year"),
-	.apply = fun(geom_bar, "data", mapping = aes(x = trans, fill = year)),
-	.combine = fun(nest, "data", aes(x = mean(displ), y = mean(cty)), 
-		y_scale = free, width = 1/10, height = 1/10))
-		
-		
-# categorical x and y axes
-# it's doable, but why not use facets?
+# categorical axiis
 titanic <- data.frame(Titanic)
-dgply(titanic, 
-	.split = c("Sex", "Age"),
-	.apply = fun(geom_bar, "data", aes(Survived, Freq, fill = Class), 
-		position = "dodge"),
-	.combine = fun(nest, "data", aes(x = Sex, y = Age), width = 1/10, 
-		height = 1/10))
-	
-#########################################################
-###        trying out reference layers                ###
-#########################################################	
-dgply(test.data,
-	.split = c("lat", "long"),
-	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education), size = 3, color = "white"),
-	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
-		y = mean(Education)), width = 5, height = 5, reference = ref_box(aes(fill = mean(Agriculture)))))
-		
-dgply(test.data,
-	.split = c("lat", "long"),
-	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education), size = 3, color = "white"),
-	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
-		y = mean(Education)), width = 5, height = 5, reference = ref_box(aes(fill = mean(Agriculture))), merge = TRUE))
+ggplot(titanic) + glyph(geom_bar(aes(x = Survived, y = Freq, fill = Class), 
+  position = "dodge"), glyph.by = c("Age", "Sex"), 
+  major = aes(x = Sex, y = Age), ref =ref_box(fill = "grey80"))
 
-# and with boxes
-dgply(mpg,
-	.split = c("year"),
-	.apply = fun(geom_bar, "data", mapping = aes(x = trans, fill =trans)),
-	.combine = fun(nest, "data", aes(x = mean(displ), y = mean(cty)), 
-		width = 1/10, height = 1/10, reference = ref_box(aes(fill = mean(displ)), alpha = 1/3)))
+# groupwise aesthetics
+ggplot(mpg) + geom_point(aes(hwy, cty, color = rank(displ))) + 
+  facet_wrap(~cyl)
+#vs
+ggplot(mpg) + ply_aes(geom_point(aes(hwy, cty, color = rank(displ))), 
+  c("cyl")) + facet_wrap(~cyl)
 
+# new tactic for overplotting  
+ggplot() + geom_point(aes(x = temperature, y = ozone, color = lat), data = nasa)	
+# vs.
+ggplot() + ply_aes(geom_point(aes(x = mean(temperature), y = mean(ozone), 
+  color = lat[1]), data = nasa), c("lat", "long"))
+#vs.	
+ggplot() + geom_point(aes(x = mean(temperature), y = mean(ozone), 
+  color = lat[1]), data = nasa)  
 
-dgply(test.data,
-	.split = c("lat", "long"),
-	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education), size = 3),
-	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
-		y = mean(Education)), width = 5, height = 5, reference = ref_hline(aes(color = mean(Agriculture), size = 10))))
-		
-dgply(test.data,
-	.split = c("lat", "long"),
-	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education), size = 3),
-	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
-		y = mean(Education)), width = 5, height = 5, reference = ref_vline(aes(color = mean(Agriculture), size = 10))))
-		
-dgply(test.data,
-	.split = c("lat", "long"),
-	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education), size = 3),
-	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
-		y = mean(Education)), width = 5, height = 5, reference = ref_points(aes(color = mean(Agriculture)))))
-		
-		
-		
-#########################################################
-###               testing merging                     ###
-#########################################################		
-dgply(test.data,
-	.split = c("lat", "long"),
-	.apply = fun(geom_point, "data", mapping = aes(x = Fertility, y = Education, color = rank(Catholic)), size = 3),
-	.combine = fun(nest, "data", major_aes = aes(x = mean(Fertility), 
-		y = mean(Education)), width = 5, height = 5, merge = TRUE))		
-		
-		
-		
-#########################################################
-###               testing embed_layers                ###
-#########################################################
-# goal: return a layer that has a subplots attribute which 
-# contains subplot x and y positions by .gid
+# geom_scatterplots - are redundant
+ggplot(nasa) + glyph(geom_point(aes(surftemp, temperature), size = 1/5), 
+  aes(long[1], lat[1]), c("lat", "long"), reference = ref_box())
 
-splits <- group_by(test.data, c("lat", "long"))
-layers <- llply(splits, fun(geom_histogram, "data", mapping = aes(x = Fertility, fill = long)))
-elayer <- embed_layers(layers, fun(cross, "data", major_aes = aes(x = mean(Fertility), y = mean(Fertility)), width = rel(3), height = rel(1)))
-eplot <- gglayer_build(elayer)
-gshow(eplot)
-eplot
-gshow(eplot)
-gshow <- function(data, newpage = is.null(vp), vp = NULL, ...){
-    if (newpage) 
-        grid.newpage()
-    gtable <- ggplot_gtable(data)
-    if (is.null(vp)) {
-        grid.draw(gtable)
-    }
-    else {
-        if (is.character(vp)) 
-            seekViewport(vp)
-        else pushViewport(vp)
-        grid.draw(gtable)
-        upViewport()
-    }
-    invisible(data)
-}
-gshow(eplot)
-layers2 <- llply(splits, fun(geom_point, "data", mapping = aes(x = Fertility, y = long, color = lat)))
-elayers2 <- embed_layers(layers2, fun(cross, "data", major_aes = aes(x = mean(Fertility), y = mean(Education))))
-eplot2 <- gglayer_build(elayers2)
-gshow(eplot2)
-p <- nest(layers, mapping = aes(x = mean(Fertility), y = mean(Education)))
+# ggplot(nasa) + geom_scatterplots(mapping = aes(x = long[1], y = lat[1], 
+#  minor.x = surftemp, minor.y = temperature), glyph.by = c("long", "lat"), 
+#  size = 1/5, reference = ref_box())
+
+ggplot(nasa) + glyph(geom_point(aes(x = surftemp, y = temperature), 
+  size = 1/5), glyph.by = c("lat", "long"), major = aes(x = long[1], 
+  y = lat[1]), ref= ref_box())
+
+# trying out geom_star
+# without glyphing
+ggplot(mpg) + GeomStar$new(mapping = aes(r = hwy, angle = cty, x = 0, y = 0, 
+  group = cyl)) + facet_wrap(~cyl)
+
+ggplot(test.data) + geom_star(mapping = aes(x = 0, y = 0, 
+  r = Catholic, angle = Fertility, group = lat)) + facet_wrap(~lat)
+
+ggplot(nasa) + ply_aes(geom_star(aes(r = ozone, angle = date, x = 0, y = 0, 
+  fill = mean(temperature))), c("lat")) + facet_wrap(~ lat)
+
+ggplot(nasa) + map_nasa +
+  glyph(geom_star(aes(r = ozone, angle = date, x = 0, y = 0, 
+  fill = mean(temperature))), aes(long[1], lat[1]), c("long", "lat"))
+
+ggplot(mpg) + ply_aes(geom_star(mapping = aes(x = cyl[1], y = 1, 
+  r = hwy, angle = cty, fill = mean(hwy), group = cyl)))
+
+ggplot(nasa) + geom_star(aes(r = ozone, angle = date, x = 0, y = 0))
+
+# new gridding
+ggplot(test.data) + geom_point(aes(Fertility, Education))
+ggplot(test.data) + 
+  grid(geom_point(aes(Fertility, Education)), x.nbin = 10, y.nbin = 10, 
+       ref= ref_box(aes(fill = mean(Catholic))))
+
+cheap.diamonds <- subset(diamonds, price <= 5000 & price >= 600)
+ggplot(cheap.diamonds) +
+  grid(geom_bar(aes(x = color, fill = color), position = "dodge"),
+    grid.aes = aes(x = carat, y = price), x.nbin = 10, y.nbin = 14,
+    y_scale = free, height.adjust = 0.5, width.adjust = 0.5,
+    ref = ref_box(aes(color = length(color))))
 
 
-#########################################################
-###               testing geom_dart                   ###
-#########################################################
-dart.data <- data.frame(x = 0, y = 0, angle = 0, width = 2, size = 1)
-darts.data <- data.frame(x = 0, y = 1:3, angle = 0, width = 1:3, size = 1, gid = 1:3)
-ggplot(dart.data, aes(x = x, y = y)) + geom_dart()
-ggplot(data.frame(x=0, y=0,angle = seq(pi/4, 2 * pi, by = pi/2)), aes(x = x, y = y, width = 3, fill = angle, angle = angle, group = angle)) + geom_dart() + coord_map()
+# trying out geom_coxcomb
+p <- ggplot(mpg) + 
+  geom_bar(aes(x = trans, fill = as.factor(cyl)), position = "stack") + 
+  coord_polar() +
+  facet_wrap(~year)
 
-qplot(x, y, data = dart.data, geom = "dart")
-ggplot() + geom_plyr(aes(x = long[1], angle = mean(Fertility), y = lat[1], width = mean(Education), group = interaction(lat, long)), test.data, c("lat", "long"), geom = "dart")
+mpg$lat <- sample(1:4, nrow(mpg), replace = TRUE)
+ggplot(mpg) + GeomCoxcomb$new(mapping = aes(angle = trans, fill = lat, 
+  group = lat)) + facet_wrap(~cyl)
+ggplot(mpg) + geom_coxcomb(aes(angle = trans, fill = lat))
 
-qplot(lat, long, data = test.data, geom = "dart")
 
+ggplot(seasons) + 
+  glyph(
+    geom_line(aes(x = time, y = pred)), 
+    major = aes(lon[1], lat[1]), glyph.by = "stn", 
+    height = 1, width = 2,
+    ref = ref_box(aes(fill = avg)), merge = TRUE)
+
+###########################################
+###          not yet working            ###
+###########################################
+load_all("../ggplyr")

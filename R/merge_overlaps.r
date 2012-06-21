@@ -1,21 +1,28 @@
+#' Identify and merge overlapping glyph assignments
+#' 
+#' merge_overlaps checks glyph positions against glyph width and heights to 
+#' identify groups of overlapping glyphs. It then computes an alternative GLYPH 
+#' variable that assigns all glyphs in an overlapping group to the same name.
+#' 
+#' @keywords internal
+#' @param globals a data frame of glyph names and positions
+#' @param width glyph width in the same units as the global x positions
+#' @param height glyph height in the same units as global y positions
+#' @return A named vector The names of the vector correspond to old glyph 
+#' assignments, the values correspond to new assignments that merge overlapping 
+#' glyphs.
+#' @export
 merge_overlaps <- function(globals, width, height) {
-	globals <- globals[c(".gid", "x", "y")]
-	globals <- arrange(globals, x)
-	g1 <- globals[1:(nrow(globals) - 1), ]
-	g2 <- globals[-1, ]
+  x.overlaps <- abs(outer(globals$x, globals$x, "-")) < width
+  y.overlaps <- abs(outer(globals$y, globals$y, "-")) < height
+  overlaps <- data.frame(x.overlaps & y.overlaps)
+  names(overlaps) <- as.character(globals$GLYPH)
 
-	x.overlaps <- abs(g1$x - g2$x) < width 
-	y.overlaps <- abs(g1$y - g2$y) < height
-	overlaps <- x.overlaps & y.overlaps
-	
-	# but what about multiple overlaps?
-	new = g1$.gid[overlaps]
-	old = g2$.gid[overlaps]
-	still.old <- which(new %in% old)
-	while(length(still.old)) {
-		new[still.old[1]] <- new[which(old == new[still.old[1]])]
-		still.old <- which(new %in% old)
-	}
-	names(new) <- old
-	new
+  for (i in seq_along(overlaps)) {
+    names(overlaps)[overlaps[[i]]] <- names(overlaps)[i]
+  }
+  vec <- as.numeric(factor(names(overlaps)))
+  names(vec) <- globals$GLYPH
+  vec
 }
+  

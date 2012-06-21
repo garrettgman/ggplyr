@@ -1,0 +1,16 @@
+glyphmaps
+stringr
+scales
+grid
+proto
+plyr
+ggplot2
+devtools
+knitr
+stats
+graphics
+grDevices
+utils
+datasets
+methods
+base

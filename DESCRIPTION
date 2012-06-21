@@ -1,4 +1,4 @@
-Package: ggplyr
+Package: glyphmaps
 Maintainer: Garrett Grolemund <grolemund@rice.edu>
 License: GPL
 Title: Explore large data with binned modelling
@@ -14,36 +14,27 @@ Imports:
     plyr,
     proto,
     grid,
-    scales
+    scales,
+    stringr
 Depends:
+    methods,
     R (>= 2.15)
 Collate:
-    'ggtransform.r'
-    'ggplyr-class.r'
-    'gglayer-class.r'
-    'fun.r'
-    'gglayer_build.R'
+    'glyph_build.r'
+    'glyphs-class.r'
+    'glayer-class.r'
+    'glyph.r'
+    'merge_overlaps.r'
     'util.r'
-    'group_by.r'
     'rel-class.r'
     'rescalers.r'
-    'dgply.r'
-    'dyply.r'
-    'ggply.r'
-    'gyply.r'
-    'lgply.r'
-    'lyply.r'
-    'nest.r'
-    'ygply.r'
-    'yyply.r'
-    'compute_plyr_aes.r'
-    'in_place.r'
-    'geom_plyr.r'
-    'ggplyr_build.r'
+    'glayer_build.r'
     'ref_box.r'
-    'ref_hline.r'
-    'ref_points.r'
-    'ref_vline.r'
+    'ply_aes.r'
     'grid.r'
-    'merge_overlaps.r'
-    'geom_dart.r'
+    'group_by.r'
+    'aesply.r'
+    'geom_star.r'
+    'geom_coxcomb.r'
+    'data.r'
+    'package.r'

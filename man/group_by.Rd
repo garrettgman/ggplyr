@@ -1,19 +1,20 @@
 \name{group_by}
 \alias{group_by}
-\title{group_by groups a data frame into a list of smaller data frames. Each smaller data frame contains all of the rows of the original data frame that contain one unique combination of the sorting variables.}
+\title{Specify how to group data during build.}
 \usage{
-  group_by(data, vars)
+  group_by(vars)
 }
 \arguments{
-  \item{data}{a data frame to group}
-
-  \item{the}{name of the variable(s) to group by, as
-  character strings}
+  \item{vars}{variable names to group a data set by, stored
+  as a character vector}
 }
 \description{
-  group_by groups a data frame into a list of smaller data
-  frames. Each smaller data frame contains all of the rows
-  of the original data frame that contain one unique
-  combination of the sorting variables.
+  group_by is a second order function: it returns a
+  function that can be used on a data set to provide a
+  grouping variable. This allows functions like
+  \code{\link{glyph}} and \code{\link{grid}} to specify how
+  to group data when a glayer inherits a plot level data
+  set at build time.
 }
+\keyword{internal}
 

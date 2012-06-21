@@ -405,164 +405,72 @@
 
 
 
-\title{A Minimal Demo of glyphmaps}
+\title{A Minimal Demo of \texttt{glyphmaps}}
 
 
 \author{Garrett Grolemund}
 
 \maketitle
-This document demonstrates the basic features of the \texttt{glyphmaps} package (name may change). \texttt{glyphmaps} was written to create plots like the ones below. Each was made with \texttt{glyphmaps}. The first two plots recreate plots from \citet{wickham2011split}. The last two recreate plots from \citet{wickham2012glyph}. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-To run the examples contained in this paper, you'll have to download the \texttt{glyphmaps} development package from \url{https://github.com/garrettgman/ggplyr} and install it with
+This document demonstrates the basic features of the \texttt{glyphmaps} package (name may change). \texttt{glyphmaps} was written to create plots like the ones below, which recreate plots similar to those in \citet{wickham2011split} and \citet{wickham2012glyph}. Each plot is made with \texttt{glyphmaps}. To run the examples in this document please download the \texttt{glyphmaps} package with the code below. (Note: Install won't work until I finish documenting the namespace. But cloning and load_all() DOES work.)
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{flushleft}
 \ttfamily\noindent
 \hlfunctioncall{library}\hlkeyword{(}\hlsymbol{devtools}\hlkeyword{)}\hspace*{\fill}\\
-\hlstd{}\hlfunctioncall{load\usebox{\hlnormalsizeboxunderscore}all}\hlkeyword{(}\hlstring{"{}glyphmaps"{}}\hlkeyword{)}\mbox{}
+\hlstd{}\hlfunctioncall{install\usebox{\hlnormalsizeboxunderscore}github}\hlkeyword{(}\hlstring{"{}ggplyr"{}}\hlkeyword{,}{\ }\hlstring{"{}garrettgman"{}}\hlkeyword{,}{\ }\hlstring{"{}glyphmaps"{}}\hlkeyword{)}\mbox{}
 \normalfont
 \end{flushleft}
 \begin{verbatim}
-## Error: Can't find package glyphmaps
+## Installing github repo(s) ggplyr/glyphmaps from garrettgman
+## Installing ggplyr.zip from https://github.com/garrettgman/ggplyr/zipball
+## Installing glyphmaps
+## Error: Command failed (1)
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{library}\hlkeyword{(}\hlsymbol{glyphmaps}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## Error: there is no package called 'glyphmaps'
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
 
 
-I haven't yet built the namespace or completed the documentation files, because the exact syntax / function membership hasn't been settled. As a result, the package will fail \begin{verbatim}
-
-Error in paste(repo, branch, sep = "/", collapse = ", ") : 
-  argument "repo" is missing, with no default
-
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{ggplot}\hlkeyword{(}\hlsymbol{seasons}\hlkeyword{)}{\ }\hlkeyword{+}{\ }\hlsymbol{map\usebox{\hlnormalsizeboxunderscore}us}{\ }\hlkeyword{+}{\ }\hlfunctioncall{grid}\hlkeyword{(}\hlfunctioncall{geom\usebox{\hlnormalsizeboxunderscore}line}\hlkeyword{(}\hlfunctioncall{aes}\hlkeyword{(}\hlargument{x}{\ }\hlargument{=}{\ }\hlsymbol{time}\hlkeyword{,}{\ }\hlargument{y}{\ }\hlargument{=}{\ }\hlsymbol{pred}\hlkeyword{)}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{grid.aes}{\ }\hlargument{=}{\ }\hlfunctioncall{aes}\hlkeyword{(}\hlsymbol{lon}\hlkeyword{,}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlsymbol{lat}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{x.nbin}{\ }\hlargument{=}{\ }\hlnumber{58}\hlkeyword{,}{\ }\hlargument{y.nbin}{\ }\hlargument{=}{\ }\hlnumber{25}\hlkeyword{,}{\ }\hlargument{ref}{\ }\hlargument{=}{\ }\hlfunctioncall{ref\usebox{\hlnormalsizeboxunderscore}box}\hlkeyword{(}\hlfunctioncall{aes}\hlkeyword{(}\hlargument{fill}{\ }\hlargument{=}{\ }\hlsymbol{avg}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{alpha}{\ }\hlargument{=}{\ }\hlnumber{0.2}\hlkeyword{,}{\ }\hlargument{color}{\ }\hlargument{=}{\ }\hlnumber{NA}\hlkeyword{)}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## Error: could not find function "ggplot"
 \end{verbatim}
-.
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{ggplot}\hlkeyword{(}\hlsymbol{nasa}\hlkeyword{)}{\ }\hlkeyword{+}{\ }\hlsymbol{map\usebox{\hlnormalsizeboxunderscore}nasa}{\ }\hlkeyword{+}{\ }\hlfunctioncall{glyph}\hlkeyword{(}\hlfunctioncall{geom\usebox{\hlnormalsizeboxunderscore}star}\hlkeyword{(}\hlfunctioncall{aes}\hlkeyword{(}\hlargument{r}{\ }\hlargument{=}{\ }\hlsymbol{ozone}\hlkeyword{,}{\ }\hlargument{angle}{\ }\hlargument{=}{\ }\hlsymbol{date}\hlkeyword{,}{\ }\hlargument{x}{\ }\hlargument{=}{\ }\hlnumber{0}\hlkeyword{,}{\ }\hlargument{y}{\ }\hlargument{=}{\ }\hlnumber{0}\hlkeyword{,}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlargument{fill}{\ }\hlargument{=}{\ }\hlfunctioncall{mean}\hlkeyword{(}\hlsymbol{temperature}\hlkeyword{)}\hlkeyword{)}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{major.aes}{\ }\hlargument{=}{\ }\hlfunctioncall{aes}\hlkeyword{(}\hlsymbol{long}\hlkeyword{[}\hlnumber{1}\hlkeyword{]}\hlkeyword{,}{\ }\hlsymbol{lat}\hlkeyword{[}\hlnumber{1}\hlkeyword{]}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{glyph.by}{\ }\hlargument{=}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlstring{"{}long"{}}\hlkeyword{,}{\ }\hlstring{"{}lat"{}}\hlkeyword{)}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## Error: could not find function "ggplot"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
+
 
 \section{Glyphs}
-The above graphs are similar in that they are all built around glyphs. I define a glyph as a geom that visually summarises information about a subset of data. Glyphs can be quite simple, or very complex. Often glyphs contain their own internal coordinate systems. The star glyphs in Figure~\ref{fig:star-glyphs} illustrate how glyphs can contain an internal (minor) coordinate system and can still be plotted in an external (major) coordinate system.
+The common feature of these graphs is that they are built around glyphs. Glyphs are geometric objects (i.e, geoms) designed to display information within the geom. In other words, a glyph can display information even if it is drawn by itself, without references to an external coordinate system. In reality, all geoms are a type of glyph, but the term glyph is usually reserved for complicated geoms, such as those that contain their own internal coordinate systems. The star glyphs in Figure~\ref{fig:star-glyphs} illustrate how glyphs can contain an internal (minor) coordinate system and can still be plotted in an external (major) coordinate system.
 
 
 
-
-\section{glyphmaps geoms}
-\texttt{glyphmaps} introduces a number of new geoms that make it easy to create glyphs. These geoms can be used in conjunction with \texttt{ggplot2} functions to create layered plots. \texttt{glyphmaps} geoms behave just like \texttt{ggplot2} geoms, but take two additional arguments, described in Section~\ref{sec:args}.
-
-
-
-
-
-
-
-
-
-
-\subsection{new arguments}
-\label{sec:args}
-Each \texttt{glyphmaps} geom takes two new arguments, \begin{verbatim}
-
-Error in eval(expr, envir, enclos) : object 'glyphs' not found
-
-\end{verbatim}
- and \begin{verbatim}
-
-Error in eval(expr, envir, enclos) : object 'reference' not found
-
-\end{verbatim}
-. \begin{verbatim}
-
-Error in eval(expr, envir, enclos) : object 'glyphs' not found
-
-\end{verbatim}
- controls how the data will be divided into subsets to be paired with individual glyphs. \begin{verbatim}
-
-Error in eval(expr, envir, enclos) : object 'reference' not found
-
-\end{verbatim}
- lets the user draw reference features with the glyphs to facilitate comparisons.
-
-\begin{verbatim}
-
-Error in eval(expr, envir, enclos) : object 'glyphs' not found
-
-\end{verbatim}
- takes the name of the variable(s) to be used to divide the data into the subsets that will correspond to different glyphs. The \begin{verbatim}
-
-Error in eval(expr, envir, enclos) : object 'glyphs' not found
-
-\end{verbatim}
- argument works just like a \begin{verbatim}
-
-Error in eval(expr, envir, enclos) : object '.vars' not found
-
-\end{verbatim}
- argument in a \begin{verbatim}
-
-Error in eval(expr, envir, enclos) : object 'ddply' not found
-
-\end{verbatim}
- call. (In fact, the \begin{verbatim}
-
-Error in eval(expr, envir, enclos) : object 'glyphs' not found
-
-\end{verbatim}
- argument in a \texttt{glyphmaps} geom will be passed into a \begin{verbatim}
-
-Error in eval(expr, envir, enclos) : object 'ddply' not found
-
-\end{verbatim}
- call as the \begin{verbatim}
-
-Error in eval(expr, envir, enclos) : object '.vars' not found
-
-\end{verbatim}
- argument.)
-
-\texttt{glyphmaps} provides methods for drawing four types of reference objects behind glyphs: boxes, vertical lines, horizontal lines, and corner points. These objects help viewers make comparisons between data inside different glyphs.
-
-
-
-
-
-
-
-\section{Generalized glyphs}
-Users are not limited to the pre-packaged glyph geoms. Any single layer plot can be turned into a glyph using the \begin{verbatim}
-
-Error in eval(expr, envir, enclos) : object 'glyph' not found
-
-\end{verbatim}
- and \begin{verbatim}
-
-Error in eval(expr, envir, enclos) : object 'plyr' not found
-
-\end{verbatim}
- functions.
-
-
-
-
-
-
-
-The plyr function also allows users to key aesthetics to subgroups of data.
-
-
-
-
-\section{Discussion - glyphs, embedded graphics, hierarchies}
-Glyphs are geometric objects (i.e, geoms) designed to display information within the geom. In other words, a glyph can display information even if it is drawn by itself, without references to an external coordinate system. In reality, all geoms are a type of glyph, but the term glyph is usually reserved for complicated geoms, such as those that contain their own internal coordinate systems.
 
 Glyphs reveal a hierarchical structure of graphics: every plot is a collection of geoms, each of which can be thought of as its own self contained plot. Sometimes these subplots are not very interesting, as in the subplot created by a single point geom. At other times, thee subplots are quite complex, as in the star glyph of Figure~\ref{fig:star-glyphs}.
 
@@ -580,6 +488,17 @@ Although we have chosen to describe such plots as glyph maps, they really repres
 
 (Interesetingly most embedded plots have settled to the stage of embedding plots within a geographic map. This resembles how Wainer, Tufte and others have traced the development of graphs through a concrete stage where cartesian axes seldom refered to anything other than latitude and longitude. Eventually graphs became more sophisticated and axes were used to represent  abstract concepts. Perhaps embedded plots are developing through the same process, or perhaps the complexity of visualizing two orders of data at once requires one order to have a concrete interpretation.)
 
+To run the examples contained below, you'll have to download the \texttt{ggplyr} development package from \url{https://github.com/garrettgman/ggplyr} and install it with
+
+
+I haven't yet built the namespace or completed the documentation files, because the exact syntax / function membership hasn't been settled. As a result, the package will fail \begin{verbatim}
+
+Error in paste(repo, branch, sep = "/", collapse = ", ") : 
+  argument "repo" is missing, with no default
+
+\end{verbatim}
+.
+
 
 \section{top down methods}
 \texttt{ggplyr}'s top down methods help users fit glyphs into existing methods of visualization. These methods provide new geoms (often based on new grobs) that can be used alongside existing geoms in \texttt{ggplot2}. 
@@ -595,40 +514,14 @@ Top down methods are difficult to implement in \texttt{ggplot2} for two reasons
 
 
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{flushleft}
-\ttfamily\noindent
-\hlfunctioncall{set.seed}\hlkeyword{(}\hlnumber{1121}\hlkeyword{)}\hspace*{\fill}\\
-\hlstd{}\hlkeyword{(}\hlsymbol{x}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{rnorm}\hlkeyword{(}\hlnumber{20}\hlkeyword{)}\hlkeyword{)}\mbox{}
-\normalfont
-\end{flushleft}
-\begin{verbatim}
-##  [1]  0.14496  0.43832  0.15319  1.08494  1.99954 -0.81188  0.16027  0.58589  0.36009
-## [10] -0.02531  0.15088  0.11008  1.35968 -0.32699 -0.71638  1.80977  0.50840 -0.52746
-## [19]  0.13272 -0.15594
-\end{verbatim}
-\begin{flushleft}
-\ttfamily\noindent
-\hlfunctioncall{mean}\hlkeyword{(}\hlsymbol{x}\hlkeyword{)}\mbox{}
-\normalfont
-\end{flushleft}
-\begin{verbatim}
-## [1] 0.3217
-\end{verbatim}
-\begin{flushleft}
-\ttfamily\noindent
-\hlfunctioncall{var}\hlkeyword{(}\hlsymbol{x}\hlkeyword{)}\mbox{}
-\normalfont
-\end{flushleft}
-\begin{verbatim}
-## [1] 0.5715
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
 
 
-The first element of \texttt{x} is 0.145. Boring boxplots
+The first element of \texttt{x} is \begin{verbatim}
+
+Error in eval(expr, envir, enclos) : object 'x' not found
+
+\end{verbatim}
+. Boring boxplots
 and histograms recorded by the PDF device:
 
 \begin{knitrout}
@@ -638,17 +531,21 @@ and histograms recorded by the PDF device:
 \hlcomment{\usebox{\hlnormalsizeboxhash}\usebox{\hlnormalsizeboxhash}{\ }two{\ }plots{\ }side{\ }by{\ }side{\ }(option{\ }fig.show=\usebox{\hlnormalsizeboxsinglequote}hold\usebox{\hlnormalsizeboxsinglequote})}\hspace*{\fill}\\
 \hlstd{}\hlfunctioncall{par}\hlkeyword{(}\hlargument{mar}{\ }\hlargument{=}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{4}\hlkeyword{,}{\ }\hlnumber{4}\hlkeyword{,}{\ }\hlnumber{0.1}\hlkeyword{,}{\ }\hlnumber{0.1}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{cex.lab}{\ }\hlargument{=}{\ }\hlnumber{0.95}\hlkeyword{,}{\ }\hlargument{cex.axis}{\ }\hlargument{=}{\ }\hlnumber{0.9}\hlkeyword{,}{\ }\hlargument{mgp}{\ }\hlargument{=}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{0.7}\hlkeyword{,}{\ }\hlnumber{0}\hlkeyword{)}\hlkeyword{,}\hspace*{\fill}\\
 \hlstd{}{\ }{\ }{\ }{\ }\hlargument{tcl}{\ }\hlargument{=}{\ }\hlkeyword{-}\hlnumber{0.3}\hlkeyword{,}{\ }\hlargument{las}{\ }\hlargument{=}{\ }\hlnumber{1}\hlkeyword{)}\hspace*{\fill}\\
-\hlstd{}\hlfunctioncall{boxplot}\hlkeyword{(}\hlsymbol{x}\hlkeyword{)}\hspace*{\fill}\\
-\hlstd{}\hlfunctioncall{hist}\hlkeyword{(}\hlsymbol{x}\hlkeyword{,}{\ }\hlargument{main}{\ }\hlargument{=}{\ }\hlstring{"{}"{}}\hlkeyword{)}\mbox{}
+\hlstd{}\hlfunctioncall{boxplot}\hlkeyword{(}\hlsymbol{x}\hlkeyword{)}\mbox{}
 \normalfont
 \end{flushleft}
+\begin{verbatim}
+## Error: object 'x' not found
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{hist}\hlkeyword{(}\hlsymbol{x}\hlkeyword{,}{\ }\hlargument{main}{\ }\hlargument{=}{\ }\hlstring{"{}"{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## Error: object 'x' not found
+\end{verbatim}
 \end{kframe}
-
-{\centering \includegraphics[width=.4\linewidth]{figure/minimal-boring-plots1} \includegraphics[width=.4\linewidth]{figure/minimal-boring-plots2} 
-
-}
-
-
 \end{knitrout}
 
 
