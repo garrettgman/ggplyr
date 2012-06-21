@@ -20,9 +20,7 @@
 
 <<setup,echo=FALSE,results=hide,message=FALSE>>=
 # this is equivalent to \SweaveOpts{...}
-opts_chunk$set(fig.path='figure/minimal-', fig.align='center', fig.show='hold', fig.lp='fig:')
-opts_knit$set(cache = TRUE)
-opts_knit$set(tidy = FALSE)
+opts_chunk$set(fig.path='figure/', fig.align='center', fig.show='hold', fig.lp='fig:', cache.path = 'cache/', cache = TRUE, tidy = FALSE)
 opts_knit$set(replace.assign=TRUE, width=90)
 setwd("/Users/GarrettsiMac/Documents/git/ggplyr")
 library(devtools)
