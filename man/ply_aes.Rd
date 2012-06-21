@@ -5,7 +5,7 @@
   ply_aes(layer, .vars = NULL)
 }
 \arguments{
-  \item{layer}{a ggplot2 layer or glayer object. This
+  \item{layer}{a ggplot2 layer or sp_layer object. This
   layer's aesthetics will be computed groupwise, but the
   layer will remain the same in every other respect.}
 
@@ -25,7 +25,7 @@
   Users may specify which groupings to use through the
   .vars argument. If this argument is left NULL, ply_aes
   will search for and use a group aes, a glyphing or
-  gridding criteria (in a glayer), a facetting criteria, or
-  any combination of these that it finds.
+  gridding criteria (in a sp_layer), a facetting criteria,
+  or any combination of these that it finds.
 }
 

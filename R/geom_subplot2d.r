@@ -60,7 +60,7 @@ grid <- function(layer, grid.aes = ggplot2::aes(), x.nbin = 10, y.nbin = 10,
   x_scale = identity, y_scale = identity, width.adjust = 0.95, 
   height.adjust = 0.95, reference = ref_box(), ply.aes = TRUE, .ref = FALSE) {
   
-  if (is.glayer(layer) || is.list(layer)) {
+  if (is.sp_layer(layer) || is.list(layer)) {
     stop("Cannot grid glayer", call. = TRUE)
   }
  # if ("plyr" %in% ls(layer)) {
@@ -94,17 +94,17 @@ grid <- function(layer, grid.aes = ggplot2::aes(), x.nbin = 10, y.nbin = 10,
   
   if (is.null(reference)) {
     if (ply.aes) {
-      ply_aes(glayer(layer))
+      ply_aes(sp_layer(layer))
     } else {
-      glayer(layer)
+      sp_layer(layer)
     }
   } else {
     ref.layer <- reference(layer, "grid", grid.aes, x.nbin = x.nbin, 
       y.nbin = y.nbin)
     if (ply.aes) {
-      list(ref.layer, ply_aes(glayer(layer)))
+      list(ref.layer, ply_aes(sp_layer(layer)))
     } else {
-      list(ref.layer, glayer(layer))
+      list(ref.layer, sp_layer(layer))
     }
   }
 }

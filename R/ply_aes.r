@@ -9,10 +9,10 @@
 #' 
 #' Users may specify which groupings to use through the .vars 
 #' argument. If this argument is left NULL, ply_aes will search for and use a 
-#' group aes, a glyphing or gridding criteria (in a glayer), a facetting 
+#' group aes, a glyphing or gridding criteria (in a sp_layer), a facetting 
 #' criteria, or any combination of these that it finds. 
 #' 
-#' @param layer a ggplot2 layer or glayer object. This layer's aesthetics will 
+#' @param layer a ggplot2 layer or sp_layer object. This layer's aesthetics will 
 #' be computed groupwise, but the layer will remain the same in every other 
 #' respect.
 #' @param .vars variable names to group by (optional), stored as a character 
@@ -27,8 +27,8 @@ ply_aes.list <- function(layer, .vars = NULL) {
   lapply(layer, ply_aes, .vars)
 }
 
-#' @S3method ply_aes glayer
-ply_aes.glayer <- function(layer, .vars = NULL) {
+#' @S3method ply_aes sp_layer
+ply_aes.sp_layer <- function(layer, .vars = NULL) {
   if (!is.null(.vars)) {
     layer$plyr <- list(ply.by = .vars)
   } else {

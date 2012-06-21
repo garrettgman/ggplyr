@@ -1,19 +1,21 @@
-#' Build a glayer for rendering
+#' Build a sp_layer for rendering
 #' 
-#' glayer_build takes a glyph layer (class glayer), and performs all steps 
-#' necessary to produce an object that can be rendered. This function outputs 
-#' two pieces: a list of data frames (one for each layer), and a panel object, 
-#' which contain all information about axis limits, breaks, etc.
+#' sp_layer_build takes a layer of subplots (class sp_layer), and performs all 
+#' steps necessary to produce an object that can be rendered. This function 
+#' outputs two pieces: a list of data frames (one for each layer), and a panel 
+#' object, which contains all information about axis limits, breaks, etc.
 #' 
-#' If the glayer is accompanied by regular layers, glayer_build will be used in 
-#' conjunction with \code{\link{glyph_build}} to build the plot for rendering.
+#' If the sp_layer is accompanied by regular layers, sp_layer_build will be used 
+#' in conjunction with \code{\link{ggsubplot_build}} to build the plot for 
+#' rendering.
 #' 
 #' @keywords internal
-#' @param layer an object of class glayer
-#' @seealso print.glyphs and \code{\link{glyph_build}} for 
-#' functions that contain the complete set of steps for generating a glyphs plot
+#' @param layer an object of class sp_layer
+#' @seealso print.ggsubplot and \code{\link{ggsubplot_build}} for 
+#' functions that contain the complete set of steps for generating a ggsubplot 
+#' plot
 #' @export
-glayer_build <- function(layer) {
+sp_layer_build <- function(layer) {
   if (!("embed" %in% ls(layer))) {
     stop("layer does not have embedded subplots")
   }
@@ -54,7 +56,7 @@ glayer_build <- function(layer) {
   minor
 }
 
-#' Format data from a facet plot to use in a glyph plot
+#' Format data from a facet plot to use in a ggsubplot plot
 #' 
 #' unpanel replaces the PANEL variable of a data frame with a GLYPH variable. It 
 #' adjusts the data frame's group variable to retain the grouping information 

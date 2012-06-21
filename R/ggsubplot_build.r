@@ -1,33 +1,33 @@
-#' Build a glyphs object for rendering
+#' Build a ggsubplot object for rendering
 #' 
-#' glyph_build takes a glyph plot object (class glyphs), and performs all steps 
+#' ggsubplot_build takes a ggsubplot object and performs all steps 
 #' necessary to produce an object that can be rendered. This function outputs 
 #' two pieces: a list of data frames (one for each layer), and a panel object, 
 #' which contain all information about axis limits, breaks, etc.
 #' 
 #' @keywords internal
-#' @param layer an object of class glayer
-#' @seealso print.glyphs and \code{\link{glayer_build}} for functions that contain the complete 
-#' set of steps for generating a glyphs plot
+#' @param layer an object of class sp_layer
+#' @seealso print.ggsubplot and \code{\link{sp_layer_build}} for functions that 
+#' contain the complete set of steps for generating a ggsubplot plot
 #' @export
-glyph_build <- function(plot){
+ggsubplot_build <- function(plot){
   if (length(plot$layers) == 0) stop("No layers in plot", call.=FALSE)
   if (!identical(plot$facet, ggplot2::facet_null())) {
-  	stop("glyphs do not support facetting", call. = FALSE)
+  	stop("ggsubplots do not support facetting", call. = FALSE)
   }
 	
   plot <- ggplot2:::plot_clone(plot)
   layers <- plot$layers
   layers <- propogate_data(layers, plot$data)
 	
-  # separate into glayers and normal layers
-  gls <- unlist(lapply(layers, is.glayer))
-  if (all(!gls)) return(ggplot2::ggplot_build(plot))
-  if (all(gls) && sum(gls) == 1) return(glayer_build(layers[[gls]]))
-  glayers <- layers[gls]
-  plot$layers <- layers[!gls]
-  gl.order <- seq_along(layers)[gls]
-  nl.order <- seq_along(layers)[!gls]
+  # separate into sp_layers and normal layers
+  spls <- unlist(lapply(layers, is.sp_layer))
+  if (all(!spls)) return(ggplot2::ggplot_build(plot))
+  if (all(spls) && sum(spls) == 1) return(sp_layer_build(layers[[spls]]))
+  splayers <- layers[spls]
+  plot$layers <- layers[!spls]
+  spl.order <- seq_along(layers)[spls]
+  nl.order <- seq_along(layers)[!spls]
 	
   # build normal layers
   normal <- NULL
@@ -37,8 +37,8 @@ glyph_build <- function(plot){
 	
   # build glyph layers (embedded plots)
   embedded <- list()
-  for (i in seq_along(glayers)) {
-    embedded[[i]] <- glayer_build(glayers[[i]])
+  for (i in seq_along(splayers)) {
+    embedded[[i]] <- sp_layer_build(splayers[[i]])
   }
 	
 	
@@ -51,7 +51,7 @@ glyph_build <- function(plot){
   # take care to order
   edata <- lapply(embedded, function(bd) bd$data[[1]])
   data <- list()
-  data[gl.order] <- edata
+  data[spl.order] <- edata
   data[nl.order] <- normal$data
 	
   # panel
@@ -77,11 +77,11 @@ glyph_build <- function(plot){
 	
   # layers
   # take care to order
-  gl.layers <- build$plot$layers
+  spl.layers <- build$plot$layers
   for (i in seq_along(embedded[-1])) {
-    gl.layers <- c(gl.layers, embedded[[i + 1]]$plot$layers)
+    spl.layers <- c(spl.layers, embedded[[i + 1]]$plot$layers)
   }
-  layers[gl.order] <- gl.layers
+  layers[spl.order] <- spl.layers
   layers[nl.order] <- normal$plot$layers
   
   # labels 

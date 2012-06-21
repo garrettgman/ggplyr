@@ -2,7 +2,7 @@
 ###             geom_scatterplots               ###
 ###################################################
 library(devtools)
-install_github("ggplyr", "garrettgman", "glyphmaps")
+install_github("ggplyr", "garrettgman", "ggsubplot")
 library(glyphmaps)
 load_all("../ggplyr")
 load("data/nasa.RData")
@@ -172,12 +172,12 @@ ggplot(mpg) + GeomCoxcomb$new(mapping = aes(angle = trans, fill = lat,
 ggplot(mpg) + geom_coxcomb(aes(angle = trans, fill = lat))
 
 
-ggplot(seasons) + 
+system.time(print(ggplot(seasons) + 
   glyph(
     geom_line(aes(x = time, y = pred)), 
     major = aes(lon[1], lat[1]), glyph.by = "stn", 
     height = 1, width = 2,
-    ref = ref_box(aes(fill = avg)), merge = TRUE)
+    ref = ref_box(aes(fill = avg)), merge = TRUE)))
 
 ###########################################
 ###          not yet working            ###

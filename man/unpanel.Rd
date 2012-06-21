@@ -1,6 +1,6 @@
 \name{unpanel}
 \alias{unpanel}
-\title{Format data from a facet plot to use in a glyph plot}
+\title{Format data from a facet plot to use in a ggsubplot plot}
 \usage{
   unpanel(df)
 }

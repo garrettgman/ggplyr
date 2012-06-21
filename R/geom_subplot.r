@@ -84,17 +84,17 @@ glyph <- function(layer, major.aes, glyph.by = NULL, width = rel(0.95),
     
   if (is.null(reference)) {
     if (ply.aes) {
-  	  ply_aes(glayer(layer))
+  	  ply_aes(sp_layer(layer))
     } else {
-      glayer(layer)
+      sp_layer(layer)
     }
   } else {
   	ref.layer <- reference(layer, "glyph", major.aes, glyph.by, width, height, 
   	  merge.overlaps)
     if (ply.aes) {
-  	  list(ref.layer, ply_aes(glayer(layer)))
+  	  list(ref.layer, ply_aes(sp_layer(layer)))
     } else {
-      list(ref.layer, glayer(layer))
+      list(ref.layer, sp_layer(layer))
     }
   }
 }
@@ -155,10 +155,10 @@ assign_glyphs <- function(., data) {
   data
 }
 
-# Calculate final positions in a glayer
+# Calculate final positions in a sp_layer
 # 
-# combine_glyphs calculates the final positions for every location in a glayer.
-# glayer_build first builds each glyph separately as if it were a facet. If 
+# combine_glyphs calculates the final positions for every location in a sp_layer.
+# sp_layer_build first builds each glyph separately as if it were a facet. If 
 # plotted, these glyphs would overlap with each other. combine_glyph relocates 
 # each glyph based on the global positions stored in the layer's embed variable.
 combine_glyphs <- function(., data) {  

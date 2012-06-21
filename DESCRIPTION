@@ -1,13 +1,15 @@
-Package: glyphmaps
+Package: ggsubplot
 Maintainer: Garrett Grolemund <grolemund@rice.edu>
 License: GPL
-Title: Explore large data with binned modelling
+Title: Explore complex data by embedding subplots within plots.
 LazyData: true
 Type: Package
 Author: Garrett Grolemund <grolemund@rice.edu>, Hadley
     Wickham <h.wickham@gmail.com>
-Description: modelglyphs makes it easy to view the output
-    of models that are applied to subsets of the data.
+Description: ggsubplot makes it easy to embed customized subplots within larger
+    graphics. Subplots may be used as a geom to explore interaction effects,
+    spatial data, and hierarchical data. Subplots can also be used to explore
+    big data without overplotting.
 Version: 0.1.0
 Imports:
     ggplot2,
@@ -20,21 +22,21 @@ Depends:
     methods,
     R (>= 2.15)
 Collate:
-    'glyph_build.r'
-    'glyphs-class.r'
-    'glayer-class.r'
-    'glyph.r'
+    'aesply.r'
+    'data.r'
+    'geom_coxcomb.r'
+    'geom_star.r'
+    'geom_subplot.r'
+    'geom_subplot2d.r'
+    'ggsubplot-class.r'
+    'ggsubplot_build.r'
+    'group_by.r'
     'merge_overlaps.r'
-    'util.r'
+    'package.r'
+    'ply_aes.r'
+    'ref_box.r'
     'rel-class.r'
     'rescalers.r'
-    'glayer_build.r'
-    'ref_box.r'
-    'ply_aes.r'
-    'grid.r'
-    'group_by.r'
-    'aesply.r'
-    'geom_star.r'
-    'geom_coxcomb.r'
-    'data.r'
-    'package.r'
+    'sp_layer-class.r'
+    'sp_layer_build.r'
+    'util.r'
