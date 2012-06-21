@@ -15,20 +15,20 @@
 #' functions that contain the complete set of steps for generating a ggsubplot 
 #' plot
 #' @export
-sp_layer_build <- function(layer) {
+sp_layer_build <- function(layer, plot.env) {
   if (!("embed" %in% ls(layer))) {
     stop("layer does not have embedded subplots")
   }
-	 
+  
   layer <- layer_clone(layer)
-  layer$data <- layer$assign_glyphs(layer$data)
+  layer$data <- layer$assign_subplots(layer$data, plot.env)
   minor <- ggplot2::ggplot_build(ggplot2::ggplot() + layer + 
-    ggplot2::facet_wrap("GLYPH")) 
+    ggplot2::facet_wrap("SUBPLOT")) 
 
   ### combine subplots (minor) into single plot
   # data
   data <- unpanel(minor$data[[1]])
-  data <- layer$combine_glyphs(data)
+  data <- layer$combine_subplots(data)
   data$PANEL <- 1L
 	
   # panel
@@ -69,7 +69,7 @@ unpanel <- function(df) {
   if (!is.null(df$group)) {
     df$group <- interaction(df$group, df$PANEL)
   } 
-  df$GLYPH <- as.numeric(as.character(df$PANEL))
+  df$SUBPLOT <- as.numeric(as.character(df$PANEL))
   df$PANEL <- NULL
   df
 }

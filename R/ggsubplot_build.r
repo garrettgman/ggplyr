@@ -19,11 +19,12 @@ ggsubplot_build <- function(plot){
   plot <- ggplot2:::plot_clone(plot)
   layers <- plot$layers
   layers <- propogate_data(layers, plot$data)
+  env <- plot$plot_env
 	
   # separate into sp_layers and normal layers
   spls <- unlist(lapply(layers, is.sp_layer))
   if (all(!spls)) return(ggplot2::ggplot_build(plot))
-  if (all(spls) && sum(spls) == 1) return(sp_layer_build(layers[[spls]]))
+  if (all(spls) && sum(spls) == 1) return(sp_layer_build(layers[[spls]], env))
   splayers <- layers[spls]
   plot$layers <- layers[!spls]
   spl.order <- seq_along(layers)[spls]
@@ -38,7 +39,7 @@ ggsubplot_build <- function(plot){
   # build glyph layers (embedded plots)
   embedded <- list()
   for (i in seq_along(splayers)) {
-    embedded[[i]] <- sp_layer_build(splayers[[i]])
+    embedded[[i]] <- sp_layer_build(splayers[[i]], env)
   }
 	
 	
@@ -121,4 +122,18 @@ propogate_data <- function(layers, plot_data) {
 		layer
 	}
 	lapply(layers, ensure_data)
+}
+
+
+#' Ensure each layer contains all aesthetic mappings that affect it.
+#' 
+#' propogate_aes checks for aesthetics defined at the global level of a plot 
+#' that affect a layer. Propogate_aes moves such aesthetics into the layer's 
+#' mapping. 
+#' @param layer ggplot2 layer objects
+#' @param plot_mapping the global data set for a ggplot2 plot
+propogate_aes <- function(layer, plot_mapping) {
+  layer$mapping <- c(layer$mapping, 
+    plot_mapping[setdiff(names(plot_mapping), names(layer$mapping))])
+  layer
 }

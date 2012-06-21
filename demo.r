@@ -28,11 +28,21 @@ ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture,
   color = rank(Catholic)), size = 3), glyph.by = c("lat", "long"), 
   major = aes(mean(Fertility), mean(Education)))
 
+ggplot(test.data) + geom_subplot(aes(mean(Fertility), mean(Education), 
+  group = interaction(long, lat), subplot = geom_point(aes(Fertility, 
+  Agriculture, color = rank(Catholic)), size = 3)))
+
 # embed bars (categorical with stats)
 ggplot(mpg) + glyph(geom_bar(aes(x = trans, fill = year)), 
   aes(x = mean(displ), y = mean(cty)), c("year"), y_scale = free, 
   width = 1/4, height = 1/4)
+
+ggplot(mpg) + geom_subplot(aes(mean(displ), mean(cty), group = year,
+  subplot = geom_bar(aes(trans, fill = year))), y_scale = free, width = 1/4, 
+  height = 1/4)
   
+
+
 # reference boxes
 # boxes
 ggplot(test.data) + glyph(geom_point(aes(Fertility, Agriculture, 
