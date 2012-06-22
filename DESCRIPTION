@@ -32,7 +32,6 @@ Collate:
     'geom_subplot2d.r'
     'ggsubplot-class.r'
     'ggsubplot_build.r'
-    'group_by.r'
     'merge_overlaps.r'
     'package.r'
     'ply_aes.r'
