@@ -137,18 +137,19 @@ glyph <- function(layer, major.aes, glyph.by = NULL, width = rel(0.95),
 #' @return an object of class sp_layer
 #' @export
 geom_subplot <- function(mapping, width = rel(0.95), height = rel(0.95), 
-                         data = NULL, x_scale = identity, y_scale = identity, position = "identity", 
-                         reference = NULL, ply.aes = TRUE, .ref = FALSE) {
+  data = NULL, x_scale = identity, y_scale = identity, position = "identity", 
+  reference = NULL, ply.aes = TRUE, .ref = FALSE) {
   
   missing <- c(is.null(mapping$x), is.null(mapping$y), is.null(mapping$group), 
-               is.null(mapping$subplot))
+    is.null(mapping$subplot))
   if (any(missing)) {
     stop(paste("Missing required aesthetics in geom_subplot:", 
-               paste(c("x", "y", "group", "subplot")[missing], collapse = ", ")))
+      paste(c("x", "y", "group", "subplot")[missing], collapse = ", ")))
   }
   
   if (position != "identity" & position != "merge") {
-    stop("subplot layer only supports 'identity' and 'merge' position adjustments.")
+    stop("geom_subplot only supports position = 'identity' or 'merge'", 
+      call. = FALSE)
   }
   
   if (position == "merge") {
@@ -188,9 +189,8 @@ extract_layer <- function(subplot_aes, env) {
   }
   if ("ggplot" %in% class(layer)) {
     # propogate data and aesthetics
-    data <-  layer$data[1]
+    layer$data <- NULL
     mapping <- layer$mapping
-    layer <- propogate_data(layer$layers[1], data)[[1]]
     layer <- propogate_aes(layer, mapping)
   }
   if (!("proto" %in% class(layer))) {
@@ -248,10 +248,10 @@ assign_subplots <- function(., data, plot.env) {
     .$mapping <- add_gid(.$mapping)
     
     too.many <- c(length(unique(globals$x)) > length(unique(globals$SUBPLOT)), 
-                  length(unique(globals$y)) > length(unique(globals$SUBPLOT)))
+      length(unique(globals$y)) > length(unique(globals$SUBPLOT)))
     if (any(too.many)) {
       message(paste("Major", paste(c("x", "y")[too.many], collapse = " and "), 
-                    "return more than one value per subplot. Only using first."))
+        "return more than one value per subplot. Only using first."))
       globals <- unique(plyr::ddply(globals, "SUBPLOT", transform, x = x[1], 
         y = y[1]))
     }

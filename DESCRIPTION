@@ -1,15 +1,17 @@
 Package: ggsubplot
 Maintainer: Garrett Grolemund <grolemund@rice.edu>
 License: GPL
-Title: Explore complex data by embedding subplots within plots.
+Title: Explore complex data by embedding subplots within
+    plots.
 LazyData: true
 Type: Package
 Author: Garrett Grolemund <grolemund@rice.edu>, Hadley
     Wickham <h.wickham@gmail.com>
-Description: ggsubplot makes it easy to embed customized subplots within larger
-    graphics. Subplots may be used as a geom to explore interaction effects,
-    spatial data, and hierarchical data. Subplots can also be used to explore
-    big data without overplotting.
+Description: ggsubplot makes it easy to embed customized
+    subplots within larger graphics. Subplots may be used
+    as a geom to explore interaction effects, spatial data,
+    and hierarchical data. Subplots can also be used to
+    explore big data without overplotting.
 Version: 0.1.0
 Imports:
     ggplot2,

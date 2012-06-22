@@ -2,10 +2,10 @@
 \alias{geom_subplot}
 \title{Create a layer of embedded subplots}
 \usage{
-  geom_subplot(mapping, width = rel(0.95),
-    height = rel(0.95), data = NULL, x_scale = identity,
-    y_scale = identity, position = "identity",
-    reference = NULL, ply.aes = TRUE, .ref = FALSE)
+  geom_subplot(mapping, width = rel(0.95), height =
+  rel(0.95), data = NULL, x_scale = identity, y_scale =
+  identity, position = "identity", reference = NULL,
+  ply.aes = TRUE, .ref = FALSE)
 }
 \arguments{
   \item{mapping}{An aesthetic mapping, usually constructed

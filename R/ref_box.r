@@ -27,7 +27,7 @@
 #' @export
 ref_box <- function(mapping = NULL, fill = "grey90", color = "white", ...) {	
   function(layer, type, major.aes, width = rel(1), height = rel(1), 
-    position = "identity", x.nbin = 10, y.nbin = 10) {
+    position = "identity", breaks = NULL) {
   	
   	def_aes <- ggplot2::aes(xmin = -1, xmax = 1, ymin = -1, ymax = 1)
   	mapping <- c(mapping, def_aes[setdiff(names(def_aes), names(mapping))])
@@ -43,9 +43,8 @@ ref_box <- function(mapping = NULL, fill = "grey90", color = "white", ...) {
     switch(type,
       subplot = geom_subplot(mapping = major.aes, width = width, 
         height = height, position = position, reference = NULL, .ref = TRUE), 
-      subplot2d = geom_subplot2d(mapping = major.aes, x.nbin = x.nbin, 
-        y.nbin = y.nbin, width.adjust = 1, height.adjust = 1, reference = NULL, 
-        .ref = TRUE)
+      subplot2d = geom_subplot2d(mapping = major.aes, breaks = breaks, 
+        width.adjust = 1, height.adjust = 1, reference = NULL, .ref = TRUE)
     )
   }
 } 
@@ -78,7 +77,7 @@ ref_box <- function(mapping = NULL, fill = "grey90", color = "white", ...) {
 #' @export
 ref_hline <- function(mapping = NULL, thickness = 0.2, fill = "white", ...) {	
   function(layer, type, major.aes, width = rel(1), height = rel(1), 
-    position = "identity", x.nbin = 10, y.nbin = 10) {
+    position = "identity", breaks = NULL) {
 
   	def_aes <- list(xmin = -1, xmax = 1, ymin = -thickness/2, ymax = thickness/2)
   	mapping <- c(mapping, def_aes[setdiff(names(def_aes), names(mapping))])
@@ -93,9 +92,8 @@ ref_hline <- function(mapping = NULL, thickness = 0.2, fill = "white", ...) {
   	switch(type,
   	  subplot = geom_subplot(mapping = major.aes, width = width, 
   	    height = height, position = position, reference = NULL, .ref = TRUE), 
-  	  subplot2d = geom_subplot2d(mapping = major.aes, x.nbin = x.nbin, 
-  	    y.nbin = y.nbin, width.adjust = 1, height.adjust = 1, reference = NULL, 
-  	    .ref = TRUE)
+  	  subplot2d = geom_subplot2d(mapping = major.aes, breaks = breaks, 
+  	    width.adjust = 1, height.adjust = 1, reference = NULL, .ref = TRUE)
   	)
   }
 } 
@@ -128,7 +126,7 @@ ref_hline <- function(mapping = NULL, thickness = 0.2, fill = "white", ...) {
 #' @export
 ref_vline <- function(mapping = NULL, thickness = 0.2, fill = "white", ...) {	
   function(layer, type, major.aes, width = rel(1), height = rel(1), 
-    position = "identity", x.nbin = 10, y.nbin = 10) {
+    position = "identity", breaks = NULL) {
   	
   	def_aes <- list(xmin = -thickness/2, xmax = thickness/2, ymin = -1, ymax = 1)
   	mapping <- c(mapping, def_aes[setdiff(names(def_aes), names(mapping))])
@@ -143,9 +141,8 @@ ref_vline <- function(mapping = NULL, thickness = 0.2, fill = "white", ...) {
   	switch(type,
   	  subplot = geom_subplot(mapping = major.aes, width = width, 
         height = height, position = position, reference = NULL, .ref = TRUE), 
-  	  subplot2d = geom_subplot2d(mapping = major.aes, x.nbin = x.nbin, 
-  	    y.nbin = y.nbin, width.adjust = 1, height.adjust = 1, reference = NULL, 
-  	   .ref = TRUE)
+  	  subplot2d = geom_subplot2d(mapping = major.aes, breaks = breaks, 
+        width.adjust = 1, height.adjust = 1, reference = NULL, .ref = TRUE)
   	)
   }
 } 

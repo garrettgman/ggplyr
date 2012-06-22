@@ -2,11 +2,10 @@
 \alias{glyph}
 \title{Turn a layer into a layer of embedded subplots}
 \usage{
-  glyph(layer, major.aes, glyph.by = NULL,
-    width = rel(0.95), height = rel(0.95),
-    x_scale = identity, y_scale = identity,
-    merge.overlaps = FALSE, reference = NULL,
-    ply.aes = TRUE, .ref = FALSE)
+  glyph(layer, major.aes, glyph.by = NULL, width =
+  rel(0.95), height = rel(0.95), x_scale = identity,
+  y_scale = identity, merge.overlaps = FALSE, reference =
+  NULL, ply.aes = TRUE, .ref = FALSE)
 }
 \arguments{
   \item{layer}{a ggplot2 layer object. See

@@ -6,5 +6,4 @@
   modified version of swiss data
 }
 \keyword{data}
-\keyword{datasets}
 

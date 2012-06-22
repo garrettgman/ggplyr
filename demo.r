@@ -3,7 +3,6 @@
 ###################################################
 library(devtools)
 install_github("ggplyr", "garrettgman", "ggsubplot")
-library(glyphmaps)
 load_all("../ggplyr")
 load("data/nasa.RData")
 load("data/testdata.RData")
@@ -179,12 +178,24 @@ ggplot(test.data) +
   grid(geom_point(aes(Fertility, Education)), x.nbin = 10, y.nbin = 10, 
        ref= ref_box(aes(fill = mean(Catholic))))
 
+load_all(".")
+ggplot(test.data) + 
+  geom_subplot2d(aes(Fertility, Education, 
+    subplot = geom_point(aes(Fertility, Education))), bins = 10,
+    ref= ref_box(aes(fill = mean(Catholic))))
+
 cheap.diamonds <- subset(diamonds, price <= 5000 & price >= 600)
 ggplot(cheap.diamonds) +
   grid(geom_bar(aes(x = color, fill = color), position = "dodge"),
     grid.aes = aes(x = carat, y = price), x.nbin = 10, y.nbin = 14,
     y_scale = free, height.adjust = 0.5, width.adjust = 0.5,
     ref = ref_box(aes(color = length(color))))
+
+load_all(".")
+ggplot(cheap.diamonds) +
+  geom_subplot2d(aes(carat, price, subplot = geom_bar(aes(color, fill = color), 
+    position = "dodge")), bins = c(10, 14), y_scale = free, height.adjust = 0.5, 
+    width.adjust = 0.5, ref = ref_box(aes(color = length(color))))
 
 
 # trying out geom_coxcomb
