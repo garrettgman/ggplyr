@@ -141,7 +141,7 @@ assign_subplots <- function(., data, plot.env) {
   if (embed$merge) {
     # search for overlapping glyphs, combine
     data$.gid <- factor(data$SUBPLOT)
-    merge.key <- merge_overlaps(globals, embed$width, embed$height)
+    merge.key <- merge_overlaps(globals, .$embed$width, .$embed$height)
     data$SUBPLOT <- merge.key[data$SUBPLOT]
     globals <- aesply(data, "SUBPLOT", embed$major.aes)
     .$mapping <- add_gid(.$mapping)
