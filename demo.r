@@ -135,13 +135,20 @@ ggplot(test.data) + geom_star(mapping = aes(x = 0, y = 0,
 ggplot(nasa) + ply_aes(geom_star(aes(r = ozone, angle = date, x = 0, y = 0, 
   fill = mean(temperature))), c("lat")) + facet_wrap(~ lat)
 
-ggplot(nasa) + map_nasa +
+ggplot(nasa) + ply_aes(geom_star(aes(r = ozone, angle = date, x = 0, y = 0, 
+  fill = mean(temperature))), c("lat")) + facet_wrap(~ lat, scales = "free")
+
+# laptop: 55.2 seconds :P
+system.time(print(ggplot(nasa) + map_nasa +
   geom_subplot(aes(long[1], lat[1], group = id, 
   subplot = geom_star(aes(r = ozone, angle = date, x = 0, y = 0, 
-  fill = mean(temperature)))))
+  fill = mean(temperature)))))))
 
 ggplot(mpg) + ply_aes(geom_star(mapping = aes(x = cyl[1], y = 1, 
   r = hwy, angle = cty, fill = mean(hwy), group = cyl)))
+
+ggplot(mpg) + geom_star(mapping = aes(x = cyl[1], y = 1, 
+  r = hwy, angle = cty, fill = mean(hwy)))
 
 ggplot(nasa) + geom_star(aes(r = ozone, angle = date, x = 0, y = 0))
 
@@ -176,10 +183,11 @@ ggplot(cheap.diamonds) +
     fill = color))), bins = c(10, 14), height.adjust = 0.5, 
     width.adjust = 0.5, ref = NULL)
 
-ggplot(cheap.diamonds) +
+# laptop: 18.758
+system.time(print(ggplot(cheap.diamonds) +
   geom_subplot2d(aes(carat, price, subplot = geom_coxcomb(aes(angle = color, 
     fill = color))), bins = c(10, 14), x_scale = free, y_scale = free,
-    height.adjust = 0.5, width.adjust = 0.5, ref = NULL)
+    height.adjust = 0.5, width.adjust = 0.5, ref = NULL)))
 
 # laptop: 87.049 seconds :P
 system.time(print(ggplot(seasons) + 

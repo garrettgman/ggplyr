@@ -42,11 +42,13 @@ GeomCoxcomb <- proto::proto(ggplot2:::Geom, {
   required_aes <- c("x")
   
   reparameterise <- function(., df, params) {
+    
+    # scale x to theta
     df <- transform(df, 
       xmin = 2 * pi / max(x) * (x - 1), 
       xmax = 2 * pi / max(x) * x)
     
-    # to create equal areas
+    # scale y to r to create equal areas
     adjust_y <- function(df) {
       if (length(df$y) == 1) {
         df$ymin <- 0
@@ -63,6 +65,7 @@ GeomCoxcomb <- proto::proto(ggplot2:::Geom, {
       df
     }
     df <- ddply(df, c("x", "PANEL"), adjust_y)
+   
     df$section <- id(df[c("x", "group")], drop = TRUE)
     
     # create polygon points
@@ -79,10 +82,25 @@ GeomCoxcomb <- proto::proto(ggplot2:::Geom, {
       df <- cbind(df, x, y)
       rbind(df, df[1, ])
     }
-    ddply(df, c("section", "group", "PANEL"), poly_curve, params$npoints)
-  }
+    df <- ddply(df, c("section", "group", "PANEL"), poly_curve, params$npoints)
   
+  # ensure that (0,0) is plotted in center of graph
+  center <- function(data) {
+    # origin always (0, 0)?
+    xtreme <- max(abs(data$x))
+    ytreme <- max(abs(data$y))
+    fullspan <- data[c(1,1,1,1), ]
+    fullspan$x <- c(-xtreme, -xtreme, xtreme, xtreme)
+    fullspan$y <- c(-ytreme, ytreme, -ytreme, ytreme)
+    fullspan$plot <- FALSE
+    data$plot <- TRUE
+    rbind(data, fullspan)
+  }
+    
+  ddply(df, c("group", "PANEL"), center)
+  }  
   draw <- draw_groups <- function(., data, scales, coordinates, ...) {
+    data <- data[data$plot, ]
     polys <- dlply(data, c("section", "PANEL"), function(df) {
       ggname("polygon", gTree(children=gList(
         with(coord_munch(coordinates, df, scales), 

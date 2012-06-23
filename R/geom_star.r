@@ -53,16 +53,39 @@ GeomStar <- proto::proto(ggplot2:::Geom, {
         last$r <- 0
         data <- rbind(data, last)
       }
-      data
+      # for centering
+      origin <- data[1, ]
+      origin$r <- 0
+      origin$theta <- 0
+      origin$plot <- FALSE
+      data$plot <- TRUE
+      rbind(data, origin)
     }
+  
     df <- ddply(df, c("group", "PANEL"), include_origin)
     
     df$x <- df$r * cos(df$theta) + df$x
     df$y <- df$r * sin(df$theta) + df$y
-    df
+
+    # ensure that (0,0) is plotted in center of graph
+    center <- function(data) {
+      origin <- data[data$r == 0 & data$theta == 0, ][1, ]
+      xtreme <- max(abs(data$x - origin$x))
+      ytreme <- max(abs(data$y - origin$y))
+      fullspan <- data[c(1,1,1,1), ]
+      fullspan$x <- c(origin$x - xtreme, origin$x - xtreme, 
+                      origin$x + xtreme, origin$x + xtreme)
+      fullspan$y <- c(origin$y - ytreme, origin$y + ytreme, 
+                      origin$y - ytreme, origin$y + ytreme)
+      fullspan$plot <- FALSE
+      rbind(data, fullspan)
+    }
+    
+    ddply(df, c("group", "PANEL"), center)
   }
   
   draw <- function(., data, scales, coordinates, ...) {
+    data <- data[data$plot, ]
     data <- data[order(data$theta, data$r), ]
     ggname(.$my_name(), 
       gTree(children = gList(
