@@ -129,6 +129,9 @@ system.time(print(ggplot(nasa) + geom_subplot2d(aes(long, lat,
 ggplot(mpg) + GeomStar$new(mapping = aes(r = hwy, angle = cty, x = 0, y = 0, 
   group = cyl)) + facet_wrap(~cyl)
 
+ggplot(mpg) + GeomStar$new(mapping = aes(r = trans, angle = cty, x = 0, y = 0, 
+  group = cyl)) + facet_wrap(~cyl)
+
 ggplot(test.data) + geom_star(mapping = aes(x = 0, y = 0, 
   r = Catholic, angle = Fertility, group = lat)) + facet_wrap(~lat)
 
@@ -176,6 +179,11 @@ ggplot(mpg) +
 mpg$lat <- sample(1:4, nrow(mpg), replace = TRUE)
 ggplot(mpg) + GeomCoxcomb$new(mapping = aes(angle = trans, fill = lat, 
   group = lat)) + facet_wrap(~cyl)
+
+ggplot(mpg[mpg$cy != 5, ]) + geom_subplot(aes(cyl, y = 1, group = cyl, 
+  subplot = geom_coxcomb(mapping = aes(angle = trans, fill = lat, 
+  group = lat))))
+
 ggplot(mpg) + geom_coxcomb(aes(angle = trans, fill = lat))
 
 ggplot(cheap.diamonds) +
@@ -183,7 +191,12 @@ ggplot(cheap.diamonds) +
     fill = color))), bins = c(10, 14), height.adjust = 0.5, 
     width.adjust = 0.5, ref = NULL)
 
-# laptop: 18.758
+# check area and spacing
+cox <- data.frame(a = c(rep(1:3, each = 100), rep(4, 50)), b = c("a", "b"))
+ggplot(cox) + geom_coxcomb(aes(angle = factor(a), fill = b, group = b), binwidth = .9)
+
+
+# laptop: 20.287
 system.time(print(ggplot(cheap.diamonds) +
   geom_subplot2d(aes(carat, price, subplot = geom_coxcomb(aes(angle = color, 
     fill = color))), bins = c(10, 14), x_scale = free, y_scale = free,

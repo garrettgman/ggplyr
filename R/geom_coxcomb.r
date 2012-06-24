@@ -42,11 +42,15 @@ GeomCoxcomb <- proto::proto(ggplot2:::Geom, {
   required_aes <- c("x")
   
   reparameterise <- function(., df, params) {
-    
-    # scale x to theta
-    df <- transform(df, 
-      xmin = 2 * pi / max(x) * (x - 1), 
-      xmax = 2 * pi / max(x) * x)
+
+    # scale bin breaks to 0 and 2 *pi
+    width <- ggplot2::resolution(unique(df$x), FALSE)
+    xbreaks <- c(df$x[1] - width/2, df$x + width/2)
+    xbreaks <- unlist(rescale_2pi(list(xbreaks)))
+    n <- length(xbreaks)
+    df$xmin <- zero_wrap(xbreaks[1:(n - 1)])
+    df$xmax <- xbreaks[2:n] # note: some xmin = 6.28 not 0
+      
     
     # scale y to r to create equal areas
     adjust_y <- function(df) {
@@ -65,7 +69,7 @@ GeomCoxcomb <- proto::proto(ggplot2:::Geom, {
       df
     }
     df <- ddply(df, c("x", "PANEL"), adjust_y)
-   
+
     df$section <- id(df[c("x", "group")], drop = TRUE)
     
     # create polygon points
@@ -83,7 +87,6 @@ GeomCoxcomb <- proto::proto(ggplot2:::Geom, {
       rbind(df, df[1, ])
     }
     df <- ddply(df, c("section", "group", "PANEL"), poly_curve, params$npoints)
-  
   # ensure that (0,0) is plotted in center of graph
   center <- function(data) {
     # origin always (0, 0)?
@@ -101,7 +104,7 @@ GeomCoxcomb <- proto::proto(ggplot2:::Geom, {
   }  
   draw <- draw_groups <- function(., data, scales, coordinates, ...) {
     data <- data[data$plot, ]
-    polys <- dlply(data, c("section", "PANEL"), function(df) {
+    polys <- dlply(data, c("section", "group", "PANEL"), function(df) {
       ggname("polygon", gTree(children=gList(
         with(coord_munch(coordinates, df, scales), 
              polygonGrob(x, y, default.units="native",
@@ -156,4 +159,10 @@ coxcomb_sections <- function(mapping) {
   names(sections) <- NULL
   if (is.null(sections)) return(NULL)
   as.call(c(quote(interaction), sections))
+}
+
+# changes 2 * pi into 0
+zero_wrap <- function(vec){
+  vec[vec > 6.2831] <- 0
+  vec
 }
