@@ -28,7 +28,7 @@
 ref_box <- function(mapping = NULL, fill = "grey90", color = "white", ...) {	
   function(layer, type, major.aes, width = rel(1), height = rel(1), 
     position = "identity", breaks = NULL) {
-  	
+
   	def_aes <- ggplot2::aes(xmin = -1, xmax = 1, ymin = -1, ymax = 1)
   	mapping <- c(mapping, def_aes[setdiff(names(def_aes), names(mapping))])
   	class(mapping) <- "uneval"
@@ -36,15 +36,16 @@ ref_box <- function(mapping = NULL, fill = "grey90", color = "white", ...) {
     rlayer <- ply_aes(ggplot2::geom_rect(mapping = mapping, ...))
   	if (is.null(mapping$fill)) rlayer$geom_params$fill <- fill
   	if (is.null(mapping$colour)) rlayer$geom_params$colour <- color
-  	if (!inherits(layer$data, "waiver")) rlayer$data <- layer$data
   	
     major.aes$subplot <- rlayer
+  	ldata <- layer$data
     
     switch(type,
-      subplot = geom_subplot(mapping = major.aes, width = width, 
+      subplot = geom_subplot(mapping = major.aes, data = ldata, width = width,
         height = height, position = position, reference = NULL, .ref = TRUE), 
-      subplot2d = geom_subplot2d(mapping = major.aes, breaks = breaks, 
-        width.adjust = 1, height.adjust = 1, reference = NULL, .ref = TRUE)
+      subplot2d = geom_subplot2d(mapping = major.aes, data = ldata, 
+        breaks = breaks, width.adjust = 1, height.adjust = 1, reference = NULL, 
+        .ref = TRUE)
     )
   }
 } 
@@ -85,15 +86,16 @@ ref_hline <- function(mapping = NULL, thickness = 0.2, fill = "white", ...) {
   	
   	rlayer <- ply_aes(ggplot2::geom_rect(mapping = mapping, ...))
   	if (is.null(mapping$fill)) rlayer$geom_params$fill <- fill
-  	if (!inherits(layer$data, "waiver")) rlayer$data <- layer$data
   	
   	major.aes$subplot <- rlayer
+  	ldata <- layer$data
   	
   	switch(type,
-  	  subplot = geom_subplot(mapping = major.aes, width = width, 
+  	  subplot = geom_subplot(mapping = major.aes, data = ldata, width = width, 
   	    height = height, position = position, reference = NULL, .ref = TRUE), 
-  	  subplot2d = geom_subplot2d(mapping = major.aes, breaks = breaks, 
-  	    width.adjust = 1, height.adjust = 1, reference = NULL, .ref = TRUE)
+  	  subplot2d = geom_subplot2d(mapping = major.aes, data = ldata, 
+        breaks = breaks, width.adjust = 1, height.adjust = 1, reference = NULL, 
+        .ref = TRUE)
   	)
   }
 } 
@@ -134,15 +136,16 @@ ref_vline <- function(mapping = NULL, thickness = 0.2, fill = "white", ...) {
   	
   	rlayer <- ply_aes(ggplot2::geom_rect(mapping = mapping, ...))
   	if (is.null(mapping$fill)) rlayer$geom_params$fill <- fill
-  	if (!inherits(layer$data, "waiver")) rlayer$data <- layer$data
   	
   	major.aes$subplot <- rlayer
+  	ldata <- layer$data
   	
   	switch(type,
-  	  subplot = geom_subplot(mapping = major.aes, width = width, 
+  	  subplot = geom_subplot(mapping = major.aes, data = ldata, width = width, 
         height = height, position = position, reference = NULL, .ref = TRUE), 
-  	  subplot2d = geom_subplot2d(mapping = major.aes, breaks = breaks, 
-        width.adjust = 1, height.adjust = 1, reference = NULL, .ref = TRUE)
+  	  subplot2d = geom_subplot2d(mapping = major.aes, data = ldata, 
+        breaks = breaks, width.adjust = 1, height.adjust = 1, reference = NULL, 
+        .ref = TRUE)
   	)
   }
 } 
