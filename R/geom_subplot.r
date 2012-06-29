@@ -36,8 +36,8 @@
 #' @return an object of class sp_layer
 #' @export
 geom_subplot <- function(mapping, width = rel(0.95), height = rel(0.95), 
-  data = NULL, x_scale = identity, y_scale = identity, position = "identity", 
-  reference = NULL, ply.aes = TRUE, .ref = FALSE) {
+  data = waiver(), x_scale = identity, y_scale = identity, 
+  position = "identity", reference = NULL, ply.aes = TRUE, .ref = FALSE) {
   
   missing <- c(is.null(mapping$x), is.null(mapping$y), is.null(mapping$group), 
     is.null(mapping$subplot))
@@ -58,6 +58,7 @@ geom_subplot <- function(mapping, width = rel(0.95), height = rel(0.95),
   }
   
   layer <- extract_layer(mapping$subplot, parent.frame())
+  layer$data <- data
   mapping$subplot <- NULL
   layer$embed <- list(width = width, height = height, x_scale = x_scale, 
     y_scale = y_scale, merge.overlaps = merge.overlaps, major.aes = mapping)

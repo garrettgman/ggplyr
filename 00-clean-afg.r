@@ -33,6 +33,7 @@ afg$year <- year(afg$date)
 afg$month <- month(afg$date, label = TRUE, abbr = FALSE)
 afg$day <- wday(afg$date, label = TRUE, abbr = FALSE)
 
+
 # Many lon, lat values outside of Afghanistan. Cleaning this.
 afg <- afg[!is.na(afg$lon),]
 afg <- afg[!is.na(afg$lat),]
@@ -74,3 +75,4 @@ save(afg, polygon, road, terrain, file = "data/afg.RData", compress = "bzip2")
                                  
                                  
                                  
+

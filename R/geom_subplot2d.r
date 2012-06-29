@@ -62,7 +62,7 @@
 #' @return an object of class glayer
 #' @export 
 geom_subplot2d <- function(mapping, bins = 10,  binwidth = NULL, breaks = NULL, 
-  x_scale = identity, y_scale = identity, width.adjust = 0.95, 
+  data = waiver(), x_scale = identity, y_scale = identity, width.adjust = 0.95, 
   height.adjust = 0.95, position = "identity", reference = ref_box(), 
   ply.aes = TRUE, .ref = FALSE) {
   
@@ -80,6 +80,7 @@ geom_subplot2d <- function(mapping, bins = 10,  binwidth = NULL, breaks = NULL,
   
   layer <- extract_layer(mapping$subplot, parent.frame())
   mapping$subplot <- NULL
+  layer$data <- data
   layer$embed <- list(x_scale = x_scale, y_scale = y_scale,
     major.aes = mapping, breaks = breaks, w.adjust = width.adjust, 
     h.adjust = height.adjust, ref = .ref)
