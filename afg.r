@@ -28,8 +28,8 @@ load("data/afg.RData")
 
 # building maps
 library(ggmap)
-roadmap <- get_map(location = c(59,29,76,39))
-terrainmap <- get_map(location = c(59,29,76,39), maptype = "terrain")
+roadmap <- get_map(location = c(59,29,76,39), maptype = "roadmap")
+terrainmap <- get_map(location = c(59,29,76,39))
                 
 library(maps)
 afghanistan <- map_data("world", region = "Afghanistan")
@@ -72,5 +72,58 @@ terrain + geom_point(aes(lon, lat, color = type), data = actions) + facet_wrap(~
 ggplot(actions) + geom_point(aes(year, total.cas, color = type))
 # no day of the week effect. But nearly 2x as many enemy actions
 
-ggplot(actions) + geom_point(aes(civilian.
 ggplot(actions) + geom_bar(aes(day, fill = type), position = "dodge")
+                                 
+library(plyr)
+means <- ddply(actions, "type", summarise,
+      fkia = mean(friendly.kia, na.rm = TRUE),
+      fwia = mean(friendly.wia, na.rm = TRUE),
+      fcas = mean(friendly.wia, na.rm = TRUE) + mean(friendly.kia, na.rm = TRUE),
+      hkia = mean(host.kia, na.rm = TRUE),
+      hwia = mean(host.wia, na.rm = TRUE),
+      hcas = mean(host.wia, na.rm = TRUE) + mean(host.kia, na.rm = TRUE),
+      ckia = mean(civilian.kia, na.rm = TRUE),
+      cwia = mean(civilian.wia, na.rm = TRUE),
+      ccas = mean(civilian.wia, na.rm = TRUE) + mean(civilian.kia, na.rm = TRUE), 
+      ekia = mean(enemy.kia, na.rm = TRUE),
+      ewia = mean(enemy.wia, na.rm = TRUE),
+      ecas = mean(enemy.wia, na.rm = TRUE) + mean(enemy.kia, na.rm = TRUE),
+      tkia = mean(total.kia, na.rm = TRUE),
+      twia = mean(total.wia, na.rm = TRUE),
+      tcas = mean(total.cas, na.rm = TRUE))      
+library(reshape2)
+means <- melt(means, id = "type")   
+qplot(type, value, data = means, geom = "bar", fill = type) + 
+  facet_wrap(~variable, ncol = 3, scales = "free")
+means2 <- ddply(actions[actions$fatal, ], "type", summarise,
+  fkia = mean(friendly.kia, na.rm = TRUE),
+  fwia = mean(friendly.wia, na.rm = TRUE),
+  fcas = mean(friendly.wia, na.rm = TRUE) + mean(friendly.kia, na.rm = TRUE),
+  hkia = mean(host.kia, na.rm = TRUE),
+  hwia = mean(host.wia, na.rm = TRUE),
+  hcas = mean(host.wia, na.rm = TRUE) + mean(host.kia, na.rm = TRUE),
+  ckia = mean(civilian.kia, na.rm = TRUE),
+  cwia = mean(civilian.wia, na.rm = TRUE),
+  ccas = mean(civilian.wia, na.rm = TRUE) + mean(civilian.kia, na.rm = TRUE), 
+  ekia = mean(enemy.kia, na.rm = TRUE),
+  ewia = mean(enemy.wia, na.rm = TRUE),
+  ecas = mean(enemy.wia, na.rm = TRUE) + mean(enemy.kia, na.rm = TRUE),
+  tkia = mean(total.kia, na.rm = TRUE),
+  twia = mean(total.wia, na.rm = TRUE),
+  tcas = mean(total.cas, na.rm = TRUE)) 
+means2 <- means2[1:2, ]                                 
+means2 <- melt(means2, id = "type")                                 
+qplot(type, value, data = means2, geom = "bar", fill = type) + 
+  facet_wrap(~ variable, ncol = 3, scales = "free")  
+                                 
+                                 
+                                 
+# distibution of civilian casualties
+road + geom_point(aes(lon, lat, color = type, size = civilian.kia), 
+  data = actions[actions$civilian.kia != 0,]) 
+
+# distibution of casualties
+casualties <- afg[afg$total.cas > 0, ]
+road + geom_subplot2d(aes(lon, lat, 
+  subplot = geom_star(aes(angle = date, r = total.cas))), 
+  bins = c(20,20), data = afg)
