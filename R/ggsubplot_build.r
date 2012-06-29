@@ -15,7 +15,7 @@ ggsubplot_build <- function(plot){
   if (!identical(plot$facet, ggplot2::facet_null())) {
   	stop("ggsubplots do not support facetting", call. = FALSE)
   }
-	
+	browser()
   plot <- ggplot2:::plot_clone(plot)
   layers <- plot$layers
   layers <- propogate_data(layers, plot$data)

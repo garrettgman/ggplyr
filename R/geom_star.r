@@ -123,11 +123,17 @@ GeomStar <- proto::proto(ggplot2:::Geom, {
   new <- function(., mapping = NULL, data = NULL, stat = NULL, 
     position = NULL, na.rm = FALSE, ...) {
     
-    missing <- !(c("x", "y", "r", "angle") %in% names(mapping))
+    missing <- !(c("r", "angle") %in% names(mapping))
     if (any(missing)) {
       stop(paste("Missing required aesthetics for geom_star:",
-        paste(c("x", "y", "r", "angle")[missing], collapse = ", ")),
+        paste(c("r", "angle")[missing], collapse = ", ")),
         call. = FALSE)
+    }
+    if(!("x" %in% names(mapping))) {
+      mapping$x <- 0
+    }
+    if(!("y" %in% names(mapping))) {
+      mapping$y <- 0
     }
     
     do.call("layer", list(mapping = mapping, data = data, stat = stat, 

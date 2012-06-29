@@ -19,7 +19,7 @@ sp_layer_build <- function(layer, plot.env) {
   if (!("embed" %in% ls(layer))) {
     stop("layer does not have embedded subplots")
   }
-  
+
   layer <- layer_clone(layer)
   layer$data <- layer$assign_subplots(layer$data, plot.env)
   minor <- ggplot2::ggplot_build(ggplot2::ggplot() + layer + 
