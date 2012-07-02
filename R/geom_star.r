@@ -36,8 +36,8 @@ GeomStar <- proto::proto(ggplot2:::Geom, {
   # turn cartesian coordinates polar
   reparameterise <- function(., df, params) {    
     # scale x to be between 0 and 2*pi
-    df$theta <- unlist(rescale_2pi(df["angle"]))
-    df$r <- unlist(rescale_01(df["r"]))
+    df$theta <- unlist(rescale_2pi(df["x"]))
+    df$r <- unlist(rescale_01(df["y"], zero = TRUE))
     
     include_origin <- function(data) {
       data <- data[order(data$theta, data$r), ]
@@ -64,8 +64,8 @@ GeomStar <- proto::proto(ggplot2:::Geom, {
   
     df <- ddply(df, c("group", "PANEL"), include_origin)
     
-    df$x <- df$r * cos(df$theta) + df$x
-    df$y <- df$r * sin(df$theta) + df$y
+    df$x <- df$r * cos(df$theta)
+    df$y <- df$r * sin(df$theta)
 
     # ensure that (0,0) is plotted in center of graph
     center <- function(data) {
@@ -106,7 +106,7 @@ GeomStar <- proto::proto(ggplot2:::Geom, {
       linetype = "solid", size = 0.5)
   }
   
-  required_aes <- c("x", "y", "r", "angle")
+  required_aes <- c("x", "y")
   
   guide_geom <- function(.) "polygon"
   
@@ -123,17 +123,30 @@ GeomStar <- proto::proto(ggplot2:::Geom, {
   new <- function(., mapping = NULL, data = NULL, stat = NULL, 
     position = NULL, na.rm = FALSE, ...) {
     
-    missing <- !(c("r", "angle") %in% names(mapping))
-    if (any(missing)) {
-      stop(paste("Missing required aesthetics for geom_star:",
-        paste(c("r", "angle")[missing], collapse = ", ")),
-        call. = FALSE)
+    if (!("x" %in% names(mapping))) {
+      if ("angle" %in% names(mapping)) {
+        names(mapping)[names(mapping) == "angle"] <- "x"
+      } else {
+        stop("Missing required aesthetic for geom_star: angle")
+      }
+    } else {
+      if ("angle" %in% names(mapping)) {
+        mapping$x <- NULL
+        names(mapping)[names(mapping) == "angle"] <- "x"
+      }
     }
-    if(!("x" %in% names(mapping))) {
-      mapping$x <- 0
-    }
-    if(!("y" %in% names(mapping))) {
-      mapping$y <- 0
+    
+    if (!("y" %in% names(mapping))) {
+      if ("r" %in% names(mapping)) {
+        names(mapping)[names(mapping) == "r"] <- "y"
+      } else {
+        stop("Missing required aesthetic for geom_star: r")
+      }
+    } else {
+      if ("r" %in% names(mapping)) {
+        mapping$y <- NULL
+        names(mapping)[names(mapping) == "r"] <- "y"
+      }
     }
     
     do.call("layer", list(mapping = mapping, data = data, stat = stat, 
