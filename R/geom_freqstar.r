@@ -1,7 +1,9 @@
-#' Star glyphs
+#' Frequency Star glyphs
 #' 
-#' geom_star draws the type of glyph commonly called a star plot, radar plot, 
-#' or polar plot.
+#' geom_freqstar draws the type of glyph commonly called a star plot, radar plot, 
+#' or polar plot. geom_freqstar bins the data provided as the angle variable and 
+#' then maps frequency statistics to the r aesthetic. Compare with 
+#' \code{\link{geom_star}}
 #' 
 #' @param mapping The aesthetic mapping, usually constructed with 
 #' \code{\link[ggplot2]{aes}}. Only needs to be set at the layer level if you 
@@ -22,38 +24,37 @@
 #' linetype, weight, and alpha.
 #' 
 #' @export
-geom_star <- function(mapping = NULL, data = NULL, stat = "identity", 
-                      position = "identity", na.rm = FALSE, ...) { 
+geom_freqstar <- function(mapping = NULL, data = NULL, stat = "bin", 
+  position = "identity", na.rm = FALSE, ...) { 
   
-  GeomStar$new(mapping = mapping, data = data, stat = stat, 
-               position = position, ...)
+  GeomFreqstar$new(mapping = mapping, data = data, stat = stat, 
+    position = position, ...)
 }
 
 
-GeomStar <- proto::proto(ggplot2:::Geom, {
-  objname <- "star"
+GeomFreqstar <- proto::proto(ggplot2:::Geom, {
+  objname <- "freqstar"
   
+  default_stat <- function(.) StatBin
+  default_pos <- function(.) PositionIdentity
+  default_aes <- function(.) aes(colour="grey20", fill=NA, size=0.5, linetype=1, 
+    weight = 1, alpha = NA)
+  
+
   # turn cartesian coordinates polar
-  reparameterise <- function(., df, params) {    
-    # scale x to be between 0 and 2*pi
-    df$theta <- unlist(rescale_2pi(df["angle"]))
-    df$r <- unlist(rescale_01(df["r"]))
+  reparameterise <- function(., df, params) {  
     
-    include_origin <- function(data) {
-      data <- data[order(data$theta, data$r), ]
-      if (data$theta[1] > 0.01) {
-        first <- data[1, ]
-        first$theta <- 0
-        first$r <- 0
-        data <- rbind(first, data)
-      }
-      if (data$theta[length(data$theta)] < 6.27) {
-        last <- data[length(data$theta), ]
-        last$theta <- 6.28
-        last$r <- 0
-        data <- rbind(data, last)
-      }
-      # for centering
+    #remove default zeros at start and end of freqpolies
+    trim_ends <- function(df) {
+      df[-c(1, nrow(df)), ]
+    }
+    df <- ddply(df, c("group", "PANEL"), trim_ends)
+    
+    # scale x to be between 0 and 2*pi
+    df$theta <- unlist(rescale_2pi(df["x"]))
+    df$r <- unlist(rescale_01(df["y"], zero = TRUE))
+    
+    mark_center <- function(data) {
       origin <- data[1, ]
       origin$r <- 0
       origin$theta <- 0
@@ -62,10 +63,10 @@ GeomStar <- proto::proto(ggplot2:::Geom, {
       rbind(data, origin)
     }
     
-    df <- ddply(df, c("group", "PANEL"), include_origin)
+    df <- ddply(df, c("group", "PANEL"), mark_center)
     
-    df$x <- df$r * cos(df$theta) + df$x
-    df$y <- df$r * sin(df$theta) + df$y
+    df$x <- df$r * cos(df$theta)
+    df$y <- df$r * sin(df$theta)
     
     # ensure that (0,0) is plotted in center of graph
     center <- function(data) {
@@ -99,14 +100,14 @@ GeomStar <- proto::proto(ggplot2:::Geom, {
     )
   }	
   
-  default_stat <- function(.) StatIdentity
+  default_stat <- function(.) StatBin
   
   default_aes <- function(.) {
     aes(weight = 1, colour = "grey20", fill = "NA", alpha = NA, 
         linetype = "solid", size = 0.5)
   }
   
-  required_aes <- c("x", "y", "r", "angle")
+  required_aes <- c("x")
   
   guide_geom <- function(.) "polygon"
   
@@ -123,21 +124,22 @@ GeomStar <- proto::proto(ggplot2:::Geom, {
   new <- function(., mapping = NULL, data = NULL, stat = NULL, 
                   position = NULL, na.rm = FALSE, ...) {
     
-    missing <- !(c("r", "angle") %in% names(mapping))
-    if (any(missing)) {
-      stop(paste("Missing required aesthetics for geom_star:",
-                 paste(c("r", "angle")[missing], collapse = ", ")),
-           call. = FALSE)
-    }
-    if(!("x" %in% names(mapping))) {
-      mapping$x <- 0
-    }
-    if(!("y" %in% names(mapping))) {
-      mapping$y <- 0
+    if (!"x" %in% names(mapping)) {
+      if (!("angle" %in% names(mapping))) {
+        stop("Missing required aesthetics for geom_freqstar: angle", 
+          call. = FALSE)
+      } else {
+        names(mapping)[names(mapping) == "angle"] <- "x"
+      }
+    } else {
+      if ("angle" %in% names(mapping)) {
+        mapping$x <- NULL
+        names(mapping)[names(mapping) == "angle"] <- "x"
+      }
     }
     
     do.call("layer", list(mapping = mapping, data = data, stat = stat, 
-                          geom = ., position = position, na.rm = na.rm, ...))  
+      geom = ., position = position, na.rm = na.rm, ...))  
   }
   
 })
