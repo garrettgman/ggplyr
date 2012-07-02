@@ -64,6 +64,11 @@ ggplot(mpg) + geom_subplot(aes(mean(displ), mean(cty), group = year,
   subplot = geom_bar(aes(x = trans, fill = year))), width = 1/3, height = 1/3, 
   reference = ref_box(aes(fill = mean(hwy)), alpha = 0.1))
 
+ggplot(mpg) + geom_subplot(aes(mean(displ), mean(cty), group = year, 
+  subplot = geom_bar(aes(x = trans, fill = year))), width = 1/3, height = 1/3, 
+  reference = ref_box(fill = NA)) +
+  opts(legend.position = "bottom")
+
 # merging overlaps
 ggplot(mpg) + geom_subplot(aes(mean(displ), mean(cty), group = year, 
   subplot = geom_bar(aes(trans, fill = year, group = year), 

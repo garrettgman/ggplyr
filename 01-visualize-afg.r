@@ -121,6 +121,8 @@ ied.cas2 <- melt(ied.cas, id = c("date", "year", "month", "day", "lon", "lat",
 ied.cas2 <- cbind(ied.cas2, colsplit(ied.cas2$variable, "\\.", c("victim", "type")))
 ied.cas2$variable <- NULL
 ied.cas2 <- dcast(ied.cas2, formula = ... ~ type, fun.aggregate = sum)
+ied.cas <- ied.cas2
+save(ied.cas, file = "data/ied_cas.csv", compress = "bzip2")
                   
 ggplot(ied.cas2) + ply_aes(geom_line(aes(date, my_cumsum(cas), 
   group = victim, color = victim)))
