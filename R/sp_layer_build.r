@@ -15,15 +15,18 @@
 #' functions that contain the complete set of steps for generating a ggsubplot 
 #' plot
 #' @export
-sp_layer_build <- function(layer, plot.env) {
+sp_layer_build <- function(layer, plot) {
   if (!("embed" %in% ls(layer))) {
     stop("layer does not have embedded subplots")
   }
-
+  
+  minimal <- ggplot2:::plot_clone(plot)
+  minimal$data <- ggplot2::waiver()
   layer <- layer_clone(layer)
-  layer$data <- layer$assign_subplots(layer$data, plot.env)
-  minor <- ggplot2::ggplot_build(ggplot2::ggplot() + layer + 
-    ggplot2::facet_wrap("SUBPLOT")) 
+  layer$data <- layer$assign_subplots(layer$data, plot$plot_env)
+
+  minimal$layers <- list(layer)
+  minor <- ggplot2::ggplot_build(minimal + ggplot2::facet_wrap("SUBPLOT")) 
 
   ### combine subplots (minor) into single plot
   # data
@@ -32,9 +35,11 @@ sp_layer_build <- function(layer, plot.env) {
   data$PANEL <- 1L
 	
   # panel
-  xspan <- range(unlist(data[names(data) %in% .x_aes]))
-  yspan <- range(unlist(data[names(data) %in% .y_aes]))
-  panel <- ggplot2::ggplot_build(ggplot2::qplot(xspan, yspan))$panel
+  xspan <- range(unlist(data[names(data) %in% .x_aes]), na.rm = TRUE)
+  yspan <- range(unlist(data[names(data) %in% .y_aes]), na.rm = TRUE)
+  minimal$layers <- list(geom_point(aes(xspan, yspan), 
+    data = data.frame(xspan, yspan)))
+  panel <- ggplot2::ggplot_build(minimal)$panel
 
   # scales
   scales <- minor$plot$scales$scales
@@ -52,7 +57,9 @@ sp_layer_build <- function(layer, plot.env) {
   minor$panel <- panel
   minor$plot$facet <- ggplot2::facet_null()
   minor$plot$scales$scales <- scales
-	
+  
+  ggplot2:::set_last_plot(plot)
+  
   minor
 }
 

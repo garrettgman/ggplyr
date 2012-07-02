@@ -10,21 +10,22 @@
 #' @seealso print.ggsubplot and \code{\link{sp_layer_build}} for functions that 
 #' contain the complete set of steps for generating a ggsubplot plot
 #' @export
-ggsubplot_build <- function(plot){
-  if (length(plot$layers) == 0) stop("No layers in plot", call.=FALSE)
-  if (!identical(plot$facet, ggplot2::facet_null())) {
+ggsubplot_build <- function(plot1){
+  if (length(plot1$layers) == 0) stop("No layers in plot", call.=FALSE)
+  if (!identical(plot1$facet, ggplot2::facet_null())) {
   	stop("ggsubplots do not support facetting", call. = FALSE)
   }
 
-  plot <- ggplot2:::plot_clone(plot)
+  plot <- ggplot2:::plot_clone(plot1)
   layers <- plot$layers
   layers <- propogate_data(layers, plot$data)
-  env <- plot$plot_env
 	
   # separate into sp_layers and normal layers
   spls <- unlist(lapply(layers, is.sp_layer))
   if (all(!spls)) return(ggplot2::ggplot_build(plot))
-  if (all(spls) && sum(spls) == 1) return(sp_layer_build(layers[[spls]], env))
+  if (all(spls) && sum(spls) == 1) {
+    return(sp_layer_build(layers[[spls]], plot))
+  }
   splayers <- layers[spls]
   plot$layers <- layers[!spls]
   spl.order <- seq_along(layers)[spls]
@@ -39,7 +40,7 @@ ggsubplot_build <- function(plot){
   # build glyph layers (embedded plots)
   embedded <- list()
   for (i in seq_along(splayers)) {
-    embedded[[i]] <- sp_layer_build(splayers[[i]], env)
+    embedded[[i]] <- sp_layer_build(splayers[[i]], plot)
   }
 	
 	
@@ -56,9 +57,15 @@ ggsubplot_build <- function(plot){
   data[nl.order] <- normal$data
 	
   # panel
-  xspan <- range(unlist(lapply(data, function(df) df[names(df) %in% .x_aes])))
-  yspan <- range(unlist(lapply(data, function(df) df[names(df) %in% .y_aes])))
-  panel <- ggplot2::ggplot_build(ggplot2::qplot(xspan, yspan))$panel
+  xspan <- range(unlist(lapply(data, function(df) df[names(df) %in% .x_aes])), 
+    na.rm = TRUE)
+  yspan <- range(unlist(lapply(data, function(df) df[names(df) %in% .y_aes])), 
+    na.rm = TRUE)
+  minimal <- plot
+  minimal$data <- ggplot2::waiver()
+  minimal$layers <- list(geom_point(aes(xspan, yspan), 
+    data = data.frame(xspan, yspan)))
+  panel <- ggplot2::ggplot_build(minimal)$panel
 	
   # scales 
   # collect all unique scales
@@ -103,7 +110,9 @@ ggsubplot_build <- function(plot){
   build$plot$scales$scales <- scales
   build$plot$layers <- layers
   build$plot$options$labels <- labels
-	
+
+  ggplot2:::set_last_plot(plot1)
+  
   build
 }
 
