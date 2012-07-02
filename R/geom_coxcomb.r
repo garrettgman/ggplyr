@@ -49,7 +49,7 @@ GeomCoxcomb <- proto::proto(ggplot2:::Geom, {
     xbreaks <- unlist(rescale_2pi(list(xbreaks)))
     n <- length(xbreaks)
     df$xmin <- zero_wrap(xbreaks[1:(n - 1)])
-    df$xmax <- xbreaks[2:n] # note: some xmin = 6.28 not 0
+    df$xmax <- xbreaks[2:n]
       
     
     # scale y to r to create equal areas
