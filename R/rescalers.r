@@ -17,10 +17,11 @@
 #' @param xvars a list of vectors
 #' @param xlim NULL (default) or a numeric vector of length two that specifies 
 #' the range of values to scale to [0, 1]
+#' @param zero logical. Should zero be added to the range before rescaling?
 #' @return a list of vectors
 #' @seealso \code{\link{rescale_11}}, \code{\link{rescale_2pi}}
 #' @export rescale_01 free
-rescale_01 <- free <- function(xvars, xlim=NULL) {
+rescale_01 <- free <- function(xvars, xlim=NULL, zero=FALSE) {
 	xnames <- names(xvars)
 	numberfy <- function(x) {
 		if (is.character(x)) {
@@ -41,6 +42,10 @@ rescale_01 <- free <- function(xvars, xlim=NULL) {
 	} else {
 		rng <- xlim
 	}
+  
+  if (zero) {
+    rng <- c(min(rng[1], 0), max(rng[2], 0))
+  }
 	
 	scale <- function(x) {
 		if ((rng[2] - rng[1]) == 0) {
@@ -72,11 +77,12 @@ rescale_01 <- free <- function(xvars, xlim=NULL) {
 #' @param xvars a list of vectors
 #' @param xlim NULL (default) or a numeric vector of length two that specifies 
 #' the range of values to scale to [-1, 1]
+#' @param zero logical. Should zero be added to the range before rescaling?
 #' @return a list of vectors
 #' @seealso \code{\link{rescale_01}}, \code{\link{rescale_2pi}}
 #' @export
-rescale_11 <- function(xvars, xlim=NULL) {
-	2 * rescale_01(xvars, xlim) - 1
+rescale_11 <- function(xvars, xlim=NULL, zero=FALSE) {
+	2 * rescale_01(xvars, xlim, zero) - 1
 }
 
 #' rescale vectors to [0, 2 * pi]
@@ -98,10 +104,11 @@ rescale_11 <- function(xvars, xlim=NULL) {
 #' @param xvars a list of vectors
 #' @param xlim NULL (default) or a numeric vector of length two that specifies 
 #' the range of values to scale to [0, 2 * pi]
+#' @param zero logical. Should zero be added to the range before rescaling?
 #' @return a list of vectors
 #' @seealso \code{\link{rescale_01}}, \code{\link{rescale_11}}
 #' @export
-rescale_2pi <- function(xvars, xlim = NULL) {
-  2 * pi * rescale_01(xvars, xlim)
+rescale_2pi <- function(xvars, xlim = NULL, zero = FALSE) {
+  2 * pi * rescale_01(xvars, xlim, zero)
 }
 
