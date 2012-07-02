@@ -126,19 +126,19 @@ system.time(print(ggplot(nasa) + geom_subplot2d(aes(long, lat,
 
 # trying out geom_star
 # without glyphing
-ggplot(mpg) + GeomStar$new(mapping = aes(r = hwy, angle = cty, x = 0, y = 0, 
+ggplot(mpg) + GeomStar$new(mapping = aes(r = hwy, angle = cty, 
   group = cyl)) + facet_wrap(~cyl)
 
-ggplot(mpg) + GeomStar$new(mapping = aes(r = trans, angle = cty, x = 0, y = 0, 
+ggplot(mpg) + GeomStar$new(mapping = aes(angle = trans, r = cty, 
   group = cyl)) + facet_wrap(~cyl)
 
-ggplot(test.data) + geom_star(mapping = aes(x = 0, y = 0, 
+ggplot(test.data) + geom_star(mapping = aes( 
   r = Catholic, angle = Fertility, group = lat)) + facet_wrap(~lat)
 
 ggplot(nasa) + ply_aes(geom_star(aes(r = ozone, angle = date, x = 0, y = 0, 
   fill = mean(temperature))), c("lat")) + facet_wrap(~ lat)
 
-ggplot(nasa) + ply_aes(geom_star(aes(r = ozone, angle = date, x = 0, y = 0, 
+ggplot(nasa) + ply_aes(geom_star(aes(r = ozone, angle = date, 
   fill = mean(temperature))), c("lat")) + facet_wrap(~ lat, scales = "free")
 
 # laptop: 55.2 seconds :P
@@ -146,6 +146,9 @@ system.time(print(ggplot(nasa) + map_nasa +
   geom_subplot(aes(long[1], lat[1], group = id, 
   subplot = geom_star(aes(r = ozone, angle = date, x = 0, y = 0, 
   fill = mean(temperature)))))))
+
+ggplot(mpg) + geom_subplot(aes(cyl[1], y = 1, group = cyl, 
+  subplot = geom_star(mapping = aes(r = hwy, angle = cty, fill = mean(hwy)))))
 
 ggplot(mpg) + ply_aes(geom_star(mapping = aes(x = cyl[1], y = 1, 
   r = hwy, angle = cty, fill = mean(hwy), group = cyl)))
@@ -207,3 +210,8 @@ system.time(print(ggplot(seasons) +
   geom_subplot(aes(lon[1], lat[1], group = stn, 
     subplot = geom_line(aes(x = time, y = pred))), height = 1, width = 2,
     ref = ref_box(aes(fill = avg)), position = "merge")))
+
+# geom_freqstar
+test <- data.frame(a = rep(1:100, 100))
+ggplot(test) + geom_freqstar(aes(angle = a), binwidth = 1)
+qplot(a, data = test, geom = "freqstar")

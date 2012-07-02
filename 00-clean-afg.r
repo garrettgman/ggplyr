@@ -41,33 +41,36 @@ afg <- afg[afg$lon > 60 & afg$lat > 29, ]
 afg <- afg[afg$lon < 75 & afg$lat < 39, ]
 
 
-# building maps
-library(ggmap)
-roadmap <- get_map(location = c(59,29,76,39), maptype = "roadmap")
-terrainmap <- get_map(location = c(59,29,76,39))
-
-
 # new variables
 afg$total.kia <- afg$friendly.kia + afg$host.kia + afg$civilian.kia + afg$enemy.kia
 afg$total.wia <- afg$friendly.wia + afg$host.wia + afg$civilian.wia + afg$enemy.wia
 afg$friendly.cas <- afg$friendly.kia + afg$friendly.wia
 afg$host.cas <- afg$host.kia + afg$host.wia
 afg$civilian.cas <- afg$civilian.kia + afg$civilian.wia
-afg$enemy.cas <- afg$enemy.kia + afg$enemy.wia
+afg$enemy.cas <- afg$enemy.kia + afg$enemy.wia + afg$enemy.captured
 afg$total.cas <- afg$total.kia + afg$total.wia
 afg$fatal <- afg$total.kia != 0
 afg$harmful <- afg$total.cas != 0
 
-
 # building maps
 library(ggmap)
-roadmap <- get_map(location = c(59,29,76,39), maptype = "roadmap")
-terrainmap <- get_map(location = c(59,29,76,39))
+roadmap <- get_map(location = c(67,35), zoom = 6, maptype = "roadmap")
+terrainmap <- get_map(location = c(67,35), zoom = 6)
+afghan <- geocode("Afghanistan")
+
+# improve the fit
+bb <- attr(roadmap, "bb")
+bb[1,3] <- bb[1,3] - (bb[1,3] - bb[1,1]) /1280*210
+roadmap <- roadmap[211:1280, ]
+attr(roadmap, "bb") <- bb
+class(roadmap) <- c("ggmap", "raster")
+
 
 library(maps)
 afghanistan <- map_data("world", region = "Afghanistan")
 
-polygon <- ggplot() + geom_polygon(aes(long, lat, group = group), fill = "white", data = afghanistan)
+polygon <- ggplot() + geom_polygon(aes(long, lat, group = group), fill = "white", 
+  color = "grey30", data = afghanistan)
 road <- ggmap(roadmap, extent = "device")
 terrain <- ggmap(terrainmap, extent = "device")
 

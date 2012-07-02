@@ -41,3 +41,4 @@ Collate:
     'sp_layer-class.r'
     'sp_layer_build.r'
     'util.r'
+    'geom_freqstar.r'

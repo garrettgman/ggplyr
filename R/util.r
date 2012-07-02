@@ -84,3 +84,8 @@ null_omit <- function(lst) {
   }
   lst[!(unlist(lapply(lst, is.null)))]
 }
+
+my_cumsum <- function(vec) {
+  vec[is.na(vec)] <- 0
+  cumsum(vec)
+}
