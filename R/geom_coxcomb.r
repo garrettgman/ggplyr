@@ -52,7 +52,6 @@ GeomCoxcomb <- proto::proto(ggplot2:::Geom, {
     df$xmin <- zero_wrap(xbreaks[1:n])
     df$xmax <- xbreaks[(n + 1):(n + n)]
       
-    
     # scale y to r to create equal areas
     adjust_y <- function(df) {
       if (length(df$y) == 1) {
@@ -137,6 +136,9 @@ GeomCoxcomb <- proto::proto(ggplot2:::Geom, {
       stop("Missing required aesthetic: angle", call. = FALSE)
     }
     names(mapping)[names(mapping) == "angle"] <- "x"
+    if ("r" %in% names(mapping)) {
+      names(mapping)[names(mapping) == "r"] <- "y"
+    }
     mapping$section <- coxcomb_sections(mapping)
     
     lyr <- do.call("layer", list(mapping = mapping, data = data, stat = stat, 
