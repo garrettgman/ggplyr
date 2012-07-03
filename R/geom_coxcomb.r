@@ -155,9 +155,9 @@ GeomCoxcomb <- proto::proto(ggplot2:::Geom, {
 #' @export
 coxcomb_sections <- function(mapping) {
   sections <- mapping[c("alpha", "fill", "colour")]
-  sections <- sections[!unlist(lapply(sections, is.null))]
+  sections <- plyr::compact(sections)
   names(sections) <- NULL
-  if (is.null(sections)) return(NULL)
+  if (length(sections) == 0) return(NULL)
   as.call(c(quote(interaction), sections))
 }
 
