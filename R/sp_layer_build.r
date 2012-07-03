@@ -19,7 +19,7 @@ sp_layer_build <- function(layer, plot) {
   if (!("embed" %in% ls(layer))) {
     stop("layer does not have embedded subplots")
   }
-  
+
   minimal <- ggplot2:::plot_clone(plot)
   minimal$data <- ggplot2::waiver()
   layer <- layer_clone(layer)

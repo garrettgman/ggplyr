@@ -111,6 +111,7 @@ extract_layer <- function(subplot_aes, env) {
 # be used by combine_subplots. assign_subplots also handles merging when 
 # position = "merge" in a \code{\link{geom_subplot}} call.
 assign_subplots <- function(., data, plot.env) {
+  
   # major x and y
   data$SUBPLOT <- eval(embed$major.aes$group, data, plot.env) 
   data$SUBPLOT <- as.numeric(factor(data$SUBPLOT))
@@ -129,14 +130,18 @@ assign_subplots <- function(., data, plot.env) {
   width <- embed$width
   height <- embed$height
   if (is.rel(width)) {
-    .$embed$width <- width <- max(ggplot2::resolution(vet(globals$x), 
-      zero = FALSE) * unclass(width), (diff(range(vet(globals$x))) + 
-      unclass(width)) / length(unique(globals$x)) * unclass(width))
+    .$embed$width <- width <- max(
+      ggplot2::resolution(vet(globals$x), zero = FALSE) * unclass(width), 
+      (diff(range(vet(globals$x), na.rm = TRUE)) + unclass(width)) / 
+      length(unique(globals$x)) * unclass(width)
+    )
   }
   if (is.rel(height)) {
-    .$embed$height <- height <- max(ggplot2::resolution(vet(globals$y), 
-      zero = FALSE) * unclass(height), (diff(range(vet(globals$y))) + 
-      unclass(height)) / length(unique(globals$y)) * unclass(height))
+    .$embed$height <- height <- max(
+      ggplot2::resolution(vet(globals$y), zero = FALSE) * unclass(height), 
+      (diff(range(vet(globals$y), na.rm = TRUE)) + unclass(height)) / 
+      length(unique(globals$y)) * unclass(height)
+    )
   }
 
   if (embed$merge) {

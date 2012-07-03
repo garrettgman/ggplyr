@@ -153,7 +153,12 @@ system.time(print(ggplot(nasa) + map_nasa +
   fill = mean(temperature)))))))
 
 ggplot(mpg) + geom_subplot(aes(cyl[1], y = 1, group = cyl, 
+  subplot = geom_freqstar(mapping = aes(angle = trans, 
+  fill = mean(hwy)))))
+
+ggplot(mpg) + geom_subplot(aes(cyl[1], y = 1, group = cyl, 
   subplot = geom_star(mapping = aes(r = hwy, angle = cty, fill = mean(hwy)))))
+
 
 ggplot(mpg) + ply_aes(geom_star(mapping = aes(x = cyl[1], y = 1, 
   r = hwy, angle = cty, fill = mean(hwy), group = cyl)))
@@ -192,7 +197,11 @@ ggplot(mpg[mpg$cy != 5, ]) + geom_subplot(aes(cyl, y = 1, group = cyl,
   subplot = geom_coxcomb(mapping = aes(angle = trans, fill = lat, 
   group = lat))))
 
-ggplot(mpg) + geom_coxcomb(aes(angle = trans, fill = lat))
+ggplot(mpg) +
+  geom_coxcomb(aes(angle = trans, fill = lat))
+
+ggplot(mpg[mpg$lat == c(3,4) & mpg$trans %in% c("manual(m5)", "manual(m6)") ,]) +
+  geom_coxcomb(aes(angle = trans, fill = lat))
 
 ggplot(cheap.diamonds) +
   geom_subplot2d(aes(carat, price, subplot = geom_coxcomb(aes(angle = color, 

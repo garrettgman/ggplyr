@@ -46,11 +46,13 @@ GeomFreqstar <- proto::proto(ggplot2:::Geom, {
     
     #remove default zeros at start and end of freqpolies
     trim_ends <- function(df) {
+      if (nrow(df) > 4) return(df[-c(1, nrow(df)), ])
       df[-c(1, nrow(df)), ]
     }
     df <- ddply(df, c("group", "PANEL"), trim_ends)
     
     # scale x to be between 0 and 2*pi
+
     df$theta <- unlist(rescale_2pi(df["x"]))
     df$r <- unlist(rescale_01(df["y"], zero = TRUE))
     
