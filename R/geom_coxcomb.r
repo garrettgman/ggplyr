@@ -45,11 +45,12 @@ GeomCoxcomb <- proto::proto(ggplot2:::Geom, {
 
     # scale bin breaks to 0 and 2 *pi
     width <- ggplot2::resolution(unique(df$x), FALSE)
-    xbreaks <- c(df$x[1] - width/2, df$x + width/2)
-    xbreaks <- unlist(rescale_2pi(list(xbreaks)))
-    n <- length(xbreaks)
-    df$xmin <- zero_wrap(xbreaks[1:(n - 1)])
-    df$xmax <- xbreaks[2:n]
+    xbreaks.min <- df$x - width/2
+    xbreaks.max <- df$x + width/2
+    xbreaks <- unlist(rescale_2pi(list(c(xbreaks.min, xbreaks.max))))
+    n <- length(xbreaks.min)
+    df$xmin <- zero_wrap(xbreaks[1:n])
+    df$xmax <- xbreaks[(n + 1):(n + n)]
       
     
     # scale y to r to create equal areas
