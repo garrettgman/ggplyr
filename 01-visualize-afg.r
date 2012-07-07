@@ -143,13 +143,15 @@ road + geom_subplot2d(aes(lon, lat,
 casualties <- afg[, c("date", "year", "month", "day", "lon", "lat", 
   "friendly.wia", "friendly.kia", "friendly.cas", "host.wia", "host.kia", 
   "host.cas", "civilian.wia", "civilian.kia", "civilian.cas", "enemy.wia", 
-  "enemy.kia", "enemy.cas", "total.kia", "total.wia", "total.cas","fatal", 
+  "enemy.kia", "enemy.cas", "fatal", 
   "harmful", "type", "category")]
 casualties <- melt(casualties, id = c("date", "year", "month", "day", "lon", "lat", 
   "fatal", "harmful", "type", "category"))
 casualties <- cbind(casualties, colsplit(casualties$variable, "\\.", c("victim", "casualty")))
 casualties$variable <- NULL
 casualties <- dcast(casualties, formula = ... ~ casualty, fun.aggregate = sum)
+casualties$victim <- factor(casualties$victim, 
+  levels = c("enemy", "civilian", "host", "friendly"))
 save(casualties, file = "data/casualties.RData", compress = "bzip2")
 
 theme_fullframe <- function (base_size = 12){

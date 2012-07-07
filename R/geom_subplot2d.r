@@ -111,6 +111,7 @@ geom_subplot2d <- function(mapping, bins = 10,  binwidth = NULL, breaks = NULL,
 # retrieved by combine_glyphs. Assign_grid is intended to be used in a glayer's 
 # assign_glyphs slot.
 assign_grid <- function(., data, env) {
+  
   # major x and y
   x <- eval(embed$major.aes$x, envir = data, enclos = env)
   x.breaks <- embed$breaks$x.breaks
@@ -168,14 +169,19 @@ assign_grid <- function(., data, env) {
 interval_breaks <- function(bins = 10, binwidth = NULL, origin = NULL, range = NULL) {
   
   function(x) {
-    
     if (is.integer(x)) x <- as.numeric(x)
     
     if (is.null(range)) {
       range <- range(x, na.rm = TRUE, finite = TRUE)
     }
     # If x is a point mass, make a single bin
-    if (diff(range) < 1e-07) return(range)
+    if (diff(range) < 1e-07) {
+      message("only one value: returning single bin")
+      if (is.null(binwidth)) {
+        binwidth <- 1
+      }
+      return(c(range[1] - binwidth/2, range[2] + binwidth/2))
+    }
     
     if (is.null(binwidth)) {
       binwidth <- diff(range) / bins

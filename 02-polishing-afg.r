@@ -43,15 +43,15 @@ one_month <- function(df) {
 
 geogrid <- function(df, bins) {
   grid_vec <- function(vec, nbins) {
-    span <- range(vec)
+    span <- range(vec, na.rm = T)
     dif <- diff(span)/nbins
     breaks <- seq(span[1], span[2], by = dif)
     labels <- (breaks - dif/2)[-1]
     as.numeric(as.character(cut(vec, breaks = breaks, labels = labels)))
   }
   
-  df$lon <- grid_vec(df$lon, bins[1])
-  df$lat <- grid_vec(df$lat, bins[2])
+  df$glon <- grid_vec(df$lon, bins[1])
+  df$glat <- grid_vec(df$lat, bins[2])
   
   df
 }
@@ -302,6 +302,13 @@ ggplot(regional.cas) + geom_subplot(aes(log(enemy.actions), log(friendly.actions
 IED <- str_detect(afg$category, "ied") + str_detect(afg$category, "IED")
 afg$ied.cas <- 0
 afg$ied.cas[IED] <- afg$total.cas[IED]
+afg$ied.civ <- 0
+afg$ied.civ[IED] <- afg$civilian.cas[IED]
+afg$ied.friend <- 0
+afg$ied.friend[IED] <- afg$friendly.cas[IED]
+afg$ied.host <- 0
+afg$ied.host[IED] <- afg$host.cas[IED]
+afg$ied <- IED
 
 ratios <- function(df) {
   civ <- sum(df$civilian.cas, na.rm = T)
@@ -309,6 +316,8 @@ ratios <- function(df) {
   enemy <- sum(df$enemy.cas, na.rm = T)
   total <- sum(df$total.cas, na.rm = T)
   ied <- sum(df$ied.cas, na.rm = T)
+  ied.civ <- sum(df$ied.civ, na.rm = T)
+  ied.friend <- sum(df$ied.friend, na.rm = T)
   
   enemy.act <- sum(df$type == "Enemy Action", na.rm = T)
   friend.act <- sum(df$type == "Friendly Action", na.rm = T)
@@ -340,10 +349,166 @@ ratios <- function(df) {
     avg.lat = mean(df$lat, na.rm = T)
   )
 }
-    
-day.ratios <- ddply(afg, "date", ratios, .progress = "text")
 
+hafg <- afg[afg$harmful, ]
+day.ratios <- ddply(hafg, "date", ratios, .progress = "text")
+save(day.ratios, file = "data/afg.ratios.RData", compress = "bzip2")
+
+qplot(date, civ.per.enemy, geom = "smooth", data = day.ratios) 
+qplot(date, civ.per.friend, geom = "smooth", data = day.ratios)
+# interesting lately more of us have been dying than of them
+qplot(date, friend.per.enemy, geom = "smooth", data = day.ratios, se = F) +
+  geom_smooth(aes(date, civ.per.enemy), color = "red", se = F) +
+  geom_smooth(aes(date, enemy.per.total), color = "green", se = F)
+qplot(date, friend.per.total, geom = "smooth", data = day.ratios)
+# we did alot in the beginning, now we're just sitting around as targets
+qplot(date, friendly.actions, geom = "smooth", data = day.ratios)    
+qplot(date, enemy.actions, geom = "smooth", data = day.ratios)
+qplot(date, by.friend, geom = "smooth", data = day.ratios)
+qplot(date, avg.lon, geom = "smooth", data = day.ratios)
+qplot(date, avg.lat, geom = "smooth", data = day.ratios)
+qplot(avg.lon, avg.lat, geom = "point", data = day.ratios, alpha = 0.25)
+qplot(friendly.actions, enemy.actions, geom = "jitter", size = civ.per.total, 
+  color = civ.per.total, data = day.ratios)
+qplot(date, enemy.per.total, geom = "smooth", 
+  data = day.ratios[day.ratios$enemy.per.total < 50,]) +
+  geom_smooth(aes(date, enemy.per.total))
+qplot(date, friend.per.enemy, geom = "point", data = day.ratios) +
+  geom_smooth(aes(date, friend.per.enemy))
+# there's an inverse relationship between enemy casualties and the number of 
+# friends hurt to make them
+qplot(log(enemy.per.total * total.cas), log(friend.per.enemy), data =day.ratios)
+
+ggplot(day.ratios) + 
+  geom_subplot2d(aes(friendly.actions, enemy.actions, 
+    subplot = geom_point(aes(date, friend.per.enemy), se = F)),
+    bins = c(8, 12))
+
+
+day.ratios <- ddply(afg, "date", ratios, .progress = "text")
+save(day.ratios, file = "data/afg.ratios.RData", compress = "bzip2")
 # then let's look at the percentage of civilian.cas in enemy vs friendly
+
+# friends and enemies
+afg$friend.per.enemy <- 0
+afg$denom <- afg$enemy.cas
+afg$denom[!afg$denom & !afg$friendly.cas] <- NA
+afg$denom[!afg$denom & afg$friendly.cas] <- 0.05
+afg$friend.per.enemy <- afg$friendly.cas / afg$denom
+qplot(log(enemy.cas + 1), log(friendly.cas + 1), data = afg, color = type, geom = "jitter")
+, geom = "smooth",
+  method = "lm", se = F, color = type)
+ggplot(afg[afg$type %in% c("Enemy Action", "Friendly Action"), ]) + geom_subplot2d(aes(log(enemy.cas + 1), log(friendly.cas + 1),
+  subplot = geom_bar(aes(type, fill = type)), bins = c(10,15)), y_scale = free)
+
+# why do day ratios take FOREVER?
+# we're going to need place ratios if we wish to make an interactive chart
+# let's just subdivide by months
+library(lubridate)
+hafg$mdate <- hafg$date
+day(hafg$mdate[!is.na(hafg$mdate)]) <- 1
+hafg <- geogrid(hafg, c(19,15))
+ratios2 <- function(df) {
+  civ <- sum(df$civilian.cas, na.rm = T)
+  friend <- sum(df$friendly.cas, na.rm = T)
+  enemy <- sum(df$enemy.cas, na.rm = T)
+  host <- sum(df$host.cas, na.rm = T)
+  total <- sum(df$total.cas, na.rm = T)
+  ied <- sum(df$ied.cas, na.rm = T)
+  ied.civ <- sum(df$ied.civ, na.rm = T)
+  ied.friend <- sum(df$ied.friend, na.rm = T)
+  ied.host <- sum(df$ied.host, na.rm = T)
+  friend.init <- sum(df$attack.on == "FRIEND", na.rm = T)
+  enemy.init <- sum(df$attack.on == "ENEMY", na.rm = T)
+  ied.n <- sum(df$ied, na.rm = TRUE)
+  
+  per <- function(num, den) {
+    if (!(num + den)) return(NA)
+    if (!den) den <- 0.5
+    num/den
+  }
+  
+  data.frame(
+    civ.per.friend = per(civ, friend),
+    civ.per.host = per(civ, host),
+    civ.per.coalition = per(civ, host + friend),
+    civ.per.enemy = per(civ, enemy),
+    civ.per.total = per(civ, total),
+    civ.per.ied = per(ied.civ, ied),
+    civ.ied = ied.civ,
+    friend.per.enemy = per(friend, enemy),
+    friend.per.total = per(friend, total),
+    friend.per.ied = per(ied.friend, ied),
+    friend.ied = ied.friend,
+    host.per.enemy = per(host, enemy),
+    host.per.total = per(host, total),
+    host.per.ied = per(ied.host, ied),
+    host.ied = ied.host, 
+    coalition.per.enemy = per(host + friend, enemy),
+    coalition.ied = sum(ied.host, ied.friend, na.rm = T),
+    enemy.per.total = per(enemy, total),
+    enemy.init = enemy.init,
+    friend.init = friend.init,
+    civ.cas = civ,
+    host.cas = host,
+    enemy.cas = enemy,
+    friend.cas = friend,
+    coalition.cas = host + friend,
+    total.cas = total,
+    by.friend = per(friend.init, enemy.init + friend.init)
+  )
+}
+
+
+place.ratios <- ddply(hafg, c("mdate", "glon", "glat"), ratios2, 
+  .progress = "text")
+save(place.ratios, file = "data/afg.ratios.RData", compress = "bzip2")
+
+qplot(mdate, civ.per.enemy, geom = "smooth", data = place.ratios) 
+qplot(mdate, civ.per.friend, geom = "smooth", data = place.ratios)
+# interesting lately more of us have been dying than of them
+qplot(mdate, friend.per.enemy, geom = "point", data = place.ratios, se = F) +
+  geom_smooth(aes(mdate, friend.per.enemy), color = "red", se = F)
+ggplot(place.ratios) + 
+  geom_subplot2d(aes(friend.init, enemy.init,
+    subplot = geom_smooth(aes(mdate, friend.per.enemy), , se = F)), 
+    ref = ref_box(aes(fill = mean(friend.cas)), color = "grey90"), 
+    bins = c(8,8))
+
+polygon + 
+  geom_subplot(aes(glon[1], glat[1], group = interaction(glon, glat),
+    subplot = geom_line(aes(mdate, y = 1))), data = place.ratios) +
+  geom_subplot(aes(glon[1], glat[1], group = interaction(glon, glat),
+    subplot = geom_smooth(aes(mdate, friend.per.enemy), method = "lm", se = F)), 
+    data = place.ratios, ref = ref_box(fill = NA, color = "grey80"))
+
+month.places <- ddply(hafg, "mdate", summarise, avg.lon = mean(lon), 
+  avg.lat = mean(lat), .progress = "text")
+polygon + geom_point(aes(avg.lon, avg.lat, color = mdate), data = month.places)
+
+year.places <- ddply(hafg, "year", summarise, avg.lon = mean(lon), 
+                      avg.lat = mean(lat), .progress = "text")
+polygon + geom_point(aes(avg.lon, avg.lat, color = year), data = year.places)
+
+
+qplot(date, friend.per.total, geom = "smooth", data = day.ratios)
+# we did alot in the beginning, now we're just sitting around as targets
+qplot(date, friendly.actions, geom = "smooth", data = day.ratios)    
+qplot(date, enemy.actions, geom = "smooth", data = day.ratios)
+qplot(date, by.friend, geom = "smooth", data = day.ratios)
+qplot(date, avg.lon, geom = "smooth", data = day.ratios)
+qplot(date, avg.lat, geom = "smooth", data = day.ratios)
+qplot(avg.lon, avg.lat, geom = "point", data = day.ratios, alpha = 0.25)
+qplot(friendly.actions, enemy.actions, geom = "jitter", size = civ.per.total, 
+      color = civ.per.total, data = day.ratios)
+qplot(date, enemy.per.total, geom = "smooth", 
+      data = day.ratios[day.ratios$enemy.per.total < 50,]) +
+        geom_smooth(aes(date, enemy.per.total))
+qplot(date, friend.per.enemy, geom = "point", data = day.ratios) +
+  geom_smooth(aes(date, friend.per.enemy))
+# there's an inverse relationship between enemy casualties and the number of 
+# friends hurt to make them
+qplot(log(enemy.per.total * total.cas), log(friend.per.enemy), data =day.ratios)
 
 
 
