@@ -23,10 +23,10 @@
 #' 
 #' @export
 geom_star <- function(mapping = NULL, data = NULL, stat = "identity", 
-  position = "identity", na.rm = FALSE, ...) { 
+  position = "identity", na.rm = FALSE, r.zero = TRUE, ...) { 
 
     GeomStar$new(mapping = mapping, data = data, stat = stat, 
-      position = position, ...)
+      position = position, r.zero = r.zero, ...)
 }
 
 
@@ -34,10 +34,10 @@ GeomStar <- proto::proto(ggplot2:::Geom, {
   objname <- "star"
   
   # turn cartesian coordinates polar
-  reparameterise <- function(., df, params) {    
+  reparameterise <- function(., df, params) { 
     # scale x to be between 0 and 2*pi
-    df$theta <- unlist(rescale_2pi(df["x"]))
-    df$r <- unlist(rescale_01(df["y"], zero = TRUE))
+    df$theta <- unlist(rescale_2pi(df["angle"]))
+    df$r <- unlist(rescale_01(df["r"], zero = params$r.zero))
     
     include_origin <- function(data) {
       data <- data[order(data$theta, data$r), ]
@@ -103,7 +103,7 @@ GeomStar <- proto::proto(ggplot2:::Geom, {
   
   default_aes <- function(.) {
     aes(weight = 1, colour = "grey20", fill = "NA", alpha = NA, 
-      linetype = "solid", size = 0.5)
+      linetype = "solid", size = 0.5, r.zero = TRUE)
   }
   
   required_aes <- c("x", "y")
@@ -121,36 +121,39 @@ GeomStar <- proto::proto(ggplot2:::Geom, {
   }
   
   new <- function(., mapping = NULL, data = NULL, stat = NULL, 
-    position = NULL, na.rm = FALSE, ...) {
+    position = NULL, na.rm = FALSE,  ...) {
     
-    if (!("x" %in% names(mapping))) {
-      if ("angle" %in% names(mapping)) {
-        names(mapping)[names(mapping) == "angle"] <- "x"
+    # compute_aesthetics should retunr numeric x and y scales
+    # to allow smooth use of the output of reparameterise
+    if (!("angle" %in% names(mapping))) {
+      if ("x" %in% names(mapping)) {
+        names(mapping)[names(mapping) == "x"] <- "angle"
+        mapping$x <- 0
       } else {
-        stop("Missing required aesthetic for geom_star: angle")
+        stop("Missing required aesthetic for geom_star: angle", call. = F)
       }
     } else {
-      if ("angle" %in% names(mapping)) {
-        mapping$x <- NULL
-        names(mapping)[names(mapping) == "angle"] <- "x"
+      if (!("x" %in% names(mapping))) {
+        mapping$x <- 0
       }
     }
-    
-    if (!("y" %in% names(mapping))) {
-      if ("r" %in% names(mapping)) {
-        names(mapping)[names(mapping) == "r"] <- "y"
+        
+    if (!("r" %in% names(mapping))) {
+      if ("y" %in% names(mapping)) {
+        names(mapping)[names(mapping) == "y"] <- "r"
+        mapping$y <- 0
       } else {
-        stop("Missing required aesthetic for geom_star: r")
+        stop(cat("Missing required aesthetic for geom_star: r\n",
+          "do you want geom_freqstar?"), call. = F)
       }
     } else {
-      if ("r" %in% names(mapping)) {
-        mapping$y <- NULL
-        names(mapping)[names(mapping) == "r"] <- "y"
+      if (!("y" %in% names(mapping))) {
+        mapping$y <- 0
       }
     }
     
     do.call("layer", list(mapping = mapping, data = data, stat = stat, 
-      geom = ., position = position, na.rm = na.rm, ...))  
+      geom = ., position = position, na.rm = na.rm, ...)) 
   }
   
 })
