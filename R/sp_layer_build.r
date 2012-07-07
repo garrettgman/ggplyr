@@ -22,6 +22,8 @@ sp_layer_build <- function(layer, plot) {
 
   minimal <- ggplot2:::plot_clone(plot)
   minimal$data <- ggplot2::waiver()
+  minimal$scales$scales[which_x(minimal$scales$scales)] <- NULL
+  minimal$scales$scales[which_y(minimal$scales$scales)] <- NULL
   layer <- layer_clone(layer)
   layer$data <- layer$assign_subplots(layer$data, plot$plot_env)
 
