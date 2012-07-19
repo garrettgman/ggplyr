@@ -72,6 +72,9 @@ ggsubplot_build <- function(plot1){
   scales <- build$plot$scales$scales
   scales[[which_x(scales)]] <- panel$x_scales[[1]]
   scales[[which_y(scales)]] <- panel$y_scales[[1]]
+  # git rid of untrained scales
+  scales[which_untrained(scales)] <- NULL
+  
   scale.names <- names_scales(scales)
   for (i in seq_along(embedded[-1])) {
     escales <- embedded[[i + 1]]$plot$scales$scales
@@ -147,4 +150,13 @@ propogate_aes <- function(layer, plot_mapping) {
   class(mapping) <- "uneval"
   layer$mapping <- mapping
   layer
+}
+
+
+#' find scales that have no range yet
+#' 
+#' @param scales A list of ggplot2 scales
+which_untrained <- function(scales) {
+  no_range <- function(scale) is.null(scale$range$range)
+  unlist(lapply(scales, no_range))
 }
