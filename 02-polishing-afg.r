@@ -4,6 +4,8 @@ load_all(".")
 load("data/afg.RData")
 load("data/ied_cas.csv")
 
+
+
 # how effective are ieds at targeting troops?
 # how about tracking civilians per ied vs. friendlies per ied?
 library(lubridate)
