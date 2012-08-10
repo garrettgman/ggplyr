@@ -17,7 +17,7 @@
 #' aesthetics. All other aesthetics will be ignored - consider placing them in 
 #' the subplot aesthetics's mapping instead. The subplot aesthetic should be a 
 #' layer or plot specification. For example, the subplot aesthetic could be the 
-#' output of \code{\link[ggplot2]{qplot} or \code{\link[ggplot2]{geom_point}. 
+#' output of \code{\link[ggplot2]{qplot}} or \code{\link[ggplot2]{geom_point}}. 
 #' Any data argument in the subplot aesthetic will be ignored, the subplot 
 #' mapping will be applied to the data inherited by the geom_subplot2d layer.
 #' @param bins numeric. The number of bins to divide each major axis into. If 

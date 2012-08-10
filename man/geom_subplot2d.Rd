@@ -16,8 +16,8 @@
   subplot aesthetics's mapping instead. The subplot
   aesthetic should be a layer or plot specification. For
   example, the subplot aesthetic could be the output of
-  \code{\link[ggplot2]{qplot} or
-  \code{\link[ggplot2]{geom_point}. Any data argument in
+  \code{\link[ggplot2]{qplot}} or
+  \code{\link[ggplot2]{geom_point}}. Any data argument in
   the subplot aesthetic will be ignored, the subplot
   mapping will be applied to the data inherited by the
   geom_subplot2d layer.}

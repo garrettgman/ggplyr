@@ -2,7 +2,7 @@
 \alias{rescale_2pi}
 \title{rescale vectors to [0, 2 * pi]}
 \usage{
-  rescale_2pi(xvars, xlim = NULL)
+  rescale_2pi(xvars, xlim = NULL, zero = FALSE)
 }
 \arguments{
   \item{xvars}{a list of vectors}
@@ -10,6 +10,9 @@
   \item{xlim}{NULL (default) or a numeric vector of length
   two that specifies the range of values to scale to [0, 2
   * pi]}
+
+  \item{zero}{logical. Should zero be added to the range
+  before rescaling?}
 }
 \value{
   a list of vectors

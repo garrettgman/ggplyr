@@ -3,7 +3,7 @@
 \alias{rescale_01}
 \title{rescale vectors to [0,1]}
 \usage{
-  rescale_01(xvars, xlim = NULL)
+  rescale_01(xvars, xlim = NULL, zero = FALSE)
 }
 \arguments{
   \item{xvars}{a list of vectors}
@@ -11,6 +11,9 @@
   \item{xlim}{NULL (default) or a numeric vector of length
   two that specifies the range of values to scale to [0,
   1]}
+
+  \item{zero}{logical. Should zero be added to the range
+  before rescaling?}
 }
 \value{
   a list of vectors

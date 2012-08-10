@@ -2,7 +2,7 @@
 \alias{ggsubplot_build}
 \title{Build a ggsubplot object for rendering}
 \usage{
-  ggsubplot_build(plot)
+  ggsubplot_build(plot1)
 }
 \arguments{
   \item{layer}{an object of class sp_layer}

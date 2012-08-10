@@ -2,7 +2,7 @@
 \alias{sp_layer_build}
 \title{Build a sp_layer for rendering}
 \usage{
-  sp_layer_build(layer, plot.env)
+  sp_layer_build(layer, plot)
 }
 \arguments{
   \item{layer}{an object of class sp_layer}
