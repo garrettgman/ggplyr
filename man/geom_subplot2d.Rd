@@ -3,10 +3,10 @@
 \title{Bin data and visualize with a grid of subplots.}
 \usage{
   geom_subplot2d(mapping, bins = 10, binwidth = NULL,
-  breaks = NULL, data = waiver(), x_scale = identity,
-  y_scale = identity, width.adjust = 0.95, height.adjust =
-  0.95, position = "identity", reference = ref_box(),
-  ply.aes = TRUE, .ref = FALSE)
+    breaks = NULL, data = waiver(), x_scale = identity,
+    y_scale = identity, width.adjust = 0.95,
+    height.adjust = 0.95, position = "identity",
+    reference = ref_box(), ply.aes = TRUE, .ref = FALSE)
 }
 \arguments{
   \item{mapping}{An aesthetic mapping, usually constructed
@@ -41,6 +41,10 @@
   first element will be applied to the x axis and the
   second to the y. Defaults to NULL.}
 
+  \item{data}{The dataframe the layer should map to.
+  geom_subplot2d inherits the global dataframe defined in
+  \code{\link[ggplot2]{ggplot}}.}
+
   \item{x_scale}{function. The scaling to use for the x
   axis within each glyph. If x_scale equals
   \code{\link{identity}}(default), the x limits within each
@@ -74,10 +78,10 @@
   on a layer beneath the subplots. They provide a
   consistent frame of reference to aid comparisons across
   subplots. Functions that create reference objects include
-  \code{\link{ref_box}}, \code{\link{ref_hline}},
-  \code{\link{ref_vline}}, and \code{\link{ref_points}}. By
-  default, reference is set to ref_box, which creates the
-  familiar mesh pattern associated with grids.}
+  \code{\link{ref_box}}, \code{\link{ref_hline}}, and
+  \code{\link{ref_vline}}. By default, reference is set to
+  ref_box, which creates the familiar mesh pattern
+  associated with grids.}
 
   \item{ply.aes}{logical. If TRUE (default) aesthetics are
   calculated separately for each subplot, as with

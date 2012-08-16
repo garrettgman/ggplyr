@@ -60,9 +60,9 @@ layer_clone.proto <- function(layer) {
   ggplot2:::plot_clone(ggplot2::ggplot() + layer)$layers[[1]]
 }
 
-#' @S3method layer_clone glayer
-layer_clone.glayer <- function(layer) {
-  glayer(ggplot2:::plot_clone(ggplot2::ggplot() + layer)$layers[[1]])
+#' @S3method layer_clone sp_layer
+layer_clone.sp_layer <- function(layer) {
+  sp_layer(ggplot2:::plot_clone(ggplot2::ggplot() + layer)$layers[[1]])
 }
 
 #' @S3method layer_clone list

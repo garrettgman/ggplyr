@@ -13,7 +13,7 @@
 }
 \description{
   rel class objects are used to specify the width and
-  height of glyphs in \code{\link{glyph}} calls. The
+  height of glyphs in \code{\link{geom_subplot}} calls. The
   numeric component of the rel object specifies the
   proportion of the relative width or height to use for the
   final width or height. The relative width or height of a

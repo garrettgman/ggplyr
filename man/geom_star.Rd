@@ -3,7 +3,8 @@
 \title{Star glyphs}
 \usage{
   geom_star(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", na.rm = FALSE, r.zero = TRUE, ...)
+    position = "identity", na.rm = FALSE, r.zero = TRUE,
+    ...)
 }
 \arguments{
   \item{mapping}{The aesthetic mapping, usually constructed
@@ -22,6 +23,10 @@
   \item{na.rm}{If FALSE (the default), removes missing
   values with a warning. If TRUE, silently removes missing
   variables.}
+
+  \item{r.zero}{logical. Should the origin of the star
+  correspond to r = 0? If FALSE, origin corresponds to
+  lowest value of r.}
 
   \item{...}{other arguments passed on to
   \code{\link[ggplot2]{layer}}. This can include aesthetics

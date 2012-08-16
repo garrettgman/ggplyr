@@ -6,4 +6,5 @@
   glyph-map yearly temperature prediction data
 }
 \keyword{data}
+\keyword{datasets}
 

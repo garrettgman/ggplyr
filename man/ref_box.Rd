@@ -3,7 +3,7 @@
 \title{Reference box glyph}
 \usage{
   ref_box(mapping = NULL, fill = "grey90", color = "white",
-  ...)
+    ...)
 }
 \arguments{
   \item{mapping}{An aesthetic mapping, usually constructed
@@ -35,10 +35,10 @@
   that can be used to create a layer of reference boxes
   with the specified mapping and parameters. The output of
   ref_box is intended to be passed as the reference
-  argument for \code{\link{grid}} or \code{\link{glyph}}.
+  argument for \code{\link{geom_subplot}} or
+  \code{\link{geom_subplot2d}}.
 }
 \seealso{
-  \code{\link{ref_hline}}, \code{\link{ref_vline}} and
-  \code{\link{ref_points}}
+  \code{\link{ref_hline}} and \code{\link{ref_vline}}
 }
 

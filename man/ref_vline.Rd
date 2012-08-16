@@ -2,8 +2,8 @@
 \alias{ref_vline}
 \title{Vertical reference line glyph}
 \usage{
-  ref_vline(mapping = NULL, thickness = 0.2, fill =
-  "white", ...)
+  ref_vline(mapping = NULL, thickness = 0.2,
+    fill = "white", ...)
 }
 \arguments{
   \item{mapping}{An aesthetic mapping, usually constructed
@@ -35,11 +35,10 @@
   function that can be used to create a layer of reference
   lines with the specified mapping and parameters. The
   output of ref_vline is intended to be passed as the
-  reference argument for \code{\link{grid}} or
-  \code{\link{glyph}}.
+  reference argument for \code{\link{geom_subplot}} or
+  \code{\link{geom_subplot2d}}.
 }
 \seealso{
-  \code{\link{ref_box}}, \code{\link{ref_hline}} and
-  \code{\link{ref_points}}
+  \code{\link{ref_box}} and \code{\link{ref_hline}}
 }
 

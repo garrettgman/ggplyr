@@ -2,10 +2,11 @@
 \alias{geom_subplot}
 \title{Create a layer of embedded subplots}
 \usage{
-  geom_subplot(mapping, width = rel(0.95), height =
-  rel(0.95), data = waiver(), x_scale = identity, y_scale =
-  identity, position = "identity", reference = NULL,
-  ply.aes = TRUE, .ref = FALSE)
+  geom_subplot(mapping, width = rel(0.95),
+    height = rel(0.95), data = waiver(),
+    x_scale = identity, y_scale = identity,
+    position = "identity", reference = NULL,
+    ply.aes = TRUE, .ref = FALSE)
 }
 \arguments{
   \item{mapping}{An aesthetic mapping, usually constructed
@@ -27,6 +28,10 @@
   \item{height}{numeric or rel object. The height of each
   glyph. Height behaves the same way as width, but applies
   to the y dimension.}
+
+  \item{data}{The dataframe the layer should map to.
+  geom_subplot inherits the global dataframe defined in
+  \code{\link[ggplot2]{ggplot}}.}
 
   \item{x_scale}{function. The scaling to use for the x
   axis within each glyph. If x_scale equals
@@ -52,8 +57,8 @@
   layer beneath the glyphs. They provide a consistent frame
   of reference to aid comparisons between the glyphs.
   Functions that create reference objects include
-  \code{\link{ref_box}}, \code{\link{ref_hline}},
-  \code{\link{ref_vline}}, and \code{\link{ref_points}}.}
+  \code{\link{ref_box}}, \code{\link{ref_hline}}, and
+  \code{\link{ref_vline}}.}
 
   \item{ply.aes}{logical. If TRUE (default) aesthetics are
   calculated separately for each group, as with

@@ -32,6 +32,8 @@
 #' used to bin the x and y axes. If set, breaks will override the bins and 
 #' binwidth arguments. If breaks is a list, the first element will be applied to 
 #' the x axis and the second to the y. Defaults to NULL.
+#' @param data The dataframe the layer should map to. geom_subplot2d inherits the 
+#' global dataframe defined in \code{\link[ggplot2]{ggplot}}.
 #' @param x_scale function. The scaling to use for the x axis within each glyph. 
 #' If x_scale equals \code{\link{identity}}(default), the x limits within each 
 #' glyph will correspond to the range of x across all glyphs. This aids 
@@ -52,7 +54,7 @@
 #' are plotted on a layer beneath the subplots. They provide a consistent frame 
 #' of reference to aid comparisons across subplots. Functions that create 
 #' reference objects include \code{\link{ref_box}}, \code{\link{ref_hline}}, 
-#' \code{\link{ref_vline}}, and \code{\link{ref_points}}. By default, reference 
+#' and \code{\link{ref_vline}}. By default, reference 
 #' is set to ref_box, which creates the familiar mesh pattern associated with 
 #' grids.
 #' @param ply.aes logical. If TRUE (default) aesthetics are calculated 

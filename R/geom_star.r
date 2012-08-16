@@ -13,6 +13,8 @@
 #' layer
 #' @param na.rm If FALSE (the default), removes missing values with a warning. 
 #' If TRUE, silently removes missing variables.
+#' @param r.zero logical. Should the origin of the star correspond to r = 0? If 
+#' FALSE, origin corresponds to lowest value of r.
 #' @param ... other arguments passed on to \code{\link[ggplot2]{layer}}. This 
 #' can include aesthetics whose values you want to set, not map. See 
 #' \code{\link[ggplot2]{layer}} for more details.

@@ -1,7 +1,7 @@
 #' Make a rel class object
 #' 
 #' rel class objects are used to specify the width and height of glyphs in 
-#' \code{\link{glyph}} calls. The numeric component of the rel object specifies 
+#' \code{\link{geom_subplot}} calls. The numeric component of the rel object specifies 
 #' the proportion of the relative width or height to use for the final width or 
 #' height. The relative width or height of a glyph is calculated at the time a 
 #' plot is built for rendering. It depends on the number of glyphs in a plot and 

@@ -52,7 +52,7 @@ setOldClass(c("proto", "environment"))
 #' @aliases $,sp_layer-method
 #' @aliases $<-,sp_layer-method
 #' @aliases +,ggplot,sp_layer-method
-#' @aliases +,glyphs,sp_layer-method
+#' @aliases +,ggsubplot,sp_layer-method
 #' @aliases ggtransform,sp_layer-method
 setClass("sp_layer", representation(layer = "proto"), validity = check_sp_layer)
 
@@ -72,39 +72,39 @@ setMethod("rep", signature(x = "sp_layer"), function(x, ...){
 	stop("object of type 'sp_layer' is not subsettable")
 })
 
-#' @exportMethod "["
+#' @export
 setMethod("[", signature(x = "sp_layer"), 
 	function(x, i, j, ..., drop = TRUE) {
     	new("sp_layer", layer = x@layer[i])
 	}
 )
 
-#' @exportMethod "[<-"
+#' @export
 setMethod("[<-", signature(x = "sp_layer"), function(x, i, j, ..., value) {
   	x@layer[i] <- value
 	x
 })
 
 
-#' @exportMethod "$"
+#' @export
 setMethod("$", signature(x = "sp_layer"), function(x, name) {
 	slot(x, "layer")[[name]]
 })
 
-#' @exportMethod "$<-"
+#' @export
 setMethod("$<-", signature(x = "sp_layer"), function(x, name, value) {
 	slot(x, "layer")[[name]] <- value
 	x
 })
 
-#' @exportMethod "+"
+#' @export
 setMethod("+", signature(e1 = "ggplot", e2 = "sp_layer"), 
 	function(e1, e2) {
 		ggsubplot(e1 + e2@layer)
 	}
 )
 
-#' @exportMethod "+"
+#' @export
 setMethod("+", signature(e1 = "ggsubplot", e2 = "sp_layer"), 
 	function(e1, e2) {
 		ggsubplot(e1@.Data + e2@layer)

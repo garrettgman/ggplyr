@@ -12,7 +12,7 @@
 #' ref_box is a second order function. It returns a function that can be used to 
 #' create a layer of reference boxes with the specified mapping and parameters. 
 #' The output of ref_box is intended to be passed as the reference argument for 
-#' \code{\link{grid}} or \code{\link{glyph}}.
+#' \code{\link{geom_subplot}} or \code{\link{geom_subplot2d}}.
 #' 
 #' @param mapping An aesthetic mapping, usually constructed with 
 #' \code{\link[ggplot2]{aes}}.
@@ -22,8 +22,7 @@
 #' color is not specified in the mapping
 #' @param ... other arguments to be used as parameters in the reference box 
 #' layer
-#' @seealso \code{\link{ref_hline}}, \code{\link{ref_vline}} and 
-#' \code{\link{ref_points}}
+#' @seealso \code{\link{ref_hline}} and \code{\link{ref_vline}}
 #' @export
 ref_box <- function(mapping = NULL, fill = "grey90", color = "white", ...) {	
   function(layer, type, major.aes, width = rel(1), height = rel(1), 
@@ -64,7 +63,7 @@ ref_box <- function(mapping = NULL, fill = "grey90", color = "white", ...) {
 #' ref_hline is a second order function. It returns a function that can be used 
 #' to create a layer of reference lines with the specified mapping and 
 #' parameters. The output of ref_hline is intended to be passed as the reference 
-#' argument for \code{\link{grid}} or \code{\link{glyph}}.
+#' argument for \code{\link{geom_subplot}} or \code{\link{geom_subplot2d}}.
 #' 
 #' @param mapping An aesthetic mapping, usually constructed with 
 #' \code{\link[ggplot2]{aes}}.
@@ -74,7 +73,7 @@ ref_box <- function(mapping = NULL, fill = "grey90", color = "white", ...) {
 #' is not specified in the mapping
 #' @param ... other arguments to be used as parameters in the reference box 
 #' layer
-#' @seealso \code{\link{ref_box}}, \code{\link{ref_vline}} and \code{\link{ref_points}}
+#' @seealso \code{\link{ref_box}} and \code{\link{ref_vline}}
 #' @export
 ref_hline <- function(mapping = NULL, thickness = 0.2, fill = "white", ...) {	
   function(layer, type, major.aes, width = rel(1), height = rel(1), 
@@ -113,7 +112,7 @@ ref_hline <- function(mapping = NULL, thickness = 0.2, fill = "white", ...) {
 #' ref_vline is a second order function. It returns a function that can be used 
 #' to create a layer of reference lines with the specified mapping and 
 #' parameters. The output of ref_vline is intended to be passed as the reference 
-#' argument for \code{\link{grid}} or \code{\link{glyph}}.
+#' argument for \code{\link{geom_subplot}} or \code{\link{geom_subplot2d}}.
 #' 
 #' @param mapping An aesthetic mapping, usually constructed with 
 #' \code{\link[ggplot2]{aes}}.
@@ -123,8 +122,7 @@ ref_hline <- function(mapping = NULL, thickness = 0.2, fill = "white", ...) {
 #' is not specified in the mapping
 #' @param ... other arguments to be used as parameters in the reference box 
 #' layer
-#' @seealso \code{\link{ref_box}}, \code{\link{ref_hline}} and 
-#' \code{\link{ref_points}}
+#' @seealso \code{\link{ref_box}} and \code{\link{ref_hline}}
 #' @export
 ref_vline <- function(mapping = NULL, thickness = 0.2, fill = "white", ...) {	
   function(layer, type, major.aes, width = rel(1), height = rel(1), 

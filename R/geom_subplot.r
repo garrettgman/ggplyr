@@ -13,6 +13,8 @@
 #' intuitive width by changing the value of the rel object.
 #' @param height numeric or rel object. The height of each glyph. Height behaves 
 #' the same way as width, but applies to the y dimension.
+#' @param data The dataframe the layer should map to. geom_subplot inherits the 
+#' global dataframe defined in \code{\link[ggplot2]{ggplot}}.
 #' @param x_scale function. The scaling to use for the x axis within each glyph. 
 #' If x_scale equals \code{\link{identity}}(default), the x limits within each 
 #' glyph will correspond to the range of x across all glyphs. This aids 
@@ -28,7 +30,7 @@
 #' on a layer beneath the glyphs. They provide a consistent frame of reference 
 #' to aid comparisons between the glyphs. Functions that create reference 
 #' objects include \code{\link{ref_box}}, \code{\link{ref_hline}}, 
-#' \code{\link{ref_vline}}, and \code{\link{ref_points}}.
+#' and \code{\link{ref_vline}}.
 #' @param ply.aes logical. If TRUE (default) aesthetics are calculated 
 #' separately for each group, as with \code{\link{ply_aes}}. If FALSE aesthetics 
 #' are calculated based on entire data set for the layer.
